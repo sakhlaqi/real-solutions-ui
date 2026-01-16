@@ -1,7 +1,7 @@
 {
   "name": "@sakhlaqi/ui",
-  "version": "1.1.0",
-  "description": "A comprehensive, production-ready React UI component library",
+  "version": "2.0.0",
+  "description": "A comprehensive, production-ready React UI component library with Material-UI integration",
   "type": "module",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -14,6 +14,26 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core/index.js",
+      "require": "./dist/core/index.cjs",
+      "types": "./dist/core/index.d.ts"
+    },
+    "./adapters": {
+      "import": "./dist/adapters/index.js",
+      "require": "./dist/adapters/index.cjs",
+      "types": "./dist/adapters/index.d.ts"
+    },
+    "./providers/internal": {
+      "import": "./dist/providers/internal/index.js",
+      "require": "./dist/providers/internal/index.cjs",
+      "types": "./dist/providers/internal/index.d.ts"
+    },
+    "./providers/mui": {
+      "import": "./dist/providers/mui/index.js",
+      "require": "./dist/providers/mui/index.cjs",
+      "types": "./dist/providers/mui/index.d.ts"
     },
     "./base": {
       "import": "./dist/base/index.js",
@@ -86,6 +106,17 @@
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
+    "@mui/x-charts": "^8.25.0",
+    "@mui/x-data-grid": "^8.25.0",
+    "@mui/x-date-pickers": "^8.25.0",
+    "@mui/x-tree-view": "^8.25.0",
+    "date-fns": "^4.1.0"
+  },
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
@@ -100,7 +131,11 @@
     "ui",
     "typescript",
     "design-system",
-    "component-library"
+    "component-library",
+    "material-ui",
+    "mui",
+    "dual-provider",
+    "adaptive-components"
   ],
   "author": "Your Name",
   "license": "MIT",
