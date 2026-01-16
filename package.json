@@ -1,8 +1,11 @@
 {
-  "name": "ui",
+  "name": "@sakhlaqi/ui",
   "version": "1.0.0",
   "description": "A comprehensive, production-ready React UI component library",
   "type": "module",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -102,10 +105,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/ui.git"
+    "url": "https://github.com/sakhlaqi/real-solutions-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/ui/issues"
+    "url": "https://github.com/sakhlaqi/real-solutions-ui/issues"
   },
-  "homepage": "https://github.com/yourusername/ui#readme"
+  "homepage": "https://github.com/sakhlaqi/real-solutions-ui#readme"
 }
