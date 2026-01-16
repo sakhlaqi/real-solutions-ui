@@ -1,0 +1,58 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+import dts from 'vite-plugin-dts';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+      include: ['src/**/*'],
+      exclude: ['**/*.stories.tsx', '**/*.test.tsx'],
+    }),
+  ],
+  build: {
+    lib: {
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        base: resolve(__dirname, 'src/components/base/index.ts'),
+        layout: resolve(__dirname, 'src/components/layout/index.ts'),
+        navigation: resolve(__dirname, 'src/components/navigation/index.ts'),
+        forms: resolve(__dirname, 'src/components/forms/index.ts'),
+        buttons: resolve(__dirname, 'src/components/buttons/index.ts'),
+        'data-display': resolve(__dirname, 'src/components/data-display/index.ts'),
+        feedback: resolve(__dirname, 'src/components/feedback/index.ts'),
+        overlay: resolve(__dirname, 'src/components/overlay/index.ts'),
+        typography: resolve(__dirname, 'src/components/typography/index.ts'),
+        utility: resolve(__dirname, 'src/components/utility/index.ts'),
+      },
+      formats: ['es', 'cjs'],
+      fileName: (format, entryName) => {
+        const ext = format === 'es' ? 'js' : 'cjs';
+        return `${entryName}.${ext}`;
+      },
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      output: {
+        preserveModules: false,
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'jsxRuntime',
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'styles/index.css';
+          }
+          return assetInfo.name || 'assets/[name][extname]';
+        },
+      },
+    },
+    cssCodeSplit: false,
+    sourcemap: true,
+    emptyOutDir: true,
+  },
+});

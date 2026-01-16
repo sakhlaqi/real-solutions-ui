@@ -1,0 +1,126 @@
+.stepper {
+  display: flex;
+  width: 100%;
+}
+
+.stepper-horizontal {
+  flex-direction: row;
+}
+
+.stepper-vertical {
+  flex-direction: column;
+}
+
+.stepper-step {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.stepper-horizontal .stepper-step {
+  flex-direction: column;
+  align-items: center;
+}
+
+.stepper-vertical .stepper-step {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.stepper-step-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.stepper-horizontal .stepper-step-button {
+  flex-direction: column;
+  text-align: center;
+}
+
+.stepper-step-clickable {
+  cursor: pointer;
+}
+
+.stepper-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid var(--border-color, #e5e7eb);
+  background-color: var(--surface-bg, #ffffff);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.stepper-indicator-active {
+  border-color: var(--primary-color, #3b82f6);
+  background-color: var(--primary-color, #3b82f6);
+  color: white;
+}
+
+.stepper-indicator-completed {
+  border-color: var(--primary-color, #3b82f6);
+  background-color: var(--primary-color, #3b82f6);
+  color: white;
+}
+
+.stepper-indicator-upcoming {
+  background-color: var(--surface-muted, #f9fafb);
+}
+
+.stepper-number {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.stepper-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stepper-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary, #6b7280);
+}
+
+.stepper-label-active,
+.stepper-label-completed {
+  color: var(--text-primary, #111827);
+}
+
+.stepper-description {
+  font-size: 0.75rem;
+  color: var(--text-muted, #9ca3af);
+}
+
+.stepper-separator {
+  flex: 1;
+  background-color: var(--border-color, #e5e7eb);
+  transition: background-color 0.2s;
+}
+
+.stepper-horizontal .stepper-separator {
+  height: 2px;
+  align-self: flex-start;
+  margin-top: 1.25rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.stepper-vertical .stepper-separator {
+  width: 2px;
+  margin-left: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  min-height: 2rem;
+}
+
+.stepper-separator-completed {
+  background-color: var(--primary-color, #3b82f6);
+}

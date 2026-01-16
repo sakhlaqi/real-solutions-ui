@@ -1,0 +1,36 @@
+# Source files
+src/
+*.test.tsx
+*.test.ts
+*.stories.tsx
+*.spec.tsx
+*.spec.ts
+
+# Config files
+tsconfig.json
+vite.config.ts
+.eslintrc.cjs
+.prettierrc
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Documentation (except README)
+docs/
+*.md
+!README.md
+
+# Development
+.vscode/
+.idea/
+node_modules/
+coverage/
+
+# Examples and demos
+examples/
+demo/

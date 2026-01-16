@@ -1,0 +1,73 @@
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 0.375rem;
+  flex-shrink: 0;
+}
+
+.icon-btn-sm {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+.icon-btn-md {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+}
+
+.icon-btn-lg {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+}
+
+.icon-btn-rounded {
+  border-radius: 50%;
+}
+
+.icon-btn-primary {
+  background-color: var(--primary-color, #3b82f6);
+  color: white;
+}
+
+.icon-btn-primary:hover:not(:disabled) {
+  background-color: var(--primary-hover, #2563eb);
+}
+
+.icon-btn-secondary {
+  background-color: var(--secondary-color, #6b7280);
+  color: white;
+}
+
+.icon-btn-secondary:hover:not(:disabled) {
+  background-color: var(--secondary-hover, #4b5563);
+}
+
+.icon-btn-ghost {
+  background-color: transparent;
+  color: var(--text-primary, #111827);
+}
+
+.icon-btn-ghost:hover:not(:disabled) {
+  background-color: var(--hover-bg, #f3f4f6);
+}
+
+.icon-btn-danger {
+  background-color: var(--error-color, #dc2626);
+  color: white;
+}
+
+.icon-btn-danger:hover:not(:disabled) {
+  background-color: var(--error-hover, #b91c1c);
+}
+
+.icon-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

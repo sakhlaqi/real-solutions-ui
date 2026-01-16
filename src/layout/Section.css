@@ -1,0 +1,9 @@
+.section {
+  width: 100%;
+}
+
+.section-padding-none { padding: 0; }
+.section-padding-sm { padding: 1rem 0; }
+.section-padding-md { padding: 2rem 0; }
+.section-padding-lg { padding: 3rem 0; }
+.section-padding-xl { padding: 4rem 0; }
