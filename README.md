@@ -1,95 +1,49 @@
-# UI Component Library
+# @sakhlaqi/ui Component Library
 
 A comprehensive, production-ready React UI component library built with React + TypeScript.
 
-## Features
+## 📦 Installation
+
+### From GitHub Packages
+
+```bash
+npm install @sakhlaqi/ui
+```
+
+> **Note:** Requires GitHub authentication. See [GITHUB_PACKAGES_SETUP.md](./GITHUB_PACKAGES_SETUP.md) for complete setup instructions.
+
+### Local Development (Monorepo)
+
+For development within the real-solutions workspace:
+
+```bash
+cd presentation
+npm install ../ui
+```
+
+## ✨ Features
 
 - ✅ **TypeScript Support** - Full type safety and IntelliSense
 - ✅ **Accessible by Default** - ARIA roles, keyboard navigation, focus management
 - ✅ **Responsive & Mobile-Friendly** - Works seamlessly across all devices
 - ✅ **Themeable** - CSS custom properties for easy theming
 - ✅ **Tree-Shakeable** - Import only what you need
-- ✅ **No Dependencies** - Only peer dependencies on React
+- ✅ **React 18 & 19 Compatible** - Works with latest React versions
+- ✅ **Zero Runtime Dependencies** - Only peer dependencies on React
 - ✅ **Well Documented** - Clear props and examples
 
-## Local Development (Monorepo Setup)
+## 🚀 Quick Start
 
-This library is part of the `real-solutions` workspace. To use it locally in the presentation project:
-
-### Option 1: File Path Dependency (Recommended)
-
-1. **Add to presentation/package.json:**
-```json
-{
-  "dependencies": {
-    "ui": "file:../ui"
-  }
-}
-```
-
-2. **Install the dependency:**
-```bash
-cd presentation
-npm install
-```
-
-3. **Import and use components:**
-```tsx
-import { Button, Input, Card, Heading, Text } from 'ui';
-
-function MyComponent() {
-  return (
-    <Card padding="lg">
-      <Heading level={2}>Welcome</Heading>
-      <Input label="Email" placeholder="you@example.com" />
-      <Button variant="primary">Submit</Button>
-    </Card>
-  );
-}
-```
-
-### Option 2: npm link (Alternative)
-
-```bash
-# In the ui directory
-cd ui
-npm link
-
-# In the presentation directory
-cd ../presentation
-npm link ui
-```
-
-### Rebuilding After Changes
-
-When you make changes to the component library:
-
-```bash
-cd ui
-npm run build
-```
-
-The changes will be automatically reflected in the presentation project since it uses a local file reference.
-
-## Installation (External Projects)
-
-For using this library in other projects outside this workspace:
-
-```bash
-npm install ui
-# or
-yarn add ui
-# or
-pnpm add ui
-```
-
-## Usage
-
-### Import All Components
+### Import Components
 
 ```tsx
-import { Button, Input, Card, Modal, Heading, Text } from 'ui';
-import 'ui/styles';
+// Import components
+import { Button, Input, Card } from '@sakhlaqi/ui';
+import { Heading, Text } from '@sakhlaqi/ui/typography';
+import { Alert } from '@sakhlaqi/ui/feedback';
+
+// Import styles (once in your main file)
+import '@sakhlaqi/ui/styles';
 
 function App() {
   return (
@@ -143,14 +97,73 @@ import { Heading, Text } from 'ui/typography';
 - `Modal`
 
 ### Typography
+### Subpath Imports (Recommended)
+
+```tsx
+// Base components
+import { Button, Input, Card } from '@sakhlaqi/ui';
+
+// Typography
+import { Heading, Text } from '@sakhlaqi/ui/typography';
+
+// Forms
+import { Form, Select, Checkbox } from '@sakhlaqi/ui/forms';
+
+// Layout
+import { Container, Grid, Flex } from '@sakhlaqi/ui/layout';
+
+// Navigation
+import { Navbar, Tabs, Breadcrumbs } from '@sakhlaqi/ui/navigation';
+
+// Data Display
+import { Badge, Avatar, Tooltip } from '@sakhlaqi/ui/data-display';
+
+// Feedback
+import { Alert, Spinner, ProgressBar } from '@sakhlaqi/ui/feedback';
+
+// Overlay
+import { Modal } from '@sakhlaqi/ui/overlay';
+
+// Utility
+import { ErrorBoundary, ThemeProvider } from '@sakhlaqi/ui/utility';
+```
+
+## 📦 Component Categories
+
+### Base (3)
+- `Button`, `Input`, `Card`
+
+### Typography (2)
 - `Heading`, `Text`
 
-### Utility
+### Forms (8)
+- `Form`, `PasswordInput`, `Select`, `Checkbox`, `RadioGroup`, `Toggle`, `Textarea`, `FileUpload`
+
+### Buttons (2)
+- `IconButton`, `ButtonGroup`
+
+### Layout (11)
+- `AppShell`, `Header`, `Footer`, `Sidebar`, `Drawer`, `Container`, `Grid`, `GridItem`, `Flex`, `Section`, `Divider`, `Spacer`
+
+### Navigation (5)
+- `Navbar`, `Breadcrumbs`, `Tabs`, `Pagination`, `Stepper`
+
+### Data Display (4)
+- `Badge`, `Avatar`, `Tooltip`, `List`, `ListItem`
+
+### Feedback (3)
+- `Alert`, `Spinner`, `ProgressBar`
+
+### Overlay (1)
+- `Modal`
+
+### Utility (3)
 - `ErrorBoundary`, `Portal`, `ThemeProvider`, `useTheme`
 
-## Theming
 
-The library uses CSS custom properties for theming:
+## 🎨 Theming
+
+The library uses CSS custom properties for easy theming:
 
 ```css
 :root {
@@ -170,10 +183,10 @@ The library uses CSS custom properties for theming:
 }
 ```
 
-### Dark Mode
+### Dark Mode Support
 
 ```tsx
-import { ThemeProvider } from 'ui/utility';
+import { ThemeProvider } from '@sakhlaqi/ui/utility';
 
 function App() {
   return (
@@ -184,12 +197,13 @@ function App() {
 }
 ```
 
-## Examples
+## 💡 Examples
 
 ### Form Example
 
 ```tsx
-import { Form, Input, PasswordInput, Button } from 'ui';
+import { Form, Input, PasswordInput, Button } from '@sakhlaqi/ui/forms';
+import '@sakhlaqi/ui/styles';
 
 function LoginForm() {
   return (
@@ -218,7 +232,7 @@ function LoginForm() {
 ### Modal Example
 
 ```tsx
-import { Modal, Button, Flex } from 'ui';
+import { Modal, Button, Flex } from '@sakhlaqi/ui';
 import { useState } from 'react';
 
 function Example() {
@@ -263,12 +277,20 @@ function Example() {
 ```bash
 # Install dependencies
 cd ui
+
+## 🔧 Development
+
+### For Monorepo Development
+
+```bash
+# Install dependencies
+cd ui
 npm install
 
-# Build library (required before first use)
+# Build library
 npm run build
 
-# Rebuild after making changes
+# Rebuild after changes
 npm run build
 
 # Type check
@@ -278,54 +300,45 @@ npm run type-check
 npm run lint
 ```
 
-### Workflow Tips
+### Publishing Updates
 
-1. **After cloning the repo:**
-   ```bash
-   # Install dependencies for both projects
-   cd presentation && npm install
-   cd ../ui && npm install && npm run build
-   ```
+See [GITHUB_PACKAGES_SETUP.md](./GITHUB_PACKAGES_SETUP.md) for complete publishing instructions.
 
-2. **When adding new components:**
-   - Create component in `ui/src/`
-   - Export from the appropriate index.ts
-   - Run `npm run build` in ui directory
-   - Component is immediately available in presentation
+**Quick publish:**
+```bash
+cd ui
+npm version patch  # or minor/major
+git push origin main
+# GitHub Actions publishes automatically
+```
 
-3. **Hot reload setup (optional):**
-   For development with hot reloading, you can use `npm link` and run a file watcher:
-   ```bash
-   cd ui
-   npm run build -- --watch  # If your vite config supports watch mode
-   ```
-
-### Project Structure
+### Monorepo Structure
 
 ```
 real-solutions/
-├── api/           # Backend API
-├── presentation/  # Frontend application (uses ui library)
-└── ui/            # Shared component library
+├── api/           # Django backend
+├── presentation/  # React frontend (uses @sakhlaqi/ui)
+└── ui/            # Component library (this package)
     ├── src/       # Source components
     │   ├── base/
     │   ├── layout/
     │   ├── forms/
     │   └── ...
-    ├── dist/      # Built library (git ignored)
+    ├── dist/      # Built library
     └── package.json
 ```
 
-## Contributing
+## 📚 Documentation
 
-Contributions are welcome! Please read our contributing guidelines before submitting PRs.
+- **Setup Guide:** [GITHUB_PACKAGES_SETUP.md](./GITHUB_PACKAGES_SETUP.md)
+- **Repository:** https://github.com/sakhlaqi/real-solutions-ui
+- **GitHub Packages:** https://github.com/sakhlaqi?tab=packages
+- **Issues:** https://github.com/sakhlaqi/real-solutions-ui/issues
 
-## License
+## 📄 License
 
-MIT © [Your Name]
+MIT © Real Solutions
 
-## Links
+---
 
-- [Documentation](https://github.com/yourusername/ui)
-- [Issues](https://github.com/yourusername/ui/issues)
-- [Changelog](https://github.com/yourusername/ui/blob/main/CHANGELOG.md)
+**Built with ❤️ for Real Solutions**
