@@ -10,6 +10,7 @@ import { BaseDatePickerProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { DatePicker as InternalDatePicker } from '../forms';
 import { DatePicker as MUIDatePicker } from '../providers/mui';
+import { DatePicker as RadixDatePicker } from '../providers/radix';
 
 /**
  * Adaptive DatePicker Component
@@ -30,6 +31,10 @@ export const DatePicker: React.FC<BaseDatePickerProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIDatePicker {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixDatePicker {...props} />;
   }
   
   // Ensure format is one of the valid internal formats

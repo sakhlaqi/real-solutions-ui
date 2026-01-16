@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { ProgressBar as InternalProgressBar } from '../feedback';
 import { LinearProgress as MUILinearProgress } from '../providers/mui';
+import { LinearProgress as RadixLinearProgress } from '../providers/radix';
 
 export interface LinearProgressProps {
   value?: number;
@@ -30,6 +31,10 @@ export const LinearProgress: React.FC<LinearProgressProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUILinearProgress {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixLinearProgress {...props} />;
   }
   
   // Transform for internal - ProgressBar requires value prop

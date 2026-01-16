@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Autocomplete as InternalAutocomplete } from '../forms';
 import { Autocomplete as MUIAutocomplete } from '../providers/mui';
+import { Autocomplete as RadixAutocomplete } from '../providers/radix';
 
 export interface AutocompleteOption {
   value: string | number;
@@ -42,6 +43,10 @@ export const Autocomplete: React.FC<AutocompleteProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIAutocomplete {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixAutocomplete {...props} />;
   }
   
   // Transform options to add id field required by internal

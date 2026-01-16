@@ -10,6 +10,7 @@ import { BaseAlertProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { Alert as InternalAlert } from '../feedback';
 import { Alert as MUIAlert } from '../providers/mui';
+import { Alert as RadixAlert } from '../providers/radix';
 
 /**
  * Adaptive Alert Component
@@ -28,6 +29,10 @@ export const Alert: React.FC<BaseAlertProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIAlert {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixAlert {...props} />;
   }
   
   // Transform MUI-style props to internal props

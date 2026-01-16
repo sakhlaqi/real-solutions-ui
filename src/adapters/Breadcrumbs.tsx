@@ -10,6 +10,7 @@ import { BreadcrumbsProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { Breadcrumbs as InternalBreadcrumbs } from '../navigation';
 import { Breadcrumbs as MUIBreadcrumbs } from '../providers/mui';
+import { Breadcrumbs as RadixBreadcrumbs } from '../providers/radix';
 
 /**
  * Adaptive Breadcrumbs Component
@@ -32,6 +33,10 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIBreadcrumbs {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixBreadcrumbs {...props} />;
   }
   
   return <InternalBreadcrumbs {...props} />;

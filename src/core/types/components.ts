@@ -65,7 +65,9 @@ export interface BaseInputProps {
   id?: string;
   name?: string;
   autoComplete?: string;
+  type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
 }
+
 
 export interface TextareaProps extends Omit<BaseInputProps, 'startAdornment' | 'endAdornment' | 'onChange'> {
   rows?: number;
@@ -97,6 +99,53 @@ export interface CheckboxProps {
   size?: Size;
   className?: string;
 }
+
+export interface SwitchProps {
+  checked?: boolean;
+  defaultChecked?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  label?: string;
+  color?: ColorVariant;
+  size?: Size;
+  className?: string;
+}
+
+export interface RadioGroupProps {
+  value: string;
+  onChange: (value: string) => void;
+  options: Array<{
+    value: string;
+    label: string;
+    disabled?: boolean;
+  }>;
+  name?: string;
+  disabled?: boolean;
+  label?: string;
+  row?: boolean;
+  orientation?: 'horizontal' | 'vertical';
+  size?: Size;
+  className?: string;
+}
+
+
+export interface SliderProps {
+  value?: number | number[];
+  defaultValue?: number | number[];
+  onChange?: (value: number | number[]) => void;
+  onChangeCommitted?: (value: number | number[]) => void;
+  min?: number;
+  max?: number;
+  step?: number;
+  marks?: boolean | Array<{ value: number; label?: string }>;
+  disabled?: boolean;
+  valueLabelDisplay?: 'on' | 'auto' | 'off';
+  orientation?: 'horizontal' | 'vertical';
+  color?: ColorVariant;
+  size?: Size;
+  className?: string;
+}
+
 
 // ============================================================================
 // TABLE INTERFACES
@@ -143,6 +192,10 @@ export interface BaseModalProps {
   className?: string;
 }
 
+// Alias for convenience
+export type ModalProps = BaseModalProps;
+
+
 export interface DialogProps extends BaseModalProps {
   cancelText?: string;
   confirmText?: string;
@@ -165,6 +218,10 @@ export interface BaseAlertProps {
   className?: string;
 }
 
+// Alias for convenience
+export type AlertProps = BaseAlertProps;
+
+
 export interface SnackbarProps {
   open: boolean;
   onClose: () => void;
@@ -172,7 +229,22 @@ export interface SnackbarProps {
   severity?: 'error' | 'warning' | 'info' | 'success';
   autoHideDuration?: number;
   position?: 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+  action?: React.ReactNode;
+  className?: string;
 }
+
+
+export interface TooltipProps {
+  title: string;
+  children: React.ReactElement;
+  placement?: 'top' | 'bottom' | 'left' | 'right';
+  arrow?: boolean;
+  open?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
+  className?: string;
+}
+
 
 export interface ProgressProps {
   value?: number;
@@ -186,12 +258,52 @@ export interface ProgressProps {
 // NAVIGATION INTERFACES
 // ============================================================================
 
+export interface AvatarProps {
+  src?: string;
+  alt?: string;
+  size?: 'small' | 'medium' | 'large';
+  variant?: 'circular' | 'rounded' | 'square';
+  children?: React.ReactNode;
+  className?: string;
+}
+
+export interface ChipProps {
+  label: string;
+  onDelete?: () => void;
+  onClick?: () => void;
+  variant?: 'filled' | 'outlined';
+  color?: ColorVariant;
+  size?: Size;
+  icon?: React.ReactNode;
+  deleteIcon?: React.ReactNode;
+  disabled?: boolean;
+  className?: string;
+}
+
+
+export interface AccordionItem {
+  id: string;
+  title: string;
+  content: React.ReactNode;
+  disabled?: boolean;
+}
+
+export interface AccordionProps {
+  items: AccordionItem[];
+  defaultExpanded?: string | string[];
+  multiple?: boolean;
+  onChange?: (expandedIds: string | string[]) => void;
+  className?: string;
+}
+
 export interface TabItem {
   label: string;
   value: string | number;
+  content?: React.ReactNode;
   icon?: React.ReactNode;
   disabled?: boolean;
 }
+
 
 export interface BaseTabsProps {
   value: string | number;
@@ -201,6 +313,8 @@ export interface BaseTabsProps {
   orientation?: 'horizontal' | 'vertical';
   className?: string;
 }
+
+// Alias for convenience - placed here to avoid duplicate with the one below
 
 export interface BreadcrumbItem {
   label: string;
@@ -263,6 +377,10 @@ export interface BaseTreeViewProps {
   multiSelect?: boolean;
   className?: string;
 }
+
+// Alias for convenience
+export type TreeViewProps = BaseTreeViewProps;
+
 
 // ============================================================================
 // CHART INTERFACES
@@ -353,3 +471,235 @@ export interface TypographyProps {
   className?: string;
   component?: React.ElementType;
 }
+
+// ============================================================================
+// ADDITIONAL COMPONENT INTERFACES
+// ============================================================================
+
+export interface BadgeProps {
+  children: React.ReactNode;
+  badgeContent?: React.ReactNode;
+  color?: ColorVariant;
+  variant?: 'standard' | 'dot';
+  max?: number;
+  showZero?: boolean;
+  invisible?: boolean;
+  anchorOrigin?: {
+    vertical: 'top' | 'bottom';
+    horizontal: 'left' | 'right';
+  };
+  className?: string;
+}
+
+export interface CardProps {
+  children: React.ReactNode;
+  elevation?: number;
+  variant?: 'elevation' | 'outlined';
+  className?: string;
+}
+
+export interface DividerProps {
+  orientation?: 'horizontal' | 'vertical';
+  variant?: 'fullWidth' | 'inset' | 'middle';
+  flexItem?: boolean;
+  light?: boolean;
+  className?: string;
+}
+
+export interface DrawerProps {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  anchor?: 'left' | 'right' | 'top' | 'bottom';
+  variant?: 'permanent' | 'persistent' | 'temporary';
+  className?: string;
+}
+
+export interface MenuProps {
+  anchorEl: HTMLElement | null;
+  open: boolean;
+  onClose: () => void;
+  items: Array<{
+    label: string;
+    onClick?: () => void;
+    icon?: React.ReactNode;
+    disabled?: boolean;
+    divider?: boolean;
+  }>;
+  className?: string;
+}
+
+export interface ListProps {
+  items: Array<{
+    id: string | number;
+    primary: string;
+    secondary?: string;
+    icon?: React.ReactNode;
+    onClick?: () => void;
+  }>;
+  dense?: boolean;
+  disablePadding?: boolean;
+  className?: string;
+}
+
+export interface AppBarProps {
+  children: React.ReactNode;
+  position?: 'fixed' | 'absolute' | 'sticky' | 'static' | 'relative';
+  color?: ColorVariant | 'default' | 'transparent';
+  elevation?: number;
+  className?: string;
+}
+
+export interface ToolbarProps {
+  children: React.ReactNode;
+  variant?: 'regular' | 'dense';
+  disableGutters?: boolean;
+  className?: string;
+}
+
+export interface BottomNavigationProps {
+  value: number;
+  onChange: (value: number) => void;
+  showLabels?: boolean;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface StepperProps {
+  activeStep: number;
+  steps: Array<{
+    label: string;
+    optional?: boolean;
+    completed?: boolean;
+  }>;
+  orientation?: 'horizontal' | 'vertical';
+  alternativeLabel?: boolean;
+  className?: string;
+}
+
+export interface BackdropProps {
+  open: boolean;
+  onClick?: () => void;
+  invisible?: boolean;
+  className?: string;
+}
+
+export interface SpeedDialProps {
+  ariaLabel: string;
+  icon: React.ReactNode;
+  actions: Array<{
+    icon: React.ReactNode;
+    name: string;
+    onClick: () => void;
+  }>;
+  direction?: 'up' | 'down' | 'left' | 'right';
+  open?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
+  className?: string;
+}
+
+export interface PopoverProps {
+  open: boolean;
+  anchorEl: HTMLElement | null;
+  onClose: () => void;
+  children: React.ReactNode;
+  anchorOrigin?: {
+    vertical: 'top' | 'center' | 'bottom';
+    horizontal: 'left' | 'center' | 'right';
+  };
+  transformOrigin?: {
+    vertical: 'top' | 'center' | 'bottom';
+    horizontal: 'left' | 'center' | 'right';
+  };
+  className?: string;
+}
+
+export interface ButtonGroupProps {
+  children: React.ReactNode;
+  variant?: 'contained' | 'outlined' | 'text';
+  color?: ColorVariant;
+  size?: Size;
+  orientation?: 'horizontal' | 'vertical';
+  disabled?: boolean;
+  className?: string;
+}
+
+export interface ToggleButtonProps {
+  value: string;
+  selected?: boolean;
+  onChange?: (value: string) => void;
+  disabled?: boolean;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface RatingProps {
+  value?: number;
+  defaultValue?: number;
+  onChange?: (value: number | null) => void;
+  max?: number;
+  precision?: number;
+  readOnly?: boolean;
+  disabled?: boolean;
+  size?: Size;
+  icon?: React.ReactNode;
+  emptyIcon?: React.ReactNode;
+  className?: string;
+}
+
+export interface SkeletonProps {
+  variant?: 'text' | 'circular' | 'rectangular';
+  width?: number | string;
+  height?: number | string;
+  animation?: 'pulse' | 'wave' | false;
+  className?: string;
+}
+
+export interface LinearProgressProps {
+  value?: number;
+  variant?: 'determinate' | 'indeterminate';
+  color?: ColorVariant;
+  className?: string;
+}
+
+export interface PaginationProps {
+  count: number;
+  page: number;
+  onChange: (page: number) => void;
+  siblingCount?: number;
+  boundaryCount?: number;
+  disabled?: boolean;
+  showFirstButton?: boolean;
+  showLastButton?: boolean;
+  size?: Size;
+  color?: ColorVariant;
+  className?: string;
+}
+
+export interface AutocompleteProps {
+  options: Array<{ label: string; value: string | number }>;
+  value?: string | number | null;
+  onChange: (value: string | number | null) => void;
+  label?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  error?: string;
+  helperText?: string;
+  multiple?: boolean;
+  freeSolo?: boolean;
+  loading?: boolean;
+  className?: string;
+}
+
+export interface SpinnerProps {
+  size?: Size;
+  color?: ColorVariant;
+  className?: string;
+}
+
+// Type aliases for convenience
+export type TabsProps = BaseTabsProps;
+export type DatePickerProps = BaseDatePickerProps;
+export type ChartsProps = BaseChartProps;
+export type TableProps = BaseTableProps;

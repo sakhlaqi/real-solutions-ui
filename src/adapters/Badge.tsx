@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Badge as InternalBadge } from '../data-display';
 import { Badge as MUIBadge } from '../providers/mui';
+import { Badge as RadixBadge } from '../providers/radix';
 
 export interface BadgeProps {
   children: React.ReactElement;
@@ -33,6 +34,10 @@ export const Badge: React.FC<BadgeProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIBadge {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixBadge {...props} />;
   }
   
   // Map variant to internal format and filter unsupported props

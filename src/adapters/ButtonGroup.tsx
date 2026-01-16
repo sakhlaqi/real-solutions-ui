@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { ButtonGroup as InternalButtonGroup } from '../buttons';
 import { ButtonGroup as MUIButtonGroup } from '../providers/mui';
+import { ButtonGroup as RadixButtonGroup } from '../providers/radix';
 
 export interface ButtonGroupProps {
   children: React.ReactNode;
@@ -36,6 +37,10 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIButtonGroup {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixButtonGroup {...props} />;
   }
   
   // Filter MUI-specific props for internal

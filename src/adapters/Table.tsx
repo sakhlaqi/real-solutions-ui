@@ -9,6 +9,7 @@ import { BaseTableProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { Table as InternalTable } from '../data-display';
 import { DataTable as MUIDataTable } from '../providers/mui';
+import { Table as RadixTable } from '../providers/radix';
 
 /**
  * Adaptive Table Component
@@ -31,6 +32,10 @@ export function Table<T = any>(props: BaseTableProps<T>) {
   
   if (provider === 'mui') {
     return <MUIDataTable {...(props as any)} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixTable {...(props as any)} />;
   }
   
   // Transform 'rows' to 'data' for internal Table

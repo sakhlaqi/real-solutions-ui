@@ -1,6 +1,6 @@
 # @sakhlaqi/ui Component Library
 
-A comprehensive, production-ready React UI component library built with React + TypeScript.
+A comprehensive, production-ready React UI component library with **three UI provider options**: Internal, Material-UI, and Radix UI.
 
 ## 📦 Installation
 
@@ -23,7 +23,7 @@ npm install ../ui
 
 ## ✨ Features
 
-- ✅ **45 Adaptive Components** - Dual-provider architecture (Internal + Material-UI)
+- ✅ **45 Adaptive Components** - **Triple-provider architecture** (Internal + Material-UI + Radix UI) ✨ **NEW in v3.0**
 - ✅ **TypeScript Support** - Full type safety and IntelliSense
 - ✅ **Dynamic Provider Switching** - Change UI framework at runtime
 - ✅ **Accessible by Default** - ARIA roles, keyboard navigation, focus management
@@ -32,6 +32,17 @@ npm install ../ui
 - ✅ **Tree-Shakeable** - Import only what you need
 - ✅ **React 18 & 19 Compatible** - Works with latest React versions
 - ✅ **Production Ready** - Battle-tested with comprehensive documentation
+- ✅ **Bug Fixed** - All critical Radix UI runtime errors resolved (Jan 2026)
+
+## 🎨 Choose Your UI Framework
+
+**v3.0** introduces support for three UI providers:
+
+1. **internal** - Lightweight custom components with minimal dependencies
+2. **mui** - Material Design components from Material-UI (@mui/material)
+3. **radix** - Modern, accessible components from Radix UI ✨ **NEW**
+
+Switch between them at any time without changing your component code!
 
 ## 🚀 Quick Start
 
@@ -40,10 +51,11 @@ npm install ../ui
 ```tsx
 import { UIProvider, Button, Input, Card } from '@sakhlaqi/ui';
 import '@sakhlaqi/ui/styles';
+import '@radix-ui/themes/styles.css'; // Required if using Radix provider
 
 function App() {
   return (
-    <UIProvider defaultProvider="internal">
+    <UIProvider defaultProvider="radix">
       <Card>
         <h1>Welcome</h1>
         <Input label="Email" placeholder="Enter email" />
@@ -76,9 +88,16 @@ function ProviderSwitcher() {
       >
         Material-UI
       </Button>
+      <Button 
+        variant={provider === 'radix' ? 'contained' : 'outlined'}
+        onClick={() => setProvider('radix')}
+      >
+        Radix UI ✨
+      </Button>
     </div>
   );
 }
+```
 ```
 
 ### Import Components
@@ -367,18 +386,29 @@ cd ui
 cd ui
 npm install
 
-# Build library
+# Build library (with TypeScript checks)
 npm run build
+
+# Build library (skip TypeScript checks - faster for testing)
+npm run build:force
 
 # Rebuild after changes
 npm run build
 
-# Type check
+# Type check only (no build)
 npm run type-check
 
 # Lint
 npm run lint
 ```
+
+### Build Scripts Explained
+
+- `npm run build` - Full build with TypeScript type checking (recommended for production)
+- `npm run build:force` - Skip TypeScript, build JavaScript only (faster for development/testing)
+- `npm run type-check` - Run TypeScript checks without building
+
+> **Note**: `build:force` is useful during development when you want to quickly test changes without fixing all TypeScript warnings. However, always run `npm run build` before publishing to ensure type safety.
 
 ### Publishing Updates
 

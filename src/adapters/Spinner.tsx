@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Spinner as InternalSpinner } from '../feedback';
 import { CircularProgress as MUISpinner } from '@mui/material';
+import { Spinner as RadixSpinner } from '../providers/radix';
 
 export interface SpinnerProps {
   size?: 'small' | 'medium' | 'large';
@@ -31,6 +32,10 @@ export const Spinner: React.FC<SpinnerProps> = (props) => {
     const sizeMap = { small: 20, medium: 40, large: 60 };
     const size = props.size ? sizeMap[props.size] : 40;
     return <MUISpinner size={size} color={props.color} className={props.className} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixSpinner {...props} />;
   }
   
   // Map size to internal format

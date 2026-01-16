@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Avatar as InternalAvatar } from '../data-display';
 import { Avatar as MUIAvatar } from '../providers/mui';
+import { Avatar as RadixAvatar } from '../providers/radix';
 
 export interface AvatarProps {
   src?: string;
@@ -32,6 +33,10 @@ export const Avatar: React.FC<AvatarProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIAvatar {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixAvatar {...props} />;
   }
   
   // Map size to internal size values

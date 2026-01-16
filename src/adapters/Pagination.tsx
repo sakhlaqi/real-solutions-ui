@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Pagination as InternalPagination } from '../navigation';
 import { Pagination as MUIPagination } from '../providers/mui';
+import { Pagination as RadixPagination } from '../providers/radix';
 
 export interface PaginationProps {
   count: number;
@@ -36,6 +37,10 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIPagination {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixPagination {...props} />;
   }
   
   // Transform props to internal API (page/count -> currentPage/totalPages)

@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { RadioGroup as InternalRadioGroup } from '../forms';
 import { RadioGroup as MUIRadioGroup } from '../providers/mui';
+import { RadioGroup as RadixRadioGroup } from '../providers/radix';
 
 export interface RadioOption {
   value: string;
@@ -44,6 +45,10 @@ export const RadioGroup: React.FC<RadioGroupProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIRadioGroup {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixRadioGroup {...props} />;
   }
   
   // Internal RadioGroup requires name prop and accepts string | number for value

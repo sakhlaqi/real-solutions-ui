@@ -10,6 +10,7 @@ import { SnackbarProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { Snackbar as InternalSnackbar } from '../feedback';
 import { Snackbar as MUISnackbar } from '../providers/mui';
+import { Snackbar as RadixSnackbar } from '../providers/radix';
 
 /**
  * Adaptive Snackbar Component
@@ -32,6 +33,10 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUISnackbar {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixSnackbar {...props} />;
   }
   
   return <InternalSnackbar {...props} />;

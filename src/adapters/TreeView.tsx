@@ -10,6 +10,7 @@ import { BaseTreeViewProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { TreeView as InternalTreeView } from '../data-display';
 import { TreeView as MUITreeView } from '../providers/mui';
+import { TreeView as RadixTreeView } from '../providers/radix';
 
 /**
  * Adaptive TreeView Component
@@ -34,6 +35,10 @@ export const TreeView: React.FC<BaseTreeViewProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUITreeView {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixTreeView {...props} />;
   }
   
   // Transform nodes to data prop for internal component

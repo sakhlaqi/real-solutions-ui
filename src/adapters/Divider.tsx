@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Divider as InternalDivider } from '../layout';
 import { Divider as MUIDivider } from '../providers/mui';
+import { Divider as RadixDivider } from '../providers/radix';
 
 export interface DividerProps {
   orientation?: 'horizontal' | 'vertical';
@@ -30,6 +31,10 @@ export const Divider: React.FC<DividerProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIDivider {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixDivider {...props} />;
   }
   
   // Filter props not supported by internal

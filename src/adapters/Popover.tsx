@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Popover as InternalPopover } from '../overlay';
 import { Popover as MUIPopover } from '../providers/mui';
+import { Popover as RadixPopover } from '../providers/radix';
 
 export interface PopoverProps {
   open: boolean;
@@ -45,6 +46,10 @@ export const Popover: React.FC<PopoverProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIPopover {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixPopover {...props} />;
   }
   
   // For internal, filter MUI-specific props

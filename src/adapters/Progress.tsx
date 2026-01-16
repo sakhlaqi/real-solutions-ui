@@ -10,6 +10,7 @@ import { ProgressProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { ProgressCircle, ProgressBar } from '../feedback';
 import { Progress as MUIProgress } from '../providers/mui';
+import { Progress as RadixProgress } from '../providers/radix';
 
 /**
  * Adaptive Progress Component
@@ -33,6 +34,10 @@ export const Progress: React.FC<ProgressProps & { linear?: boolean }> = (props) 
   
   if (provider === 'mui') {
     return <MUIProgress {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixProgress {...props} />;
   }
   
   // Use ProgressBar for linear, ProgressCircle for circular

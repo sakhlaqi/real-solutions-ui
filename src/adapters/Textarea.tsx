@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Textarea as InternalTextarea } from '../forms';
 import { Textarea as MUITextarea } from '../providers/mui';
+import { Textarea as RadixTextarea } from '../providers/radix';
 
 export interface TextareaProps {
   value?: string;
@@ -41,6 +42,10 @@ export const Textarea: React.FC<TextareaProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUITextarea {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixTextarea {...props} />;
   }
   
   // Transform props for internal (error must be string)

@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { DropdownMenu as InternalMenu } from '../navigation';
 import { Menu as MUIMenu } from '../providers/mui';
+import { Menu as RadixMenu } from '../providers/radix';
 
 export interface MenuItem {
   label: string;
@@ -44,6 +45,10 @@ export const Menu: React.FC<MenuProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIMenu {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixMenu {...props} />;
   }
   
   // Transform for internal DropdownMenu - add id field and handle clicks through items

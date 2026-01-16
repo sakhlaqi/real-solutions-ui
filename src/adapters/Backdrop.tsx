@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Backdrop as InternalBackdrop } from '../overlay';
 import { Backdrop as MUIBackdrop } from '../providers/mui';
+import { Backdrop as RadixBackdrop } from '../providers/radix';
 
 export interface BackdropProps {
   open: boolean;
@@ -32,6 +33,10 @@ export const Backdrop: React.FC<BackdropProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIBackdrop {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixBackdrop {...props} />;
   }
   
   return <InternalBackdrop {...props} />;

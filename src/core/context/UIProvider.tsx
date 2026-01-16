@@ -1,12 +1,13 @@
 /**
  * UI Provider Context
  * 
- * Manages the UI implementation provider (internal vs MUI) and theme configuration.
+ * Manages the UI implementation provider (internal, MUI, or Radix) and theme configuration.
  * Consumers use this context to switch between different UI implementations.
  */
 
 import React, { createContext, useContext, useMemo, useState } from 'react';
 import { UIProvider as UIProviderType, ThemeConfig } from '../types';
+import { RadixThemeProvider } from '../theme/radixTheme';
 
 interface UIContextValue {
   provider: UIProviderType;
@@ -74,7 +75,14 @@ export const UIProvider: React.FC<UIProviderProps> = ({
     [provider, theme]
   );
 
-  return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
+  // Wrap with RadixThemeProvider if using Radix
+  const content = provider === 'radix' ? (
+    <RadixThemeProvider theme={theme}>{children}</RadixThemeProvider>
+  ) : (
+    children
+  );
+
+  return <UIContext.Provider value={value}>{content}</UIContext.Provider>;
 };
 
 /**

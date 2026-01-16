@@ -10,7 +10,9 @@
 
 import React from 'react';
 import { LineChartProps, BarChartProps, PieChartProps } from '../core/types';
+import { useUIContext } from '../core/context';
 import * as MUIComponents from '../providers/mui';
+import { Charts as RadixCharts } from '../providers/radix';
 
 /**
  * Adaptive LineChart Component
@@ -27,9 +29,13 @@ import * as MUIComponents from '../providers/mui';
  * ```
  */
 export const LineChart: React.FC<LineChartProps> = (props) => {
-  // TODO: Implement internal chart components
-  // For now, always use MUI charts regardless of provider
-  // const { provider } = useUIContext();
+  const { provider } = useUIContext();
+  
+  if (provider === 'radix') {
+    return <RadixCharts type="line" {...props} />;
+  }
+  
+  // MUI or internal (fallback to MUI for now)
   return <MUIComponents.LineChart {...props} />;
 };
 

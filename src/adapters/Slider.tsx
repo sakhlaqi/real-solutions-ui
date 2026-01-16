@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Slider as InternalSlider } from '../forms';
 import { Slider as MUISlider } from '../providers/mui';
+import { Slider as RadixSlider } from '../providers/radix';
 
 export interface SliderProps {
   value: number | number[];
@@ -33,6 +34,10 @@ export const Slider: React.FC<SliderProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUISlider {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixSlider {...props} />;
   }
   
   // Filter props not supported by internal

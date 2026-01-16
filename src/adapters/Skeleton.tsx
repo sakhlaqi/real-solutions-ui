@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { SkeletonLoader as InternalSkeleton } from '../feedback';
 import { Skeleton as MUISkeleton } from '../providers/mui';
+import { Skeleton as RadixSkeleton } from '../providers/radix';
 
 export interface SkeletonProps {
   variant?: 'text' | 'rectangular' | 'circular';
@@ -32,6 +33,10 @@ export const Skeleton: React.FC<SkeletonProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUISkeleton {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixSkeleton {...props} />;
   }
   
   // Transform for internal - SkeletonLoader already uses variant

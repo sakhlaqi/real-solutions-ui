@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { BottomNavigation as InternalBottomNavigation } from '../navigation';
 import { BottomNavigation as MUIBottomNavigation } from '../providers/mui';
+import { BottomNavigation as RadixBottomNavigation } from '../providers/radix';
 
 export interface BottomNavigationAction {
   label: string;
@@ -42,6 +43,10 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIBottomNavigation {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixBottomNavigation {...props} />;
   }
   
   // Transform actions to ensure icon is provided (internal requires it)

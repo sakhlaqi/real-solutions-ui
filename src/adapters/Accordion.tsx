@@ -8,21 +8,8 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Accordion as InternalAccordion } from '../layout';
 import { Accordion as MUIAccordion } from '../providers/mui';
-
-export interface AccordionItem {
-  id: string;
-  title: string;
-  content: React.ReactNode;
-  disabled?: boolean;
-}
-
-export interface AccordionProps {
-  items: AccordionItem[];
-  expanded?: string | string[];
-  onChange?: (id: string) => void;
-  multiple?: boolean;
-  disabled?: boolean;
-}
+import { Accordion as RadixAccordion } from '../providers/radix';
+import type { AccordionProps } from '../core/types';
 
 /**
  * Adaptive Accordion Component
@@ -46,21 +33,19 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
     return <MUIAccordion {...props} />;
   }
   
-  // Transform for internal Accordion
-  const { onChange, expanded, items, multiple } = props;
+  if (provider === 'radix') {
+    return <RadixAccordion {...props} />;
+  }
   
-  const handleChange = (expandedValue: string | string[]) => {
-    // Internal onChange expects the full expanded state, just extract the id
-    const id = Array.isArray(expandedValue) ? expandedValue[0] : expandedValue;
-    onChange?.(id);
-  };
+  // Transform for internal Accordion
+  const { onChange, defaultExpanded, items, multiple } = props;
   
   return (
     <InternalAccordion
       items={items}
-      defaultExpanded={expanded}
+      defaultExpanded={defaultExpanded}
       multiple={multiple}
-      onChange={handleChange}
+      onChange={onChange}
     />
   );
 };

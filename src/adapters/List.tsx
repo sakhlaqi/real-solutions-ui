@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { List as InternalList } from '../data-display';
 import { List as MUIList } from '../providers/mui';
+import { List as RadixList } from '../providers/radix';
 
 export interface ListProps {
   children: React.ReactNode;
@@ -31,6 +32,10 @@ export const List: React.FC<ListProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIList {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixList {...props} />;
   }
   
   // Filter props not supported by internal

@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { AppBar as InternalAppBar } from '../navigation';
 import { AppBar as MUIAppBar } from '../providers/mui';
+import { AppBar as RadixAppBar } from '../providers/radix';
 
 export interface AppBarProps {
   children: React.ReactNode;
@@ -33,6 +34,10 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIAppBar {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixAppBar {...props} />;
   }
   
   // Filter props not supported by internal (including 'relative' position)

@@ -7,6 +7,7 @@ import { BaseInputProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { Input as InternalInput } from '../base';
 import { Input as MUIInput } from '../providers/mui';
+import { Input as RadixInput } from '../providers/radix';
 
 /**
  * Adaptive Input Component
@@ -23,6 +24,10 @@ export const Input: React.FC<BaseInputProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIInput {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixInput {...props} />;
   }
   
   // Filter out MUI-specific props that don't apply to internal Input

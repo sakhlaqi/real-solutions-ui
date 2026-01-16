@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Drawer as InternalDrawer } from '../layout';
 import { Drawer as MUIDrawer } from '../providers/mui';
+import { Drawer as RadixDrawer } from '../providers/radix';
 
 export interface DrawerProps {
   open: boolean;
@@ -33,6 +34,10 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIDrawer {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixDrawer {...props} />;
   }
   
   // Transform open to isOpen and filter unsupported props

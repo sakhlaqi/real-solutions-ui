@@ -10,6 +10,7 @@ import { IconButtonProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { IconButton as InternalIconButton } from '../buttons';
 import { IconButton as MUIIconButton } from '../providers/mui';
+import { IconButton as RadixIconButton } from '../providers/radix';
 
 /**
  * Adaptive IconButton Component
@@ -26,6 +27,10 @@ export const IconButton: React.FC<IconButtonProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIIconButton {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixIconButton {...props} />;
   }
   
   // Transform props - internal uses 'icon' and 'ariaLabel', MUI uses children and aria-label

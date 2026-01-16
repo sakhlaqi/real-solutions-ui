@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Stepper as InternalStepper } from '../navigation';
 import { Stepper as MUIStepper } from '../providers/mui';
+import { Stepper as RadixStepper } from '../providers/radix';
 
 export interface Step {
   label: string;
@@ -43,6 +44,10 @@ export const Stepper: React.FC<StepperProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIStepper {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixStepper {...props} />;
   }
   
   // Transform activeStep to currentStep and add id field to steps

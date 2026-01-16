@@ -8,6 +8,7 @@ import React, { ReactNode } from 'react';
 import { useUIContext } from '../core/context';
 import { Card as InternalCard } from '../layout';
 import { Card as MUICard } from '../providers/mui';
+import { Card as RadixCard } from '../providers/radix';
 
 export interface CardProps {
   children: ReactNode;
@@ -34,6 +35,10 @@ export const Card: React.FC<CardProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUICard {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixCard {...props} />;
   }
   
   // Internal Card uses simpler props

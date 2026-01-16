@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { ToggleButton as InternalToggleButton } from '../buttons';
 import { ToggleButton as MUIToggleButton } from '../providers/mui';
+import { ToggleButton as RadixToggleButton } from '../providers/radix';
 
 export interface ToggleButtonProps {
   value: string;
@@ -38,6 +39,10 @@ export const ToggleButton: React.FC<ToggleButtonProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIToggleButton {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixToggleButton {...props} />;
   }
   
   // Transform props for internal - wrap in options array

@@ -10,6 +10,7 @@ import { useUIContext } from '../core/context';
 // Using MUI Tooltip as fallback for internal implementation
 import { Tooltip as MUITooltipInternal } from '@mui/material';
 import { Tooltip as MUITooltip } from '../providers/mui';
+import { Tooltip as RadixTooltip } from '../providers/radix';
 
 export interface TooltipProps {
   title: string;
@@ -33,6 +34,10 @@ export const Tooltip: React.FC<TooltipProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUITooltip {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixTooltip {...props} />;
   }
   
   // Use MUI implementation for now since internal Tooltip may not exist

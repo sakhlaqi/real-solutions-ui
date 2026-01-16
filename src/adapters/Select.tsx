@@ -10,6 +10,7 @@ import { SelectProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { Select as InternalSelect } from '../forms';
 import { Select as MUISelect } from '../providers/mui';
+import { Select as RadixSelect } from '../providers/radix';
 
 /**
  * Adaptive Select Component
@@ -31,6 +32,10 @@ export const Select: React.FC<SelectProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUISelect {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixSelect {...props} />;
   }
   
   // Internal Select doesn't support size as string, remove it

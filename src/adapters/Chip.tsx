@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Chip as InternalChip } from '../data-display';
 import { Chip as MUIChip } from '../providers/mui';
+import { Chip as RadixChip } from '../providers/radix';
 
 export interface ChipProps {
   label: string;
@@ -34,6 +35,10 @@ export const Chip: React.FC<ChipProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIChip {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixChip {...props} />;
   }
   
   // Transform for internal Chip which expects children instead of label

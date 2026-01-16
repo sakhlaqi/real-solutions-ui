@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Rating as InternalRating } from '../forms';
 import { Rating as MUIRating } from '../providers/mui';
+import { Rating as RadixRating } from '../providers/radix';
 
 export interface RatingProps {
   value: number;
@@ -38,6 +39,10 @@ export const Rating: React.FC<RatingProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIRating {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixRating {...props} />;
   }
   
   // Filter MUI-specific props for internal

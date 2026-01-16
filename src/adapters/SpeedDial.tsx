@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { SpeedDial as InternalSpeedDial } from '../navigation';
 import { SpeedDial as MUISpeedDial } from '../providers/mui';
+import { SpeedDial as RadixSpeedDial } from '../providers/radix';
 
 export interface SpeedDialAction {
   icon: React.ReactElement;
@@ -43,6 +44,10 @@ export const SpeedDial: React.FC<SpeedDialProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUISpeedDial {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixSpeedDial {...props} />;
   }
   
   // Transform props for internal (name -> label)

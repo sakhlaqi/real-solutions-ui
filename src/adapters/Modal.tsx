@@ -10,6 +10,7 @@ import { BaseModalProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { Modal as InternalModal } from '../overlay';
 import { Modal as MUIModal } from '../providers/mui';
+import { Modal as RadixModal } from '../providers/radix';
 
 /**
  * Adaptive Modal Component
@@ -33,6 +34,10 @@ export const Modal: React.FC<BaseModalProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIModal {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixModal {...props} />;
   }
   
   // Transform props - internal uses 'isOpen', MUI uses 'open'

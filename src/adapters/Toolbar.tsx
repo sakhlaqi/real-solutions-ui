@@ -7,6 +7,7 @@
 import React from 'react';
 import { useUIContext } from '../core/context';
 import { Toolbar as MUIToolbar } from '../providers/mui';
+import { Toolbar as RadixToolbar } from '../providers/radix';
 
 export interface ToolbarProps {
   children: React.ReactNode;
@@ -32,6 +33,10 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIToolbar {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixToolbar {...props} />;
   }
   
   // For internal, just render a div with flexbox styling

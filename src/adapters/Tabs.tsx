@@ -10,6 +10,7 @@ import { BaseTabsProps } from '../core/types';
 import { useUIContext } from '../core/context';
 import { Tabs as InternalTabs } from '../navigation';
 import { Tabs as MUITabs } from '../providers/mui';
+import { Tabs as RadixTabs } from '../providers/radix';
 
 /**
  * Adaptive Tabs Component
@@ -34,6 +35,10 @@ export const Tabs: React.FC<BaseTabsProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUITabs {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixTabs {...props} />;
   }
   
   // Transform MUI-style tabs to internal format

@@ -8,6 +8,7 @@ import React from 'react';
 import { useUIContext } from '../core/context';
 import { Toggle as InternalSwitch } from '../forms';
 import { Switch as MUISwitch } from '../providers/mui';
+import { Switch as RadixSwitch } from '../providers/radix';
 
 export interface SwitchProps {
   checked: boolean;
@@ -31,6 +32,10 @@ export const Switch: React.FC<SwitchProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUISwitch {...props} />;
+  }
+  
+  if (provider === 'radix') {
+    return <RadixSwitch {...props} />;
   }
   
   // Map to internal Toggle component
