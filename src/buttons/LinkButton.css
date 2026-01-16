@@ -1,0 +1,107 @@
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  text-decoration: none;
+}
+
+/* Sizes */
+.link-button.sm {
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-2xs);
+}
+
+.link-button.md {
+  font-size: var(--font-size-base);
+}
+
+.link-button.lg {
+  font-size: var(--font-size-lg);
+}
+
+/* Variants */
+.link-button.primary {
+  color: var(--color-primary);
+}
+
+.link-button.primary:hover:not(.disabled) {
+  color: var(--color-primary-dark);
+}
+
+.link-button.secondary {
+  color: var(--color-text-secondary);
+}
+
+.link-button.secondary:hover:not(.disabled) {
+  color: var(--color-text-primary);
+}
+
+.link-button.danger {
+  color: var(--color-error);
+}
+
+.link-button.danger:hover:not(.disabled) {
+  color: var(--color-error-dark);
+}
+
+.link-button.ghost {
+  color: var(--color-text-primary);
+}
+
+.link-button.ghost:hover:not(.disabled) {
+  color: var(--color-primary);
+}
+
+/* Underline styles */
+.link-button.underline-none {
+  text-decoration: none;
+}
+
+.link-button.underline-hover {
+  text-decoration: none;
+}
+
+.link-button.underline-hover:hover:not(.disabled) {
+  text-decoration: underline;
+}
+
+.link-button.underline-always {
+  text-decoration: underline;
+}
+
+/* Disabled state */
+.link-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* External icon */
+.link-button-external-icon {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.link-button.sm .link-button-external-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.link-button.lg .link-button-external-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Focus styles */
+.link-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

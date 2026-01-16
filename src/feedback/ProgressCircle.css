@@ -1,0 +1,79 @@
+.progress-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-circle-svg {
+  transform: rotate(-90deg);
+}
+
+.progress-circle-svg.indeterminate .progress-circle-fill {
+  animation: progress-circle-spin 1.4s linear infinite;
+  stroke-dasharray: 80, 200;
+  stroke-dashoffset: 0;
+}
+
+@keyframes progress-circle-spin {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 100, 200;
+    stroke-dashoffset: -15;
+  }
+  100% {
+    stroke-dasharray: 100, 200;
+    stroke-dashoffset: -125;
+  }
+}
+
+.progress-circle-bg {
+  stroke: var(--color-background-secondary);
+  opacity: 0.3;
+}
+
+.progress-circle-fill {
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress-circle-fill.primary {
+  stroke: var(--color-primary);
+}
+
+.progress-circle-fill.success {
+  stroke: var(--color-success);
+}
+
+.progress-circle-fill.warning {
+  stroke: var(--color-warning);
+}
+
+.progress-circle-fill.error {
+  stroke: var(--color-error);
+}
+
+.progress-circle-fill.info {
+  stroke: var(--color-info);
+}
+
+.progress-circle-label {
+  position: absolute;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.progress-circle.sm .progress-circle-label {
+  font-size: var(--font-size-xs);
+}
+
+.progress-circle.lg .progress-circle-label {
+  font-size: var(--font-size-base);
+}
+
+.progress-circle.xl .progress-circle-label {
+  font-size: var(--font-size-lg);
+}

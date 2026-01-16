@@ -1,6 +1,6 @@
 {
   "name": "@sakhlaqi/ui",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A comprehensive, production-ready React UI component library",
   "type": "module",
   "publishConfig": {

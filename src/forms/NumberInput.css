@@ -1,0 +1,139 @@
+.number-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  width: fit-content;
+}
+
+.number-input-wrapper.full-width {
+  width: 100%;
+}
+
+.number-input-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.number-input-label .required {
+  color: var(--color-error);
+  margin-left: var(--spacing-2xs);
+}
+
+.number-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.number-input {
+  padding: var(--spacing-sm) var(--spacing-md);
+  padding-right: 32px; /* Space for controls */
+  font-size: var(--font-size-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+  font-family: inherit;
+  width: 100%;
+  min-width: 150px;
+}
+
+.number-input.has-prefix {
+  padding-left: calc(var(--spacing-md) * 2 + 20px);
+}
+
+.number-input.has-suffix {
+  padding-right: calc(32px + var(--spacing-md) + 20px);
+}
+
+.number-input-prefix,
+.number-input-suffix {
+  position: absolute;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+.number-input-prefix {
+  left: var(--spacing-md);
+}
+
+.number-input-suffix {
+  right: calc(32px + var(--spacing-sm));
+}
+
+.number-input:hover:not(:disabled) {
+  border-color: var(--color-border-hover);
+}
+
+.number-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-alpha);
+}
+
+.number-input.error {
+  border-color: var(--color-error);
+}
+
+.number-input.error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-alpha);
+}
+
+.number-input:disabled,
+.number-input.disabled {
+  background-color: var(--color-background-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.number-input-controls {
+  position: absolute;
+  right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.number-input-btn {
+  width: 24px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  background-color: var(--color-background-secondary);
+  color: var(--color-text-secondary);
+  font-size: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.number-input-btn:hover:not(:disabled) {
+  background-color: var(--color-background-hover);
+  color: var(--color-text-primary);
+}
+
+.number-input-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.number-input-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.number-input-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+}
+
+.number-input-helper {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}

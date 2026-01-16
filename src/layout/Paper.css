@@ -1,0 +1,39 @@
+.paper {
+  background-color: var(--color-background);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+}
+
+.paper.square {
+  border-radius: 0;
+}
+
+/* Variants */
+.paper.elevation {
+  border: none;
+}
+
+.paper.outlined {
+  border: 1px solid var(--color-border);
+}
+
+/* Elevation levels */
+.paper.elevation.elevation-0 {
+  box-shadow: none;
+}
+
+.paper.elevation.elevation-1 {
+  box-shadow: var(--shadow-sm);
+}
+
+.paper.elevation.elevation-2 {
+  box-shadow: var(--shadow-md);
+}
+
+.paper.elevation.elevation-3 {
+  box-shadow: var(--shadow-lg);
+}
+
+.paper.elevation.elevation-4 {
+  box-shadow: var(--shadow-xl);
+}

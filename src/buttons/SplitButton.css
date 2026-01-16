@@ -1,0 +1,165 @@
+.split-button {
+  display: inline-flex;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.split-button button {
+  border: none;
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.split-button-main {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  flex: 1;
+}
+
+.split-button-dropdown {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sizes */
+.split-button.sm button {
+  font-size: var(--font-size-sm);
+}
+
+.split-button.sm .split-button-main {
+  padding: var(--spacing-xs) var(--spacing-md);
+}
+
+.split-button.sm .split-button-dropdown {
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.split-button.md button {
+  font-size: var(--font-size-base);
+}
+
+.split-button.lg button {
+  font-size: var(--font-size-lg);
+}
+
+.split-button.lg .split-button-main {
+  padding: var(--spacing-md) var(--spacing-xl);
+}
+
+.split-button.lg .split-button-dropdown {
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+/* Variants */
+.split-button.primary button {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.split-button.primary button:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.split-button.secondary button {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.split-button.secondary button:hover:not(:disabled) {
+  background-color: var(--color-secondary-dark);
+}
+
+.split-button.outline button {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.split-button.outline button:hover:not(:disabled) {
+  background-color: var(--color-primary-alpha);
+}
+
+.split-button.outline .split-button-dropdown {
+  border-left-color: var(--color-primary);
+}
+
+.split-button.danger button {
+  background-color: var(--color-error);
+  color: white;
+}
+
+.split-button.danger button:hover:not(:disabled) {
+  background-color: var(--color-error-dark);
+}
+
+.split-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.split-button button:disabled {
+  cursor: not-allowed;
+}
+
+.split-button button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.split-button-menu {
+  min-width: 180px;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xs) 0;
+  z-index: 1000;
+  animation: split-button-fade-in 0.15s ease-out;
+}
+
+@keyframes split-button-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.split-button-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.split-button-menu-item:hover:not(.disabled) {
+  background-color: var(--color-background-hover);
+}
+
+.split-button-menu-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.split-button-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}

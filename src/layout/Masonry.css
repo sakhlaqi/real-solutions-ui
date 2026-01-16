@@ -1,0 +1,39 @@
+.masonry {
+  column-count: 3;
+  column-gap: 16px;
+}
+
+.masonry.responsive {
+  column-count: var(--columns-xs, 1);
+}
+
+@media (min-width: 600px) {
+  .masonry.responsive {
+    column-count: var(--columns-sm, 2);
+  }
+}
+
+@media (min-width: 960px) {
+  .masonry.responsive {
+    column-count: var(--columns-md, 3);
+  }
+}
+
+@media (min-width: 1280px) {
+  .masonry.responsive {
+    column-count: var(--columns-lg, 4);
+  }
+}
+
+@media (min-width: 1920px) {
+  .masonry.responsive {
+    column-count: var(--columns-xl, 5);
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+}

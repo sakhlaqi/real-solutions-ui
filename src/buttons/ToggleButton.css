@@ -1,0 +1,74 @@
+.toggle-button-group {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.toggle-button-group.full-width {
+  width: 100%;
+}
+
+.toggle-button-group.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  border: none;
+  border-right: 1px solid var(--color-border);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.toggle-button:last-child {
+  border-right: none;
+}
+
+.toggle-button:hover:not(:disabled):not(.disabled) {
+  background-color: var(--color-background-hover);
+}
+
+.toggle-button.selected {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.toggle-button:disabled,
+.toggle-button.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Sizes */
+.toggle-button-group.sm .toggle-button {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+}
+
+.toggle-button-group.lg .toggle-button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-base);
+}
+
+.toggle-button-icon {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button-label {
+  display: flex;
+  align-items: center;
+}
