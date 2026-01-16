@@ -1,6 +1,6 @@
 {
   "name": "@sakhlaqi/ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A comprehensive, production-ready React UI component library",
   "type": "module",
   "publishConfig": {
@@ -82,8 +82,8 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

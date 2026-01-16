@@ -43,3 +43,4 @@ pnpm-debug.log*
 .cache
 .temp
 *.tgz
+.npmrc
