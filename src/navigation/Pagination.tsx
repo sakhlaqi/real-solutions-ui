@@ -65,7 +65,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     <nav aria-label="Pagination" className={`pagination ${className}`}>
       <ul className="pagination-list">
         {showFirstLast && (
-          <li>
+          <li key="first">
             <button
               className="pagination-button"
               onClick={() => onPageChange(1)}
@@ -78,7 +78,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         )}
 
         {showPrevNext && (
-          <li>
+          <li key="prev">
             <button
               className="pagination-button"
               onClick={() => onPageChange(currentPage - 1)}
@@ -96,7 +96,7 @@ export const Pagination: React.FC<PaginationProps> = ({
               <span className="pagination-ellipsis">...</span>
             </li>
           ) : (
-            <li key={page}>
+            <li key={`page-${page}`}>
               <button
                 className={`pagination-button ${
                   currentPage === page ? 'pagination-button-active' : ''
@@ -113,7 +113,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         )}
 
         {showPrevNext && (
-          <li>
+          <li key="next">
             <button
               className="pagination-button"
               onClick={() => onPageChange(currentPage + 1)}
@@ -126,7 +126,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         )}
 
         {showFirstLast && (
-          <li>
+          <li key="last">
             <button
               className="pagination-button"
               onClick={() => onPageChange(totalPages)}

@@ -1,5 +1,4 @@
 import React from 'react';
-import './Thumbnail.css';
 
 export interface ThumbnailProps {
   src: string;

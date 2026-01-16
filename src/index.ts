@@ -68,6 +68,36 @@ export {
   Breadcrumbs,
   Snackbar,
   Progress,
+  Card,
+  Tooltip,
+  Badge,
+  Avatar,
+  Chip,
+  Spinner,
+  Slider,
+  Switch,
+  RadioGroup,
+  Pagination,
+  Autocomplete,
+  Drawer,
+  Menu,
+  Stepper,
+  Accordion,
+  Dialog,
+  AppBar,
+  List,
+  Divider,
+  Textarea,
+  BottomNavigation,
+  Toolbar,
+  SpeedDial,
+  Popover,
+  Backdrop,
+  ButtonGroup,
+  ToggleButton,
+  Rating,
+  Skeleton,
+  LinearProgress,
 } from './adapters';
 
 // ============================================================================
@@ -82,12 +112,7 @@ export * as MUIComponents from './providers/mui';
 // Original internal components - direct imports
 // Note: These may conflict with adaptive components above.
 // Prefer using adaptive components or InternalComponents namespace.
-// ============================================================================
-
-// Base Components
-export * from './base';
-
-// Layout Components
+// =================================, Drawer, Accordion - use adaptive versions)
 export {
   Header,
   Footer,
@@ -95,17 +120,13 @@ export {
   AdminLayout,
   AppShell,
   Sidebar,
-  Drawer,
   Container,
   Grid,
   GridItem,
   Flex,
   Section,
-  Divider,
   Spacer,
-  Card,
   Paper,
-  Accordion,
   Stack,
   Box,
   ImageList,
@@ -136,16 +157,11 @@ export type {
   MasonryProps,
 } from './layout';
 
-// Navigation Components (excluding Breadcrumbs and Tabs - use adaptive versions)
+// Navigation Components (excluding Breadcrumbs, Tabs, Pagination, Stepper, BottomNavigation, SpeedDial - use adaptive versions)
 export {
   Navbar,
-  Pagination,
-  Stepper,
-  AppBar,
-  BottomNavigation,
   DropdownMenu,
   ContextMenu,
-  SpeedDial,
 } from './navigation';
 
 export type {
@@ -155,21 +171,15 @@ export type {
   StepperProps,
 } from './navigation';
 
-// Form Components (excluding conflicts with adapters)
+// Form Components (excluding RadioGroup, Toggle, Slider, Autocomplete, Rating - use adaptive versions)
 export {
   PasswordInput,
   EmailInput,
   NumberInput,
-  Textarea,
   TextareaAutosize,
   MultiSelect,
-  Autocomplete,
-  RadioGroup,
-  Toggle,
   TimePicker,
   DateTimePicker,
-  Rating,
-  Slider,
   TransferList,
   FileUpload,
 } from './forms';
@@ -182,35 +192,25 @@ export type {
   RadioGroupProps,
   ToggleProps,
   RatingProps,
-  SliderProps,
   FileUploadProps,
 } from './forms';
 
 // Button Components (excluding conflicts with adapters)
 export {
-  ButtonGroup,
   FloatingActionButton,
   LinkButton,
   SplitButton,
-  ToggleButton,
 } from './buttons';
 
 export type {
-  ButtonGroupProps,
   FloatingActionButtonProps,
   LinkButtonProps,
   SplitButtonProps,
-  ToggleButtonProps,
 } from './buttons';
 
-// Data Display Components (excluding conflicts with adapters)
+// Data Display Components (excluding Badge, Avatar, Tooltip, Chip, List - use adaptive versions)
 export {
-  Badge,
-  Avatar,
-  Tooltip,
-  List,
   ListItem,
-  Chip,
   Tag,
   Timeline,
 } from './data-display';
@@ -226,9 +226,8 @@ export type {
   TimelineProps,
 } from './data-display';
 
-// Feedback Components (excluding Alert and Snackbar - use adaptive versions)
+// Feedback Components (excluding Alert, Snackbar, Spinner - use adaptive versions)
 export {
-  Spinner,
   ProgressBar,
   ProgressCircle,
   SkeletonLoader,
@@ -251,14 +250,11 @@ export type {
   ToastProps,
 } from './feedback';
 
-// Overlay Components (excluding Modal - use adaptive version)
+// Overlay Components (excluding Modal, Dialog, Backdrop, Popover - use adaptive versions)
 export {
-  Dialog,
-  Backdrop,
   SlideOver,
   BottomSheet,
   Lightbox,
-  Popover,
 } from './overlay';
 
 export type {

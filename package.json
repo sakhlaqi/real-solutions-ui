@@ -1,6 +1,6 @@
 {
   "name": "@sakhlaqi/ui",
-  "version": "2.0.0",
+  "version": "2.3.0",
   "description": "A comprehensive, production-ready React UI component library with Material-UI integration",
   "type": "module",
   "publishConfig": {

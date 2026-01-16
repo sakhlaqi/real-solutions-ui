@@ -23,16 +23,63 @@ npm install ../ui
 
 ## ✨ Features
 
+- ✅ **45 Adaptive Components** - Dual-provider architecture (Internal + Material-UI)
 - ✅ **TypeScript Support** - Full type safety and IntelliSense
+- ✅ **Dynamic Provider Switching** - Change UI framework at runtime
 - ✅ **Accessible by Default** - ARIA roles, keyboard navigation, focus management
 - ✅ **Responsive & Mobile-Friendly** - Works seamlessly across all devices
 - ✅ **Themeable** - CSS custom properties for easy theming
 - ✅ **Tree-Shakeable** - Import only what you need
 - ✅ **React 18 & 19 Compatible** - Works with latest React versions
-- ✅ **Zero Runtime Dependencies** - Only peer dependencies on React
-- ✅ **Well Documented** - Clear props and examples
+- ✅ **Production Ready** - Battle-tested with comprehensive documentation
 
 ## 🚀 Quick Start
+
+### Basic Setup with UIProvider
+
+```tsx
+import { UIProvider, Button, Input, Card } from '@sakhlaqi/ui';
+import '@sakhlaqi/ui/styles';
+
+function App() {
+  return (
+    <UIProvider defaultProvider="internal">
+      <Card>
+        <h1>Welcome</h1>
+        <Input label="Email" placeholder="Enter email" />
+        <Button variant="contained">Click Me</Button>
+      </Card>
+    </UIProvider>
+  );
+}
+```
+
+### Switch Between Providers
+
+```tsx
+import { useUIContext, Button } from '@sakhlaqi/ui';
+
+function ProviderSwitcher() {
+  const { provider, setProvider } = useUIContext();
+  
+  return (
+    <div>
+      <Button 
+        variant={provider === 'internal' ? 'contained' : 'outlined'}
+        onClick={() => setProvider('internal')}
+      >
+        Internal UI
+      </Button>
+      <Button 
+        variant={provider === 'mui' ? 'contained' : 'outlined'}
+        onClick={() => setProvider('mui')}
+      >
+        Material-UI
+      </Button>
+    </div>
+  );
+}
+```
 
 ### Import Components
 
@@ -65,7 +112,40 @@ import { Modal } from 'ui/overlay';
 import { Heading, Text } from 'ui/typography';
 ```
 
-## Component Categories
+## 📦 Adaptive Components (45 Total)
+
+The library provides **45 adaptive components** that automatically switch between Internal and Material-UI implementations based on `UIProvider`.
+
+### Form Components (8)
+`Button`, `IconButton`, `Input`, `Select`, `Checkbox`, `Rating`, `Textarea`, `RadioGroup`
+
+### Data Display (8)  
+`Table`, `TreeView`, `Card`, `Tooltip`, `Badge`, `Avatar`, `Chip`, `List`
+
+### Feedback (7)
+`Alert`, `Spinner`, `Slider`, `Switch`, `Progress`, `Skeleton`, `LinearProgress`
+
+### Overlay (3)
+`Modal`, `Snackbar`, `Drawer`
+
+### Charts (3)
+`LineChart`, `BarChart`, `PieChart`
+
+### Navigation (6)
+`Tabs`, `Breadcrumbs`, `Pagination`, `Stepper`, `Menu`, `BottomNavigation`
+
+### Layout (5)
+`Accordion`, `Dialog`, `AppBar`, `Divider`, `Popover`
+
+### Buttons (3)
+`ButtonGroup`, `ToggleButton`, `SpeedDial`
+
+### Utility (2)
+`DatePicker`, `Backdrop`, `Toolbar`
+
+> 📖 See [ADAPTIVE_COMPONENTS.md](./ADAPTIVE_COMPONENTS.md) for complete documentation
+
+## 📦 Component Categories
 
 ### Base Components
 - `Button` - Action button with variants
@@ -139,8 +219,8 @@ import { ErrorBoundary, ThemeProvider } from '@sakhlaqi/ui/utility';
 ### Forms (8)
 - `Form`, `PasswordInput`, `Select`, `Checkbox`, `RadioGroup`, `Toggle`, `Textarea`, `FileUpload`
 
-### Buttons (2)
-- `IconButton`, `ButtonGroup`
+### Buttons (4)
+- `IconButton`, `ButtonGroup`, `ToggleButton`, `FloatingActionButton`
 
 ### Layout (11)
 - `AppShell`, `Header`, `Footer`, `Sidebar`, `Drawer`, `Container`, `Grid`, `GridItem`, `Flex`, `Section`, `Divider`, `Spacer`
@@ -151,8 +231,8 @@ import { ErrorBoundary, ThemeProvider } from '@sakhlaqi/ui/utility';
 ### Data Display (4)
 - `Badge`, `Avatar`, `Tooltip`, `List`, `ListItem`
 
-### Feedback (3)
-- `Alert`, `Spinner`, `ProgressBar`
+### Feedback (5)
+- `Alert`, `Spinner`, `ProgressBar`, `Skeleton`, `LinearProgress`
 
 ### Overlay (1)
 - `Modal`

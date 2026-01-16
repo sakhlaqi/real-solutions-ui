@@ -1,6 +1,6 @@
 # @sakhlaqi/ui - Adaptive Components Quick Reference
 
-## All Available Adaptive Components (15 Total)
+## All Available Adaptive Components (45 Total)
 
 ### Form Components (5)
 ```tsx
@@ -372,3 +372,179 @@ import type {
   // ... and many more
 } from '@sakhlaqi/ui';
 ```
+
+---
+
+## 🆕 Phase 5 Components (January 16, 2026)
+
+### ButtonGroup - Group Buttons Together
+```tsx
+import { ButtonGroup, Button } from '@sakhlaqi/ui';
+
+<ButtonGroup variant="contained" size="medium" orientation="horizontal">
+  <Button>One</Button>
+  <Button>Two</Button>
+  <Button>Three</Button>
+</ButtonGroup>
+
+// Vertical orientation
+<ButtonGroup orientation="vertical" fullWidth>
+  <Button>Option A</Button>
+  <Button>Option B</Button>
+</ButtonGroup>
+```
+
+### ToggleButton - Single Toggle Button  
+```tsx
+import { ToggleButton } from '@sakhlaqi/ui';
+import { FormatBold, FormatItalic } from '@mui/icons-material';
+
+<ToggleButton
+  value="bold"
+  selected={isBold}
+  onChange={() => setIsBold(!isBold)}
+  size="medium"
+>
+  <FormatBold />
+</ToggleButton>
+```
+
+### Rating - Star Rating Component
+```tsx
+import { Rating } from '@sakhlaqi/ui';
+
+// Basic rating
+<Rating
+  value={rating}
+  onChange={(value) => setRating(value)}
+  max={5}
+/>
+
+// Half-star precision
+<Rating
+  value={4.5}
+  onChange={setRating}
+  precision={0.5}
+  size="large"
+/>
+
+// Read-only
+<Rating value={4} readOnly />
+```
+
+### Skeleton - Loading Placeholder
+```tsx
+import { Skeleton } from '@sakhlaqi/ui';
+
+// Text skeleton
+<Skeleton variant="text" width={200} />
+
+// Rectangular skeleton
+<Skeleton variant="rectangular" width={300} height={100} />
+
+// Circular skeleton (avatar)
+<Skeleton variant="circular" width={40} height={40} />
+
+// Multiple skeletons
+<div>
+  <Skeleton variant="text" width="60%" />
+  <Skeleton variant="text" width="80%" />
+  <Skeleton variant="text" width="40%" />
+</div>
+```
+
+### LinearProgress - Linear Progress Bar
+```tsx
+import { LinearProgress } from '@sakhlaqi/ui';
+
+// Determinate (with value)
+<LinearProgress value={75} variant="determinate" />
+
+// Indeterminate (loading)
+<LinearProgress variant="indeterminate" />
+
+// With color
+<LinearProgress value={50} color="secondary" />
+```
+
+---
+
+## 📊 Updated Component Statistics
+
+| Category | Adaptive Count | Key Components |
+|----------|---------------|----------------|
+| **Forms** | 8 | Button, Input, Select, Checkbox, Rating, Textarea, RadioGroup, IconButton |
+| **Data Display** | 8 | Table, TreeView, Card, Tooltip, Badge, Avatar, Chip, List |
+| **Feedback** | 7 | Alert, Spinner, Slider, Switch, Progress, Skeleton, LinearProgress |
+| **Overlay** | 3 | Modal, Snackbar, Drawer |
+| **Charts** | 3 | LineChart, BarChart, PieChart |
+| **Navigation** | 6 | Tabs, Breadcrumbs, Pagination, Stepper, Menu, BottomNavigation |
+| **Layout** | 5 | Accordion, Dialog, AppBar, Divider, Popover |
+| **Buttons** | 3 | ButtonGroup, ToggleButton, SpeedDial |
+| **Utility** | 2 | DatePicker, Backdrop, Toolbar |
+| **Total Adaptive** | **45** | Up from 40 components |
+
+---
+
+## 🎯 Complete Usage Example
+
+```tsx
+import { 
+  UIProvider, 
+  Button, 
+  Input, 
+  Rating, 
+  LinearProgress,
+  Skeleton,
+  ButtonGroup,
+  Card
+} from '@sakhlaqi/ui';
+import '@sakhlaqi/ui/styles';
+
+function App() {
+  const [loading, setLoading] = useState(true);
+  const [rating, setRating] = useState(4);
+  const [progress, setProgress] = useState(75);
+
+  return (
+    <UIProvider defaultProvider="internal">
+      <Card>
+        <h1>Product Review</h1>
+        
+        {loading ? (
+          <>
+            <Skeleton variant="text" width="80%" />
+            <Skeleton variant="rectangular" height={100} />
+            <Skeleton variant="text" width="60%" />
+          </>
+        ) : (
+          <>
+            <Rating value={rating} onChange={setRating} />
+            <Input label="Your Review" placeholder="Write your review..." />
+            
+            <LinearProgress value={progress} variant="determinate" />
+            
+            <ButtonGroup>
+              <Button variant="outlined">Cancel</Button>
+              <Button variant="contained">Submit</Button>
+            </ButtonGroup>
+          </>
+        )}
+      </Card>
+    </UIProvider>
+  );
+}
+```
+
+---
+
+## 📚 Additional Resources
+
+- **Full Documentation:** [ADAPTIVE_COMPONENTS.md](./ADAPTIVE_COMPONENTS.md)
+- **Changelog:** [CHANGELOG_v2.3.md](./CHANGELOG_v2.3.md)
+- **Setup Guide:** [GITHUB_PACKAGES_SETUP.md](./GITHUB_PACKAGES_SETUP.md)
+- **Architecture:** [DUAL_PROVIDER_ARCHITECTURE.md](./DUAL_PROVIDER_ARCHITECTURE.md)
+
+**Version:** 2.3.0  
+**Last Updated:** January 16, 2026  
+**Total Adaptive Components:** 45

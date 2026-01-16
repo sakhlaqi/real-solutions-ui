@@ -39,6 +39,12 @@ export const Input: React.FC<InputProps> = ({
   const errorId = `${inputId}-error`;
   const helperId = `${inputId}-helper`;
   
+  // If value is provided without onChange or readOnly, make it read-only to avoid React warning
+  const hasValue = 'value' in props;
+  const hasOnChange = 'onChange' in props;
+  const hasReadOnly = 'readOnly' in props;
+  const shouldBeReadOnly = hasValue && !hasOnChange && !hasReadOnly;
+  
   const wrapperClasses = [
     'input-wrapper',
     fullWidth ? 'input-full-width' : '',
@@ -71,6 +77,7 @@ export const Input: React.FC<InputProps> = ({
           className={inputClasses}
           required={required}
           disabled={disabled}
+          readOnly={shouldBeReadOnly}
           aria-invalid={!!error}
           aria-describedby={
             error ? errorId : helperText ? helperId : undefined

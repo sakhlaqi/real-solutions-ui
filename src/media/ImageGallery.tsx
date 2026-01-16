@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './ImageGallery.css';
 
 export interface ImageGalleryProps {
   images: Array<{
