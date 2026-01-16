@@ -65,7 +65,8 @@
       "require": "./dist/utility/index.cjs",
       "types": "./dist/utility/index.d.ts"
     },
-    "./styles": "./dist/styles/index.css"
+    "./styles": "./dist/styles/index.css",
+    "./dist/styles/index.css": "./dist/styles/index.css"
   },
   "files": [
     "dist",
