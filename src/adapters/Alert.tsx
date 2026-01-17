@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { Alert as InternalAlert } from '../feedback';
 import { Alert as MUIAlert } from '../providers/mui';
 import { Alert as RadixAlert } from '../providers/radix';
+import { Alert as ShadcnAlert } from '../providers/shadcn';
 
 /**
  * Adaptive Alert Component
@@ -33,6 +34,10 @@ export const Alert: React.FC<BaseAlertProps> = (props) => {
   
   if (provider === 'radix') {
     return <RadixAlert {...props} />;
+  }
+
+  if (provider === 'shadcn') {
+    return <ShadcnAlert {...props} />;
   }
   
   // Transform MUI-style props to internal props

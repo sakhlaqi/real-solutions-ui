@@ -27,11 +27,11 @@ export const EmailInput: React.FC<EmailInputProps> = (props) => {
   const { provider } = useUIContext();
   
   if (provider === 'mui') {
-    return <MUIInput {...props} type="email" />;
+    return <MUIInput {...props as any} type="email" />;
   }
   
   if (provider === 'radix') {
-    return <RadixInput {...props} type="email" />;
+    return <RadixInput {...props as any} type="email" />;
   }
   
   return <InternalEmailInput {...props} />;

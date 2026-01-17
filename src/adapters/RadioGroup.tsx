@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { RadioGroup as InternalRadioGroup } from '../forms';
 import { RadioGroup as MUIRadioGroup } from '../providers/mui';
 import { RadioGroup as RadixRadioGroup } from '../providers/radix';
+import { RadioGroup as ShadcnRadioGroup } from '../providers/shadcn';
 
 export interface RadioOption {
   value: string;
@@ -42,6 +43,10 @@ export interface RadioGroupProps {
  */
 export const RadioGroup: React.FC<RadioGroupProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnRadioGroup {...props as any} />;
+  }
   
   if (provider === 'mui') {
     return <MUIRadioGroup {...props} />;

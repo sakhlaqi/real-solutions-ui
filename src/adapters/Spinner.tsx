@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { Spinner as InternalSpinner } from '../feedback';
 import { CircularProgress as MUISpinner } from '@mui/material';
 import { Spinner as RadixSpinner } from '../providers/radix';
+import { Spinner as ShadcnSpinner } from '../providers/shadcn';
 
 export interface SpinnerProps {
   size?: 'small' | 'medium' | 'large';
@@ -26,6 +27,10 @@ export interface SpinnerProps {
  */
 export const Spinner: React.FC<SpinnerProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnSpinner {...props} />;
+  }
   
   if (provider === 'mui') {
     // Map size to MUI size values

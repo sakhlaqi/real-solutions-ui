@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { Tabs as InternalTabs } from '../navigation';
 import { Tabs as MUITabs } from '../providers/mui';
 import { Tabs as RadixTabs } from '../providers/radix';
+import { Tabs as ShadcnTabs } from '../providers/shadcn';
 
 /**
  * Adaptive Tabs Component
@@ -32,6 +33,10 @@ import { Tabs as RadixTabs } from '../providers/radix';
  */
 export const Tabs: React.FC<BaseTabsProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnTabs {...props as any} />;
+  }
   
   if (provider === 'mui') {
     return <MUITabs {...props} />;

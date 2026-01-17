@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { Slider as InternalSlider } from '../forms';
 import { Slider as MUISlider } from '../providers/mui';
 import { Slider as RadixSlider } from '../providers/radix';
+import { Slider as ShadcnSlider } from '../providers/shadcn';
 
 export interface SliderProps {
   value: number | number[];
@@ -31,6 +32,10 @@ export interface SliderProps {
  */
 export const Slider: React.FC<SliderProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnSlider {...props as any} />;
+  }
   
   if (provider === 'mui') {
     return <MUISlider {...props} />;

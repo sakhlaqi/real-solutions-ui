@@ -1,12 +1,14 @@
 /**
  * Adapter Form Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
+ * Dynamically switches between internal, MUI, Radix, and Shadcn implementations
  * based on the current UIProvider context.
  */
 
 import React from 'react';
+import { useUIContext } from '../core/context';
 import { Form as InternalForm, FormProps } from '../forms';
+import { Form as ShadcnForm } from '../providers/shadcn';
 
 /**
  * Adaptive Form Component
@@ -20,7 +22,13 @@ import { Form as InternalForm, FormProps } from '../forms';
  * ```
  */
 export const Form: React.FC<FormProps> = (props) => {
-  // Form always uses internal implementation
+  const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnForm {...props as any} />;
+  }
+  
+  // Form uses internal implementation for other providers
   return <InternalForm {...props} />;
 };
 

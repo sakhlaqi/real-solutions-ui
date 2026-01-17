@@ -5,7 +5,6 @@
  * internal, Material-UI, and Radix UI implementations.
  */
 
-import React from 'react';
 import { Typography } from '@sakhlaqi/ui';
 
 // Example 1: Headings
@@ -71,7 +70,7 @@ export const UtilityExample = () => (
       This paragraph has gutter (bottom margin) for spacing.
     </Typography>
     
-    <Typography noWrap style={{ width: '200px' }}>
+    <Typography noWrap className="w-[200px]">
       This is a very long text that will be truncated with ellipsis when it overflows
     </Typography>
   </div>

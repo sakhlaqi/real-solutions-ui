@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { DatePicker as InternalDatePicker } from '../forms';
 import { DatePicker as MUIDatePicker } from '../providers/mui';
 import { DatePicker as RadixDatePicker } from '../providers/radix';
+import { DatePicker as ShadcnDatePicker } from '../providers/shadcn';
 
 /**
  * Adaptive DatePicker Component
@@ -28,6 +29,10 @@ import { DatePicker as RadixDatePicker } from '../providers/radix';
  */
 export const DatePicker: React.FC<BaseDatePickerProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnDatePicker {...props} />;
+  }
   
   if (provider === 'mui') {
     return <MUIDatePicker {...props} />;

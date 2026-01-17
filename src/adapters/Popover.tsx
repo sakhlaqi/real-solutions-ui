@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { Popover as InternalPopover } from '../overlay';
 import { Popover as MUIPopover } from '../providers/mui';
 import { Popover as RadixPopover } from '../providers/radix';
+import { Popover as ShadcnPopover } from '../providers/shadcn';
 
 export interface PopoverProps {
   open: boolean;
@@ -43,6 +44,10 @@ export interface PopoverProps {
  */
 export const Popover: React.FC<PopoverProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnPopover {...props} />;
+  }
   
   if (provider === 'mui') {
     return <MUIPopover {...props} />;

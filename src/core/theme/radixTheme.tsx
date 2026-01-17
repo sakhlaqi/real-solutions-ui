@@ -10,8 +10,13 @@ import { ThemeConfig } from '../types';
 let radixStylesLoaded = false;
 const loadRadixStyles = () => {
   if (!radixStylesLoaded) {
-    import('@radix-ui/themes/styles.css');
-    radixStylesLoaded = true;
+    try {
+      // @ts-ignore - CSS import may not exist
+      import('@radix-ui/themes/styles.css');
+      radixStylesLoaded = true;
+    } catch (e) {
+      console.warn('Radix Themes styles not found');
+    }
   }
 };
 

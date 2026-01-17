@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { Heading, Text } from '../typography';
 import { Typography as MUITypography } from '../providers/mui';
 import { Typography as RadixTypography } from '../providers/radix';
+import { TypographyH1, TypographyH2, TypographyH3, TypographyH4, TypographyP } from '../providers/shadcn/ui';
 
 /**
  * Adaptive Typography Component
@@ -27,6 +28,27 @@ import { Typography as RadixTypography } from '../providers/radix';
  */
 export const Typography: React.FC<TypographyProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    const { variant = 'body1', children, gutterBottom, align, noWrap, ...rest } = props;
+    
+    // Build className with MUI-like props
+    const className = [
+      rest.className,
+      gutterBottom ? 'mb-4' : '',
+      align ? `text-${align}` : '',
+      noWrap ? 'truncate' : '',
+    ].filter(Boolean).join(' ');
+    
+    const shadcnProps = { ...rest, className };
+    
+    // Map MUI variants to shadcn typography components
+    if (variant === 'h1') return <TypographyH1 {...shadcnProps as any}>{children}</TypographyH1>;
+    if (variant === 'h2') return <TypographyH2 {...shadcnProps as any}>{children}</TypographyH2>;
+    if (variant === 'h3') return <TypographyH3 {...shadcnProps as any}>{children}</TypographyH3>;
+    if (variant === 'h4') return <TypographyH4 {...shadcnProps as any}>{children}</TypographyH4>;
+    return <TypographyP {...shadcnProps as any}>{children}</TypographyP>;
+  }
   
   if (provider === 'mui') {
     return <MUITypography {...props} />;

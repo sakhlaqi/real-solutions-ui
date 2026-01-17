@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { Avatar as InternalAvatar } from '../data-display';
 import { Avatar as MUIAvatar } from '../providers/mui';
 import { Avatar as RadixAvatar } from '../providers/radix';
+import { Avatar as ShadcnAvatar } from '../providers/shadcn';
 
 export interface AvatarProps {
   src?: string;
@@ -30,6 +31,10 @@ export interface AvatarProps {
  */
 export const Avatar: React.FC<AvatarProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnAvatar {...props} />;
+  }
   
   if (provider === 'mui') {
     return <MUIAvatar {...props} />;

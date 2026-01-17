@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { Dialog as InternalDialog } from '../overlay';
 import { Dialog as MUIDialog } from '../providers/mui';
 import { Dialog as RadixDialog } from '../providers/radix';
+import { Dialog as ShadcnDialog } from '../providers/shadcn';
 
 export interface DialogProps {
   open: boolean;
@@ -46,6 +47,10 @@ export const Dialog: React.FC<DialogProps> = (props) => {
   
   if (provider === 'mui') {
     return <MUIDialog {...props} />;
+  }
+
+  if (provider === 'shadcn') {
+    return <ShadcnDialog {...props} />;
   }
   
   if (provider === 'radix') {

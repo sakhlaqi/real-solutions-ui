@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { Checkbox as InternalCheckbox } from '../forms';
 import { Checkbox as MUICheckbox } from '../providers/mui';
 import { Checkbox as RadixCheckbox } from '../providers/radix';
+import { Checkbox as ShadcnCheckbox } from '../providers/shadcn';
 
 /**
  * Adaptive Checkbox Component
@@ -35,6 +36,10 @@ export const Checkbox: React.FC<CheckboxProps> = (props) => {
   
   if (provider === 'radix') {
     return <RadixCheckbox {...props} />;
+  }
+
+  if (provider === 'shadcn') {
+    return <ShadcnCheckbox {...props} />;
   }
   
   // Transform onChange handler and filter incompatible props

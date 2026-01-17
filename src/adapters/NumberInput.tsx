@@ -29,11 +29,11 @@ export const NumberInput: React.FC<NumberInputProps> = (props) => {
   const { provider } = useUIContext();
   
   if (provider === 'mui') {
-    return <MUIInput {...props} type="number" />;
+    return <MUIInput {...props as any} type="number" />;
   }
   
   if (provider === 'radix') {
-    return <RadixInput {...props} type="number" />;
+    return <RadixInput {...props as any} type="number" />;
   }
   
   return <InternalNumberInput {...props} />;

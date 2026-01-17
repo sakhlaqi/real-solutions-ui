@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { SkeletonLoader as InternalSkeleton } from '../feedback';
 import { Skeleton as MUISkeleton } from '../providers/mui';
 import { Skeleton as RadixSkeleton } from '../providers/radix';
+import { Skeleton as ShadcnSkeleton } from '../providers/shadcn';
 
 export interface SkeletonProps {
   variant?: 'text' | 'rectangular' | 'circular';
@@ -30,6 +31,10 @@ export interface SkeletonProps {
  */
 export const Skeleton: React.FC<SkeletonProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnSkeleton {...props} />;
+  }
   
   if (provider === 'mui') {
     return <MUISkeleton {...props} />;

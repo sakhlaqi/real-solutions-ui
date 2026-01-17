@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { ProgressCircle, ProgressBar } from '../feedback';
 import { Progress as MUIProgress } from '../providers/mui';
 import { Progress as RadixProgress } from '../providers/radix';
+import { Progress as ShadcnProgress } from '../providers/shadcn';
 
 /**
  * Adaptive Progress Component
@@ -31,6 +32,10 @@ import { Progress as RadixProgress } from '../providers/radix';
  */
 export const Progress: React.FC<ProgressProps & { linear?: boolean }> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnProgress {...props} />;
+  }
   
   if (provider === 'mui') {
     return <MUIProgress {...props} />;

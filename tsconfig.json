@@ -9,6 +9,7 @@
     "declarationMap": true,
     "emitDeclarationOnly": false,
     "outDir": "./dist",
+    "rootDir": "./src",
 
     /* Bundler mode */
     "moduleResolution": "bundler",

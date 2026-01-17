@@ -1,12 +1,14 @@
 /**
  * Adapter DropdownMenu Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
+ * Dynamically switches between internal, MUI, Radix, and Shadcn implementations
  * based on the current UIProvider context.
  */
 
 import React from 'react';
+import { useUIContext } from '../core/context';
 import { DropdownMenu as InternalDropdownMenu, DropdownMenuProps } from '../navigation';
+import { DropdownMenu as ShadcnDropdownMenu } from '../providers/shadcn';
 
 /**
  * Adaptive DropdownMenu Component
@@ -23,7 +25,13 @@ import { DropdownMenu as InternalDropdownMenu, DropdownMenuProps } from '../navi
  * ```
  */
 export const DropdownMenu: React.FC<DropdownMenuProps> = (props) => {
-  // DropdownMenu always uses internal implementation
+  const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnDropdownMenu {...props as any} />;
+  }
+  
+  // DropdownMenu uses internal implementation for other providers
   return <InternalDropdownMenu {...props} />;
 };
 

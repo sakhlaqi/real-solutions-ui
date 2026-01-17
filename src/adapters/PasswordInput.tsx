@@ -27,11 +27,11 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
   const { provider } = useUIContext();
   
   if (provider === 'mui') {
-    return <MUIInput {...props} type="password" />;
+    return <MUIInput {...props as any} type="password" />;
   }
   
   if (provider === 'radix') {
-    return <RadixInput {...props} type="password" />;
+    return <RadixInput {...props as any} type="password" />;
   }
   
   return <InternalPasswordInput {...props} />;

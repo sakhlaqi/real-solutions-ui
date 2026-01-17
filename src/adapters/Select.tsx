@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { Select as InternalSelect } from '../forms';
 import { Select as MUISelect } from '../providers/mui';
 import { Select as RadixSelect } from '../providers/radix';
+import { Select as ShadcnSelect } from '../providers/shadcn';
 
 /**
  * Adaptive Select Component
@@ -29,6 +30,10 @@ import { Select as RadixSelect } from '../providers/radix';
  */
 export const Select: React.FC<SelectProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnSelect {...props} />;
+  }
   
   if (provider === 'mui') {
     return <MUISelect {...props} />;

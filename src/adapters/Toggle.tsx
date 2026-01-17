@@ -1,12 +1,14 @@
 /**
  * Adapter Toggle Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
+ * Dynamically switches between internal, MUI, Radix, and Shadcn implementations
  * based on the current UIProvider context.
  */
 
 import React from 'react';
+import { useUIContext } from '../core/context';
 import { Toggle as InternalToggle, ToggleProps } from '../forms';
+import { Toggle as ShadcnToggle } from '../providers/shadcn';
 
 /**
  * Adaptive Toggle Component
@@ -21,7 +23,13 @@ import { Toggle as InternalToggle, ToggleProps } from '../forms';
  * ```
  */
 export const Toggle: React.FC<ToggleProps> = (props) => {
-  // Toggle always uses internal implementation
+  const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnToggle {...props as any} />;
+  }
+  
+  // Toggle uses internal implementation for other providers
   return <InternalToggle {...props} />;
 };
 

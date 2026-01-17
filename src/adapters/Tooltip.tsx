@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { Tooltip as MUITooltipInternal } from '@mui/material';
 import { Tooltip as MUITooltip } from '../providers/mui';
 import { Tooltip as RadixTooltip } from '../providers/radix';
+import { Tooltip as ShadcnTooltip } from '../providers/shadcn';
 
 export interface TooltipProps {
   title: string;
@@ -31,6 +32,10 @@ export interface TooltipProps {
  */
 export const Tooltip: React.FC<TooltipProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnTooltip {...props} />;
+  }
   
   if (provider === 'mui') {
     return <MUITooltip {...props} />;

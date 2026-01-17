@@ -1,12 +1,14 @@
 /**
  * Adapter ContextMenu Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
+ * Dynamically switches between internal, MUI, Radix, and Shadcn implementations
  * based on the current UIProvider context.
  */
 
 import React from 'react';
+import { useUIContext } from '../core/context';
 import { ContextMenu as InternalContextMenu, ContextMenuProps } from '../navigation';
+import { ContextMenu as ShadcnContextMenu } from '../providers/shadcn';
 
 /**
  * Adaptive ContextMenu Component
@@ -24,7 +26,13 @@ import { ContextMenu as InternalContextMenu, ContextMenuProps } from '../navigat
  * ```
  */
 export const ContextMenu: React.FC<ContextMenuProps> = (props) => {
-  // ContextMenu always uses internal implementation
+  const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnContextMenu {...props} />;
+  }
+  
+  // ContextMenu uses internal implementation for other providers
   return <InternalContextMenu {...props} />;
 };
 

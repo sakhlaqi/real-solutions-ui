@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { Modal as InternalModal } from '../overlay';
 import { Modal as MUIModal } from '../providers/mui';
 import { Modal as RadixModal } from '../providers/radix';
+import { Dialog as ShadcnModal } from '../providers/shadcn';
 
 /**
  * Adaptive Modal Component
@@ -38,6 +39,10 @@ export const Modal: React.FC<BaseModalProps> = (props) => {
   
   if (provider === 'radix') {
     return <RadixModal {...props} />;
+  }
+
+  if (provider === 'shadcn') {
+    return <ShadcnModal {...props} />;
   }
   
   // Transform props - internal uses 'isOpen', MUI uses 'open'

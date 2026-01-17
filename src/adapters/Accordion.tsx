@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { Accordion as InternalAccordion } from '../layout';
 import { Accordion as MUIAccordion } from '../providers/mui';
 import { Accordion as RadixAccordion } from '../providers/radix';
+import { Accordion as ShadcnAccordion } from '../providers/shadcn';
 import type { AccordionProps } from '../core/types';
 
 /**
@@ -35,6 +36,10 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
   
   if (provider === 'radix') {
     return <RadixAccordion {...props} />;
+  }
+
+  if (provider === 'shadcn') {
+    return <ShadcnAccordion {...props} />;
   }
   
   // Transform for internal Accordion

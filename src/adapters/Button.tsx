@@ -11,6 +11,7 @@ import { useUIContext } from '../core/context';
 import { Button as InternalButton } from '../base';
 import { Button as MUIButton } from '../providers/mui';
 import { Button as RadixButton } from '../providers/radix';
+import { Button as ShadcnButton } from '../providers/shadcn';
 
 /**
  * Adaptive Button Component
@@ -31,6 +32,10 @@ export const Button: React.FC<BaseButtonProps> = (props) => {
   
   if (provider === 'radix') {
     return <RadixButton {...props} />;
+  }
+
+  if (provider === 'shadcn') {
+    return <ShadcnButton {...props} />;
   }
   
   // Map MUI props to internal props

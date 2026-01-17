@@ -8,6 +8,7 @@
 import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
 import { UIProvider as UIProviderType, ThemeConfig } from '../types';
 import { RadixThemeProvider } from '../theme/radixTheme';
+import { ShadcnThemeProvider } from '../../providers/shadcn/theme';
 
 interface UIContextValue {
   provider: UIProviderType;
@@ -64,7 +65,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({
     }));
   };
 
-  // Clean up Radix classes from HTML element when not using Radix
+  // Clean up provider-specific classes from HTML element
   useEffect(() => {
     const htmlElement = document.documentElement;
     
@@ -84,6 +85,11 @@ export const UIProvider: React.FC<UIProviderProps> = ({
         }
       });
     }
+
+    if (provider !== 'shadcn') {
+      // Remove shadcn dark mode class if not using shadcn
+      htmlElement.classList.remove('dark');
+    }
   }, [provider]);
 
   const value = useMemo(
@@ -97,12 +103,14 @@ export const UIProvider: React.FC<UIProviderProps> = ({
     [provider, theme]
   );
 
-  // Wrap with RadixThemeProvider if using Radix
-  const content = provider === 'radix' ? (
-    <RadixThemeProvider theme={theme}>{children}</RadixThemeProvider>
-  ) : (
-    children
-  );
+  // Wrap with provider-specific theme components
+  let content = children;
+  
+  if (provider === 'radix') {
+    content = <RadixThemeProvider theme={theme}>{children}</RadixThemeProvider>;
+  } else if (provider === 'shadcn') {
+    content = <ShadcnThemeProvider theme={theme}>{children}</ShadcnThemeProvider>;
+  }
 
   return <UIContext.Provider value={value}>{content}</UIContext.Provider>;
 };

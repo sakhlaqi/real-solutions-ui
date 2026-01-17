@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { Pagination as InternalPagination } from '../navigation';
 import { Pagination as MUIPagination } from '../providers/mui';
 import { Pagination as RadixPagination } from '../providers/radix';
+import { Pagination as ShadcnPagination } from '../providers/shadcn';
 
 export interface PaginationProps {
   count: number;
@@ -34,6 +35,10 @@ export interface PaginationProps {
  */
 export const Pagination: React.FC<PaginationProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnPagination {...props as any} />;
+  }
   
   if (provider === 'mui') {
     return <MUIPagination {...props} />;

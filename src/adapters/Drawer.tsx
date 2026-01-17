@@ -9,6 +9,7 @@ import { useUIContext } from '../core/context';
 import { Drawer as InternalDrawer } from '../layout';
 import { Drawer as MUIDrawer } from '../providers/mui';
 import { Drawer as RadixDrawer } from '../providers/radix';
+import { Drawer as ShadcnDrawer } from '../providers/shadcn';
 
 export interface DrawerProps {
   open: boolean;
@@ -31,6 +32,10 @@ export interface DrawerProps {
  */
 export const Drawer: React.FC<DrawerProps> = (props) => {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnDrawer {...props} />;
+  }
   
   if (provider === 'mui') {
     return <MUIDrawer {...props} />;

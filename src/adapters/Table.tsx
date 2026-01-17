@@ -10,6 +10,7 @@ import { useUIContext } from '../core/context';
 import { Table as InternalTable } from '../data-display';
 import { DataTable as MUIDataTable } from '../providers/mui';
 import { Table as RadixTable } from '../providers/radix';
+import { Table as ShadcnTable } from '../providers/shadcn';
 
 /**
  * Adaptive Table Component
@@ -29,6 +30,10 @@ import { Table as RadixTable } from '../providers/radix';
  */
 export function Table<T = any>(props: BaseTableProps<T>) {
   const { provider } = useUIContext();
+  
+  if (provider === 'shadcn') {
+    return <ShadcnTable {...(props as any)} />;
+  }
   
   if (provider === 'mui') {
     return <MUIDataTable {...(props as any)} />;
