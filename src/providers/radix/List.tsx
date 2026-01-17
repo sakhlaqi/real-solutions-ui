@@ -22,6 +22,7 @@ export const List: React.FC<ListProps> = ({
         padding: disablePadding ? 0 : '8px 0',
         listStyle: 'none',
       }}
+      // @ts-ignore - Using ul for semantic HTML
       as="ul"
     >
       {items?.map((item, index) => (

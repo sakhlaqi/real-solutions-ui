@@ -46,7 +46,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = (props) => {
   }
   
   if (provider === 'radix') {
-    return <RadixAutocomplete {...props} />;
+    return <RadixAutocomplete {...props as any} />;
   }
   
   // Transform options to add id field required by internal

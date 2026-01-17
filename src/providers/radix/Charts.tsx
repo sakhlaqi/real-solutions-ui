@@ -10,7 +10,7 @@ import type { ChartsProps } from '../../core/types';
 
 export const Charts: React.FC<ChartsProps> = ({
   type = 'line',
-  data,
+  data: _data,
   title,
   width,
   height = 300,

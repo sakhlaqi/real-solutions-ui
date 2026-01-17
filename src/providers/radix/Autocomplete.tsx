@@ -9,12 +9,12 @@ import type { AutocompleteProps } from '../../core/types';
 
 export const Autocomplete: React.FC<AutocompleteProps> = ({
   options,
-  value,
+  value: _value,
   onChange,
   label,
   placeholder,
   disabled = false,
-  fullWidth = false,
+  fullWidth: _fullWidth = false,
   className,
 }) => {
   const [inputValue, setInputValue] = useState('');
@@ -25,7 +25,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   );
 
   return (
-    <Flex direction="column" gap="1" style={{ width: fullWidth ? '100%' : undefined, position: 'relative' }}>
+    <Flex direction="column" gap="1" style={{ width: _fullWidth ? '100%' : undefined, position: 'relative' }}>
       {label && <label>{label}</label>}
       <TextField.Root
         value={inputValue}
@@ -58,7 +58,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
               onClick={() => {
                 setInputValue(option.label);
                 if (onChange) {
-                  onChange(option);
+                  onChange(option as any);
                 }
                 setShowOptions(false);
               }}

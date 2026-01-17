@@ -21,7 +21,7 @@ export const Dialog: React.FC<DialogProps> = ({
   className,
 }) => {
   return (
-    <RadixAlertDialog.Root open={open} onOpenChange={(isOpen: boolean) => !isOpen && (onClose?.() || onCancel?.())}>
+    <RadixAlertDialog.Root open={open} onOpenChange={(isOpen: boolean) => { if (!isOpen) { onClose?.(); onCancel?.(); } }}>
       <RadixAlertDialog.Portal>
         <RadixAlertDialog.Overlay
           style={{

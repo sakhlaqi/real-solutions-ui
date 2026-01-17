@@ -70,6 +70,7 @@ export const RadixThemeProvider: React.FC<RadixThemeProviderProps> = ({ children
       appearance={appearance}
       radius={radius as any}
       scaling="100%"
+      hasBackground={false}
     >
       {children}
     </Theme>

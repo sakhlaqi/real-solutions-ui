@@ -35,7 +35,7 @@ export const List: React.FC<ListProps> = (props) => {
   }
   
   if (provider === 'radix') {
-    return <RadixList {...props} />;
+    return <RadixList {...props as any} />;
   }
   
   // Filter props not supported by internal

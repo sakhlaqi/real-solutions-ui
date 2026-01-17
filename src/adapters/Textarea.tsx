@@ -45,7 +45,7 @@ export const Textarea: React.FC<TextareaProps> = (props) => {
   }
   
   if (provider === 'radix') {
-    return <RadixTextarea {...props} />;
+    return <RadixTextarea {...props as any} />;
   }
   
   // Transform props for internal (error must be string)

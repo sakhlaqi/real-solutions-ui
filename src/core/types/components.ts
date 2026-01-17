@@ -154,6 +154,7 @@ export interface SliderProps {
 export interface Column<T = any> {
   field: keyof T | string;
   headerName: string;
+  label?: string;
   width?: number;
   flex?: number;
   sortable?: boolean;
@@ -167,6 +168,8 @@ export interface BaseTableProps<T = any> {
   rows: T[];
   loading?: boolean;
   error?: string;
+  stickyHeader?: boolean;
+  size?: Size;
   onRowClick?: (row: T) => void;
   pagination?: boolean;
   pageSize?: number;
@@ -275,6 +278,7 @@ export interface ChipProps {
   color?: ColorVariant;
   size?: Size;
   icon?: React.ReactNode;
+  avatar?: React.ReactNode;
   deleteIcon?: React.ReactNode;
   disabled?: boolean;
   className?: string;
@@ -284,6 +288,7 @@ export interface ChipProps {
 export interface AccordionItem {
   id: string;
   title: string;
+  summary?: string;
   content: React.ReactNode;
   disabled?: boolean;
 }
@@ -400,6 +405,8 @@ export interface ChartSeries {
 
 export interface BaseChartProps {
   series: ChartSeries[];
+  type?: 'line' | 'bar' | 'pie' | 'area';
+  data?: any[];
   width?: number | string;
   height?: number | string;
   title?: string;
@@ -481,6 +488,7 @@ export interface BadgeProps {
   badgeContent?: React.ReactNode;
   color?: ColorVariant;
   variant?: 'standard' | 'dot';
+  size?: Size;
   max?: number;
   showZero?: boolean;
   invisible?: boolean;
@@ -492,7 +500,11 @@ export interface BadgeProps {
 }
 
 export interface CardProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  actions?: React.ReactNode;
+  media?: React.ReactNode;
   elevation?: number;
   variant?: 'elevation' | 'outlined';
   className?: string;
@@ -510,6 +522,7 @@ export interface DrawerProps {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  title?: React.ReactNode;
   anchor?: 'left' | 'right' | 'top' | 'bottom';
   variant?: 'permanent' | 'persistent' | 'temporary';
   className?: string;
@@ -580,6 +593,7 @@ export interface StepperProps {
 export interface BackdropProps {
   open: boolean;
   onClick?: () => void;
+  children?: React.ReactNode;
   invisible?: boolean;
   className?: string;
 }
@@ -591,11 +605,13 @@ export interface SpeedDialProps {
     icon: React.ReactNode;
     name: string;
     onClick: () => void;
+    tooltipTitle?: string;
   }>;
   direction?: 'up' | 'down' | 'left' | 'right';
   open?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
+  hidden?: boolean;
   className?: string;
 }
 
@@ -603,7 +619,9 @@ export interface PopoverProps {
   open: boolean;
   anchorEl: HTMLElement | null;
   onClose: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  content?: React.ReactNode;
+  placement?: 'top' | 'right' | 'bottom' | 'left';
   anchorOrigin?: {
     vertical: 'top' | 'center' | 'bottom';
     horizontal: 'left' | 'center' | 'right';
@@ -621,6 +639,7 @@ export interface ButtonGroupProps {
   color?: ColorVariant;
   size?: Size;
   orientation?: 'horizontal' | 'vertical';
+  fullWidth?: boolean;
   disabled?: boolean;
   className?: string;
 }
@@ -629,6 +648,8 @@ export interface ToggleButtonProps {
   value: string;
   selected?: boolean;
   onChange?: (value: string) => void;
+  size?: Size;
+  color?: ColorVariant;
   disabled?: boolean;
   children: React.ReactNode;
   className?: string;
@@ -683,6 +704,7 @@ export interface AutocompleteProps {
   onChange: (value: string | number | null) => void;
   label?: string;
   placeholder?: string;
+  fullWidth?: boolean;
   disabled?: boolean;
   error?: string;
   helperText?: string;

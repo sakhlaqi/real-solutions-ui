@@ -21,8 +21,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         <React.Fragment key={index}>
           {item.href ? (
             <Text
-              as="a"
-              href={item.href}
+              {...({ as: "a", href: item.href } as any)}
               size="2"
               onClick={item.onClick}
               style={{

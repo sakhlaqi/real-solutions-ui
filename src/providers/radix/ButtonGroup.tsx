@@ -10,9 +10,9 @@ import type { ButtonGroupProps } from '../../core/types';
 export const ButtonGroup: React.FC<ButtonGroupProps> = ({
   children,
   orientation = 'horizontal',
-  variant = 'outlined',
-  color = 'primary',
-  size = 'medium',
+  variant: _variant = 'outlined',
+  color: _color = 'primary',
+  size: _size = 'medium',
   fullWidth = false,
   className,
 }) => {

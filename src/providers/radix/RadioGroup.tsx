@@ -15,7 +15,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   label,
   disabled = false,
   orientation = 'vertical',
-  size = 'medium',
+  size: _size = 'medium',
   className,
 }) => {
   const handleValueChange = (newValue: string) => {
@@ -23,8 +23,6 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       onChange({ target: { value: newValue } } as any);
     }
   };
-
-  const radixSize = size === 'small' ? '1' : size === 'medium' ? '2' : '3';
 
   return (
     <Flex direction="column" gap="2">

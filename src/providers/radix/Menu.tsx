@@ -10,7 +10,7 @@ import type { MenuProps } from '../../core/types';
 export const Menu: React.FC<MenuProps> = ({
   open,
   onClose,
-  anchorEl,
+  anchorEl: _anchorEl,
   items,
   className,
 }) => {

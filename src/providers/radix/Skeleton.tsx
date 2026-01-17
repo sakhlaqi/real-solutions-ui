@@ -11,7 +11,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   variant = 'text',
   width,
   height,
-  animation = 'pulse',
+  animation: _animation = 'pulse',
   className,
 }) => {
   const defaultHeight = variant === 'text' ? '1em' :

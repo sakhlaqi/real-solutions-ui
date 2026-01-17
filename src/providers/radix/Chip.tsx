@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Badge, IconButton } from '@radix-ui/themes';
+import { Badge } from '@radix-ui/themes';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import type { ChipProps } from '../../core/types';
 

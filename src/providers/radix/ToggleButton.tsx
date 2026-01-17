@@ -14,13 +14,13 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
   children,
   disabled = false,
   size = 'medium',
-  color = 'primary',
+  color: _color = 'primary',
   className,
 }) => {
   return (
     <RadixToggle.Root
       pressed={selected}
-      onPressedChange={onChange}
+      onPressedChange={(pressed) => onChange?.(pressed ? value : '')}
       disabled={disabled}
       className={className}
       style={{

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { TextField, Text, Flex } from '@radix-ui/themes';
+import { Text, Flex } from '@radix-ui/themes';
 import type { DatePickerProps } from '../../core/types';
 
 export const DatePicker: React.FC<DatePickerProps> = ({
@@ -27,7 +27,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       )}
       <input
         type="date"
-        value={value as string}
+        value={value as unknown as string}
         onChange={onChange as any}
         disabled={disabled}
         className={className}

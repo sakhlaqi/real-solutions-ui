@@ -35,7 +35,7 @@ export const Spinner: React.FC<SpinnerProps> = (props) => {
   }
   
   if (provider === 'radix') {
-    return <RadixSpinner {...props} />;
+    return <RadixSpinner {...props as any} />;
   }
   
   // Map size to internal format

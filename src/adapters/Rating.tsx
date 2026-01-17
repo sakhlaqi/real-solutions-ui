@@ -42,7 +42,7 @@ export const Rating: React.FC<RatingProps> = (props) => {
   }
   
   if (provider === 'radix') {
-    return <RadixRating {...props} />;
+    return <RadixRating {...props as any} />;
   }
   
   // Filter MUI-specific props for internal

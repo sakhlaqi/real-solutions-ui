@@ -32,7 +32,7 @@ export const LineChart: React.FC<LineChartProps> = (props) => {
   const { provider } = useUIContext();
   
   if (provider === 'radix') {
-    return <RadixCharts type="line" {...props} />;
+    return <RadixCharts {...props as any} type="line" />;
   }
   
   // MUI or internal (fallback to MUI for now)

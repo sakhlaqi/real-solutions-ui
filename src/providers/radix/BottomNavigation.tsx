@@ -8,16 +8,16 @@ import { Flex } from '@radix-ui/themes';
 import type { BottomNavigationProps } from '../../core/types';
 
 export const BottomNavigation: React.FC<BottomNavigationProps> = ({
-  value,
-  onChange,
-  showLabels = true,
+  value: _value,
+  onChange: _onChange,
+  showLabels: _showLabels = true,
   children,
   className,
 }) => {
   return (
     <Flex
       align="center"
-      justify="around"
+      justify="between"
       className={className}
       style={{
         position: 'fixed',

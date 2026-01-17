@@ -10,7 +10,7 @@ import type { TableProps } from '../../core/types';
 export const Table: React.FC<TableProps> = ({
   columns,
   rows,
-  stickyHeader = false,
+  stickyHeader: _stickyHeader = false,
   size = 'medium',
   className,
 }) => {
@@ -20,7 +20,7 @@ export const Table: React.FC<TableProps> = ({
         <RadixTable.Row>
           {columns?.map((column, index) => (
             <RadixTable.ColumnHeaderCell key={index}>
-              {column.label || column.field}
+              {(column.label || column.field) as React.ReactNode}
             </RadixTable.ColumnHeaderCell>
           ))}
         </RadixTable.Row>

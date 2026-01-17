@@ -13,15 +13,13 @@ export const Pagination: React.FC<PaginationProps> = ({
   page = 1,
   onChange,
   disabled = false,
-  siblingCount = 1,
+  siblingCount: _siblingCount = 1,
   showFirstButton = false,
   showLastButton = false,
   className,
 }) => {
   const handlePageChange = (newPage: number) => {
-    if (onChange) {
-      onChange({} as any, newPage);
-    }
+    onChange?.(newPage);
   };
 
   return (

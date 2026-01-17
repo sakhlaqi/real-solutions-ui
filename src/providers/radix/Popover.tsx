@@ -10,7 +10,7 @@ import type { PopoverProps } from '../../core/types';
 export const Popover: React.FC<PopoverProps> = ({
   open,
   onClose,
-  anchorEl,
+  anchorEl: _anchorEl,
   children,
   content,
   placement = 'bottom',

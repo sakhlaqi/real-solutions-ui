@@ -46,7 +46,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = (props) => {
   }
   
   if (provider === 'radix') {
-    return <RadixBottomNavigation {...props} />;
+    return <RadixBottomNavigation {...props as any} />;
   }
   
   // Transform actions to ensure icon is provided (internal requires it)

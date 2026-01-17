@@ -38,7 +38,7 @@ export const Chip: React.FC<ChipProps> = (props) => {
   }
   
   if (provider === 'radix') {
-    return <RadixChip {...props} />;
+    return <RadixChip {...props as any} />;
   }
   
   // Transform for internal Chip which expects children instead of label

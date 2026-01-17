@@ -35,7 +35,7 @@ export const Switch: React.FC<SwitchProps> = (props) => {
   }
   
   if (provider === 'radix') {
-    return <RadixSwitch {...props} />;
+    return <RadixSwitch {...props as any} />;
   }
   
   // Map to internal Toggle component

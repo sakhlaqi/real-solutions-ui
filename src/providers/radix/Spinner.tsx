@@ -9,7 +9,7 @@ import type { SpinnerProps } from '../../core/types';
 
 export const Spinner: React.FC<SpinnerProps> = ({
   size = 'medium',
-  color = 'primary',
+  color: _color = 'primary',
   className,
 }) => {
   const sizeMap = { small: '1', medium: '2', large: '3' };

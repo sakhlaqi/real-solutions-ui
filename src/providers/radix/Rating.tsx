@@ -12,7 +12,7 @@ export const Rating: React.FC<RatingProps> = ({
   value = 0,
   onChange,
   max = 5,
-  precision = 1,
+  precision: _precision = 1,
   disabled = false,
   readOnly = false,
   size = 'medium',
@@ -22,8 +22,8 @@ export const Rating: React.FC<RatingProps> = ({
   const iconSize = sizeMap[size];
 
   const handleClick = (rating: number) => {
-    if (!disabled && !readOnly && onChange) {
-      onChange({} as any, rating);
+    if (!disabled && !readOnly) {
+      onChange?.(rating);
     }
   };
 

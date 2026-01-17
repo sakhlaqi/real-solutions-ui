@@ -9,7 +9,7 @@ import type { DividerProps } from '../../core/types';
 
 export const Divider: React.FC<DividerProps> = ({
   orientation = 'horizontal',
-  variant = 'fullWidth',
+  variant: _variant = 'fullWidth',
   className,
 }) => {
   return (
