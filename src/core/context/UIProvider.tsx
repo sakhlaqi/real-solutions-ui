@@ -5,7 +5,7 @@
  * Consumers use this context to switch between different UI implementations.
  */
 
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
 import { UIProvider as UIProviderType, ThemeConfig } from '../types';
 import { RadixThemeProvider } from '../theme/radixTheme';
 
@@ -63,6 +63,28 @@ export const UIProvider: React.FC<UIProviderProps> = ({
       mode: prev.mode === 'light' ? 'dark' : 'light',
     }));
   };
+
+  // Clean up Radix classes from HTML element when not using Radix
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+    
+    if (provider !== 'radix') {
+      // Remove Radix theme classes
+      htmlElement.classList.remove('light', 'dark', 'light-theme', 'dark-theme');
+      htmlElement.removeAttribute('data-accent-color');
+      htmlElement.removeAttribute('data-gray-color');
+      htmlElement.removeAttribute('data-radius');
+      htmlElement.removeAttribute('data-scaling');
+      
+      // Remove any Radix-specific class that starts with 'radix-themes'
+      const classes = Array.from(htmlElement.classList);
+      classes.forEach(className => {
+        if (className.startsWith('radix-themes')) {
+          htmlElement.classList.remove(className);
+        }
+      });
+    }
+  }, [provider]);
 
   const value = useMemo(
     () => ({

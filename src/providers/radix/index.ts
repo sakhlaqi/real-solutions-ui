@@ -48,6 +48,7 @@ export { Rating } from './Rating';
 export { Skeleton } from './Skeleton';
 export { LinearProgress } from './LinearProgress';
 export { Table } from './Table';
+export { Typography } from './Typography';
 export { DatePicker } from './DatePicker';
 export { TreeView } from './TreeView';
 export { Charts } from './Charts';

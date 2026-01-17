@@ -49,3 +49,4 @@ export { ToggleButton } from './ToggleButton';
 export { Rating } from './Rating';
 export { Skeleton } from './Skeleton';
 export { LinearProgress } from './LinearProgress';
+export { Typography } from './Typography';

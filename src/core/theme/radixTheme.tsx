@@ -4,8 +4,16 @@
  */
 
 import { Theme } from '@radix-ui/themes';
-import '@radix-ui/themes/styles.css';
 import { ThemeConfig } from '../types';
+
+// Import Radix styles dynamically to avoid loading when not using Radix
+let radixStylesLoaded = false;
+const loadRadixStyles = () => {
+  if (!radixStylesLoaded) {
+    import('@radix-ui/themes/styles.css');
+    radixStylesLoaded = true;
+  }
+};
 
 /**
  * Maps design token colors to Radix color scales
@@ -38,9 +46,14 @@ export const mapToRadixColor = (color?: string): string => {
 
 /**
  * Maps theme mode to Radix appearance
+ * Ensures light mode is the default if not specified
  */
 export const mapThemeMode = (mode?: 'light' | 'dark'): 'light' | 'dark' => {
-  return mode || 'light';
+  // Explicitly default to 'light' for Radix UI
+  if (!mode || mode === 'light') {
+    return 'light';
+  }
+  return 'dark';
 };
 
 /**
@@ -56,6 +69,9 @@ export interface RadixThemeProviderProps {
  * Wraps application with Radix Themes provider
  */
 export const RadixThemeProvider: React.FC<RadixThemeProviderProps> = ({ children, theme }) => {
+  // Load Radix styles when provider is used
+  loadRadixStyles();
+  
   const accentColor = mapToRadixColor(theme.primaryColor);
   const grayColor = 'slate'; // Default gray scale
   const appearance = mapThemeMode(theme.mode);
@@ -71,6 +87,7 @@ export const RadixThemeProvider: React.FC<RadixThemeProviderProps> = ({ children
       radius={radius as any}
       scaling="100%"
       hasBackground={false}
+      panelBackground="solid"
     >
       {children}
     </Theme>

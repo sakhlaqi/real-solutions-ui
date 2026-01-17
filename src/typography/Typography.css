@@ -129,3 +129,20 @@
 .text-align-justify {
   text-align: justify;
 }
+
+/* Utility classes for adapter */
+.gutter-bottom {
+  margin-bottom: 0.75em;
+}
+
+.no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-overline {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}

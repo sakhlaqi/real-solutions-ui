@@ -98,6 +98,7 @@ export {
   Rating,
   Skeleton,
   LinearProgress,
+  Typography,
 } from './adapters';
 
 // ============================================================================
