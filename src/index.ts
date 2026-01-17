@@ -99,6 +99,53 @@ export {
   Skeleton,
   LinearProgress,
   Typography,
+  PasswordInput,
+  EmailInput,
+  NumberInput,
+  Tag,
+  Timeline,
+  ListItem,
+  FloatingActionButton,
+  LinkButton,
+  SplitButton,
+  MultiSelect,
+  TimePicker,
+  DateTimePicker,
+  TransferList,
+  FileUpload,
+  TextareaAutosize,
+  Toast,
+  ProgressBar,
+  ProgressCircle,
+  EmptyState,
+  SlideOver,
+  BottomSheet,
+  Image,
+  Carousel,
+  Navbar,
+  Grid,
+  Flex,
+  Stack,
+  Box,
+  Container,
+  Paper,
+  SkeletonLoader,
+  ErrorState,
+  SuccessState,
+  Lightbox,
+  ImageGallery,
+  Thumbnail,
+  Heading,
+  Text,
+  DropdownMenu,
+  ContextMenu,
+  ImageList,
+  Masonry,
+  Section,
+  Spacer,
+  GridItem,
+  Form,
+  Toggle,
 } from './adapters';
 
 // ============================================================================
@@ -114,6 +161,7 @@ export * as MUIComponents from './providers/mui';
 // Note: These may conflict with adaptive components above.
 // Prefer using adaptive components or InternalComponents namespace.
 // =================================, Drawer, Accordion - use adaptive versions)
+// Layout Components (use adaptive versions from adapters)
 export {
   Header,
   Footer,
@@ -121,17 +169,6 @@ export {
   AdminLayout,
   AppShell,
   Sidebar,
-  Container,
-  Grid,
-  GridItem,
-  Flex,
-  Section,
-  Spacer,
-  Paper,
-  Stack,
-  Box,
-  ImageList,
-  Masonry,
 } from './layout';
 
 export type {
@@ -158,12 +195,8 @@ export type {
   MasonryProps,
 } from './layout';
 
-// Navigation Components (excluding Breadcrumbs, Tabs, Pagination, Stepper, BottomNavigation, SpeedDial - use adaptive versions)
-export {
-  Navbar,
-  DropdownMenu,
-  ContextMenu,
-} from './navigation';
+// Navigation Components (use adaptive versions from adapters)
+export {} from './navigation';
 
 export type {
   NavbarProps,
@@ -172,18 +205,8 @@ export type {
   StepperProps,
 } from './navigation';
 
-// Form Components (excluding RadioGroup, Toggle, Slider, Autocomplete, Rating - use adaptive versions)
-export {
-  PasswordInput,
-  EmailInput,
-  NumberInput,
-  TextareaAutosize,
-  MultiSelect,
-  TimePicker,
-  DateTimePicker,
-  TransferList,
-  FileUpload,
-} from './forms';
+// Form Components (use adaptive versions from adapters)
+export {} from './forms';
 
 export type {
   PasswordInputProps,
@@ -197,11 +220,8 @@ export type {
 } from './forms';
 
 // Button Components (excluding conflicts with adapters)
-export {
-  FloatingActionButton,
-  LinkButton,
-  SplitButton,
-} from './buttons';
+// Button Components (use adaptive versions from adapters)
+export {} from './buttons';
 
 export type {
   FloatingActionButtonProps,
@@ -209,12 +229,8 @@ export type {
   SplitButtonProps,
 } from './buttons';
 
-// Data Display Components (excluding Badge, Avatar, Tooltip, Chip, List - use adaptive versions)
-export {
-  ListItem,
-  Tag,
-  Timeline,
-} from './data-display';
+// Data Display Components (excluding Badge, Avatar, Tooltip, Chip, List, ListItem, Tag, Timeline - use adaptive versions)
+export {} from './data-display';
 
 export type {
   BadgeProps,
@@ -228,14 +244,8 @@ export type {
 } from './data-display';
 
 // Feedback Components (excluding Alert, Snackbar, Spinner - use adaptive versions)
+// Feedback Components (use adaptive versions from adapters)
 export {
-  ProgressBar,
-  ProgressCircle,
-  SkeletonLoader,
-  EmptyState,
-  ErrorState,
-  SuccessState,
-  Toast,
   useToast,
 } from './feedback';
 
@@ -251,12 +261,8 @@ export type {
   ToastProps,
 } from './feedback';
 
-// Overlay Components (excluding Modal, Dialog, Backdrop, Popover - use adaptive versions)
-export {
-  SlideOver,
-  BottomSheet,
-  Lightbox,
-} from './overlay';
+// Overlay Components (use adaptive versions from adapters)
+export {} from './overlay';
 
 export type {
   ModalProps,
@@ -267,11 +273,8 @@ export type {
   PopoverProps,
 } from './overlay';
 
-// Typography Components
-export {
-  Heading,
-  Text,
-} from './typography';
+// Typography Components (use adaptive versions from adapters)
+export {} from './typography';
 
 export type {
   HeadingProps,
@@ -301,13 +304,8 @@ export type {
   FeatureFlagWrapperProps,
 } from './utility';
 
-// Media Components
-export {
-  Image,
-  Carousel,
-  ImageGallery,
-  Thumbnail,
-} from './media';
+// Media Components (use adaptive versions from adapters)
+export {} from './media';
 
 export type {
   ImageProps,
