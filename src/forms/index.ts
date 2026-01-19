@@ -8,11 +8,11 @@ export type { FormProps } from './Form';
 export { FileUpload } from './FileUpload';
 export type { FileUploadProps } from './FileUpload';
 
-export { MultiSelect } from './MultiSelect';
-export type { MultiSelectProps, MultiSelectOption } from './MultiSelect';
+// Note: MultiSelect component moved to MUI implementation
+// Use MultiSelect from @sakhlaqi/ui/adapters instead
 
-export { TextareaAutosize } from './TextareaAutosize';
-export type { TextareaAutosizeProps } from './TextareaAutosize';
+// Note: TextareaAutosize component moved to MUI implementation
+// Use TextareaAutosize from @sakhlaqi/ui/adapters instead
 
-export { TransferList } from './TransferList';
-export type { TransferListProps, TransferListItem } from './TransferList';
+// Note: TransferList component moved to MUI implementation
+// Use TransferList from @sakhlaqi/ui/adapters instead

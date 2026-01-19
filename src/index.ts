@@ -180,18 +180,15 @@ export {
   MainLayout,
   AdminLayout,
   AppShell,
-  Sidebar,
 } from './layout';
 
 export type {
   HeaderProps,
   FooterProps,
   AppShellProps,
-  SidebarProps,
-  FlexProps,
-  SectionProps,
   SpacerProps,
   // Note: PaperProps, StackProps, ImageListProps moved to MUI - import from adapters
+  // Note: SidebarProps, FlexProps, SectionProps moved to MUI - import from adapters
 } from './layout';
 
 // Navigation Components (use adaptive versions from adapters)

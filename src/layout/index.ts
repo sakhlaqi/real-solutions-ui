@@ -14,17 +14,17 @@ export { AdminLayout } from './AdminLayout';
 export { AppShell } from './AppShell';
 export type { AppShellProps } from './AppShell';
 
-export { Sidebar } from './Sidebar';
-export type { SidebarProps } from './Sidebar';
+// Note: Sidebar component moved to MUI implementation
+// Use Sidebar from @sakhlaqi/ui/adapters instead
 
 // Note: Container component moved to MUI implementation
 // Use Container from @sakhlaqi/ui/adapters instead
 
-export { Flex } from './Flex';
-export type { FlexProps } from './Flex';
+// Note: Flex component moved to MUI implementation
+// Use Flex from @sakhlaqi/ui/adapters instead
 
-export { Section } from './Section';
-export type { SectionProps } from './Section';
+// Note: Section component moved to MUI implementation
+// Use Section from @sakhlaqi/ui/adapters instead
 
 export { Spacer } from './Spacer';
 export type { SpacerProps } from './Spacer';

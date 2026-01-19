@@ -1,6 +1,6 @@
 {
   "name": "@sakhlaqi/ui",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "A comprehensive, production-ready React UI component library with Material-UI integration",
   "type": "module",
   "publishConfig": {
@@ -118,6 +118,8 @@
     "@mui/material": "^7.3.7",
     "@mui/x-charts": "^8.25.0",
     "@mui/x-data-grid": "^8.25.0",
+    "@mui/x-data-grid-premium": "^8.25.0",
+    "@mui/x-data-grid-pro": "^8.25.0",
     "@mui/x-date-pickers": "^8.25.0",
     "@mui/x-tree-view": "^8.25.0",
     "@tanstack/react-table": "^8.21.3",

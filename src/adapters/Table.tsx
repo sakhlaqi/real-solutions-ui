@@ -1,12 +1,43 @@
 /**
  * Adapter Table Component
  * 
- * Uses MUI DataGrid/DataTable for all providers.
+ * Uses MUI Table for all providers.
  * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
-import { BaseTableProps } from '../core/types';
-import { DataTable as MUIDataTable } from '../providers/mui';
+import React from 'react';
+import {
+  Table as MuiTable,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  CircularProgress,
+  Box,
+  Typography,
+} from '@mui/material';
+
+export interface TableColumn<T = any> {
+  key: string;
+  label: string;
+  render?: (row: T) => React.ReactNode;
+  align?: 'left' | 'center' | 'right';
+}
+
+export interface TableProps<T = any> {
+  columns: TableColumn<T>[];
+  data: T[];
+  striped?: boolean;
+  hoverable?: boolean;
+  bordered?: boolean;
+  compact?: boolean;
+  loading?: boolean;
+  emptyMessage?: string;
+  onRowClick?: (row: T) => void;
+  className?: string;
+}
 
 /**
  * Adaptive Table Component
@@ -16,16 +47,76 @@ import { DataTable as MUIDataTable } from '../providers/mui';
  * @example
  * ```tsx
  * <Table 
- *   rows={users}
  *   columns={[
- *     { field: 'name', header: 'Name' },
- *     { field: 'email', header: 'Email' }
+ *     { key: 'name', label: 'Name' },
+ *     { key: 'email', label: 'Email' }
  *   ]}
+ *   data={users}
  * />
  * ```
  */
-export function Table<T = any>(props: BaseTableProps<T>) {
-  return <MUIDataTable {...(props as any)} />;
-}
+export const Table = <T extends Record<string, any>>({
+  columns,
+  data = [],
+  striped = false,
+  hoverable = true,
+  bordered = false,
+  compact = false,
+  loading = false,
+  emptyMessage = 'No data available',
+  onRowClick,
+  className,
+}: TableProps<T>) => {
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" p={4}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" p={4}>
+        <Typography color="text.secondary">{emptyMessage}</Typography>
+      </Box>
+    );
+  }
+
+  return (
+    <TableContainer component={bordered ? Paper : 'div'} className={className}>
+      <MuiTable size={compact ? 'small' : 'medium'}>
+        <TableHead>
+          <TableRow>
+            {columns.map((column) => (
+              <TableCell key={column.key} align={column.align || 'left'}>
+                {column.label}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row, index) => (
+            <TableRow
+              key={index}
+              hover={hoverable}
+              onClick={() => onRowClick?.(row)}
+              sx={{
+                cursor: onRowClick ? 'pointer' : 'default',
+                backgroundColor: striped && index % 2 === 1 ? 'action.hover' : 'inherit',
+              }}
+            >
+              {columns.map((column) => (
+                <TableCell key={column.key} align={column.align || 'left'}>
+                  {column.render ? column.render(row) : row[column.key]}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </MuiTable>
+    </TableContainer>
+  );
+};
 
 Table.displayName = 'AdapterTable';

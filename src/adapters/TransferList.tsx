@@ -1,12 +1,14 @@
 /**
  * Adapter TransferList Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI TransferList for all providers.
+ * Internal implementation is deprecated in favor of MUI's implementation.
  */
 
 import React from 'react';
-import { TransferList as InternalTransferList, TransferListProps } from '../forms';
+import { TransferList as MUITransferList, TransferListProps as MUITransferListProps } from '../providers/mui/TransferList';
+
+export type TransferListProps = MUITransferListProps;
 
 /**
  * Adaptive TransferList Component
@@ -16,16 +18,14 @@ import { TransferList as InternalTransferList, TransferListProps } from '../form
  * <TransferList
  *   leftItems={availableItems}
  *   rightItems={selectedItems}
- *   onTransfer={handleTransfer}
+ *   onChange={(left, right) => handleChange(left, right)}
  *   leftTitle="Available"
  *   rightTitle="Selected"
  * />
  * ```
  */
 export const TransferList: React.FC<TransferListProps> = (props) => {
-  // TransferList always uses internal implementation as it's a complex
-  // dual-list component with transfer logic
-  return <InternalTransferList {...props} />;
+  return <MUITransferList {...props} />;
 };
 
 TransferList.displayName = 'AdapterTransferList';

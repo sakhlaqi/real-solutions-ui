@@ -28,24 +28,24 @@ const users: User[] = [
 
 export const Default: Story = {
   args: {
-    rows: users,
+    data: users,
     columns: [
-      { field: 'id', header: 'ID' },
-      { field: 'name', header: 'Name' },
-      { field: 'email', header: 'Email' },
-      { field: 'role', header: 'Role' },
+      { key: 'id', label: 'ID' },
+      { key: 'name', label: 'Name' },
+      { key: 'email', label: 'Email' },
+      { key: 'role', label: 'Role' },
     ],
   },
 };
 
 export const WithSorting: Story = {
   args: {
-    rows: users,
+    data: users,
     columns: [
-      { field: 'id', header: 'ID', sortable: true },
-      { field: 'name', header: 'Name', sortable: true },
-      { field: 'email', header: 'Email', sortable: true },
-      { field: 'role', header: 'Role', sortable: true },
+      { key: 'id', label: 'ID' },
+      { key: 'name', label: 'Name' },
+      { key: 'email', label: 'Email' },
+      { key: 'role', label: 'Role' },
     ],
   },
 };
@@ -71,20 +71,20 @@ export const ProductsTable: Story = {
 
     return (
       <Table
-        rows={products}
+        data={products}
         columns={[
-          { field: 'id', header: 'ID' },
-          { field: 'name', header: 'Product' },
-          { field: 'category', header: 'Category' },
+          { key: 'id', label: 'ID' },
+          { key: 'name', label: 'Product' },
+          { key: 'category', label: 'Category' },
           {
-            field: 'price',
-            header: 'Price',
+            key: 'price',
+            label: 'Price',
             render: (row: Product) => `$${row.price}`,
           },
-          { field: 'stock', header: 'Stock' },
+          { key: 'stock', label: 'Stock' },
           {
-            field: 'status',
-            header: 'Status',
+            key: 'status',
+            label: 'Status',
             render: (row: Product) => (
               <span
                 style={{
@@ -118,15 +118,15 @@ export const WithActions: Story = {
 
     return (
       <Table
-        rows={users}
+        data={users}
         columns={[
-          { field: 'id', header: 'ID' },
-          { field: 'name', header: 'Name' },
-          { field: 'email', header: 'Email' },
-          { field: 'role', header: 'Role' },
+          { key: 'id', label: 'ID' },
+          { key: 'name', label: 'Name' },
+          { key: 'email', label: 'Email' },
+          { key: 'role', label: 'Role' },
           {
-            field: 'actions',
-            header: 'Actions',
+            key: 'actions',
+            label: 'Actions',
             render: (row: User) => (
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button
@@ -176,12 +176,12 @@ export const DenseTable: Story = {
     return (
       <div style={{ maxHeight: '400px', overflow: 'auto' }}>
         <Table
-          rows={manyUsers}
+          data={manyUsers}
           columns={[
-            { field: 'id', header: 'ID' },
-            { field: 'name', header: 'Name' },
-            { field: 'email', header: 'Email' },
-            { field: 'role', header: 'Role' },
+            { key: 'id', label: 'ID' },
+            { key: 'name', label: 'Name' },
+            { key: 'email', label: 'Email' },
+            { key: 'role', label: 'Role' },
           ]}
         />
       </div>
@@ -191,12 +191,12 @@ export const DenseTable: Story = {
 
 export const EmptyTable: Story = {
   args: {
-    rows: [],
+    data: [],
     columns: [
-      { field: 'id', header: 'ID' },
-      { field: 'name', header: 'Name' },
-      { field: 'email', header: 'Email' },
-      { field: 'role', header: 'Role' },
+      { key: 'id', label: 'ID' },
+      { key: 'name', label: 'Name' },
+      { key: 'email', label: 'Email' },
+      { key: 'role', label: 'Role' },
     ],
   },
 };
@@ -215,12 +215,12 @@ export const StripedRows: Story = {
         `}</style>
         <div className="striped-table">
           <Table
-            rows={users}
+            data={users}
             columns={[
-              { field: 'id', header: 'ID' },
-              { field: 'name', header: 'Name' },
-              { field: 'email', header: 'Email' },
-              { field: 'role', header: 'Role' },
+              { key: 'id', label: 'ID' },
+              { key: 'name', label: 'Name' },
+              { key: 'email', label: 'Email' },
+              { key: 'role', label: 'Role' },
             ]}
           />
         </div>
@@ -233,12 +233,12 @@ export const WithCustomWidth: Story = {
   render: () => {
     return (
       <Table
-        rows={users}
+        data={users}
         columns={[
-          { field: 'id', header: 'ID', width: '60px' },
-          { field: 'name', header: 'Name', width: '200px' },
-          { field: 'email', header: 'Email', width: '250px' },
-          { field: 'role', header: 'Role', width: '120px' },
+          { key: 'id', label: 'ID' },
+          { key: 'name', label: 'Name' },
+          { key: 'email', label: 'Email' },
+          { key: 'role', label: 'Role' },
         ]}
       />
     );

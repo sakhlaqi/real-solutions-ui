@@ -1,12 +1,14 @@
 /**
  * Adapter TextareaAutosize Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI TextareaAutosize for all providers.
+ * Internal implementation is deprecated in favor of MUI's implementation.
  */
 
 import React from 'react';
-import { TextareaAutosize as InternalTextareaAutosize, TextareaAutosizeProps } from '../forms';
+import { TextareaAutosize as MUITextareaAutosize, TextareaAutosizeProps as MUITextareaAutosizeProps } from '../providers/mui/TextareaAutosize';
+
+export type TextareaAutosizeProps = MUITextareaAutosizeProps;
 
 /**
  * Adaptive TextareaAutosize Component
@@ -15,7 +17,7 @@ import { TextareaAutosize as InternalTextareaAutosize, TextareaAutosizeProps } f
  * ```tsx
  * <TextareaAutosize
  *   value={text}
- *   onChange={(e) => setText(e.target.value)}
+ *   onChange={(value) => setText(value)}
  *   minRows={3}
  *   maxRows={10}
  *   placeholder="Enter text..."
@@ -23,9 +25,7 @@ import { TextareaAutosize as InternalTextareaAutosize, TextareaAutosizeProps } f
  * ```
  */
 export const TextareaAutosize: React.FC<TextareaAutosizeProps> = (props) => {
-  // TextareaAutosize always uses internal implementation for consistent
-  // auto-resize behavior
-  return <InternalTextareaAutosize {...props} />;
+  return <MUITextareaAutosize {...props} />;
 };
 
 TextareaAutosize.displayName = 'AdapterTextareaAutosize';
