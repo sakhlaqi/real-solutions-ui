@@ -57,7 +57,25 @@ export {
   Select,
   Checkbox,
   Table,
+  
+  // Date & Time Pickers
   DatePicker,
+  DesktopDatePicker,
+  MobileDatePicker,
+  StaticDatePicker,
+  TimePicker,
+  DesktopTimePicker,
+  MobileTimePicker,
+  StaticTimePicker,
+  DateTimePicker,
+  DesktopDateTimePicker,
+  MobileDateTimePicker,
+  StaticDateTimePicker,
+  DateRangePicker,
+  DesktopDateRangePicker,
+  MobileDateRangePicker,
+  StaticDateRangePicker,
+  
   TreeView,
   LineChart,
   BarChart,
@@ -102,34 +120,26 @@ export {
   PasswordInput,
   EmailInput,
   NumberInput,
-  Tag,
   Timeline,
-  ListItem,
   FloatingActionButton,
   LinkButton,
   SplitButton,
   MultiSelect,
-  TimePicker,
-  DateTimePicker,
   TransferList,
   FileUpload,
   TextareaAutosize,
   Toast,
-  ProgressBar,
-  ProgressCircle,
   EmptyState,
   SlideOver,
   BottomSheet,
   Image,
   Carousel,
   Navbar,
-  Grid,
   Flex,
   Stack,
   Box,
   Container,
   Paper,
-  SkeletonLoader,
   ErrorState,
   SuccessState,
   Lightbox,
@@ -143,34 +153,11 @@ export {
   Masonry,
   Section,
   Spacer,
-  GridItem,
   Form,
   Toggle,
-  AlertDialog,
-  AspectRatio,
-  Calendar,
-  Chart,
-  Collapsible,
-  Combobox,
-  Command,
-  DataTable,
-  Empty,
-  Field,
-  HoverCard,
-  InputGroup,
-  InputOTP,
-  Item,
   Kbd,
-  Label,
-  Menubar,
-  NativeSelect,
-  NavigationMenu,
-  Resizable,
-  ScrollArea,
   Separator,
   Sheet,
-  Sonner,
-  ToggleGroup,
 } from './adapters';
 
 // ============================================================================
@@ -201,23 +188,10 @@ export type {
   FooterProps,
   AppShellProps,
   SidebarProps,
-  DrawerProps,
-  ContainerProps,
-  GridProps,
-  GridItemProps,
   FlexProps,
   SectionProps,
-  DividerProps,
   SpacerProps,
-  CardProps,
-  PaperProps,
-  AccordionProps,
-  AccordionItemProps,
-  StackProps,
-  BoxProps,
-  ImageListProps,
-  ImageListItem,
-  MasonryProps,
+  // Note: PaperProps, StackProps, ImageListProps moved to MUI - import from adapters
 } from './layout';
 
 // Navigation Components (use adaptive versions from adapters)
@@ -225,26 +199,15 @@ export {} from './navigation';
 
 export type {
   NavbarProps,
-  TabsProps,
-  PaginationProps,
-  StepperProps,
 } from './navigation';
 
 // Form Components (use adaptive versions from adapters)
 export {} from './forms';
 
 export type {
-  PasswordInputProps,
-  EmailInputProps,
-  NumberInputProps,
-  AutocompleteProps,
-  RadioGroupProps,
-  ToggleProps,
-  RatingProps,
   FileUploadProps,
 } from './forms';
 
-// Button Components (excluding conflicts with adapters)
 // Button Components (use adaptive versions from adapters)
 export {} from './buttons';
 
@@ -257,16 +220,8 @@ export type {
 // Data Display Components (excluding Badge, Avatar, Tooltip, Chip, List, ListItem, Tag, Timeline - use adaptive versions)
 export {} from './data-display';
 
-export type {
-  BadgeProps,
-  AvatarProps,
-  TooltipProps,
-  ListProps,
-  ListItemProps,
-  ChipProps,
-  TagProps,
-  TimelineProps,
-} from './data-display';
+// Note: BadgeProps and TimelineProps are now exported from adapters
+// Use these from @sakhlaqi/ui/adapters instead
 
 // Feedback Components (excluding Alert, Snackbar, Spinner - use adaptive versions)
 // Feedback Components (use adaptive versions from adapters)
@@ -275,11 +230,6 @@ export {
 } from './feedback';
 
 export type {
-  AlertProps,
-  SpinnerProps,
-  ProgressBarProps,
-  ProgressCircleProps,
-  SkeletonLoaderProps,
   EmptyStateProps,
   ErrorStateProps,
   SuccessStateProps,
@@ -287,16 +237,7 @@ export type {
 } from './feedback';
 
 // Overlay Components (use adaptive versions from adapters)
-export {} from './overlay';
-
-export type {
-  ModalProps,
-  BackdropProps,
-  SlideOverProps,
-  BottomSheetProps,
-  LightboxProps,
-  PopoverProps,
-} from './overlay';
+// Note: SlideOverProps, BottomSheetProps, LightboxProps moved to MUI - import from adapters
 
 // Typography Components (use adaptive versions from adapters)
 export {} from './typography';

@@ -1,6 +1,6 @@
 # @sakhlaqi/ui Component Library
 
-A comprehensive, production-ready React UI component library with **four UI provider options**: Internal, Material-UI, Radix UI, and Shadcn UI.
+A comprehensive, production-ready React UI component library with **dual UI provider options**: Internal and Material-UI.
 
 ## 📦 Installation
 
@@ -23,25 +23,23 @@ npm install ../ui
 
 ## ✨ Features
 
-- ✅ **60+ Adaptive Components with Shadcn Support** - **Quad-provider architecture** (Internal + Material-UI + Radix UI + Shadcn UI) ✨ **NEW in v3.1**
+- ✅ **95+ Adaptive Components** - **Dual-provider architecture** (Internal + Material-UI)
 - ✅ **TypeScript Support** - Full type safety and IntelliSense
 - ✅ **Dynamic Provider Switching** - Change UI framework at runtime
 - ✅ **Accessible by Default** - ARIA roles, keyboard navigation, focus management
 - ✅ **Responsive & Mobile-Friendly** - Works seamlessly across all devices
-- ✅ **Themeable** - CSS custom properties for easy theming + Tailwind CSS for Shadcn
+- ✅ **Themeable** - CSS custom properties for easy theming
 - ✅ **Tree-Shakeable** - Import only what you need
 - ✅ **React 18 & 19 Compatible** - Works with latest React versions
 - ✅ **Production Ready** - Battle-tested with comprehensive documentation
-- ✅ **Bug Fixed** - All critical runtime errors resolved (Jan 2026)
+- ✅ **Simplified Architecture** - Streamlined to two providers for easier maintenance (Jan 2026)
 
 ## 🎨 Choose Your UI Framework
 
-**v3.1** introduces support for **four UI providers**:
+The library supports **two UI providers**:
 
 1. **internal** - Lightweight custom components with minimal dependencies
 2. **mui** - Material Design components from Material-UI (@mui/material)
-3. **radix** - Modern, accessible components from Radix UI
-4. **shadcn** - Beautiful, customizable components built on Radix UI + Tailwind CSS ✨ **NEW**
 
 Switch between them at any time without changing your component code!
 
@@ -52,11 +50,10 @@ Switch between them at any time without changing your component code!
 ```tsx
 import { UIProvider, Button, Input, Card } from '@sakhlaqi/ui';
 import '@sakhlaqi/ui/styles';
-import '@radix-ui/themes/styles.css'; // Required if using Radix provider
 
 function App() {
   return (
-    <UIProvider defaultProvider="shadcn">
+    <UIProvider defaultProvider="mui">
       <Card>
         <h1>Welcome</h1>
         <Input label="Email" placeholder="Enter email" />
@@ -88,18 +85,6 @@ function ProviderSwitcher() {
         onClick={() => setProvider('mui')}
       >
         Material-UI
-      </Button>
-      <Button 
-        variant={provider === 'radix' ? 'contained' : 'outlined'}
-        onClick={() => setProvider('radix')}
-      >
-        Radix UI
-      </Button>
-      <Button 
-        variant={provider === 'shadcn' ? 'contained' : 'outlined'}
-        onClick={() => setProvider('shadcn')}
-      >
-        Shadcn UI ✨
       </Button>
     </div>
   );
@@ -138,73 +123,48 @@ import { Modal } from 'ui/overlay';
 import { Heading, Text } from 'ui/typography';
 ```
 
-## 📦 Adaptive Components (60 Total with Shadcn Support)
+## 📦 Available Components (95+)
 
-The library provides **60 adaptive components** that automatically switch between Internal, Material-UI, Radix UI, and **Shadcn UI** implementations based on `UIProvider`.
-
-### Components with Full Shadcn Support (60)
-
-#### Core Components
-`Avatar`, `Badge`, `Button`, `ButtonGroup`, `Card`, `Checkbox`, `Input`, `Progress`, `Select`, `Slider`, `Switch`, `Textarea`, `Toast`, `Toggle`, `Tooltip`, `Typography`
-
-#### Form Components
-`DatePicker`, `Drawer`, `DropdownMenu`, `Form`, `Pagination`, `Popover`, `RadioGroup`, `Tabs`
-
-#### Layout & Navigation
-`Accordion`, `Alert`, `AppBar`, `Breadcrumbs`, `ContextMenu`, `Dialog`, `Divider`, `Spinner`, `Table`
-
-#### New Shadcn-Native Components (29)
-`AlertDialog`, `AspectRatio`, `Calendar`, `Chart`, `Collapsible`, `Combobox`, `Command`, `DataTable`, `Empty`, `Field`, `HoverCard`, `InputGroup`, `InputOTP`, `Item`, `Kbd`, `Label`, `Menubar`, `NativeSelect`, `NavigationMenu`, `Resizable`, `ScrollArea`, `Separator`, `Sheet`, `Sidebar`, `Skeleton`, `Sonner`, `ToggleGroup`
+The library provides **95+ adaptive components** that automatically switch between Internal and Material-UI implementations based on `UIProvider`.
 
 > 📖 All components support dynamic provider switching at runtime
+
+### Component Categories
+
+#### Core Components (3)
+`Button`, `Input`, `Card`
+
+#### Typography (2)
+`Heading`, `Text`
+
+#### Forms (12)
+`Form`, `PasswordInput`, `EmailInput`, `NumberInput`, `Select`, `Checkbox`, `RadioGroup`, `Toggle`, `Textarea`, `FileUpload`, `Autocomplete`, `MultiSelect`
+
+#### Buttons (5)
+`IconButton`, `ButtonGroup`, `ToggleButton`, `FloatingActionButton`, `SplitButton`, `LinkButton`
+
+#### Layout (15)
+`AppShell`, `Header`, `Footer`, `Sidebar`, `Drawer`, `Container`, `Grid`, `GridItem`, `Flex`, `Section`, `Divider`, `Spacer`, `Box`, `Paper`, `Stack`
+
+#### Navigation (8)
+`Navbar`, `Breadcrumbs`, `Tabs`, `Pagination`, `Stepper`, `Menu`, `BottomNavigation`, `Toolbar`
+
+#### Data Display (15)
+`Badge`, `Avatar`, `Tooltip`, `List`, `ListItem`, `Table`, `TreeView`, `Chip`, `Tag`, `Timeline`, `Image`, `ImageGallery`, `Thumbnail`, `ImageList`, `Masonry`
+
+#### Feedback (10)
+`Alert`, `Spinner`, `ProgressBar`, `Skeleton`, `LinearProgress`, `Snackbar`, `Toast`, `EmptyState`, `ErrorState`, `SuccessState`
+
+#### Overlay (7)
+`Modal`, `Dialog`, `Popover`, `Backdrop`, `Lightbox`, `SlideOver`, `BottomSheet`
+
+#### Charts (3)
 `LineChart`, `BarChart`, `PieChart`
 
-### Navigation (6)
-`Tabs`, `Breadcrumbs`, `Pagination`, `Stepper`, `Menu`, `BottomNavigation`
-
-### Layout (5)
-`Accordion`, `Dialog`, `AppBar`, `Divider`, `Popover`
-
-### Buttons (3)
-`ButtonGroup`, `ToggleButton`, `SpeedDial`
-
-### Utility (2)
-`DatePicker`, `Backdrop`, `Toolbar`
+#### Utility (5)
+`ErrorBoundary`, `Portal`, `DatePicker`, `DateTimePicker`, `TimePicker`
 
 > 📖 See [ADAPTIVE_COMPONENTS.md](./ADAPTIVE_COMPONENTS.md) for complete documentation
-
-## 📦 Component Categories
-
-### Base Components
-- `Button` - Action button with variants
-- `Input` - Form input with validation
-- `Card` - Content container
-
-### Layout
-- `AppShell`, `Header`, `Footer`, `Sidebar`, `Drawer`
-- `Container`, `Grid`, `GridItem`, `Flex`
-- `Section`, `Divider`, `Spacer`
-
-### Navigation
-- `Navbar`, `Breadcrumbs`, `Tabs`, `Pagination`, `Stepper`
-
-### Forms
-- `Form`, `PasswordInput`, `Select`, `Checkbox`, `RadioGroup`
-- `Toggle`, `Textarea`, `FileUpload`
-
-### Buttons
-- `IconButton`, `ButtonGroup`
-
-### Data Display
-- `Badge`, `Avatar`, `Tooltip`, `List`, `ListItem`
-
-### Feedback
-- `Alert`, `Spinner`, `ProgressBar`
-
-### Overlay
-- `Modal`
-
-### Typography
 ### Subpath Imports (Recommended)
 
 ```tsx
@@ -450,9 +410,19 @@ real-solutions/
 ## 📚 Documentation
 
 - **Setup Guide:** [GITHUB_PACKAGES_SETUP.md](./GITHUB_PACKAGES_SETUP.md)
+- **Migration Guide:** [SHADCN_RADIX_REMOVAL_COMPLETE.md](./SHADCN_RADIX_REMOVAL_COMPLETE.md)
 - **Repository:** https://github.com/sakhlaqi/real-solutions-ui
 - **GitHub Packages:** https://github.com/sakhlaqi?tab=packages
 - **Issues:** https://github.com/sakhlaqi/real-solutions-ui/issues
+
+## 🔄 Version History
+
+### v3.1.0 (January 2026)
+- **Breaking Change**: Removed Radix UI and Shadcn UI provider support
+- Simplified to dual-provider architecture (Internal + MUI only)
+- Removed 113 dependencies related to Radix and Shadcn
+- Updated all documentation
+- See [SHADCN_RADIX_REMOVAL_COMPLETE.md](./SHADCN_RADIX_REMOVAL_COMPLETE.md) for full migration guide
 
 ## 📄 License
 

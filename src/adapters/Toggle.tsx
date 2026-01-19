@@ -1,18 +1,26 @@
 /**
  * Adapter Toggle Component
  * 
- * Dynamically switches between internal, MUI, Radix, and Shadcn implementations
- * based on the current UIProvider context.
+ * Toggle is an alias for Switch. Uses MUI Switch for all providers.
+ * @deprecated Use Switch instead of Toggle
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Toggle as InternalToggle, ToggleProps } from '../forms';
-import { Toggle as ShadcnToggle } from '../providers/shadcn';
+import { Switch as MUISwitch } from '../providers/mui';
+
+export interface ToggleProps {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label?: string;
+  disabled?: boolean;
+  color?: 'primary' | 'secondary' | 'default';
+  size?: 'small' | 'medium';
+}
 
 /**
- * Adaptive Toggle Component
+ * Adaptive Toggle Component (Alias for Switch)
  * 
+ * @deprecated Use Switch instead
  * @example
  * ```tsx
  * <Toggle
@@ -23,14 +31,7 @@ import { Toggle as ShadcnToggle } from '../providers/shadcn';
  * ```
  */
 export const Toggle: React.FC<ToggleProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnToggle {...props as any} />;
-  }
-  
-  // Toggle uses internal implementation for other providers
-  return <InternalToggle {...props} />;
+  return <MUISwitch {...props} />;
 };
 
 Toggle.displayName = 'AdapterToggle';

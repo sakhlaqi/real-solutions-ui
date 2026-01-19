@@ -1,13 +1,11 @@
 /**
  * Adaptive Toolbar Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Toolbar for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
 import { Toolbar as MUIToolbar } from '../providers/mui';
-import { Toolbar as RadixToolbar } from '../providers/radix';
 
 export interface ToolbarProps {
   children: React.ReactNode;
@@ -29,31 +27,7 @@ export interface ToolbarProps {
  * ```
  */
 export const Toolbar: React.FC<ToolbarProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIToolbar {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixToolbar {...props} />;
-  }
-  
-  // For internal, just render a div with flexbox styling
-  const { children, className = '', variant, disableGutters } = props;
-  return (
-    <div 
-      className={`toolbar ${variant === 'dense' ? 'toolbar-dense' : ''} ${className}`}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: disableGutters ? 0 : variant === 'dense' ? '0 8px' : '0 16px',
-        minHeight: variant === 'dense' ? 48 : 64,
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <MUIToolbar {...props} />;
 };
 
 Toolbar.displayName = 'AdapterToolbar';

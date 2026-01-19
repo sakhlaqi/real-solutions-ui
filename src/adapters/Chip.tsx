@@ -1,14 +1,11 @@
 /**
  * Adaptive Chip Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Chip for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Chip as InternalChip } from '../data-display';
 import { Chip as MUIChip } from '../providers/mui';
-import { Chip as RadixChip } from '../providers/radix';
 
 export interface ChipProps {
   label: string;
@@ -31,19 +28,7 @@ export interface ChipProps {
  * ```
  */
 export const Chip: React.FC<ChipProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIChip {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixChip {...props as any} />;
-  }
-  
-  // Transform for internal Chip which expects children instead of label
-  const { label, variant, size, deleteIcon, ...internalProps } = props;
-  return <InternalChip {...internalProps}>{label}</InternalChip>;
+  return <MUIChip {...props} />;
 };
 
 Chip.displayName = 'AdapterChip';

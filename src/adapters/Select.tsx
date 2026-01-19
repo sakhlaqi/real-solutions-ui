@@ -1,22 +1,18 @@
 /**
  * Adapter Select Component
  * 
- * Dynamically switches between internal and MUI select implementations
- * based on the current UIProvider context.
+ * Uses MUI Select for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
 import { SelectProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { Select as InternalSelect } from '../forms';
 import { Select as MUISelect } from '../providers/mui';
-import { Select as RadixSelect } from '../providers/radix';
-import { Select as ShadcnSelect } from '../providers/shadcn';
 
 /**
  * Adaptive Select Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Note: This component now uses MUI implementation for all providers.
  * 
  * @example
  * ```tsx
@@ -29,24 +25,7 @@ import { Select as ShadcnSelect } from '../providers/shadcn';
  * ```
  */
 export const Select: React.FC<SelectProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnSelect {...props} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUISelect {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixSelect {...props} />;
-  }
-  
-  // Internal Select doesn't support size as string, remove it
-  const { size, ...restProps } = props as any;
-  
-  return <InternalSelect {...restProps} />;
+  return <MUISelect {...props} />;
 };
 
 Select.displayName = 'AdapterSelect';

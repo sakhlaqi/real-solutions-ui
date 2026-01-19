@@ -1,12 +1,11 @@
 /**
  * Adapter Masonry Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Lab Masonry for all providers.
  */
 
 import React from 'react';
-import { Masonry as InternalMasonry, MasonryProps } from '../layout';
+import { Masonry as MUIMasonry, MUIMasonryProps as MasonryProps } from '../providers/mui';
 
 /**
  * Adaptive Masonry Component
@@ -21,8 +20,7 @@ import { Masonry as InternalMasonry, MasonryProps } from '../layout';
  * ```
  */
 export const Masonry: React.FC<MasonryProps> = (props) => {
-  // Masonry always uses internal implementation
-  return <InternalMasonry {...props} />;
+  return <MUIMasonry {...props} />;
 };
 
 Masonry.displayName = 'AdapterMasonry';

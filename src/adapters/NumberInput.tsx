@@ -1,15 +1,18 @@
 /**
  * Adapter NumberInput Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Input with type="number" for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { NumberInput as InternalNumberInput, NumberInputProps } from '../forms';
 import { Input as MUIInput } from '../providers/mui';
-import { Input as RadixInput } from '../providers/radix';
+import { BaseInputProps } from '../core/types';
+
+export type NumberInputProps = Omit<BaseInputProps, 'type'> & {
+  min?: number;
+  max?: number;
+  step?: number;
+};
 
 /**
  * Adaptive NumberInput Component
@@ -26,17 +29,7 @@ import { Input as RadixInput } from '../providers/radix';
  * ```
  */
 export const NumberInput: React.FC<NumberInputProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIInput {...props as any} type="number" />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixInput {...props as any} type="number" />;
-  }
-  
-  return <InternalNumberInput {...props} />;
+  return <MUIInput {...props as any} type="number" />;
 };
 
 NumberInput.displayName = 'AdapterNumberInput';

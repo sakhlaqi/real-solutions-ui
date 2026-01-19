@@ -1,5 +1,4 @@
 import React from 'react';
-import './Form.css';
 
 export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   children: React.ReactNode;

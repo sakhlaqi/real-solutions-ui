@@ -1,15 +1,11 @@
 /**
  * Adaptive Pagination Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Pagination for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Pagination as InternalPagination } from '../navigation';
 import { Pagination as MUIPagination } from '../providers/mui';
-import { Pagination as RadixPagination } from '../providers/radix';
-import { Pagination as ShadcnPagination } from '../providers/shadcn';
 
 export interface PaginationProps {
   count: number;
@@ -34,35 +30,7 @@ export interface PaginationProps {
  * ```
  */
 export const Pagination: React.FC<PaginationProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnPagination {...props as any} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUIPagination {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixPagination {...props} />;
-  }
-  
-  // Transform props to internal API (page/count -> currentPage/totalPages)
-  const { page, count, onChange, variant, shape, size, siblingCount, boundaryCount, ...restProps } = props;
-  
-  const handlePageChange = (newPage: number) => {
-    onChange(newPage);
-  };
-  
-  return (
-    <InternalPagination
-      {...restProps}
-      currentPage={page}
-      totalPages={count}
-      onPageChange={handlePageChange}
-    />
-  );
+  return <MUIPagination {...props} />;
 };
 
 Pagination.displayName = 'AdapterPagination';

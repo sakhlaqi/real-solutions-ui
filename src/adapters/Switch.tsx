@@ -1,15 +1,11 @@
 /**
  * Adaptive Switch Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Switch for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Toggle as InternalSwitch } from '../forms';
 import { Switch as MUISwitch } from '../providers/mui';
-import { Switch as RadixSwitch } from '../providers/radix';
-import { Switch as ShadcnSwitch } from '../providers/shadcn';
 
 export interface SwitchProps {
   checked: boolean;
@@ -29,23 +25,7 @@ export interface SwitchProps {
  * ```
  */
 export const Switch: React.FC<SwitchProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUISwitch {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixSwitch {...props as any} />;
-  }
-
-  if (provider === 'shadcn') {
-    return <ShadcnSwitch {...props} />;
-  }
-  
-  // Map to internal Toggle component
-  const { color, size, ...internalProps } = props;
-  return <InternalSwitch {...internalProps} />;
+  return <MUISwitch {...props} />;
 };
 
 Switch.displayName = 'AdapterSwitch';

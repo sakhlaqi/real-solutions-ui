@@ -1,15 +1,11 @@
 /**
  * Adaptive Popover Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Popover for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Popover as InternalPopover } from '../overlay';
 import { Popover as MUIPopover } from '../providers/mui';
-import { Popover as RadixPopover } from '../providers/radix';
-import { Popover as ShadcnPopover } from '../providers/shadcn';
 
 export interface PopoverProps {
   open: boolean;
@@ -43,23 +39,7 @@ export interface PopoverProps {
  * ```
  */
 export const Popover: React.FC<PopoverProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnPopover {...props} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUIPopover {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixPopover {...props} />;
-  }
-  
-  // For internal, filter MUI-specific props
-  const { anchorOrigin, transformOrigin, ...internalProps } = props;
-  return <InternalPopover {...internalProps} />;
+  return <MUIPopover {...props} />;
 };
 
 Popover.displayName = 'AdapterPopover';

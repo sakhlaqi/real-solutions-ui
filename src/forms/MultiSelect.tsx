@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './MultiSelect.css';
 
 export interface MultiSelectOption {
   id: string | number;

@@ -1,4 +1,12 @@
-# Radix UI Integration Guide
+# ⚠️ DEPRECATED - Radix UI Integration Guide
+
+> **This document is obsolete as of v3.1.0**
+> 
+> Radix UI support has been removed from this library. This document is kept for historical reference only.
+> 
+> For migration information, see [SHADCN_RADIX_REMOVAL_COMPLETE.md](./SHADCN_RADIX_REMOVAL_COMPLETE.md)
+
+---
 
 ## Overview
 

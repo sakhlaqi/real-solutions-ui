@@ -1,22 +1,19 @@
 /**
  * Adapter DatePicker Component
  * 
- * Dynamically switches between internal and MUI date picker implementations
- * based on the current UIProvider context.
+ * Uses MUI X Date Picker for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready date picker.
  */
 
 import React from 'react';
 import { BaseDatePickerProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { DatePicker as InternalDatePicker } from '../forms';
 import { DatePicker as MUIDatePicker } from '../providers/mui';
-import { DatePicker as RadixDatePicker } from '../providers/radix';
-import { DatePicker as ShadcnDatePicker } from '../providers/shadcn';
 
 /**
  * Adaptive DatePicker Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Note: This component now uses MUI implementation for both 'mui' and 'internal' providers.
+ * The internal DatePicker implementation is deprecated as MUI X provides full functionality.
  * 
  * @example
  * ```tsx
@@ -28,27 +25,8 @@ import { DatePicker as ShadcnDatePicker } from '../providers/shadcn';
  * ```
  */
 export const DatePicker: React.FC<BaseDatePickerProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnDatePicker {...props} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUIDatePicker {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixDatePicker {...props} />;
-  }
-  
-  // Ensure format is one of the valid internal formats
-  const { format, ...restProps } = props;
-  const validFormat = format && ['MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'].includes(format)
-    ? (format as 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY-MM-DD')
-    : 'MM/DD/YYYY';
-  
-  return <InternalDatePicker {...restProps} format={validFormat} />;
+  // Always use MUI implementation - internal DatePicker is deprecated
+  return <MUIDatePicker {...props} />;
 };
 
 DatePicker.displayName = 'AdapterDatePicker';

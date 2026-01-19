@@ -1,22 +1,18 @@
 /**
  * Adapter Modal Component
  * 
- * Dynamically switches between internal and MUI modal implementations
- * based on the current UIProvider context.
+ * Uses MUI Dialog for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
 import { BaseModalProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { Modal as InternalModal } from '../overlay';
 import { Modal as MUIModal } from '../providers/mui';
-import { Modal as RadixModal } from '../providers/radix';
-import { Dialog as ShadcnModal } from '../providers/shadcn';
 
 /**
  * Adaptive Modal Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Note: This component now uses MUI implementation for all providers.
  * 
  * @example
  * ```tsx
@@ -31,24 +27,7 @@ import { Dialog as ShadcnModal } from '../providers/shadcn';
  * ```
  */
 export const Modal: React.FC<BaseModalProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIModal {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixModal {...props} />;
-  }
-
-  if (provider === 'shadcn') {
-    return <ShadcnModal {...props} />;
-  }
-  
-  // Transform props - internal uses 'isOpen', MUI uses 'open'
-  const { open, ...restProps } = props;
-  
-  return <InternalModal {...restProps} isOpen={open} />;
+  return <MUIModal {...props} />;
 };
 
 Modal.displayName = 'AdapterModal';

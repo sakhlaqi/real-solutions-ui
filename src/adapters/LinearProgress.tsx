@@ -1,14 +1,11 @@
 /**
  * Adaptive LinearProgress Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI LinearProgress for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { ProgressBar as InternalProgressBar } from '../feedback';
 import { LinearProgress as MUILinearProgress } from '../providers/mui';
-import { LinearProgress as RadixLinearProgress } from '../providers/radix';
 
 export interface LinearProgressProps {
   value?: number;
@@ -27,21 +24,7 @@ export interface LinearProgressProps {
  * ```
  */
 export const LinearProgress: React.FC<LinearProgressProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUILinearProgress {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixLinearProgress {...props} />;
-  }
-  
-  // Transform for internal - ProgressBar requires value prop
-  const { variant, color, value, ...restProps } = props;
-  const progressValue = value !== undefined ? value : 0;
-  
-  return <InternalProgressBar {...restProps} value={progressValue} />;
+  return <MUILinearProgress {...props} />;
 };
 
 LinearProgress.displayName = 'AdapterLinearProgress';

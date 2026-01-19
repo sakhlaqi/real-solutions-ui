@@ -1,21 +1,15 @@
 /**
  * Adapter TreeView Component
  * 
- * Dynamically switches between internal and MUI tree view implementations
- * based on the current UIProvider context.
+ * Uses MUI TreeView for all providers.
  */
 
 import React from 'react';
 import { BaseTreeViewProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { TreeView as InternalTreeView } from '../data-display';
 import { TreeView as MUITreeView } from '../providers/mui';
-import { TreeView as RadixTreeView } from '../providers/radix';
 
 /**
  * Adaptive TreeView Component
- * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
  * 
  * @example
  * ```tsx
@@ -31,20 +25,7 @@ import { TreeView as RadixTreeView } from '../providers/radix';
  * ```
  */
 export const TreeView: React.FC<BaseTreeViewProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUITreeView {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixTreeView {...props} />;
-  }
-  
-  // Transform nodes to data prop for internal component
-  const { nodes, ...restProps } = props;
-  
-  return <InternalTreeView {...restProps} data={nodes} />;
+  return <MUITreeView {...props} />;
 };
 
 TreeView.displayName = 'AdapterTreeView';

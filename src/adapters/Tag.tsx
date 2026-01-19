@@ -1,15 +1,14 @@
 /**
  * Adapter Tag Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Chip for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Tag as InternalTag, TagProps } from '../data-display';
-import { Chip as MUIChip } from '../providers/mui';
-import { Chip as RadixChip } from '../providers/radix';
+import { Chip as MUIChip, ChipProps as MUIChipProps } from '../providers/mui';
+
+// Tag is an alias for Chip
+export type TagProps = MUIChipProps;
 
 /**
  * Adaptive Tag Component
@@ -20,17 +19,7 @@ import { Chip as RadixChip } from '../providers/radix';
  * ```
  */
 export const Tag: React.FC<TagProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIChip {...props as any} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixChip {...props as any} />;
-  }
-  
-  return <InternalTag {...props} />;
+  return <MUIChip {...props} />;
 };
 
 Tag.displayName = 'AdapterTag';

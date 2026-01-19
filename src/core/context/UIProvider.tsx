@@ -1,14 +1,12 @@
 /**
  * UI Provider Context
  * 
- * Manages the UI implementation provider (internal, MUI, or Radix) and theme configuration.
+ * Manages the UI implementation provider (internal or MUI) and theme configuration.
  * Consumers use this context to switch between different UI implementations.
  */
 
 import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
 import { UIProvider as UIProviderType, ThemeConfig } from '../types';
-import { RadixThemeProvider } from '../theme/radixTheme';
-import { ShadcnThemeProvider } from '../../providers/shadcn/theme';
 
 interface UIContextValue {
   provider: UIProviderType;
@@ -58,6 +56,19 @@ export const UIProvider: React.FC<UIProviderProps> = ({
     ...defaultTheme,
   });
 
+  // Update provider when defaultProvider prop changes (for Storybook)
+  useEffect(() => {
+    setProvider(defaultProvider);
+  }, [defaultProvider]);
+
+  // Update theme when defaultTheme prop changes (for Storybook)
+  useEffect(() => {
+    setTheme((prev) => ({
+      ...prev,
+      ...defaultTheme,
+    }));
+  }, [defaultTheme]);
+
   const toggleThemeMode = () => {
     setTheme((prev) => ({
       ...prev,
@@ -65,31 +76,9 @@ export const UIProvider: React.FC<UIProviderProps> = ({
     }));
   };
 
-  // Clean up provider-specific classes from HTML element
+  // Clean up provider-specific classes from HTML element (no longer needed)
   useEffect(() => {
-    const htmlElement = document.documentElement;
-    
-    if (provider !== 'radix') {
-      // Remove Radix theme classes
-      htmlElement.classList.remove('light', 'dark', 'light-theme', 'dark-theme');
-      htmlElement.removeAttribute('data-accent-color');
-      htmlElement.removeAttribute('data-gray-color');
-      htmlElement.removeAttribute('data-radius');
-      htmlElement.removeAttribute('data-scaling');
-      
-      // Remove any Radix-specific class that starts with 'radix-themes'
-      const classes = Array.from(htmlElement.classList);
-      classes.forEach(className => {
-        if (className.startsWith('radix-themes')) {
-          htmlElement.classList.remove(className);
-        }
-      });
-    }
-
-    if (provider !== 'shadcn') {
-      // Remove shadcn dark mode class if not using shadcn
-      htmlElement.classList.remove('dark');
-    }
+    // No cleanup needed for internal/MUI providers
   }, [provider]);
 
   const value = useMemo(
@@ -103,14 +92,8 @@ export const UIProvider: React.FC<UIProviderProps> = ({
     [provider, theme]
   );
 
-  // Wrap with provider-specific theme components
-  let content = children;
-  
-  if (provider === 'radix') {
-    content = <RadixThemeProvider theme={theme}>{children}</RadixThemeProvider>;
-  } else if (provider === 'shadcn') {
-    content = <ShadcnThemeProvider theme={theme}>{children}</ShadcnThemeProvider>;
-  }
+  // No provider-specific theme wrappers needed
+  const content = children;
 
   return <UIContext.Provider value={value}>{content}</UIContext.Provider>;
 };

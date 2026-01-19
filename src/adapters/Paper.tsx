@@ -1,26 +1,27 @@
 /**
  * Adapter Paper Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Paper implementation.
+ * Internal implementation is deprecated.
  */
 
 import React from 'react';
-import { Paper as InternalPaper, PaperProps } from '../layout';
+import { Paper as MUIPaper, MUIPaperProps } from '../providers/mui';
+
+export type PaperProps = MUIPaperProps;
 
 /**
  * Adaptive Paper Component
  * 
  * @example
  * ```tsx
- * <Paper elevation={2} padding={16}>
+ * <Paper elevation={2}>
  *   Content
  * </Paper>
  * ```
  */
 export const Paper: React.FC<PaperProps> = (props) => {
-  // Paper always uses internal implementation
-  return <InternalPaper {...props} />;
+  return <MUIPaper {...props} />;
 };
 
 Paper.displayName = 'AdapterPaper';

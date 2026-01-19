@@ -1,14 +1,11 @@
 /**
  * Adaptive BottomNavigation Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI BottomNavigation for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { BottomNavigation as InternalBottomNavigation } from '../navigation';
 import { BottomNavigation as MUIBottomNavigation } from '../providers/mui';
-import { BottomNavigation as RadixBottomNavigation } from '../providers/radix';
 
 export interface BottomNavigationAction {
   label: string;
@@ -39,24 +36,7 @@ export interface BottomNavigationProps {
  * ```
  */
 export const BottomNavigation: React.FC<BottomNavigationProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIBottomNavigation {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixBottomNavigation {...props as any} />;
-  }
-  
-  // Transform actions to ensure icon is provided (internal requires it)
-  const { actions, ...restProps } = props;
-  const internalActions = actions.map(action => ({
-    ...action,
-    icon: action.icon || <span />,
-  }));
-  
-  return <InternalBottomNavigation {...restProps} actions={internalActions} />;
+  return <MUIBottomNavigation {...props} />;
 };
 
 BottomNavigation.displayName = 'AdapterBottomNavigation';

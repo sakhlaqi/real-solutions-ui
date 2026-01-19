@@ -1,24 +1,22 @@
 /**
  * Adaptive Card Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Card for all providers.
  */
 
-import React, { ReactNode } from 'react';
-import { useUIContext } from '../core/context';
-import { Card as InternalCard } from '../layout';
-import { Card as MUICard } from '../providers/mui';
-import { Card as RadixCard } from '../providers/radix';
-import { Card as ShadcnCard } from '../providers/shadcn';
+import React from 'react';
+import {
+  Card as MUICard,
+  MUICardProps as CardProps,
+  CardContent,
+  CardHeader,
+  CardActions,
+  CardMedia,
+  CardActionArea,
+} from '../providers/mui';
 
-export interface CardProps {
-  children: ReactNode;
-  padding?: 'none' | 'sm' | 'md' | 'lg';
-  elevation?: number;
-  variant?: 'outlined' | 'elevation';
-  className?: string;
-  onClick?: () => void;
-}
+export type { CardProps };
+export { CardContent, CardHeader, CardActions, CardMedia, CardActionArea };
 
 /**
  * Adaptive Card Component
@@ -32,23 +30,7 @@ export interface CardProps {
  * ```
  */
 export const Card: React.FC<CardProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUICard {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixCard {...props} />;
-  }
-
-  if (provider === 'shadcn') {
-    return <ShadcnCard {...props} />;
-  }
-  
-  // Internal Card uses simpler props
-  const { elevation, variant, ...internalProps } = props;
-  return <InternalCard {...internalProps} />;
+  return <MUICard {...props} />;
 };
 
 Card.displayName = 'AdapterCard';

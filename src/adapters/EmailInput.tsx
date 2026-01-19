@@ -1,15 +1,14 @@
 /**
  * Adapter EmailInput Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Input with type="email" for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { EmailInput as InternalEmailInput, EmailInputProps } from '../forms';
 import { Input as MUIInput } from '../providers/mui';
-import { Input as RadixInput } from '../providers/radix';
+import { BaseInputProps } from '../core/types';
+
+export type EmailInputProps = Omit<BaseInputProps, 'type'>;
 
 /**
  * Adaptive EmailInput Component
@@ -24,17 +23,7 @@ import { Input as RadixInput } from '../providers/radix';
  * ```
  */
 export const EmailInput: React.FC<EmailInputProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIInput {...props as any} type="email" />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixInput {...props as any} type="email" />;
-  }
-  
-  return <InternalEmailInput {...props} />;
+  return <MUIInput {...props as any} type="email" />;
 };
 
 EmailInput.displayName = 'AdapterEmailInput';

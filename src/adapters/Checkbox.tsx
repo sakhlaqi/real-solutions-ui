@@ -1,22 +1,18 @@
 /**
  * Adapter Checkbox Component
  * 
- * Dynamically switches between internal and MUI checkbox implementations
- * based on the current UIProvider context.
+ * Uses MUI Checkbox for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
 import { CheckboxProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { Checkbox as InternalCheckbox } from '../forms';
 import { Checkbox as MUICheckbox } from '../providers/mui';
-import { Checkbox as RadixCheckbox } from '../providers/radix';
-import { Checkbox as ShadcnCheckbox } from '../providers/shadcn';
 
 /**
  * Adaptive Checkbox Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Note: This component now uses MUI implementation for all providers.
  * 
  * @example
  * ```tsx
@@ -28,28 +24,7 @@ import { Checkbox as ShadcnCheckbox } from '../providers/shadcn';
  * ```
  */
 export const Checkbox: React.FC<CheckboxProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUICheckbox {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixCheckbox {...props} />;
-  }
-
-  if (provider === 'shadcn') {
-    return <ShadcnCheckbox {...props} />;
-  }
-  
-  // Transform onChange handler and filter incompatible props
-  const { onChange, size, color, ...restProps } = props as any;
-  const handleChange = onChange ? (checked: boolean) => {
-    // Internal component already provides boolean
-    onChange(checked as any);
-  } : undefined;
-  
-  return <InternalCheckbox {...restProps} onChange={handleChange} />;
+  return <MUICheckbox {...props} />;
 };
 
 Checkbox.displayName = 'AdapterCheckbox';

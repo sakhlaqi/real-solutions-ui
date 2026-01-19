@@ -1,22 +1,15 @@
 /**
  * Adapter Tabs Component
  * 
- * Dynamically switches between internal and MUI tabs implementations
- * based on the current UIProvider context.
+ * Uses MUI Tabs for all providers.
  */
 
 import React from 'react';
 import { BaseTabsProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { Tabs as InternalTabs } from '../navigation';
 import { Tabs as MUITabs } from '../providers/mui';
-import { Tabs as RadixTabs } from '../providers/radix';
-import { Tabs as ShadcnTabs } from '../providers/shadcn';
 
 /**
  * Adaptive Tabs Component
- * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
  * 
  * @example
  * ```tsx
@@ -32,43 +25,7 @@ import { Tabs as ShadcnTabs } from '../providers/shadcn';
  * ```
  */
 export const Tabs: React.FC<BaseTabsProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnTabs {...props as any} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUITabs {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixTabs {...props} />;
-  }
-  
-  // Transform MUI-style tabs to internal format
-  const { tabs, value, onChange, variant, orientation, ...restProps } = props;
-  const internalTabs = tabs.map((tab: any) => ({
-    id: String(tab.value),
-    label: tab.label,
-    content: tab.content || <></>,
-    disabled: tab.disabled,
-    icon: tab.icon,
-  }));
-  
-  // Map MUI variant to internal variant
-  let internalVariant: 'line' | 'enclosed' | 'pills' | undefined;
-  if (variant === 'standard') internalVariant = 'line';
-  else if (variant === 'fullWidth') internalVariant = 'enclosed';
-  else if (variant === 'scrollable') internalVariant = 'pills';
-  
-  return <InternalTabs 
-    {...restProps} 
-    tabs={internalTabs} 
-    activeTab={String(value)}
-    onChange={(tabId) => onChange?.(tabId as any)}
-    variant={internalVariant}
-  />;
+  return <MUITabs {...props} />;
 };
 
 Tabs.displayName = 'AdapterTabs';

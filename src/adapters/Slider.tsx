@@ -1,15 +1,12 @@
 /**
  * Adaptive Slider Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Slider for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Slider as InternalSlider } from '../forms';
 import { Slider as MUISlider } from '../providers/mui';
-import { Slider as RadixSlider } from '../providers/radix';
-import { Slider as ShadcnSlider } from '../providers/shadcn';
 
 export interface SliderProps {
   value: number | number[];
@@ -25,29 +22,15 @@ export interface SliderProps {
 /**
  * Adaptive Slider Component
  * 
+ * Note: This component now uses MUI implementation for all providers.
+ * 
  * @example
  * ```tsx
  * <Slider value={50} onChange={setValue} min={0} max={100} />
  * ```
  */
 export const Slider: React.FC<SliderProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnSlider {...props as any} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUISlider {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixSlider {...props} />;
-  }
-  
-  // Filter props not supported by internal
-  const { marks, valueLabelDisplay, ...internalProps } = props;
-  return <InternalSlider {...internalProps} />;
+  return <MUISlider {...props} />;
 };
 
 Slider.displayName = 'AdapterSlider';

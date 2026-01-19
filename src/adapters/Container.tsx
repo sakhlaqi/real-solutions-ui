@@ -1,12 +1,17 @@
 /**
  * Adapter Container Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Container for all providers.
+ * MUI Container centers content horizontally with responsive max-width.
  */
 
 import React from 'react';
-import { Container as InternalContainer, ContainerProps } from '../layout';
+import {
+  Container as MUIContainer,
+  MUIContainerProps as ContainerProps,
+} from '../providers/mui';
+
+export type { ContainerProps };
 
 /**
  * Adaptive Container Component
@@ -19,8 +24,7 @@ import { Container as InternalContainer, ContainerProps } from '../layout';
  * ```
  */
 export const Container: React.FC<ContainerProps> = (props) => {
-  // Container always uses internal implementation
-  return <InternalContainer {...props} />;
+  return <MUIContainer {...props} />;
 };
 
 Container.displayName = 'AdapterContainer';

@@ -2,11 +2,12 @@
  * Adaptive Calendar Component
  * 
  * Automatically switches between provider implementations based on UIProvider.
+ * 
+ * Note: Calendar is currently only available as a utility component.
+ * Neither internal nor MUI providers have a built-in calendar implementation.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Calendar as ShadcnCalendar } from '../providers/shadcn';
 
 export interface CalendarProps {
   mode?: 'single' | 'multiple' | 'range';
@@ -17,7 +18,7 @@ export interface CalendarProps {
 }
 
 /**
- * Adaptive Calendar Component
+ * Calendar Component - Placeholder
  * 
  * @example
  * ```tsx
@@ -28,15 +29,12 @@ export interface CalendarProps {
  * />
  * ```
  */
-export const Calendar: React.FC<CalendarProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn' || provider === 'radix') {
-    return <ShadcnCalendar {...props as any} />;
-  }
-  
-  // Fallback to shadcn for other providers
-  return <ShadcnCalendar {...props as any} />;
+export const Calendar: React.FC<CalendarProps> = () => {
+  return (
+    <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '4px' }}>
+      <p>Calendar component is not available. Please use a date picker library.</p>
+    </div>
+  );
 };
 
 Calendar.displayName = 'AdapterCalendar';

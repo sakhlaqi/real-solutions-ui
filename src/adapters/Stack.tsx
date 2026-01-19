@@ -1,27 +1,28 @@
 /**
  * Adapter Stack Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Stack implementation.
+ * Internal implementation is deprecated.
  */
 
 import React from 'react';
-import { Stack as InternalStack, StackProps } from '../layout';
+import { Stack as MUIStack, MUIStackProps } from '../providers/mui';
+
+export type StackProps = MUIStackProps;
 
 /**
  * Adaptive Stack Component
  * 
  * @example
  * ```tsx
- * <Stack spacing={16} direction="vertical">
+ * <Stack spacing={2} direction="row">
  *   <div>Item 1</div>
  *   <div>Item 2</div>
  * </Stack>
  * ```
  */
 export const Stack: React.FC<StackProps> = (props) => {
-  // Stack always uses internal implementation for consistent stacking behavior
-  return <InternalStack {...props} />;
+  return <MUIStack {...props} />;
 };
 
 Stack.displayName = 'AdapterStack';

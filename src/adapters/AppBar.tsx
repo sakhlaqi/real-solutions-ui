@@ -1,14 +1,11 @@
 /**
  * Adaptive AppBar Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI AppBar for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { AppBar as InternalAppBar } from '../navigation';
 import { AppBar as MUIAppBar } from '../providers/mui';
-import { AppBar as RadixAppBar } from '../providers/radix';
 
 export interface AppBarProps {
   children: React.ReactNode;
@@ -30,20 +27,7 @@ export interface AppBarProps {
  * ```
  */
 export const AppBar: React.FC<AppBarProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIAppBar {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixAppBar {...props} />;
-  }
-  
-  // Filter props not supported by internal (including 'relative' position)
-  const { elevation, position, ...internalProps } = props;
-  const internalPosition = position === 'relative' ? 'static' : position;
-  return <InternalAppBar {...internalProps} position={internalPosition} />;
+  return <MUIAppBar {...props} />;
 };
 
 AppBar.displayName = 'AdapterAppBar';

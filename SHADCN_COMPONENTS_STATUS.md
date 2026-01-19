@@ -1,4 +1,12 @@
-# shadcn/ui Components Status
+# ⚠️ DEPRECATED - shadcn/ui Components Status
+
+> **This document is obsolete as of v3.1.0**
+> 
+> Shadcn UI support has been removed from this library. This document is kept for historical reference only.
+> 
+> For migration information, see [SHADCN_RADIX_REMOVAL_COMPLETE.md](./SHADCN_RADIX_REMOVAL_COMPLETE.md)
+
+---
 
 ## Currently Installed (33 components)
 

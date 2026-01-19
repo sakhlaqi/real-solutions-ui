@@ -1,14 +1,11 @@
 /**
  * Adaptive Stepper Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Stepper for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Stepper as InternalStepper } from '../navigation';
 import { Stepper as MUIStepper } from '../providers/mui';
-import { Stepper as RadixStepper } from '../providers/radix';
 
 export interface Step {
   label: string;
@@ -40,25 +37,7 @@ export interface StepperProps {
  * ```
  */
 export const Stepper: React.FC<StepperProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIStepper {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixStepper {...props} />;
-  }
-  
-  // Transform activeStep to currentStep and add id field to steps
-  const { activeStep, steps, alternativeLabel, ...internalProps } = props;
-  
-  const internalSteps = steps.map((step, index) => ({
-    ...step,
-    id: `step-${index}`,
-  }));
-  
-  return <InternalStepper {...internalProps} steps={internalSteps} currentStep={activeStep} />;
+  return <MUIStepper {...props} />;
 };
 
 Stepper.displayName = 'AdapterStepper';

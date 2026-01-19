@@ -1,15 +1,11 @@
 /**
  * Adaptive Avatar Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Avatar for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Avatar as InternalAvatar } from '../data-display';
 import { Avatar as MUIAvatar } from '../providers/mui';
-import { Avatar as RadixAvatar } from '../providers/radix';
-import { Avatar as ShadcnAvatar } from '../providers/shadcn';
 
 export interface AvatarProps {
   src?: string;
@@ -30,26 +26,7 @@ export interface AvatarProps {
  * ```
  */
 export const Avatar: React.FC<AvatarProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnAvatar {...props} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUIAvatar {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixAvatar {...props} />;
-  }
-  
-  // Map size to internal size values
-  const { size, ...restProps } = props;
-  const sizeMap = { small: 'sm', medium: 'md', large: 'lg' } as const;
-  const internalSize = size ? sizeMap[size] : 'md';
-  
-  return <InternalAvatar {...restProps} size={internalSize} />;
+  return <MUIAvatar {...props} />;
 };
 
 Avatar.displayName = 'AdapterAvatar';

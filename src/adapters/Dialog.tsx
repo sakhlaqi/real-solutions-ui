@@ -1,15 +1,11 @@
 /**
  * Adaptive Dialog Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Dialog for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Dialog as InternalDialog } from '../overlay';
 import { Dialog as MUIDialog } from '../providers/mui';
-import { Dialog as RadixDialog } from '../providers/radix';
-import { Dialog as ShadcnDialog } from '../providers/shadcn';
 
 export interface DialogProps {
   open: boolean;
@@ -43,23 +39,7 @@ export interface DialogProps {
  * ```
  */
 export const Dialog: React.FC<DialogProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIDialog {...props} />;
-  }
-
-  if (provider === 'shadcn') {
-    return <ShadcnDialog {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixDialog {...props} />;
-  }
-  
-  // Transform for internal Dialog
-  const { maxWidth, fullWidth, fullScreen, ...internalProps } = props;
-  return <InternalDialog {...internalProps} />;
+  return <MUIDialog {...props} />;
 };
 
 Dialog.displayName = 'AdapterDialog';

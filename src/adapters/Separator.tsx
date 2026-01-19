@@ -1,12 +1,10 @@
 /**
  * Adaptive Separator Component
  * 
- * Automatically switches between provider implementations based on UIProvider.
+ * Simple separator implementation.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Separator as ShadcnSeparator } from '../providers/shadcn';
 
 export interface SeparatorProps {
   orientation?: 'horizontal' | 'vertical';
@@ -23,15 +21,10 @@ export interface SeparatorProps {
  * <Separator orientation="vertical" />
  * ```
  */
-export const Separator: React.FC<SeparatorProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn' || provider === 'radix') {
-    return <ShadcnSeparator {...props} />;
-  }
-  
-  // Fallback to shadcn for other providers
-  return <ShadcnSeparator {...props} />;
+export const Separator: React.FC<SeparatorProps> = () => {
+  return (
+    <div style={{ height: '1px', width: '100%', backgroundColor: '#ccc', margin: '8px 0' }} />
+  );
 };
 
 Separator.displayName = 'AdapterSeparator';

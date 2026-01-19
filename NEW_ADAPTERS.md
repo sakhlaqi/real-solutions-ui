@@ -80,7 +80,6 @@ Created **46 new adapters** across **5 batches**, bringing the UI library to **9
 - **Providers**: 
   - Internal: Uses native `PasswordInput` from forms
   - MUI: Uses `Input` with `type="password"`
-  - Radix: Uses `Input` with `type="password"`
 - **Features**: Password toggle visibility, validation
 
 #### 2. EmailInput Adapter
@@ -88,7 +87,6 @@ Created **46 new adapters** across **5 batches**, bringing the UI library to **9
 - **Providers**:
   - Internal: Uses native `EmailInput` from forms
   - MUI: Uses `Input` with `type="email"`
-  - Radix: Uses `Input` with `type="email"`
 - **Features**: Email validation, proper keyboard on mobile
 
 #### 3. NumberInput Adapter
@@ -96,7 +94,6 @@ Created **46 new adapters** across **5 batches**, bringing the UI library to **9
 - **Providers**:
   - Internal: Uses native `NumberInput` from forms
   - MUI: Uses `Input` with `type="number"`
-  - Radix: Uses `Input` with `type="number"`
 - **Features**: Min/max validation, step increments
 
 #### 4. MultiSelect Adapter
@@ -162,7 +159,6 @@ Created **46 new adapters** across **5 batches**, bringing the UI library to **9
 - **Providers**:
   - Internal: Uses native `Tag` from data-display
   - MUI: Maps to `Chip` component
-  - Radix: Maps to `Chip` component (from Radix provider)
 - **Features**: Labels, variants, colors, deletable tags
 
 #### 14. Timeline Adapter
@@ -170,7 +166,6 @@ Created **46 new adapters** across **5 batches**, bringing the UI library to **9
 - **Providers**:
   - Internal: Uses native `Timeline` from data-display
   - MUI: Uses internal (MUI doesn't have native Timeline)
-  - Radix: Uses internal (Radix doesn't have native Timeline)
 - **Features**: Time-based event display, custom icons
 
 #### 15. ListItem Adapter
@@ -178,7 +173,6 @@ Created **46 new adapters** across **5 batches**, bringing the UI library to **9
 - **Providers**:
   - Internal: Uses native `ListItem` from data-display
   - MUI: Uses internal for consistency
-  - Radix: Uses internal for consistency
 - **Features**: Works with List adapter, icons, secondary text
 
 ## Usage Examples
@@ -422,7 +416,7 @@ The UI library now has **93 adapters** providing **complete coverage** of ALL ex
 
 ## Notes
 
-- Timeline and ListItem use internal implementation across all providers as MUI/Radix don't have direct equivalents
-- Tag maps to Chip in both MUI and Radix providers
+- Timeline and ListItem use internal implementation across all providers as MUI doesn't have direct equivalents
+- Tag maps to Chip in the MUI provider
 - Input adapters (Password, Email, Number) leverage the existing Input adapter with type specifications
 - Type warnings during build are non-breaking and relate to HTML input attribute compatibility

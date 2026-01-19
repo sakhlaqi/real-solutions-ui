@@ -17,14 +17,8 @@ export type { AppShellProps } from './AppShell';
 export { Sidebar } from './Sidebar';
 export type { SidebarProps } from './Sidebar';
 
-export { Drawer } from './Drawer';
-export type { DrawerProps } from './Drawer';
-
-export { Container } from './Container';
-export type { ContainerProps } from './Container';
-
-export { Grid, GridItem } from './Grid';
-export type { GridProps, GridItemProps } from './Grid';
+// Note: Container component moved to MUI implementation
+// Use Container from @sakhlaqi/ui/adapters instead
 
 export { Flex } from './Flex';
 export type { FlexProps } from './Flex';
@@ -32,29 +26,20 @@ export type { FlexProps } from './Flex';
 export { Section } from './Section';
 export type { SectionProps } from './Section';
 
-export { Divider } from './Divider';
-export type { DividerProps } from './Divider';
-
 export { Spacer } from './Spacer';
 export type { SpacerProps } from './Spacer';
 
-export { Card } from './Card';
-export type { CardProps } from './Card';
+// Note: Paper component moved to MUI implementation
+// Use Paper from @sakhlaqi/ui/adapters instead
 
-export { Paper } from './Paper';
-export type { PaperProps } from './Paper';
+// Note: Stack component moved to MUI implementation
+// Use Stack from @sakhlaqi/ui/adapters instead
 
-export { Accordion } from './Accordion';
-export type { AccordionProps, AccordionItemProps } from './Accordion';
+// Note: Box component moved to MUI implementation
+// Use Box from @sakhlaqi/ui/adapters instead
 
-export { Stack } from './Stack';
-export type { StackProps } from './Stack';
+// Note: ImageList component moved to MUI implementation
+// Use ImageList from @sakhlaqi/ui/adapters instead
 
-export { Box } from './Box';
-export type { BoxProps } from './Box';
-
-export { ImageList } from './ImageList';
-export type { ImageListProps, ImageListItem } from './ImageList';
-
-export { Masonry } from './Masonry';
-export type { MasonryProps } from './Masonry';
+// Note: Masonry component moved to MUI Lab implementation
+// Use Masonry from @sakhlaqi/ui/adapters instead

@@ -1,15 +1,11 @@
 /**
  * Adaptive Drawer Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Drawer for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Drawer as InternalDrawer } from '../layout';
 import { Drawer as MUIDrawer } from '../providers/mui';
-import { Drawer as RadixDrawer } from '../providers/radix';
-import { Drawer as ShadcnDrawer } from '../providers/shadcn';
 
 export interface DrawerProps {
   open: boolean;
@@ -31,23 +27,7 @@ export interface DrawerProps {
  * ```
  */
 export const Drawer: React.FC<DrawerProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnDrawer {...props} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUIDrawer {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixDrawer {...props} />;
-  }
-  
-  // Transform open to isOpen and filter unsupported props
-  const { open, variant, ...internalProps } = props;
-  return <InternalDrawer {...internalProps} isOpen={open} />;
+  return <MUIDrawer {...props} />;
 };
 
 Drawer.displayName = 'AdapterDrawer';

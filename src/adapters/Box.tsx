@@ -1,26 +1,27 @@
 /**
  * Adapter Box Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Box for all providers.
+ * MUI Box provides a generic container with access to theme and sx prop.
  */
 
 import React from 'react';
-import { Box as InternalBox, BoxProps } from '../layout';
+import { Box as MUIBox, MUIBoxProps as BoxProps } from '../providers/mui';
+
+export type { BoxProps };
 
 /**
  * Adaptive Box Component
  * 
  * @example
  * ```tsx
- * <Box padding={16} margin={8}>
+ * <Box padding="md" margin="sm" display="flex">
  *   Content
  * </Box>
  * ```
  */
 export const Box: React.FC<BoxProps> = (props) => {
-  // Box always uses internal implementation
-  return <InternalBox {...props} />;
+  return <MUIBox {...props} />;
 };
 
 Box.displayName = 'AdapterBox';

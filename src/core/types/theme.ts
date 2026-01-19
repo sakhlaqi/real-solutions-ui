@@ -2,7 +2,7 @@
  * Theme Types and Interfaces
  */
 
-export type UIProvider = 'internal' | 'mui' | 'radix' | 'shadcn';
+export type UIProvider = 'internal' | 'mui';
 
 export type ThemeMode = 'light' | 'dark';
 

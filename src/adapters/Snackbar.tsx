@@ -1,21 +1,15 @@
 /**
  * Adapter Snackbar Component
  * 
- * Dynamically switches between internal and MUI snackbar implementations
- * based on the current UIProvider context.
+ * Uses MUI Snackbar for all providers.
  */
 
 import React from 'react';
 import { SnackbarProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { Snackbar as InternalSnackbar } from '../feedback';
 import { Snackbar as MUISnackbar } from '../providers/mui';
-import { Snackbar as RadixSnackbar } from '../providers/radix';
 
 /**
  * Adaptive Snackbar Component
- * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
  * 
  * @example
  * ```tsx
@@ -29,17 +23,7 @@ import { Snackbar as RadixSnackbar } from '../providers/radix';
  * ```
  */
 export const Snackbar: React.FC<SnackbarProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUISnackbar {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixSnackbar {...props} />;
-  }
-  
-  return <InternalSnackbar {...props} />;
+  return <MUISnackbar {...props} />;
 };
 
 Snackbar.displayName = 'AdapterSnackbar';

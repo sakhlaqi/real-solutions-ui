@@ -1,12 +1,12 @@
 /**
  * Adaptive Sheet Component
  * 
- * Automatically switches between provider implementations based on UIProvider.
+ * Note: Sheet is now a wrapper around Drawer component.
+ * For side panel functionality, use Drawer directly.
  */
 
 import React, { ReactNode } from 'react';
-import { useUIContext } from '../core/context';
-import { Sheet as ShadcnSheet } from '../providers/shadcn';
+import { Drawer } from './Drawer';
 
 export interface SheetProps {
   children: ReactNode;
@@ -21,21 +21,19 @@ export interface SheetProps {
  * @example
  * ```tsx
  * <Sheet open={open} onOpenChange={setOpen}>
- *   <SheetContent>
- *     {children}
- *   </SheetContent>
+ *   {children}
  * </Sheet>
  * ```
  */
-export const Sheet: React.FC<SheetProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn' || provider === 'radix') {
-    return <ShadcnSheet {...props} />;
-  }
-  
-  // Fallback to shadcn for other providers
-  return <ShadcnSheet {...props} />;
+export const Sheet: React.FC<SheetProps> = ({ open, onOpenChange, children, className }) => {
+  return (
+    <Drawer
+      open={open ?? false}
+      onClose={() => onOpenChange?.(false)}
+    >
+      {children}
+    </Drawer>
+  );
 };
 
 Sheet.displayName = 'AdapterSheet';

@@ -1,17 +1,11 @@
 /**
  * Adaptive Tooltip Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Tooltip for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-// Note: Internal Tooltip may need to be imported from a different location
-// Using MUI Tooltip as fallback for internal implementation
-import { Tooltip as MUITooltipInternal } from '@mui/material';
 import { Tooltip as MUITooltip } from '../providers/mui';
-import { Tooltip as RadixTooltip } from '../providers/radix';
-import { Tooltip as ShadcnTooltip } from '../providers/shadcn';
 
 export interface TooltipProps {
   title: string;
@@ -31,22 +25,16 @@ export interface TooltipProps {
  * ```
  */
 export const Tooltip: React.FC<TooltipProps> = (props) => {
-  const { provider } = useUIContext();
+  const { children, title, placement, arrow } = props;
   
-  if (provider === 'shadcn') {
-    return <ShadcnTooltip {...props} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUITooltip {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixTooltip {...props} />;
-  }
-  
-  // Use MUI implementation for now since internal Tooltip may not exist
-  return <MUITooltipInternal {...props} />;
+  // Wrap children in a span to ensure refs can be attached for MUI
+  const wrappedChildren = (
+    <span style={{ display: 'inline-block', maxWidth: '100%' }}>
+      {children}
+    </span>
+  );
+
+  return <MUITooltip title={title} placement={placement} arrow={arrow}>{wrappedChildren}</MUITooltip>;
 };
 
 Tooltip.displayName = 'AdapterTooltip';

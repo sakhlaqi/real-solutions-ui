@@ -44,3 +44,6 @@ pnpm-debug.log*
 .temp
 *.tgz
 .npmrc
+
+*storybook.log
+storybook-static

@@ -1,15 +1,14 @@
 /**
  * Adapter PasswordInput Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI Input with type="password" for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { PasswordInput as InternalPasswordInput, PasswordInputProps } from '../forms';
 import { Input as MUIInput } from '../providers/mui';
-import { Input as RadixInput } from '../providers/radix';
+import { BaseInputProps } from '../core/types';
+
+export type PasswordInputProps = Omit<BaseInputProps, 'type'>;
 
 /**
  * Adaptive PasswordInput Component
@@ -24,17 +23,7 @@ import { Input as RadixInput } from '../providers/radix';
  * ```
  */
 export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIInput {...props as any} type="password" />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixInput {...props as any} type="password" />;
-  }
-  
-  return <InternalPasswordInput {...props} />;
+  return <MUIInput {...props as any} type="password" />;
 };
 
 PasswordInput.displayName = 'AdapterPasswordInput';

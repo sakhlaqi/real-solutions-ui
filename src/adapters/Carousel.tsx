@@ -1,14 +1,12 @@
 /**
  * Adapter Carousel Component
  * 
- * Dynamically switches between internal, MUI, Radix, and Shadcn implementations
+ * Dynamically switches between internal and MUI implementations
  * based on the current UIProvider context.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
 import { Carousel as InternalCarousel, CarouselProps } from '../media';
-import { Carousel as ShadcnCarousel } from '../providers/shadcn';
 
 /**
  * Adaptive Carousel Component
@@ -23,13 +21,7 @@ import { Carousel as ShadcnCarousel } from '../providers/shadcn';
  * ```
  */
 export const Carousel: React.FC<CarouselProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnCarousel {...props} />;
-  }
-  
-  // Carousel uses internal implementation for other providers
+  // Carousel uses internal implementation for all providers
   return <InternalCarousel {...props} />;
 };
 

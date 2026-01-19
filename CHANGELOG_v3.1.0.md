@@ -1,4 +1,13 @@
-# Changelog v3.1.0 - Shadcn UI Integration
+# ⚠️ DEPRECATED - Changelog v3.1.0 - Shadcn UI Integration
+
+> **This document is obsolete as of v3.1.0 final release**
+> 
+> This changelog described the initial Shadcn UI integration, but that integration was later removed in the same version.
+> The library now supports only Internal and MUI providers.
+> 
+> For information about the removal, see [SHADCN_RADIX_REMOVAL_COMPLETE.md](./SHADCN_RADIX_REMOVAL_COMPLETE.md)
+
+---
 
 ## 🎉 Major Release: Shadcn UI Provider Support
 

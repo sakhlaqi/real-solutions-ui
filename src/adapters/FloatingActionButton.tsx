@@ -1,7 +1,7 @@
 /**
  * Adapter FloatingActionButton Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
+ * Dynamically switches between internal and MUI implementations
  * based on the current UIProvider context.
  */
 
@@ -22,7 +22,7 @@ import { FloatingActionButton as InternalFAB, FloatingActionButtonProps } from '
  */
 export const FloatingActionButton: React.FC<FloatingActionButtonProps> = (props) => {
   // FAB always uses internal implementation as it's a specialized component
-  // with positioning logic that MUI/Radix handle differently
+  // with positioning logic that MUI handles differently
   return <InternalFAB {...props} />;
 };
 

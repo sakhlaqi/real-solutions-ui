@@ -1,15 +1,12 @@
 /**
  * Adaptive Textarea Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI TextField (multiline) for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Textarea as InternalTextarea } from '../forms';
 import { Textarea as MUITextarea } from '../providers/mui';
-import { Textarea as RadixTextarea } from '../providers/radix';
-import { Textarea as ShadcnTextarea } from '../providers/shadcn';
 
 export interface TextareaProps {
   value?: string;
@@ -27,6 +24,8 @@ export interface TextareaProps {
 /**
  * Adaptive Textarea Component
  * 
+ * Note: This component now uses MUI implementation for all providers.
+ * 
  * @example
  * ```tsx
  * <Textarea
@@ -39,24 +38,7 @@ export interface TextareaProps {
  * ```
  */
 export const Textarea: React.FC<TextareaProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUITextarea {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixTextarea {...props as any} />;
-  }
-
-  if (provider === 'shadcn') {
-    return <ShadcnTextarea {...props as any} />;
-  }
-  
-  // Transform props for internal (error must be string)
-  const { error, ...otherProps } = props;
-  const internalError = typeof error === 'boolean' ? undefined : error;
-  return <InternalTextarea {...otherProps} error={internalError} />;
+  return <MUITextarea {...props} />;
 };
 
 Textarea.displayName = 'AdapterTextarea';

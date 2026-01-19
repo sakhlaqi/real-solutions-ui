@@ -343,22 +343,105 @@ export interface BaseDatePickerProps {
   onChange: (date: Date | null) => void;
   label?: string;
   disabled?: boolean;
+  readOnly?: boolean;
   error?: string;
   helperText?: string;
   minDate?: Date;
   maxDate?: Date;
   format?: string;
   fullWidth?: boolean;
+  required?: boolean;
   className?: string;
 }
 
-export interface DateTimePickerProps extends BaseDatePickerProps {
-  showTime?: boolean;
+export interface DatePickerProps extends BaseDatePickerProps {
+  defaultValue?: Date | null;
+  disablePast?: boolean;
+  disableFuture?: boolean;
+  shouldDisableDate?: (date: Date) => boolean;
+}
+
+export interface DesktopDatePickerProps extends DatePickerProps {
+  // Desktop-specific props can be added here
+}
+
+export interface MobileDatePickerProps extends DatePickerProps {
+  // Mobile-specific props can be added here
+}
+
+export interface StaticDatePickerProps extends Omit<DatePickerProps, 'fullWidth'> {
+  // Static picker doesn't need fullWidth
 }
 
 export interface TimePickerProps extends Omit<BaseDatePickerProps, 'minDate' | 'maxDate'> {
+  defaultValue?: Date | null;
   minTime?: Date;
   maxTime?: Date;
+  showSeconds?: boolean;
+  use24Hour?: boolean;
+  step?: number;
+  disablePast?: boolean;
+  disableFuture?: boolean;
+}
+
+export interface DesktopTimePickerProps extends TimePickerProps {
+  // Desktop-specific props can be added here
+}
+
+export interface MobileTimePickerProps extends TimePickerProps {
+  // Mobile-specific props can be added here
+}
+
+export interface StaticTimePickerProps extends Omit<TimePickerProps, 'fullWidth'> {
+  // Static picker doesn't need fullWidth
+}
+
+export interface DateTimePickerProps extends BaseDatePickerProps {
+  defaultValue?: Date | null;
+  showSeconds?: boolean;
+  use24Hour?: boolean;
+  disablePast?: boolean;
+  disableFuture?: boolean;
+  shouldDisableDate?: (date: Date) => boolean;
+}
+
+export interface DesktopDateTimePickerProps extends DateTimePickerProps {
+  // Desktop-specific props can be added here
+}
+
+export interface MobileDateTimePickerProps extends DateTimePickerProps {
+  // Mobile-specific props can be added here
+}
+
+export interface StaticDateTimePickerProps extends Omit<DateTimePickerProps, 'fullWidth'> {
+  // Static picker doesn't need fullWidth
+}
+
+export interface DateRange {
+  start: Date | null;
+  end: Date | null;
+}
+
+export interface DateRangePickerProps extends Omit<BaseDatePickerProps, 'value' | 'onChange'> {
+  value: DateRange;
+  onChange: (range: DateRange) => void;
+  defaultValue?: DateRange;
+  disablePast?: boolean;
+  disableFuture?: boolean;
+  shouldDisableDate?: (date: Date) => boolean;
+  calendars?: 1 | 2 | 3;
+}
+
+export interface DesktopDateRangePickerProps extends DateRangePickerProps {
+  // Desktop-specific props can be added here
+}
+
+export interface MobileDateRangePickerProps extends DateRangePickerProps {
+  // Mobile-specific props can be added here
+}
+
+export interface StaticDateRangePickerProps extends Omit<DateRangePickerProps, 'fullWidth'> {
+  // Static picker doesn't need fullWidth
 }
 
 // ============================================================================
@@ -722,6 +805,5 @@ export interface SpinnerProps {
 
 // Type aliases for convenience
 export type TabsProps = BaseTabsProps;
-export type DatePickerProps = BaseDatePickerProps;
 export type ChartsProps = BaseChartProps;
 export type TableProps = BaseTableProps;

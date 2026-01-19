@@ -1,22 +1,15 @@
 /**
  * Adapter Alert Component
  * 
- * Dynamically switches between internal and MUI alert implementations
- * based on the current UIProvider context.
+ * Uses MUI Alert for all providers.
  */
 
 import React from 'react';
 import { BaseAlertProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { Alert as InternalAlert } from '../feedback';
 import { Alert as MUIAlert } from '../providers/mui';
-import { Alert as RadixAlert } from '../providers/radix';
-import { Alert as ShadcnAlert } from '../providers/shadcn';
 
 /**
  * Adaptive Alert Component
- * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
  * 
  * @example
  * ```tsx
@@ -26,29 +19,7 @@ import { Alert as ShadcnAlert } from '../providers/shadcn';
  * ```
  */
 export const Alert: React.FC<BaseAlertProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIAlert {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixAlert {...props} />;
-  }
-
-  if (provider === 'shadcn') {
-    return <ShadcnAlert {...props} />;
-  }
-  
-  // Transform MUI-style props to internal props
-  const { severity, variant: muiVariant, ...restProps } = props;
-  // Map MUI variants to internal variants, filter out non-matching ones
-  let internalVariant: 'info' | 'success' | 'warning' | 'error' = 'info';
-  if (severity && ['info', 'success', 'warning', 'error'].includes(severity)) {
-    internalVariant = severity as 'info' | 'success' | 'warning' | 'error';
-  }
-  
-  return <InternalAlert {...restProps} variant={internalVariant} />;
+  return <MUIAlert {...props} />;
 };
 
 Alert.displayName = 'AdapterAlert';

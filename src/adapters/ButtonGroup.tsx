@@ -1,15 +1,11 @@
 /**
  * Adaptive ButtonGroup Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI ButtonGroup for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { ButtonGroup as InternalButtonGroup } from '../buttons';
 import { ButtonGroup as MUIButtonGroup } from '../providers/mui';
-import { ButtonGroup as RadixButtonGroup } from '../providers/radix';
-import { ButtonGroup as ShadcnButtonGroup } from '../providers/shadcn';
 
 export interface ButtonGroupProps {
   children: React.ReactNode;
@@ -34,23 +30,9 @@ export interface ButtonGroupProps {
  * ```
  */
 export const ButtonGroup: React.FC<ButtonGroupProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnButtonGroup {...props} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUIButtonGroup {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixButtonGroup {...props} />;
-  }
-  
-  // Filter MUI-specific props for internal
-  const { variant, size, ...internalProps } = props;
-  return <InternalButtonGroup {...internalProps} />;
+  return <MUIButtonGroup {...props} />;
 };
+
+ButtonGroup.displayName = 'AdapterButtonGroup';
 
 ButtonGroup.displayName = 'AdapterButtonGroup';

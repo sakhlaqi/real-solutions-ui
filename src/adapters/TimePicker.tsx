@@ -1,15 +1,19 @@
 /**
  * Adapter TimePicker Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI X Time Picker for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready time picker.
  */
 
 import React from 'react';
-import { TimePicker as InternalTimePicker, TimePickerProps } from '../forms';
+import { TimePickerProps } from '../core/types';
+import { TimePicker as MUITimePicker } from '../providers/mui';
 
 /**
  * Adaptive TimePicker Component
+ * 
+ * Note: This component now uses MUI implementation for all providers.
+ * The internal TimePicker is deprecated as MUI X provides full functionality.
  * 
  * @example
  * ```tsx
@@ -22,8 +26,8 @@ import { TimePicker as InternalTimePicker, TimePickerProps } from '../forms';
  * ```
  */
 export const TimePicker: React.FC<TimePickerProps> = (props) => {
-  // TimePicker always uses internal implementation for consistency
-  return <InternalTimePicker {...props} />;
+  // Always use MUI implementation
+  return <MUITimePicker {...props} />;
 };
 
 TimePicker.displayName = 'AdapterTimePicker';

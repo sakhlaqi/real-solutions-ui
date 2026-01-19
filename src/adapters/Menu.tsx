@@ -1,14 +1,11 @@
 /**
  * Adaptive Menu Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Menu for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { DropdownMenu as InternalMenu } from '../navigation';
 import { Menu as MUIMenu } from '../providers/mui';
-import { Menu as RadixMenu } from '../providers/radix';
 
 export interface MenuItem {
   label: string;
@@ -41,35 +38,7 @@ export interface MenuProps {
  * ```
  */
 export const Menu: React.FC<MenuProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIMenu {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixMenu {...props} />;
-  }
-  
-  // Transform for internal DropdownMenu - add id field and handle clicks through items
-  const { anchorEl, items, onItemClick, onClose, ...restProps } = props;
-  
-  const internalItems = items.map(item => ({
-    ...item,
-    id: item.value,
-    onClick: () => {
-      onItemClick(item.value);
-      onClose();
-    },
-  }));
-  
-  return (
-    <InternalMenu
-      {...restProps}
-      items={internalItems}
-      trigger={<span />}
-    />
-  );
+  return <MUIMenu {...props} />;
 };
 
 Menu.displayName = 'AdapterMenu';

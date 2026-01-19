@@ -5,8 +5,6 @@
  */
 
 import React, { ReactNode } from 'react';
-import { useUIContext } from '../core/context';
-import { Kbd as ShadcnKbd } from '../providers/shadcn';
 
 export interface KbdProps {
   children: ReactNode;
@@ -21,15 +19,14 @@ export interface KbdProps {
  * <Kbd>Ctrl</Kbd>
  * ```
  */
-export const Kbd: React.FC<KbdProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn' || provider === 'radix') {
-    return <ShadcnKbd {...props} />;
-  }
-  
-  // Fallback to shadcn for other providers
-  return <ShadcnKbd {...props} />;
+export const Kbd: React.FC<KbdProps> = ({ children, className = '' }) => {
+  return (
+    <kbd 
+      className={`inline-flex items-center justify-center rounded border border-gray-300 bg-gray-100 px-2 py-1 text-sm font-mono text-gray-700 shadow-sm ${className}`}
+    >
+      {children}
+    </kbd>
+  );
 };
 
 Kbd.displayName = 'AdapterKbd';

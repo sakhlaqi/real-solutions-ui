@@ -2,23 +2,11 @@
  * Overlay Components
  */
 
-export { Modal } from './Modal';
-export type { ModalProps } from './Modal';
+// Note: SlideOver component moved to MUI Drawer implementation
+// Use SlideOver from @sakhlaqi/ui/adapters instead
 
-export { Dialog } from './Dialog';
-export type { DialogProps } from './Dialog';
+// Note: BottomSheet component moved to MUI Drawer implementation
+// Use BottomSheet from @sakhlaqi/ui/adapters instead
 
-export { Backdrop } from './Backdrop';
-export type { BackdropProps } from './Backdrop';
-
-export { SlideOver } from './SlideOver';
-export type { SlideOverProps } from './SlideOver';
-
-export { BottomSheet } from './BottomSheet';
-export type { BottomSheetProps } from './BottomSheet';
-
-export { Lightbox } from './Lightbox';
-export type { LightboxProps } from './Lightbox';
-
-export { Popover } from './Popover';
-export type { PopoverProps } from './Popover';
+// Note: Lightbox component moved to MUI Dialog implementation
+// Use Lightbox from @sakhlaqi/ui/adapters instead

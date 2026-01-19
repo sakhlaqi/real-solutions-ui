@@ -1,14 +1,11 @@
 /**
  * Adaptive List Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI List for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { List as InternalList } from '../data-display';
 import { List as MUIList } from '../providers/mui';
-import { List as RadixList } from '../providers/radix';
 
 export interface ListProps {
   children: React.ReactNode;
@@ -28,19 +25,7 @@ export interface ListProps {
  * ```
  */
 export const List: React.FC<ListProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIList {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixList {...props as any} />;
-  }
-  
-  // Filter props not supported by internal
-  const { dense, disablePadding, ...internalProps } = props;
-  return <InternalList {...internalProps} />;
+  return <MUIList {...props} />;
 };
 
 List.displayName = 'AdapterList';

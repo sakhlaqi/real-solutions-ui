@@ -58,14 +58,15 @@ export const BarChart: React.FC<BarChartProps> = ({
     stack: stacked ? 'total' : undefined,
   }));
 
-  const xAxisData = series[0]?.data.map((d) => String(d.x)) || [];
+  const categoryData = series[0]?.data.map((d) => String(d.x)) || [];
 
   return (
     <div className={className}>
       {title && <h3 style={{ textAlign: 'center', marginBottom: '1rem' }}>{title}</h3>}
       <MuiBarChart
         series={chartSeries}
-        xAxis={[{ scaleType: 'band', data: xAxisData }]}
+        xAxis={orientation === 'vertical' ? [{ scaleType: 'band', data: categoryData }] : undefined}
+        yAxis={orientation === 'horizontal' ? [{ scaleType: 'band', data: categoryData }] : undefined}
         width={typeof width === 'number' ? width : undefined}
         height={typeof height === 'number' ? height : 400}
         layout={orientation === 'horizontal' ? 'horizontal' : 'vertical'}

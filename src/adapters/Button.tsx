@@ -1,22 +1,18 @@
 /**
  * Adapter Button Component
  * 
- * Dynamically switches between internal and MUI button implementations
- * based on the current UIProvider context.
+ * Uses MUI Button for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
 import { BaseButtonProps } from '../core/types';
-import { useUIContext } from '../core/context';
-import { Button as InternalButton } from '../base';
 import { Button as MUIButton } from '../providers/mui';
-import { Button as RadixButton } from '../providers/radix';
-import { Button as ShadcnButton } from '../providers/shadcn';
 
 /**
  * Adaptive Button Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Note: This component now uses MUI implementation for all providers.
  * 
  * @example
  * ```tsx
@@ -24,35 +20,7 @@ import { Button as ShadcnButton } from '../providers/shadcn';
  * ```
  */
 export const Button: React.FC<BaseButtonProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIButton {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixButton {...props} />;
-  }
-
-  if (provider === 'shadcn') {
-    return <ShadcnButton {...props} />;
-  }
-  
-  // Map MUI props to internal props
-  const { variant, size, ...restProps } = props as any;
-  let internalVariant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' = 'primary';
-  
-  if (variant === 'contained') internalVariant = 'primary';
-  else if (variant === 'outlined') internalVariant = 'outline';
-  else if (variant === 'text') internalVariant = 'ghost';
-  
-  // Map size - MUI uses small/medium/large, internal uses xs/sm/md/lg
-  let internalSize: 'xs' | 'sm' | 'md' | 'lg' | undefined;
-  if (size === 'small') internalSize = 'sm';
-  else if (size === 'medium') internalSize = 'md';
-  else if (size === 'large') internalSize = 'lg';
-  
-  return <InternalButton {...restProps} variant={internalVariant} size={internalSize} />;
+  return <MUIButton {...props} />;
 };
 
 Button.displayName = 'AdapterButton';

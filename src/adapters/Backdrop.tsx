@@ -1,14 +1,11 @@
 /**
  * Adaptive Backdrop Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Backdrop for all providers.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Backdrop as InternalBackdrop } from '../overlay';
 import { Backdrop as MUIBackdrop } from '../providers/mui';
-import { Backdrop as RadixBackdrop } from '../providers/radix';
 
 export interface BackdropProps {
   open: boolean;
@@ -29,17 +26,7 @@ export interface BackdropProps {
  * ```
  */
 export const Backdrop: React.FC<BackdropProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIBackdrop {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixBackdrop {...props} />;
-  }
-  
-  return <InternalBackdrop {...props} />;
+  return <MUIBackdrop {...props} />;
 };
 
 Backdrop.displayName = 'AdapterBackdrop';

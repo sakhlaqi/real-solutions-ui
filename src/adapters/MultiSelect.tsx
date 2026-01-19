@@ -1,7 +1,7 @@
 /**
  * Adapter MultiSelect Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
+ * Dynamically switches between internal and MUI implementations
  * based on the current UIProvider context.
  */
 

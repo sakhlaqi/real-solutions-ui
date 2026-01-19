@@ -6,9 +6,7 @@
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
 import { Toast as InternalToast, ToastProps } from '../feedback';
-import { Toast as ShadcnToast } from '../providers/shadcn';
 
 /**
  * Adaptive Toast Component
@@ -23,11 +21,6 @@ import { Toast as ShadcnToast } from '../providers/shadcn';
  * ```
  */
 export const Toast: React.FC<ToastProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnToast {...props as any} />;
-  }
   
   // Toast uses internal implementation for consistent behavior
   return <InternalToast {...props} />;

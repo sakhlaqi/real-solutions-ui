@@ -1,4 +1,12 @@
-# shadcn/ui Components - Complete Installation
+# ⚠️ DEPRECATED - shadcn/ui Components - Complete Installation
+
+> **This document is obsolete as of v3.1.0**
+> 
+> Shadcn UI support has been removed from this library. This document is kept for historical reference only.
+> 
+> For migration information, see [SHADCN_RADIX_REMOVAL_COMPLETE.md](./SHADCN_RADIX_REMOVAL_COMPLETE.md)
+
+---
 
 ## Summary
 Successfully added all 16 missing shadcn/ui components to the @sakhlaqi/ui package, achieving **100% component coverage** (49/49 components).

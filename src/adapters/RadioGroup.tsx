@@ -1,15 +1,12 @@
 /**
  * Adaptive RadioGroup Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI RadioGroup for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { RadioGroup as InternalRadioGroup } from '../forms';
 import { RadioGroup as MUIRadioGroup } from '../providers/mui';
-import { RadioGroup as RadixRadioGroup } from '../providers/radix';
-import { RadioGroup as ShadcnRadioGroup } from '../providers/shadcn';
 
 export interface RadioOption {
   value: string;
@@ -29,6 +26,8 @@ export interface RadioGroupProps {
 /**
  * Adaptive RadioGroup Component
  * 
+ * Note: This component now uses MUI implementation for all providers.
+ * 
  * @example
  * ```tsx
  * <RadioGroup 
@@ -42,29 +41,7 @@ export interface RadioGroupProps {
  * ```
  */
 export const RadioGroup: React.FC<RadioGroupProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'shadcn') {
-    return <ShadcnRadioGroup {...props as any} />;
-  }
-  
-  if (provider === 'mui') {
-    return <MUIRadioGroup {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixRadioGroup {...props} />;
-  }
-  
-  // Internal RadioGroup requires name prop and accepts string | number for value
-  const { name = 'radio-group', onChange, ...restProps } = props;
-  
-  // Wrap onChange to handle internal's string | number -> string
-  const handleChange = (value: string | number) => {
-    onChange(String(value));
-  };
-  
-  return <InternalRadioGroup {...restProps} name={name} onChange={handleChange} />;
+  return <MUIRadioGroup {...props} />;
 };
 
 RadioGroup.displayName = 'AdapterRadioGroup';

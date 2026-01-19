@@ -1,14 +1,12 @@
 /**
  * Adaptive Rating Component
  * 
- * Automatically switches between internal and MUI implementations based on UIProvider.
+ * Uses MUI Rating for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
-import { useUIContext } from '../core/context';
-import { Rating as InternalRating } from '../forms';
 import { Rating as MUIRating } from '../providers/mui';
-import { Rating as RadixRating } from '../providers/radix';
 
 export interface RatingProps {
   value: number;
@@ -25,6 +23,8 @@ export interface RatingProps {
 /**
  * Adaptive Rating Component
  * 
+ * Note: This component now uses MUI implementation for all providers.
+ * 
  * @example
  * ```tsx
  * <Rating
@@ -35,19 +35,7 @@ export interface RatingProps {
  * ```
  */
 export const Rating: React.FC<RatingProps> = (props) => {
-  const { provider } = useUIContext();
-  
-  if (provider === 'mui') {
-    return <MUIRating {...props} />;
-  }
-  
-  if (provider === 'radix') {
-    return <RadixRating {...props as any} />;
-  }
-  
-  // Filter MUI-specific props for internal
-  const { precision, size, icon, emptyIcon, ...internalProps } = props;
-  return <InternalRating {...internalProps} />;
+  return <MUIRating {...props} />;
 };
 
 Rating.displayName = 'AdapterRating';

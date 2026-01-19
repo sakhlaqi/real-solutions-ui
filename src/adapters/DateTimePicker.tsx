@@ -1,15 +1,18 @@
 /**
  * Adapter DateTimePicker Component
  * 
- * Dynamically switches between internal, MUI, and Radix implementations
- * based on the current UIProvider context.
+ * Uses MUI X Date Time Picker for all providers.
+ * Internal implementation is deprecated in favor of MUI's production-ready component.
  */
 
 import React from 'react';
-import { DateTimePicker as InternalDateTimePicker, DateTimePickerProps } from '../forms';
+import { DateTimePickerProps } from '../core/types';
+import { DateTimePicker as MUIDateTimePicker } from '../providers/mui';
 
 /**
  * Adaptive DateTimePicker Component
+ * 
+ * Note: This component now uses MUI implementation for all providers.
  * 
  * @example
  * ```tsx
@@ -21,8 +24,7 @@ import { DateTimePicker as InternalDateTimePicker, DateTimePickerProps } from '.
  * ```
  */
 export const DateTimePicker: React.FC<DateTimePickerProps> = (props) => {
-  // DateTimePicker always uses internal implementation for consistency
-  return <InternalDateTimePicker {...props} />;
+  return <MUIDateTimePicker {...props} />;
 };
 
 DateTimePicker.displayName = 'AdapterDateTimePicker';
