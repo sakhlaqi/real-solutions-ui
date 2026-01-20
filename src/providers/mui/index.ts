@@ -11,10 +11,6 @@ export { DataTable } from './Table';
 export { AdvancedTable } from './DataGrid';
 export { XDataGrid } from './XDataGrid';
 export type { XDataGridProps } from './XDataGrid';
-export { XDataGridPro } from './XDataGridPro';
-export type { XDataGridProProps } from './XDataGridPro';
-export { XDataGridPremium } from './XDataGridPremium';
-export type { XDataGridPremiumProps } from './XDataGridPremium';
 
 // Date Picker Components
 export { DatePicker } from './DatePicker';
