@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Heading as InternalHeading, HeadingProps } from '../typography';
+import { Heading as InternalHeading, HeadingProps } from '../core/components/typography';
 
 /**
  * Adaptive Heading Component

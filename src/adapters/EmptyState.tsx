@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { EmptyState as InternalEmptyState, EmptyStateProps } from '../feedback';
+import { EmptyState as InternalEmptyState, EmptyStateProps } from '../core/components/feedback';
 
 /**
  * Adaptive EmptyState Component

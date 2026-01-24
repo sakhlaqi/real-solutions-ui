@@ -18,6 +18,7 @@ export {
   renderPage,
   renderPageSync,
 } from './renderPage';
+export type { PageRendererProps } from './renderPage';
 
 // Node Renderer
 export {
@@ -45,3 +46,40 @@ export type {
   ComponentNotFoundProps,
   TemplateNotFoundProps,
 } from './FallbackComponents';
+
+// Validation Display
+export {
+  ValidationErrorDisplay,
+  ValidationSuccessDisplay,
+  parseZodErrors,
+} from './ValidationDisplay';
+
+export type {
+  ValidationError,
+  ValidationDisplayProps,
+  ValidationSuccessProps,
+} from './ValidationDisplay';
+
+// Adapter Warnings
+export {
+  AdapterWarningsDisplay,
+  InlineAdapterWarning,
+  AdapterWarningsBadge,
+} from './AdapterWarnings';
+
+export type {
+  AdapterWarning,
+  AdapterWarningsDisplayProps,
+} from './AdapterWarnings';
+
+// Error & Warning Overlay
+export {
+  ErrorWarningOverlay,
+  InlineErrorBanner,
+} from './ErrorWarningOverlay';
+
+export type {
+  ErrorWarningOverlayProps,
+  InlineErrorBannerProps,
+} from './ErrorWarningOverlay';
+

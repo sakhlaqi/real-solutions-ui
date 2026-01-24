@@ -1,0 +1,268 @@
+{
+  "version": "1.0.0",
+  "title": "New Employee",
+  "description": "Employee registration form",
+  "template": {
+    "type": "DashboardLayout",
+    "props": {
+      "sidebarVisible": false
+    },
+    "slots": {
+      "header": {
+        "type": "HeaderComposite",
+        "props": {
+          "title": "New Employee",
+          "subtitle": "Add a new employee to the system",
+          "breadcrumbs": [
+            { "label": "Home", "href": "/" },
+            { "label": "Employees", "href": "/employees" },
+            { "label": "New", "href": "/employees/new" }
+          ],
+          "showBackButton": true
+        }
+      },
+      "main": {
+        "type": "Container",
+        "props": {
+          "maxWidth": "md"
+        },
+        "children": [
+          {
+            "type": "Card",
+            "props": {
+              "title": "Employee Information",
+              "subtitle": "Please fill in all required fields",
+              "padding": "lg"
+            },
+            "children": [
+              {
+                "type": "Stack",
+                "props": {
+                  "spacing": 3
+                },
+                "children": [
+                  {
+                    "type": "Heading",
+                    "props": {
+                      "level": 3,
+                      "children": "Personal Details"
+                    }
+                  },
+                  {
+                    "type": "Stack",
+                    "props": {
+                      "direction": "row",
+                      "spacing": 2
+                    },
+                    "children": [
+                      {
+                        "type": "Input",
+                        "props": {
+                          "label": "First Name",
+                          "placeholder": "Enter first name",
+                          "required": true,
+                          "fullWidth": true
+                        }
+                      },
+                      {
+                        "type": "Input",
+                        "props": {
+                          "label": "Last Name",
+                          "placeholder": "Enter last name",
+                          "required": true,
+                          "fullWidth": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Input",
+                    "props": {
+                      "label": "Email",
+                      "type": "email",
+                      "placeholder": "employee@company.com",
+                      "required": true,
+                      "fullWidth": true,
+                      "helperText": "Work email address"
+                    }
+                  },
+                  {
+                    "type": "Input",
+                    "props": {
+                      "label": "Phone Number",
+                      "type": "tel",
+                      "placeholder": "+1 (555) 123-4567",
+                      "fullWidth": true
+                    }
+                  },
+                  {
+                    "type": "Divider",
+                    "props": {}
+                  },
+                  {
+                    "type": "Heading",
+                    "props": {
+                      "level": 3,
+                      "children": "Employment Details"
+                    }
+                  },
+                  {
+                    "type": "Stack",
+                    "props": {
+                      "direction": "row",
+                      "spacing": 2
+                    },
+                    "children": [
+                      {
+                        "type": "Select",
+                        "props": {
+                          "label": "Department",
+                          "required": true,
+                          "fullWidth": true,
+                          "options": [
+                            { "label": "Engineering", "value": "engineering" },
+                            { "label": "Design", "value": "design" },
+                            { "label": "Marketing", "value": "marketing" },
+                            { "label": "Sales", "value": "sales" },
+                            { "label": "HR", "value": "hr" },
+                            { "label": "Finance", "value": "finance" }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "Select",
+                        "props": {
+                          "label": "Employment Type",
+                          "required": true,
+                          "fullWidth": true,
+                          "options": [
+                            { "label": "Full-Time", "value": "full-time" },
+                            { "label": "Part-Time", "value": "part-time" },
+                            { "label": "Contract", "value": "contract" },
+                            { "label": "Intern", "value": "intern" }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Input",
+                    "props": {
+                      "label": "Job Title",
+                      "placeholder": "e.g., Senior Software Engineer",
+                      "required": true,
+                      "fullWidth": true
+                    }
+                  },
+                  {
+                    "type": "Stack",
+                    "props": {
+                      "direction": "row",
+                      "spacing": 2
+                    },
+                    "children": [
+                      {
+                        "type": "DatePicker",
+                        "props": {
+                          "label": "Start Date",
+                          "required": true,
+                          "fullWidth": true
+                        }
+                      },
+                      {
+                        "type": "Select",
+                        "props": {
+                          "label": "Reporting Manager",
+                          "fullWidth": true,
+                          "options": [
+                            { "label": "John Smith (Engineering)", "value": "john-smith" },
+                            { "label": "Sarah Johnson (Design)", "value": "sarah-johnson" },
+                            { "label": "Michael Brown (Marketing)", "value": "michael-brown" },
+                            { "label": "Emily Davis (Sales)", "value": "emily-davis" }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Input",
+                    "props": {
+                      "label": "Annual Salary",
+                      "type": "number",
+                      "placeholder": "e.g., 75000",
+                      "required": true,
+                      "fullWidth": true,
+                      "helperText": "In USD"
+                    }
+                  },
+                  {
+                    "type": "Divider",
+                    "props": {}
+                  },
+                  {
+                    "type": "Heading",
+                    "props": {
+                      "level": 3,
+                      "children": "Additional Information"
+                    }
+                  },
+                  {
+                    "type": "Textarea",
+                    "props": {
+                      "label": "Notes",
+                      "placeholder": "Any additional information about the employee...",
+                      "rows": 4,
+                      "fullWidth": true
+                    }
+                  },
+                  {
+                    "type": "Checkbox",
+                    "props": {
+                      "label": "Send welcome email to employee"
+                    }
+                  },
+                  {
+                    "type": "Checkbox",
+                    "props": {
+                      "label": "Activate employee account immediately"
+                    }
+                  },
+                  {
+                    "type": "Stack",
+                    "props": {
+                      "direction": "row",
+                      "spacing": 2,
+                      "sx": {
+                        "pt": 2
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "Button",
+                        "props": {
+                          "variant": "contained",
+                          "color": "primary",
+                          "size": "large",
+                          "children": "Create Employee"
+                        }
+                      },
+                      {
+                        "type": "Button",
+                        "props": {
+                          "variant": "outlined",
+                          "color": "secondary",
+                          "size": "large",
+                          "children": "Cancel"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

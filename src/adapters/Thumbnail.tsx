@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Thumbnail as InternalThumbnail, ThumbnailProps } from '../media';
+import { Thumbnail as InternalThumbnail, ThumbnailProps } from '../core/components/media';
 
 /**
  * Adaptive Thumbnail Component

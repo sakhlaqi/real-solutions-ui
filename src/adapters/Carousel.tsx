@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Carousel as InternalCarousel, CarouselProps } from '../media';
+import { Carousel as InternalCarousel, CarouselProps } from '../core/components/media';
 
 /**
  * Adaptive Carousel Component

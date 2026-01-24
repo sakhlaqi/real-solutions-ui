@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { ImageGallery as InternalImageGallery, ImageGalleryProps } from '../media';
+import { ImageGallery as InternalImageGallery, ImageGalleryProps } from '../core/components/media';
 
 /**
  * Adaptive ImageGallery Component

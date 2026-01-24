@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { FloatingActionButton as InternalFAB, FloatingActionButtonProps } from '../buttons';
+import { FloatingActionButton as InternalFAB, FloatingActionButtonProps } from '../core/components/buttons';
 
 /**
  * Adaptive FloatingActionButton Component

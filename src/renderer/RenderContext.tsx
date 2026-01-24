@@ -14,6 +14,17 @@ const defaultRenderContext: RenderContextType = {
   depth: 0,
   maxDepth: 50,
   provider: 'mui', // Default to MUI provider
+  tenantId: 'tenant-1',
+  theme: {
+    mode: 'light',
+  },
+  featureFlags: {
+    darkMode: false,
+    advancedSearch: true,
+    betaFeatures: false,
+    exportData: true,
+    notifications: true,
+  },
 };
 
 /**

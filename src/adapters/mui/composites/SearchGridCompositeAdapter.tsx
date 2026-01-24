@@ -44,6 +44,11 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
   className = '',
   testId = 'search-grid-composite',
 }: SearchGridCompositeProps<T>) => {
+  // Ensure defaultPageSize is in pageSizeOptions
+  const validPageSizeOptions = pageSizeOptions.includes(defaultPageSize) 
+    ? pageSizeOptions 
+    : [...pageSizeOptions, defaultPageSize].sort((a, b) => a - b);
+  
   // State
   const [searchQuery, setSearchQuery] = useState('');
   const [filterValues, setFilterValues] = useState<Record<string, any>>({});
@@ -69,29 +74,32 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
     }));
 
     // Add actions column if row actions are defined
-    if (rowActions && rowActions.length > 0) {
+    if (rowActions) {
       cols.push({
         field: 'actions',
         headerName: 'Actions',
-        width: rowActions.length * 50 + 20,
+        width: 150,
         sortable: false,
-        renderCell: (params) => (
-          <Stack direction="row" spacing={1}>
-            {rowActions.map((action) => (
-              <Button
-                key={action.id}
-                size="small"
-                variant={action.variant === 'primary' ? 'contained' : 'outlined'}
-                color={action.variant === 'danger' ? 'error' : 'primary'}
-                onClick={() => action.onClick?.(params.row as T)}
-                disabled={action.disabled}
-              >
-                {action.icon}
-                {action.label}
-              </Button>
-            ))}
-          </Stack>
-        ),
+        renderCell: (params) => {
+          const actions = rowActions(params.row as T);
+          return (
+            <Stack direction="row" spacing={1}>
+              {actions.map((action) => (
+                <Button
+                  key={action.id}
+                  size="small"
+                  variant={action.variant || 'outlined'}
+                  color={action.color || 'primary'}
+                  onClick={() => action.onClick?.()}
+                  disabled={action.disabled}
+                  startIcon={action.icon}
+                >
+                  {action.label}
+                </Button>
+              ))}
+            </Stack>
+          );
+        },
       });
     }
 
@@ -237,8 +245,8 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
               {toolbarActions.map((action) => (
                 <Button
                   key={action.id}
-                  variant={action.variant === 'primary' ? 'contained' : 'outlined'}
-                  color={action.variant === 'danger' ? 'error' : 'primary'}
+                  variant={action.variant || 'outlined'}
+                  color={action.color || 'primary'}
                   onClick={() => action.onClick?.()}
                   disabled={action.disabled}
                   startIcon={action.icon}
@@ -258,7 +266,7 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
         loading={loading}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
-        pageSizeOptions={pageSizeOptions}
+        pageSizeOptions={validPageSizeOptions}
         sortModel={sortModel}
         onSortModelChange={setSortModel}
         checkboxSelection={selectionMode === 'multiple'}
@@ -266,6 +274,7 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
         rowSelectionModel={selectionModel}
         onRowSelectionModelChange={handleSelectionChange}
         onRowClick={handleRowClick}
+        pagination
         autoHeight
         disableColumnMenu
         slots={{

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Toast as InternalToast, ToastProps } from '../feedback';
+import { Toast as InternalToast, ToastProps } from '../core/components/feedback';
 
 /**
  * Adaptive Toast Component

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Image as InternalImage, ImageProps } from '../media';
+import { Image as InternalImage, ImageProps } from '../core/components/media';
 
 /**
  * Adaptive Image Component

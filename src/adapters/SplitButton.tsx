@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { SplitButton as InternalSplitButton, SplitButtonProps } from '../buttons';
+import { SplitButton as InternalSplitButton, SplitButtonProps } from '../core/components/buttons';
 
 /**
  * Adaptive SplitButton Component

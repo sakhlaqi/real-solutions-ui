@@ -1,0 +1,504 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentation/Components/Stack" />
+
+# Stack Component
+
+A layout component that arranges children in a vertical or horizontal stack with consistent spacing.
+
+---
+
+## 📋 Overview
+
+Stack is a fundamental layout component that manages spacing and direction of its children. It's perfect for creating consistent vertical or horizontal layouts without writing custom CSS flexbox code.
+
+**Current Implementation:** Uses MUI Stack for all providers.
+
+---
+
+## 🎯 When to Use
+
+### ✅ Use Stack When:
+- Arranging multiple items vertically or horizontally
+- Need consistent spacing between items
+- Building form layouts
+- Creating card content layouts
+- Organizing button groups
+
+### ❌ Don't Use Stack When:
+- Need complex grid layouts (use Grid)
+- Need precise positioning (use Flex or CSS)
+- Single child element (no stacking needed)
+- Creating responsive multi-column layouts (use Grid)
+- Need wrapping behavior (use Flex with wrap)
+
+---
+
+## 📊 Props Reference
+
+### StackProps Interface
+
+```typescript
+interface StackProps {
+  children: React.ReactNode;
+  direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+  spacing?: number | string;
+  divider?: React.ReactNode;
+  alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
+  justifyContent?: 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
+  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+  sx?: object;  // MUI sx prop for advanced styling
+}
+```
+
+### Required Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `children` | `React.ReactNode` | Yes* | Items to stack |
+
+*In practice, Stack without children renders nothing but isn't an error.
+
+### Optional Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `direction` | `'row' \| 'column'` | `'column'` | Stack direction |
+| `spacing` | `number \| string` | `0` | Space between items (theme units) |
+| `divider` | `React.ReactNode` | - | Element between each item |
+| `alignItems` | Flex align values | `'stretch'` | Cross-axis alignment |
+| `justifyContent` | Flex justify values | `'flex-start'` | Main-axis alignment |
+| `flexWrap` | Wrap values | `'nowrap'` | Whether items wrap |
+
+---
+
+## 💡 Usage Examples
+
+### Basic Vertical Stack
+
+```tsx
+import { Stack, Button } from '@sakhlaqi/ui/adapters';
+
+<Stack spacing={2}>
+  <Button>First Item</Button>
+  <Button>Second Item</Button>
+  <Button>Third Item</Button>
+</Stack>
+```
+
+### Horizontal Stack
+
+```tsx
+<Stack direction="row" spacing={2}>
+  <Button>Save</Button>
+  <Button>Cancel</Button>
+  <Button>Reset</Button>
+</Stack>
+```
+
+### With Dividers
+
+```tsx
+import { Divider } from '@sakhlaqi/ui/adapters';
+
+<Stack 
+  spacing={2} 
+  divider={<Divider />}
+>
+  <div>Section 1</div>
+  <div>Section 2</div>
+  <div>Section 3</div>
+</Stack>
+```
+
+### Form Layout
+
+```tsx
+<Stack spacing={3}>
+  <Input label="Name" fullWidth />
+  <Input label="Email" type="email" fullWidth />
+  <Input label="Phone" type="tel" fullWidth />
+  
+  <Stack direction="row" spacing={2} justifyContent="flex-end">
+    <Button variant="outlined">Cancel</Button>
+    <Button variant="contained">Submit</Button>
+  </Stack>
+</Stack>
+```
+
+### Centered Content
+
+```tsx
+<Stack 
+  spacing={2} 
+  alignItems="center"
+  justifyContent="center"
+  style={{ minHeight: '100vh' }}
+>
+  <h1>Welcome</h1>
+  <p>Get started below</p>
+  <Button variant="contained">Get Started</Button>
+</Stack>
+```
+
+### Card Content
+
+```tsx
+import { Card } from '@sakhlaqi/ui/adapters';
+
+<Card>
+  <Stack spacing={2}>
+    <h2>Card Title</h2>
+    <p>Card description goes here...</p>
+    <Stack direction="row" spacing={1} justifyContent="flex-end">
+      <Button variant="text">Learn More</Button>
+      <Button variant="contained">Get Started</Button>
+    </Stack>
+  </Stack>
+</Card>
+```
+
+---
+
+## 📏 Spacing System
+
+### Theme Units
+
+Spacing values are multiplied by 8px in MUI's default theme:
+
+| Value | Pixels | Use Case |
+|-------|--------|----------|
+| `0.5` | 4px | Very tight spacing |
+| `1` | 8px | Tight spacing, related items |
+| `2` | 16px | **Default**, comfortable spacing |
+| `3` | 24px | Section spacing |
+| `4` | 32px | Large gaps, major sections |
+| `8` | 64px | Very large gaps |
+
+### String Values
+
+```tsx
+// Pixel values
+<Stack spacing="16px">...</Stack>
+
+// Rem values
+<Stack spacing="1rem">...</Stack>
+
+// Responsive spacing
+<Stack spacing={{ xs: 1, sm: 2, md: 3 }}>...</Stack>
+```
+
+---
+
+## 🔄 Direction Variants
+
+### Column (Default)
+
+```tsx
+<Stack direction="column" spacing={2}>
+  <div>Top</div>
+  <div>Middle</div>
+  <div>Bottom</div>
+</Stack>
+```
+
+**Use for:** Vertical forms, lists, sequential content
+
+### Row
+
+```tsx
+<Stack direction="row" spacing={2}>
+  <div>Left</div>
+  <div>Center</div>
+  <div>Right</div>
+</Stack>
+```
+
+**Use for:** Button groups, horizontal navigation, inline items
+
+### Column-Reverse
+
+```tsx
+<Stack direction="column-reverse" spacing={2}>
+  <div>This appears at bottom</div>
+  <div>This appears at top</div>
+</Stack>
+```
+
+**Use for:** Chat messages, reverse chronological order
+
+### Row-Reverse
+
+```tsx
+<Stack direction="row-reverse" spacing={2}>
+  <div>This appears on right</div>
+  <div>This appears on left</div>
+</Stack>
+```
+
+**Use for:** RTL layouts, reversed button order
+
+---
+
+## 🎨 Alignment
+
+### Align Items (Cross-Axis)
+
+```tsx
+// Align to start (top for column, left for row)
+<Stack alignItems="flex-start">...</Stack>
+
+// Center items
+<Stack alignItems="center">...</Stack>
+
+// Align to end (bottom for column, right for row)
+<Stack alignItems="flex-end">...</Stack>
+
+// Stretch items to fill
+<Stack alignItems="stretch">...</Stack>
+```
+
+### Justify Content (Main-Axis)
+
+```tsx
+// Pack items at start
+<Stack justifyContent="flex-start">...</Stack>
+
+// Center items
+<Stack justifyContent="center">...</Stack>
+
+// Pack items at end
+<Stack justifyContent="flex-end">...</Stack>
+
+// Space between items
+<Stack justifyContent="space-between">...</Stack>
+
+// Space around items
+<Stack justifyContent="space-around">...</Stack>
+```
+
+---
+
+## 🔌 Adapter Behavior
+
+### Current Provider: MUI
+
+All providers use MUI Stack implementation.
+
+**Features:**
+- ✅ Responsive spacing values
+- ✅ Theme integration
+- ✅ All flexbox alignment options
+- ✅ Divider support
+- ✅ Direction control
+
+### No Fallback Needed
+
+MUI Stack is production-ready and feature-complete.
+
+---
+
+## ⚠️ Limitations
+
+### Known Issues
+
+1. **Negative Margins**
+   - Stack uses negative margins for spacing
+   - May cause overflow issues in constrained containers
+   - Wrap in a container with padding if needed
+
+2. **Flexbox Only**
+   - Stack uses flexbox internally
+   - Not suitable for complex grid layouts
+   - Use Grid component for true grid layouts
+
+3. **No Gap Property**
+   - Uses margin-based spacing, not CSS gap
+   - May have different behavior than native gap
+
+### Performance
+
+- Lightweight component with minimal overhead
+- Efficient for most use cases
+- For very large lists (100+items), consider virtualization
+
+---
+
+## 🎯 Common Patterns
+
+### Form with Actions
+
+```tsx
+<Stack spacing={3}>
+  {/* Form fields */}
+  <Input label="Name" />
+  <Input label="Email" />
+  
+  {/* Action buttons */}
+  <Stack direction="row" spacing={2} justifyContent="flex-end">
+    <Button variant="outlined">Cancel</Button>
+    <Button variant="contained" type="submit">Submit</Button>
+  </Stack>
+</Stack>
+```
+
+### List with Dividers
+
+```tsx
+<Stack divider={<Divider />}>
+  {items.map(item => (
+    <div key={item.id} style={{ padding: '16px' }}>
+      {item.content}
+    </div>
+  ))}
+</Stack>
+```
+
+### Responsive Direction
+
+```tsx
+// Vertical on mobile, horizontal on desktop
+<Stack 
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={2}
+>
+  <Button fullWidth>Action 1</Button>
+  <Button fullWidth>Action 2</Button>
+</Stack>
+```
+
+### Nested Stacks
+
+```tsx
+<Stack spacing={4}>
+  {/* Outer vertical stack */}
+  
+  <Stack spacing={1}>
+    {/* Inner vertical section */}
+    <h3>Section 1</h3>
+    <p>Content...</p>
+  </Stack>
+  
+  <Stack spacing={1}>
+    {/* Another inner section */}
+    <h3>Section 2</h3>
+    <p>Content...</p>
+  </Stack>
+</Stack>
+```
+
+---
+
+## ❌ Anti-Patterns
+
+See also: [Excessive Nesting Anti-Pattern](?path=/docs/anti-patterns-unsupported-combinations--excessive-nesting)
+
+### ❌ Don't: Excessive Nesting
+
+```tsx
+// ❌ Too many nested stacks
+<Stack>
+  <Stack>
+    <Stack>
+      <Stack>
+        <Stack>
+          <Button>Over-nested!</Button>
+        </Stack>
+      </Stack>
+    </Stack>
+  </Stack>
+</Stack>
+```
+
+### ✅ Do: Flatten Structure
+
+```tsx
+// ✅ Flat, simple structure
+<Stack spacing={2}>
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+  <Button>Button 3</Button>
+</Stack>
+```
+
+### ❌ Don't: Stack Single Child
+
+```tsx
+// ❌ Unnecessary wrapper
+<Stack spacing={2}>
+  <Button>Only one button</Button>
+</Stack>
+```
+
+### ✅ Do: Remove Unnecessary Stack
+
+```tsx
+// ✅ No wrapper needed
+<Button>Only one button</Button>
+```
+
+---
+
+## 🔍 Related Components
+
+- **[Flex]** - More flexible layout control
+- **[Grid]** - Two-dimensional grid layouts
+- **[Divider]** - Separator between items
+- **[Box]** - General-purpose container
+
+---
+
+## 🐛 Troubleshooting
+
+### Items Not Spacing
+
+**Problem:** Spacing prop not working.
+
+**Solutions:**
+- Check if children are valid React elements
+- Verify spacing value is number or string
+- Ensure no absolute positioning on children
+
+### Overflow Issues
+
+**Problem:** Content overflows container.
+
+**Solutions:**
+- Stack uses negative margins
+- Add padding to parent container
+- Use `flexWrap="wrap"` if appropriate
+
+### Alignment Not Working
+
+**Problem:** alignItems or justifyContent not working.
+
+**Solutions:**
+- Check if Stack has explicit height (for justifyContent)
+- Verify children don't have conflicting styles
+- Use browser DevTools to inspect flexbox
+
+---
+
+## 🎯 Best Practices
+
+### Do's ✅
+
+- Use spacing values from theme (1, 2, 3, 4)
+- Keep nesting depth < 3 levels
+- Use direction="row" for horizontal layouts
+- Add dividers for visual separation
+- Use responsive spacing when needed
+
+### Don'ts ❌
+
+- Don't nest more than 3 levels deep
+- Don't use Stack for single children
+- Don't mix Stack with custom flexbox CSS
+- Don't use when Grid is more appropriate
+- Don't forget responsive considerations
+
+---
+
+**Last Updated:** January 2026  
+**Component Version:** 3.3.0  
+**Status:** ✅ Stable

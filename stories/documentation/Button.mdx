@@ -1,0 +1,432 @@
+import { Meta, Markdown, Typeset } from '@storybook/blocks';
+
+<Meta title="Documentation/Components/Button" />
+
+# Button Component
+
+A versatile button component that adapts to different UI providers while maintaining a consistent API.
+
+---
+
+## 📋 Overview
+
+The Button component is a fundamental interactive element used to trigger actions. It supports multiple visual variants, colors, and sizes while maintaining accessibility and consistent behavior across providers.
+
+**Current Implementation:** Uses MUI Button for all providers (Internal implementation deprecated).
+
+---
+
+## 🎯 When to Use
+
+### ✅ Use Button When:
+- Triggering actions (submit, save, cancel)
+- Navigation (when wrapped with router links)
+- Opening dialogs or modals
+- Confirming or canceling operations
+- Primary calls-to-action
+
+### ❌ Don't Use Button When:
+- Wrapping large content (use clickable Card instead)
+- Navigation only (consider Link component)
+- Triggering dropdown menus (use IconButton or MenuButton)
+- In a table cell for every row (consider IconButton for space)
+
+---
+
+## 📊 Props Reference
+
+### BaseButtonProps Interface
+
+```typescript
+interface BaseButtonProps {
+  children?: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
+  variant?: 'contained' | 'outlined' | 'text';
+  color?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
+  size?: 'small' | 'medium' | 'large';
+  fullWidth?: boolean;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+```
+
+### Required Props
+
+**None** - All props are optional with sensible defaults.
+
+### Optional Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Button label or content |
+| `onClick` | `(event: MouseEvent) => void` | - | Click event handler |
+| `disabled` | `boolean` | `false` | Disables the button |
+| `variant` | `'contained' \| 'outlined' \| 'text'` | `'text'` | Visual style variant |
+| `color` | `'primary' \| 'secondary' \| 'error' \| 'warning' \| 'info' \| 'success'` | `'primary'` | Color theme |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Button size |
+| `fullWidth` | `boolean` | `false` | Takes full container width |
+| `startIcon` | `React.ReactNode` | - | Icon before text |
+| `endIcon` | `React.ReactNode` | - | Icon after text |
+| `className` | `string` | - | Additional CSS classes |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | HTML button type |
+
+---
+
+## 🎨 Variants
+
+### Contained (Solid)
+Primary emphasis, highest prominence.
+
+```tsx
+<Button variant="contained" color="primary">
+  Primary Action
+</Button>
+```
+
+**Use for:**
+- Primary actions (Save, Submit, Continue)
+- Calls-to-action
+- Most important button on the page
+
+### Outlined
+Medium emphasis, visible but not dominant.
+
+```tsx
+<Button variant="outlined" color="primary">
+  Secondary Action
+</Button>
+```
+
+**Use for:**
+- Secondary actions (Cancel, Back, Edit)
+- Multiple actions of equal importance
+- Alternatives to the primary action
+
+### Text (Flat)
+Lowest emphasis, subtle appearance.
+
+```tsx
+<Button variant="text" color="primary">
+  Tertiary Action
+</Button>
+```
+
+**Use for:**
+- Least important actions
+- Inline actions in text
+- Toolbar buttons
+- Footer actions
+
+---
+
+## 🎨 Colors
+
+### Semantic Colors
+
+| Color | Meaning | Use Case |
+|-------|---------|----------|
+| `primary` | Main brand color | Primary actions, CTAs |
+| `secondary` | Secondary brand color | Alternative actions |
+| `error` | Danger, destructive | Delete, Remove, Cancel subscription |
+| `warning` | Caution required | Proceed with warning, Irreversible actions |
+| `info` | Informational | Learn more, Details, Help |
+| `success` | Positive action | Confirm, Approve, Complete |
+
+### Color Examples
+
+```tsx
+// Error for destructive actions
+<Button variant="contained" color="error">
+  Delete Account
+</Button>
+
+// Success for positive confirmation
+<Button variant="contained" color="success">
+  Approve Request
+</Button>
+
+// Warning for caution
+<Button variant="outlined" color="warning">
+  Proceed with Caution
+</Button>
+```
+
+---
+
+## 📏 Sizes
+
+| Size | Height | Use Case |
+|------|--------|----------|
+| `small` | 30px | Compact UIs, tables, toolbars |
+| `medium` | 36px | Default, most forms and dialogs |
+| `large` | 42px | Landing pages, prominent CTAs |
+
+```tsx
+<Button size="small">Small</Button>
+<Button size="medium">Medium (default)</Button>
+<Button size="large">Large</Button>
+```
+
+---
+
+## 🔌 Adapter Behavior
+
+### Current Provider: MUI
+
+**Implementation:** All providers use MUI Button component.
+
+**Reasoning:** MUI Button is production-ready, accessible, and feature-complete. Internal implementation has been deprecated.
+
+### Provider Differences
+
+| Feature | MUI | Internal (Deprecated) | Notes |
+|---------|-----|----------------------|-------|
+| Variants | ✅ All supported | ⚠️ Limited | Use MUI for all cases |
+| Colors | ✅ All semantic colors | ⚠️ Basic only | MUI recommended |
+| Icons | ✅ startIcon, endIcon | ❌ Not supported | Use MUI |
+| Accessibility | ✅ Full ARIA support | ⚠️ Basic | MUI is accessible |
+| Ripple Effect | ✅ Yes | ❌ No | MUI has ripple |
+
+### Fallback Behavior
+
+No fallback needed - MUI Button is used universally.
+
+---
+
+## 💡 Usage Examples
+
+### Basic Button
+
+```tsx
+import { Button } from '@sakhlaqi/ui/adapters';
+
+<Button onClick={() => console.log('Clicked')}>
+  Click Me
+</Button>
+```
+
+### Form Submit Button
+
+```tsx
+<form onSubmit={handleSubmit}>
+  <Input label="Email" type="email" required />
+  <Button type="submit" variant="contained" color="primary">
+    Submit
+  </Button>
+</form>
+```
+
+### With Icons
+
+```tsx
+import SaveIcon from '@mui/icons-material/Save';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+<Button 
+  variant="contained" 
+  color="primary" 
+  startIcon={<SaveIcon />}
+>
+  Save
+</Button>
+
+<Button 
+  variant="outlined" 
+  color="error" 
+  endIcon={<DeleteIcon />}
+>
+  Delete
+</Button>
+```
+
+### Loading State
+
+```tsx
+import CircularProgress from '@mui/material/CircularProgress';
+
+<Button 
+  variant="contained" 
+  disabled={loading}
+  startIcon={loading ? <CircularProgress size={20} /> : null}
+>
+  {loading ? 'Saving...' : 'Save'}
+</Button>
+```
+
+### Full Width
+
+```tsx
+<Button variant="contained" fullWidth>
+  Full Width Button
+</Button>
+```
+
+### Button Group
+
+```tsx
+import { Stack } from '@sakhlaqi/ui/adapters';
+
+<Stack direction="row" spacing={2}>
+  <Button variant="contained">Save</Button>
+  <Button variant="outlined">Cancel</Button>
+  <Button variant="text">Reset</Button>
+</Stack>
+```
+
+---
+
+## ⚠️ Limitations
+
+### Known Issues
+
+1. **Icon Sizing**
+   - Icons should be 20-24px for best appearance
+   - MUI automatically sizes icons, but custom icons may need manual sizing
+
+2. **Fullwidth in Flex Containers**
+   - `fullWidth` may not work as expected in flex containers
+   - Use explicit `width: 100%` or wrap in a block container
+
+3. **Type="submit" Outside Forms**
+   - `type="submit"` only works inside `<form>` elements
+   - Use `type="button"` (default) for standalone buttons
+
+### Provider Limitations
+
+Since all providers use MUI:
+- MUI theme customization affects all buttons
+- MUI-specific props (like `disableElevation`) are available but not in types
+- Custom variants require MUI theme extension
+
+---
+
+## ♿ Accessibility
+
+### Built-in Features
+
+- ✅ **Keyboard Navigation**: Tab to focus, Enter/Space to activate
+- ✅ **ARIA Attributes**: Proper roles and states
+- ✅ **Focus Indicators**: Visible focus ring
+- ✅ **Disabled State**: Properly communicated to screen readers
+
+### Best Practices
+
+```tsx
+// ✅ Good: Clear, descriptive label
+<Button>Save Changes</Button>
+
+// ❌ Bad: Vague label
+<Button>OK</Button>
+
+// ✅ Good: Icon with accessible label
+<Button aria-label="Delete item">
+  <DeleteIcon />
+</Button>
+
+// ❌ Bad: Icon without label
+<Button>
+  <DeleteIcon />
+</Button>
+```
+
+### Color Contrast
+
+- Contained buttons meet WCAG AA contrast requirements
+- Outlined and text buttons may need manual contrast checking
+- Don't rely on color alone to convey meaning
+
+---
+
+## 🔍 Related Components
+
+- **[IconButton](?path=/docs/buttons-iconbutton--docs)** - Button with only an icon
+- **[ButtonGroup](?path=/docs/buttons-buttongroup--docs)** - Group of related buttons
+- **[Link]** - For navigation without button styling
+
+---
+
+## 📚 Examples in Storybook
+
+- [Button Stories](?path=/docs/buttons-button--docs)
+- [Anti-Pattern: Button Wrapping Content](?path=/docs/anti-patterns-unsupported-combinations--button-wrapping-content)
+
+---
+
+## 🐛 Troubleshooting
+
+### Button Not Clickable
+
+**Problem:** Button doesn't respond to clicks.
+
+**Solutions:**
+- Check if `disabled` prop is set
+- Verify `onClick` handler is attached
+- Check if button is covered by another element (z-index)
+- Ensure button is inside viewport
+
+### Styling Not Applied
+
+**Problem:** Custom styles or `className` not working.
+
+**Solutions:**
+- Check MUI theme configuration
+- Verify CSS specificity (MUI uses higher specificity)
+- Use `sx` prop for MUI-specific styling
+- Check if styles are being overridden
+
+### Icons Not Showing
+
+**Problem:** `startIcon` or `endIcon` not visible.
+
+**Solutions:**
+- Verify icon component is imported correctly
+- Check icon color (may blend with button background)
+- Ensure icon is React component, not image path
+- Try wrapping icon in `<>` fragment
+
+---
+
+## 📝 Migration Guide
+
+### From Internal to MUI (Already Done)
+
+All buttons now use MUI automatically. No migration needed.
+
+### From Direct MUI Import to Adapter
+
+```tsx
+// ❌ Before: Direct import
+import { Button } from '../../providers/mui';
+
+// ✅ After: Adapter import
+import { Button } from '@sakhlaqi/ui/adapters';
+```
+
+---
+
+## 🎯 Best Practices
+
+### Do's ✅
+
+- Use semantic colors (`error` for delete, `success` for approve)
+- Provide clear, action-oriented labels ("Save Changes" not "OK")
+- Use appropriate variants (contained for primary, outlined for secondary)
+- Group related buttons with consistent spacing
+- Include icons for common actions (save, delete, search)
+
+### Don'ts ❌
+
+- Don't use more than one contained button in the same area
+- Don't use `color="error"` for non-destructive actions
+- Don't create buttons wider than their container
+- Don't use vague labels ("Submit", "OK", "Done")
+- Don't wrap large content in buttons (use Card instead)
+
+---
+
+**Last Updated:** January 2026  
+**Component Version:** 3.3.0  
+**Status:** ✅ Stable

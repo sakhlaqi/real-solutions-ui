@@ -5,6 +5,7 @@ import { validatePageConfig, type PageConfig } from '../schema';
 import { renderNode } from './renderNode';
 import type { RenderContext, RenderOptions, RenderError, RenderResult } from './types';
 import { RenderContextProvider } from './RenderContext';
+import type { AdapterWarning } from './AdapterWarnings';
 
 /**
  * Render Page
@@ -30,6 +31,12 @@ export interface PageRendererProps {
   
   /** Callback when rendering completes */
   onRenderComplete?: (result: RenderResult) => void;
+  
+  /** Callback when adapter warnings occur */
+  onAdapterWarning?: (warning: AdapterWarning) => void;
+  
+  /** Show inline warnings in UI (default: false) */
+  showInlineWarnings?: boolean;
 }
 
 /**
@@ -97,9 +104,12 @@ export function PageRenderer({
   loading = <div>Loading page...</div>,
   errorComponent: ErrorComponent = DefaultErrorComponent,
   onRenderComplete,
+  onAdapterWarning,
+  showInlineWarnings = false,
 }: PageRendererProps) {
   const [errors, setErrors] = useState<RenderError[]>([]);
   const [warnings, setWarnings] = useState<string[]>([]);
+  const [adapterWarnings, setAdapterWarnings] = useState<AdapterWarning[]>([]);
 
   // Parse and validate config
   const pageConfig = useMemo<PageConfig | null>(() => {
@@ -144,6 +154,14 @@ export function PageRenderer({
       warnings={warnings}
       ErrorComponent={ErrorComponent}
       onRenderComplete={onRenderComplete}
+      onAdapterWarning={(warning) => {
+        setAdapterWarnings(prev => [...prev, warning]);
+        if (onAdapterWarning) {
+          onAdapterWarning(warning);
+        }
+      }}
+      adapterWarnings={adapterWarnings}
+      showInlineWarnings={showInlineWarnings}
     />
   );
 }
@@ -159,6 +177,9 @@ function PageRendererInternal({
   warnings,
   ErrorComponent,
   onRenderComplete,
+  onAdapterWarning,
+  adapterWarnings,
+  showInlineWarnings = false,
 }: {
   config: PageConfig;
   options: RenderOptions;
@@ -166,6 +187,9 @@ function PageRendererInternal({
   warnings: string[];
   ErrorComponent: React.ComponentType<{ error: Error; errors?: RenderError[] }>;
   onRenderComplete?: (result: RenderResult) => void;
+  onAdapterWarning?: (warning: AdapterWarning) => void;
+  adapterWarnings: AdapterWarning[];
+  showInlineWarnings?: boolean;
 }) {
   const { debug = false } = options;
 
@@ -188,6 +212,16 @@ function PageRendererInternal({
       const TemplateAdapter = React.lazy(async () => {
         const Adapter = await resolveTemplateAdapter(config.template, provider);
         if (!Adapter) {
+          // Emit adapter warning
+          if (onAdapterWarning) {
+            onAdapterWarning({
+              type: 'template-not-found',
+              componentType: config.template,
+              requestedProvider: provider,
+              message: `Template adapter for "${config.template}" not found for provider "${provider}"`,
+              timestamp: Date.now(),
+            });
+          }
           throw new Error(`Template adapter for "${config.template}" not found for provider "${provider}"`);
         }
         return { default: Adapter };

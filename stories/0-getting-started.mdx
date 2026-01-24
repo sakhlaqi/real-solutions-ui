@@ -1,0 +1,301 @@
+import { Meta, Markdown } from '@storybook/blocks';
+
+<Meta title="Documentation/Getting Started" />
+
+# UI Library Documentation
+
+Welcome to the **Real Solutions UI Library** — a comprehensive, provider-agnostic component library with adaptive rendering capabilities.
+
+---
+
+## 🎯 Overview
+
+This library provides:
+
+- **Adaptive Components**: Switch between MUI, Internal, and other providers seamlessly
+- **Type-Safe Props**: Full TypeScript support with strict prop validation
+- **JSON-Driven Pages**: Render entire pages from JSON configurations
+- **Schema Validation**: Runtime validation with detailed error messages
+- **Storybook Integration**: Living documentation with interactive examples
+
+---
+
+## 📚 Documentation Structure
+
+### [Core Components (Atoms)](?path=/docs/buttons-button--docs)
+Basic UI building blocks like buttons, inputs, and cards.
+
+- **Button** - Action triggers with multiple variants
+- **Input** - Text input fields with validation
+- **Card** - Content containers with consistent styling
+- **Typography** - Text display with semantic meaning
+- **Badge** - Small count or status indicators
+
+### [Composite Components (Molecules)](?path=/docs/composites-header--docs)
+Combined components that work together.
+
+- **Header** - Page headers with title and actions
+- **Sidebar** - Navigation sidebars
+- **SearchGrid** - Search bar with results grid
+
+### [Layout Components](?path=/docs/layout-stack--docs)
+Structure and positioning components.
+
+- **Stack** - Vertical/horizontal spacing
+- **Flex** - Flexible box layouts
+- **Grid** - Grid-based layouts
+- **Container** - Content width containers
+
+### [JSON Pages](?path=/docs/json-pages-page-renderer--docs)
+Render entire pages from JSON configurations.
+
+### [Anti-Patterns](?path=/docs/anti-patterns-invalid-json-configs--docs)
+Learn what NOT to do with educational examples.
+
+---
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+npm install @sakhlaqi/ui
+```
+
+### Basic Usage
+
+```tsx
+import { Button, Input, Card } from '@sakhlaqi/ui/adapters';
+
+function MyComponent() {
+  return (
+    <Card>
+      <Input placeholder="Enter your name" />
+      <Button variant="contained" color="primary">
+        Submit
+      </Button>
+    </Card>
+  );
+}
+```
+
+### With Provider Configuration
+
+```tsx
+import { ThemeProvider } from '@sakhlaqi/ui';
+
+function App() {
+  return (
+    <ThemeProvider provider="mui">
+      <MyComponent />
+    </ThemeProvider>
+  );
+}
+```
+
+---
+
+## 🔑 Key Concepts
+
+### Adapters vs Direct Imports
+
+**✅ DO**: Use adapters for flexibility
+```tsx
+import { Button } from '@sakhlaqi/ui/adapters';
+```
+
+**❌ DON'T**: Import directly from providers
+```tsx
+// This tightly couples to MUI
+import { Button } from '@sakhlaqi/ui/providers/mui';
+```
+
+### Provider Switching
+
+Change providers globally without refactoring code:
+
+```tsx
+// Switch from MUI to Ant Design
+<ThemeProvider provider="antd">  {/* was "mui" */}
+  <App />
+</ThemeProvider>
+```
+
+### Schema Validation
+
+All JSON configurations are validated at runtime:
+
+```tsx
+import { validatePageConfig } from '@sakhlaqi/ui';
+
+const result = validatePageConfig(config);
+if (!result.success) {
+  console.error('Invalid config:', result.error);
+}
+```
+
+---
+
+## 📖 Component Documentation
+
+Each component page includes:
+
+- **Props Table** - All supported properties with types
+- **Required vs Optional** - Which props are mandatory
+- **Adapter Behavior** - How different providers handle the component
+- **Usage Examples** - Interactive code examples
+- **When to Use** - Recommended use cases
+- **When NOT to Use** - Anti-patterns to avoid
+
+---
+
+## 🛠️ Advanced Features
+
+### JSON-Driven Pages
+
+Render entire pages from JSON:
+
+```tsx
+import { PageRenderer } from '@sakhlaqi/ui/renderer';
+
+const pageConfig = {
+  metadata: {
+    title: 'Dashboard',
+    version: '1.0',
+  },
+  template: {
+    type: 'stack',
+    props: { spacing: 2 },
+    children: [
+      {
+        type: 'card',
+        props: { title: 'Welcome' },
+      },
+    ],
+  },
+};
+
+function DashboardPage() {
+  return <PageRenderer config={pageConfig} />;
+}
+```
+
+### Error Handling
+
+Display validation errors inline:
+
+```tsx
+import { ValidationErrorDisplay } from '@sakhlaqi/ui/renderer';
+
+const result = validatePageConfig(config);
+if (!result.success) {
+  return <ValidationErrorDisplay errors={result.error.errors} />;
+}
+```
+
+---
+
+## 🎨 Theming
+
+### Provider-Specific Themes
+
+Each provider respects its own theming system:
+
+```tsx
+// MUI theming
+import { ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    primary: { main: '#1976d2' },
+  },
+});
+
+<ThemeProvider theme={theme}>
+  <App />
+</ThemeProvider>
+```
+
+### Consistent API
+
+Despite different providers, the component API remains consistent:
+
+```tsx
+// Works with any provider
+<Button variant="contained" color="primary">
+  Click Me
+</Button>
+```
+
+---
+
+## 📊 Component Status
+
+| Component | Status | MUI Support | Internal Support | Notes |
+|-----------|--------|-------------|------------------|-------|
+| Button | ✅ Stable | Full | Deprecated | Use MUI for all providers |
+| Input | ✅ Stable | Full | Full | Both implementations available |
+| Card | ✅ Stable | Full | Full | Consistent API |
+| Stack | ✅ Stable | Full | Full | Layout component |
+| Modal | ✅ Stable | Full | Full | Overlay component |
+| Timeline | ⚠️ Partial | MUI Lab | Internal | Falls back to Internal if MUI unavailable |
+
+---
+
+## 🔍 Finding What You Need
+
+### By Component Type
+- **Actions**: Button, IconButton, ButtonGroup
+- **Inputs**: Input, Select, Checkbox, Switch
+- **Display**: Card, Paper, Typography, Badge
+- **Layout**: Stack, Flex, Grid, Container
+- **Navigation**: Navbar, Sidebar, Tabs
+- **Feedback**: Alert, Snackbar, Progress
+
+### By Use Case
+- **Forms**: Input, Select, Checkbox, Button
+- **Data Display**: Table, XDataGrid, Card
+- **Navigation**: Navbar, Tabs, Breadcrumbs
+- **Layout**: Stack, Flex, Grid
+- **Overlays**: Modal, Drawer, Popover
+
+---
+
+## 📚 Additional Resources
+
+- **[Anti-Patterns](?path=/docs/anti-patterns-invalid-json-configs--docs)** - Learn from common mistakes
+- **[Error Handling](?path=/docs/renderer-error-warning-display--docs)** - Validation and error display
+- **[JSON Pages](?path=/docs/json-pages-page-renderer--docs)** - JSON-driven rendering
+- **[GitHub Repository](https://github.com/sakhlaqi/real-solutions)** - Source code and issues
+
+---
+
+## 🤝 Contributing
+
+This is a living documentation system. When you add or modify components:
+
+1. Update the component's `.stories.tsx` file
+2. Add/update props documentation
+3. Include usage examples
+4. Document limitations and edge cases
+5. Add to anti-patterns if applicable
+
+---
+
+## 📝 Conventions
+
+### Naming
+- **Components**: PascalCase (`Button`, `InputField`)
+- **Props**: camelCase (`onClick`, `fullWidth`)
+- **Files**: PascalCase for components, kebab-case for docs
+
+### Required Props
+Props marked with `*` in documentation are required and will cause TypeScript errors if omitted.
+
+### Optional Props
+All other props are optional and have sensible defaults.
+
+---
+
+**Last Updated:** January 2026  
+**Version:** 3.3.0

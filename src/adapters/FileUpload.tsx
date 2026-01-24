@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { FileUpload as InternalFileUpload, FileUploadProps } from '../forms';
+import { FileUpload as InternalFileUpload, FileUploadProps } from '../core/components/forms';
 
 /**
  * Adaptive FileUpload Component

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { DropdownMenu as InternalDropdownMenu, DropdownMenuProps } from '../navigation';
+import { DropdownMenu as InternalDropdownMenu, DropdownMenuProps } from '../core/components/navigation';
 
 /**
  * Adaptive DropdownMenu Component

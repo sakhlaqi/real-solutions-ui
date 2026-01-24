@@ -174,106 +174,115 @@ export * as MUIComponents from './providers/mui';
 // Prefer using adaptive components or InternalComponents namespace.
 // =================================, Drawer, Accordion - use adaptive versions)
 // Layout Components (use adaptive versions from adapters)
-export {
-  Header,
-  Footer,
-  MainLayout,
-  AdminLayout,
-  AppShell,
-} from './layout';
+// Note: Layout exports moved to adapters - import from adapters/[Component]
+// export {
+//   Header,
+//   Footer,
+//   MainLayout,
+//   AdminLayout,
+//   AppShell,
+// } from './layout';
 
-export type {
-  HeaderProps,
-  FooterProps,
-  AppShellProps,
-  SpacerProps,
-  // Note: PaperProps, StackProps, ImageListProps moved to MUI - import from adapters
-  // Note: SidebarProps, FlexProps, SectionProps moved to MUI - import from adapters
-} from './layout';
+// export type {
+//   HeaderProps,
+//   FooterProps,
+//   AppShellProps,
+//   SpacerProps,
+//   // Note: PaperProps, StackProps, ImageListProps moved to MUI - import from adapters
+//   // Note: SidebarProps, FlexProps, SectionProps moved to MUI - import from adapters
+// } from './layout';
 
 // Navigation Components (use adaptive versions from adapters)
-export {} from './navigation';
+// Note: Navigation exports moved to adapters - import from adapters/[Component]
+// export {} from './navigation';
 
-export type {
-  NavbarProps,
-} from './navigation';
+// export type {
+//   NavbarProps,
+// } from './navigation';
 
 // Form Components (use adaptive versions from adapters)
-export {} from './forms';
+// Note: Form exports moved to adapters - import from adapters/[Component]
+// export {} from './forms';
 
-export type {
-  FileUploadProps,
-} from './forms';
+// export type {
+//   FileUploadProps,
+// } from './forms';
 
 // Button Components (use adaptive versions from adapters)
-export {} from './buttons';
+// Note: Button exports moved to adapters - import from adapters/[Component]
+// export {} from './buttons';
 
-export type {
-  FloatingActionButtonProps,
-  LinkButtonProps,
-  SplitButtonProps,
-} from './buttons';
+// export type {
+//   FloatingActionButtonProps,
+//   LinkButtonProps,
+//   SplitButtonProps,
+// } from './buttons';
 
 // Data Display Components (excluding Badge, Avatar, Tooltip, Chip, List, ListItem, Tag, Timeline - use adaptive versions)
-export {} from './data-display';
+// Note: Data display exports moved to adapters - import from adapters/[Component]
+// export {} from './data-display';
 
 // Note: BadgeProps and TimelineProps are now exported from adapters
 // Use these from @sakhlaqi/ui/adapters instead
 
 // Feedback Components (excluding Alert, Snackbar, Spinner - use adaptive versions)
 // Feedback Components (use adaptive versions from adapters)
-export {
-  useToast,
-} from './feedback';
+// Note: Feedback exports moved to adapters - import from adapters/[Component]
+// export {
+//   useToast,
+// } from './feedback';
 
-export type {
-  EmptyStateProps,
-  ErrorStateProps,
-  SuccessStateProps,
-  ToastProps,
-} from './feedback';
+// export type {
+//   EmptyStateProps,
+//   ErrorStateProps,
+//   SuccessStateProps,
+//   ToastProps,
+// } from './feedback';
 
 // Overlay Components (use adaptive versions from adapters)
 // Note: SlideOverProps, BottomSheetProps, LightboxProps moved to MUI - import from adapters
 
 // Typography Components (use adaptive versions from adapters)
-export {} from './typography';
+// Note: Typography exports moved to adapters - import from adapters/[Component]
+// export {} from './typography';
 
-export type {
-  HeadingProps,
-  TextProps,
-} from './typography';
+// export type {
+//   HeadingProps,
+//   TextProps,
+// } from './typography';
 
 // Utility Components
-export {
-  ErrorBoundary,
-  Portal,
-  ThemeProvider,
-  ClickAwayListener,
-  CssBaseline,
-  NoSsr,
-  useMediaQuery,
-  ResponsiveWrapper,
-  VisibilityToggle,
-  FeatureFlagWrapper,
-} from './utility';
+// Note: Utility exports moved to adapters - import from adapters/[Component]
+// export {
+//   ErrorBoundary,
+//   Portal,
+//   ThemeProvider,
+//   ClickAwayListener,
+//   CssBaseline,
+//   NoSsr,
+//   useMediaQuery,
+//   ResponsiveWrapper,
+//   VisibilityToggle,
+//   FeatureFlagWrapper,
+// } from './utility';
 
-export type {
-  PortalProps,
-  ThemeProviderProps,
-  ClickAwayListenerProps,
-  ResponsiveWrapperProps,
-  VisibilityToggleProps,
-  FeatureFlagWrapperProps,
-} from './utility';
+// export type {
+//   PortalProps,
+//   ThemeProviderProps,
+//   ClickAwayListenerProps,
+//   ResponsiveWrapperProps,
+//   VisibilityToggleProps,
+//   FeatureFlagWrapperProps,
+// } from './utility';
 
 // Media Components (use adaptive versions from adapters)
-export {} from './media';
+// Note: Media exports moved to adapters - import from adapters/[Component]
+// export {} from './media';
 
-export type {
-  ImageProps,
-  CarouselProps,
-  ImageGalleryProps,
-  ThumbnailProps,
-} from './media';
+// export type {
+//   ImageProps,
+//   CarouselProps,
+//   ImageGalleryProps,
+//   ThumbnailProps,
+// } from './media';
 

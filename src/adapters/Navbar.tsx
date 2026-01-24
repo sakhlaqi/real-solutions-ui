@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Navbar as InternalNavbar, NavbarProps } from '../navigation';
+import { Navbar as InternalNavbar, NavbarProps } from '../core/components/navigation';
 
 /**
  * Adaptive Navbar Component

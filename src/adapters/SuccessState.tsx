@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { SuccessState as InternalSuccessState, SuccessStateProps } from '../feedback';
+import { SuccessState as InternalSuccessState, SuccessStateProps } from '../core/components/feedback';
 
 /**
  * Adaptive SuccessState Component

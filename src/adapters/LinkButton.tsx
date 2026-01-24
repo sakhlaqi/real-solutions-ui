@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { LinkButton as InternalLinkButton, LinkButtonProps } from '../buttons';
+import { LinkButton as InternalLinkButton, LinkButtonProps } from '../core/components/buttons';
 
 /**
  * Adaptive LinkButton Component

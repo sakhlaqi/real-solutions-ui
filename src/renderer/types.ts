@@ -34,6 +34,23 @@ export interface RenderContext {
   
   /** Active UI provider for adapter resolution */
   provider?: UIProvider;
+  
+  /** Active tenant ID for multi-tenant support */
+  tenantId?: string;
+  
+  /** Theme configuration */
+  theme?: {
+    mode: 'light' | 'dark';
+    colors?: {
+      primary?: string;
+      secondary?: string;
+      background?: string;
+      foreground?: string;
+    };
+  };
+  
+  /** Feature flags for conditional rendering */
+  featureFlags?: Record<string, boolean>;
 }
 
 /**

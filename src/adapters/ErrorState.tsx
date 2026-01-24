@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { ErrorState as InternalErrorState, ErrorStateProps } from '../feedback';
+import { ErrorState as InternalErrorState, ErrorStateProps } from '../core/components/feedback';
 
 /**
  * Adaptive ErrorState Component

@@ -1,0 +1,471 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentation/Components/Input" />
+
+# Input Component
+
+A text input field component with validation support, adornments, and consistent behavior across providers.
+
+---
+
+## 📋 Overview
+
+The Input component provides a standardized text input interface with built-in validation, helper text, and adornment support. It adapts to different UI providers while maintaining a consistent API.
+
+---
+
+## 🎯 When to Use
+
+### ✅ Use Input When:
+- Collecting single-line text data
+- Forms requiring user input (name, email, search)
+- Fields with validation requirements
+- Inputs needing icons or adornments
+
+### ❌ Don't Use Input When:
+- Multi-line text needed (use Textarea)
+- Selecting from predefined options (use Select)
+- Binary choice (use Checkbox or Switch)
+- Large formatted text (use rich text editor)
+
+---
+
+## 📊 Props Reference
+
+### BaseInputProps Interface
+
+```typescript
+interface BaseInputProps {
+  value?: string;                    // Controlled value
+  defaultValue?: string;             // Uncontrolled default value
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;              // Placeholder text
+  disabled?: boolean;                // Disables input
+  required?: boolean;                // Marks as required
+  error?: string;                    // Error state (non-empty = error)
+  helperText?: string;               // Helper text below input
+  label?: string;                    // Label above input
+  fullWidth?: boolean;               // Takes full container width
+  size?: 'small' | 'medium' | 'large';
+  startAdornment?: React.ReactNode;  // Icon/text before input
+  endAdornment?: React.ReactNode;    // Icon/text after input
+  className?: string;
+  id?: string;                       // HTML id attribute
+  name?: string;                     // HTML name attribute
+  autoComplete?: string;             // Autocomplete hint
+  type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
+}
+```
+
+### Required Props
+
+**None** - All props are optional.
+
+### Common Prop Patterns
+
+| Pattern | Example | Use Case |
+|---------|---------|----------|
+| Controlled | `value + onChange` | Form with state management |
+| Uncontrolled | `defaultValue` | Simple forms without state |
+| With validation | `error + helperText` | Form validation feedback |
+| With label | `label + id` | Accessible forms |
+| Full width | `fullWidth` | Responsive layouts |
+
+---
+
+## 📝 Input Types
+
+| Type | Description | Use Case |
+|------|-------------|----------|
+| `text` | Plain text (default) | Name, username, general text |
+| `password` | Masked text | Passwords, sensitive data |
+| `email` | Email validation | Email addresses |
+| `number` | Numeric input | Quantities, prices |
+| `tel` | Phone number | Phone numbers |
+| `url` | URL validation | Website addresses |
+| `search` | Search input | Search bars |
+
+---
+
+## 💡 Usage Examples
+
+### Basic Input
+
+```tsx
+import { Input } from '@sakhlaqi/ui/adapters';
+
+<Input 
+  placeholder="Enter your name" 
+  fullWidth 
+/>
+```
+
+### With Label
+
+```tsx
+<Input
+  id="email"
+  name="email"
+  label="Email Address"
+  type="email"
+  placeholder="you@example.com"
+  fullWidth
+/>
+```
+
+### With Validation
+
+```tsx
+const [email, setEmail] = useState('');
+const [error, setError] = useState('');
+
+const validateEmail = (value: string) => {
+  if (!value) {
+    setError('Email is required');
+  } else if (!/\S+@\S+\.\S+/.test(value)) {
+    setError('Invalid email address');
+  } else {
+    setError('');
+  }
+};
+
+<Input
+  label="Email"
+  type="email"
+  value={email}
+  onChange={(e) => {
+    setEmail(e.target.value);
+    validateEmail(e.target.value);
+  }}
+  error={error}
+  helperText={error || 'We will never share your email'}
+  required
+  fullWidth
+/>
+```
+
+### With Adornments
+
+```tsx
+import SearchIcon from '@mui/icons-material/Search';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
+// Start adornment (icon before input)
+<Input
+  placeholder="Search..."
+  startAdornment={<SearchIcon />}
+  fullWidth
+/>
+
+// End adornment (icon after input)
+<Input
+  type="password"
+  placeholder="Password"
+  endAdornment={<VisibilityIcon />}
+  fullWidth
+/>
+```
+
+### Disabled State
+
+```tsx
+<Input
+  label="Username"
+  value="john.doe"
+  disabled
+  helperText="Cannot be changed after registration"
+/>
+```
+
+### Sizes
+
+```tsx
+<Stack spacing={2}>
+  <Input size="small" placeholder="Small input" />
+  <Input size="medium" placeholder="Medium input (default)" />
+  <Input size="large" placeholder="Large input" />
+</Stack>
+```
+
+---
+
+## 🔌 Adapter Behavior
+
+### MUI Implementation
+
+- Full feature support
+- Material Design styling
+- Automatic focus management
+- Built-in validation states
+
+### Internal Implementation
+
+- Basic input styling
+- Limited adornment support
+- Manual validation styling
+- Compatible API
+
+### Key Differences
+
+| Feature | MUI | Internal |
+|---------|-----|----------|
+| Label animation | ✅ Floats | ❌ Static |
+| Error styling | ✅ Red outline + icon | ⚠️ Red outline |
+| Adornments | ✅ Full support | ⚠️ Basic |
+| Helper text | ✅ Animated | ✅ Static |
+| Auto-focus | ✅ Yes | ✅ Yes |
+
+---
+
+## ⚠️ Limitations
+
+### Known Issues
+
+1. **Number Input Scrolling**
+   - Mouse wheel can change number values inadvertently
+   - Consider disabling wheel events for number inputs
+
+2. **Password Auto-fill**
+   - Browser auto-fill may bypass validation
+   - Re-validate on form submit
+
+3. **Mobile Keyboards**
+   - `type` affects mobile keyboard layout
+   - Test on mobile devices for best UX
+
+### Browser Compatibility
+
+- Modern browsers: Full support
+- IE11: Basic support (no label animation)
+- Safari: Auto-fill styling may differ
+
+---
+
+## ♿ Accessibility
+
+### Built-in Features
+
+- ✅ **Label Association**: `label` automatically links to input
+- ✅ **ARIA Attributes**: `aria-invalid`, `aria-describedby` when error
+- ✅ **Keyboard Navigation**: Tab to focus, type to input
+- ✅ **Screen Reader Support**: Announces label, error, helper text
+
+### Best Practices
+
+```tsx
+// ✅ Good: Label with id association
+<Input 
+  id="username" 
+  label="Username" 
+  required 
+/>
+
+// ❌ Bad: No label
+<Input placeholder="Username" />
+
+// ✅ Good: Error with helper text
+<Input 
+  label="Email"
+  error="Invalid email"
+  helperText="Must be a valid email address"
+/>
+
+// ✅ Good: Required indicator
+<Input 
+  label="Password"
+  required
+  type="password"
+/>
+```
+
+---
+
+## 🎯 Form Integration
+
+### With React Hook Form
+
+```tsx
+import { useForm } from 'react-hook-form';
+
+const { register, handleSubmit, formState: { errors } } = useForm();
+
+<Input
+  label="Email"
+  {...register('email', { 
+    required: 'Email is required',
+    pattern: {
+      value: /\S+@\S+\.\S+/,
+      message: 'Invalid email address'
+    }
+  })}
+  error={errors.email?.message}
+  helperText={errors.email?.message}
+/>
+```
+
+### With Formik
+
+```tsx
+import { useFormik } from 'formik';
+
+const formik = useFormik({
+  initialValues: { email: '' },
+  validate: values => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = 'Required';
+    }
+    return errors;
+  },
+  onSubmit: values => console.log(values)
+});
+
+<Input
+  label="Email"
+  name="email"
+  value={formik.values.email}
+  onChange={formik.handleChange}
+  error={formik.errors.email}
+  helperText={formik.errors.email}
+/>
+```
+
+---
+
+## 🔍 Related Components
+
+- **[Textarea]** - Multi-line text input
+- **[Select]** - Dropdown selection
+- **[Autocomplete]** - Input with suggestions
+- **[Form]** - Form wrapper with validation
+
+---
+
+## 🐛 Troubleshooting
+
+### Input Not Updating
+
+**Problem:** Typing doesn't update the input.
+
+**Solutions:**
+- Ensure `onChange` is provided with controlled input
+- Check if `value` prop is being updated correctly
+- Verify state management logic
+
+### Validation Not Showing
+
+**Problem:** Error state not displaying.
+
+**Solutions:**
+- Check if `error` prop has a non-empty value
+- Verify `helperText` is set to display error message
+- Ensure error styling is not overridden by CSS
+
+### Label Overlapping Text
+
+**Problem:** Label covers input text.
+
+**Solutions:**
+- This typically happens with MUI when shrink is not set
+- Ensure value is controlled or defaultValue is set
+- May need explicit `InputLabelProps={{ shrink: true }}`
+
+---
+
+## 📝 Validation Patterns
+
+### Email Validation
+
+```tsx
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+<Input
+  type="email"
+  label="Email"
+  value={email}
+  onChange={(e) => {
+    const value = e.target.value;
+    setEmail(value);
+    setError(emailRegex.test(value) ? '' : 'Invalid email');
+  }}
+  error={error}
+  required
+/>
+```
+
+### Password Strength
+
+```tsx
+const validatePassword = (pwd: string) => {
+  if (pwd.length < 8) return 'At least 8 characters';
+  if (!/[A-Z]/.test(pwd)) return 'Include uppercase letter';
+  if (!/[0-9]/.test(pwd)) return 'Include a number';
+  return '';
+};
+
+<Input
+  type="password"
+  label="Password"
+  value={password}
+  onChange={(e) => {
+    setPassword(e.target.value);
+    setError(validatePassword(e.target.value));
+  }}
+  error={error}
+  helperText={error || 'Strong password required'}
+/>
+```
+
+### Real-time Validation
+
+```tsx
+const [value, setValue] = useState('');
+const [error, setError] = useState('');
+
+// Debounced validation
+useEffect(() => {
+  const timer = setTimeout(() => {
+    if (value && value.length < 3) {
+      setError('At least 3 characters');
+    } else {
+      setError('');
+    }
+  }, 500);
+
+  return () => clearTimeout(timer);
+}, [value]);
+
+<Input
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+  error={error}
+  helperText={error}
+/>
+```
+
+---
+
+## 🎯 Best Practices
+
+### Do's ✅
+
+- Always provide `label` for accessibility
+- Use appropriate `type` for input purpose
+- Show validation errors with `helperText`
+- Use `required` for mandatory fields
+- Provide clear placeholder text as hints
+- Test with screen readers
+
+### Don'ts ❌
+
+- Don't use placeholder as the only label
+- Don't validate on every keystroke (debounce)
+- Don't disable autocomplete unnecessarily
+- Don't use `type="number"` for credit cards or phone numbers
+- Don't hide password requirements until after submit
+
+---
+
+**Last Updated:** January 2026  
+**Component Version:** 3.3.0  
+**Status:** ✅ Stable

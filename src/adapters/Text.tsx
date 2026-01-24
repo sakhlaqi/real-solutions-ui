@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Text as InternalText, TextProps } from '../typography';
+import { Text as InternalText, TextProps } from '../core/components/typography';
 
 /**
  * Adaptive Text Component

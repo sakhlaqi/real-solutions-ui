@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Spacer as InternalSpacer, SpacerProps } from '../layout';
+import { Spacer as InternalSpacer, SpacerProps } from '../core/components/layout';
 
 /**
  * Adaptive Spacer Component

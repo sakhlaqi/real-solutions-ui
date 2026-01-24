@@ -48,8 +48,8 @@ async function loadComponentAdapters(): Promise<ComponentAdapterMap> {
   }
 
   const [muiComposites, internalComposites] = await Promise.all([
-    import('../mui/composites'),
-    import('../internal/composites'),
+    import('./mui/composites'),
+    import('./internal/composites'),
   ]);
 
   componentAdaptersCache = {
@@ -77,8 +77,8 @@ async function loadTemplateAdapters(): Promise<TemplateAdapterMap> {
   }
 
   const [muiTemplates, internalTemplates] = await Promise.all([
-    import('../mui/templates'),
-    import('../internal/templates'),
+    import('./mui/templates'),
+    import('./internal/templates'),
   ]);
 
   templateAdaptersCache = {

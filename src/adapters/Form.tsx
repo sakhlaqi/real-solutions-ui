@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Form as InternalForm, FormProps } from '../forms';
+import { Form as InternalForm, FormProps } from '../core/components/forms';
 
 /**
  * Adaptive Form Component

@@ -1,0 +1,299 @@
+/**
+ * Visual Regression Testing Styles
+ * 
+ * Global CSS to make stories deterministic and stable for visual regression testing.
+ * This file should be conditionally loaded when running visual regression tests.
+ */
+
+/* 
+ * Disable all animations and transitions
+ * This prevents timing issues in visual regression tests
+ */
+.disable-animations *,
+.disable-animations *::before,
+.disable-animations *::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* 
+ * Disable hover effects during testing
+ * Prevents flaky tests due to cursor position
+ */
+.disable-animations *:hover {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 
+ * Disable focus animations
+ * Ensures consistent focus state in screenshots
+ */
+.disable-animations *:focus {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 
+ * Disable scroll behavior
+ * Ensures instant scrolling for consistent screenshots
+ */
+.disable-animations {
+  scroll-behavior: auto !important;
+}
+
+/* 
+ * Disable smooth scrolling
+ */
+.disable-animations * {
+  scroll-behavior: auto !important;
+}
+
+/* 
+ * Disable MUI transitions
+ */
+.disable-animations .MuiCollapse-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiSlide-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiFade-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiGrow-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiZoom-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable Ripple effect
+ */
+.disable-animations .MuiTouchRipple-root {
+  display: none !important;
+}
+
+/* 
+ * Disable skeleton animation
+ */
+.disable-animations .MuiSkeleton-root {
+  animation: none !important;
+}
+
+/* 
+ * Disable linear progress animation
+ */
+.disable-animations .MuiLinearProgress-bar {
+  animation: none !important;
+  transition: none !important;
+}
+
+.disable-animations .MuiLinearProgress-barColorPrimary {
+  animation: none !important;
+}
+
+.disable-animations .MuiLinearProgress-barColorSecondary {
+  animation: none !important;
+}
+
+/* 
+ * Disable circular progress animation
+ */
+.disable-animations .MuiCircularProgress-svg {
+  animation: none !important;
+}
+
+.disable-animations .MuiCircularProgress-circle {
+  animation: none !important;
+}
+
+/* 
+ * Stable image rendering
+ * Prevents image loading artifacts
+ */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* 
+ * Font rendering consistency
+ * Ensures text renders consistently across screenshots
+ */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 
+ * Disable cursor for screenshots
+ * Prevents cursor from appearing in visual tests
+ */
+.disable-animations {
+  cursor: default !important;
+}
+
+.disable-animations * {
+  cursor: inherit !important;
+}
+
+/* 
+ * Disable backdrop filter animations
+ * Prevents blur transition timing issues
+ */
+.disable-animations .MuiBackdrop-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable modal transitions
+ */
+.disable-animations .MuiModal-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiDialog-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable drawer transitions
+ */
+.disable-animations .MuiDrawer-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiDrawer-paper {
+  transition: none !important;
+}
+
+/* 
+ * Disable snackbar transitions
+ */
+.disable-animations .MuiSnackbar-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable tooltip transitions
+ */
+.disable-animations .MuiTooltip-tooltip {
+  transition: none !important;
+}
+
+/* 
+ * Disable menu transitions
+ */
+.disable-animations .MuiMenu-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiPaper-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable accordion transitions
+ */
+.disable-animations .MuiAccordion-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiAccordionDetails-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable tab indicator animation
+ */
+.disable-animations .MuiTabs-indicator {
+  transition: none !important;
+}
+
+/* 
+ * Disable stepper transitions
+ */
+.disable-animations .MuiStepConnector-line {
+  transition: none !important;
+}
+
+/* 
+ * Disable switch transitions
+ */
+.disable-animations .MuiSwitch-thumb {
+  transition: none !important;
+}
+
+.disable-animations .MuiSwitch-track {
+  transition: none !important;
+}
+
+/* 
+ * Disable checkbox and radio transitions
+ */
+.disable-animations .MuiCheckbox-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiRadio-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable chip transitions
+ */
+.disable-animations .MuiChip-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiChip-deleteIcon {
+  transition: none !important;
+}
+
+/* 
+ * Disable button transitions
+ */
+.disable-animations .MuiButton-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiIconButton-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable form control transitions
+ */
+.disable-animations .MuiOutlinedInput-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiInputLabel-root {
+  transition: none !important;
+}
+
+.disable-animations .MuiFormHelperText-root {
+  transition: none !important;
+}
+
+/* 
+ * Disable all keyframe animations
+ */
+@media (prefers-reduced-motion: reduce) {
+  .disable-animations *,
+  .disable-animations *::before,
+  .disable-animations *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
