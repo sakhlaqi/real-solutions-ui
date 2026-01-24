@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "title": "List Detail View",
+  "description": "Master-detail layout with list and detail panels",
+  "template": {
+    "type": "TwoColumnLayout",
+    "props": {
+      "leftWidth": 0.3,
+      "gap": 16
+    },
+    "slots": {
+      "header": {
+        "type": "HeaderComposite",
+        "props": {
+          "title": "Employee Directory",
+          "subtitle": "View and manage employee information",
+          "breadcrumbs": [
+            { "label": "Home", "href": "/" },
+            { "label": "Employees", "href": "/employees" }
+          ],
+          "showBackButton": true,
+          "actions": [
+            { "id": "add", "label": "Add Employee", "variant": "primary" }
+          ]
+        }
+      },
+      "left": {
+        "type": "SearchGridComposite",
+        "props": {
+          "dataSource": "employees",
+          "columns": [
+            { "id": "name", "label": "Name", "field": "name" }
+          ],
+          "data": [
+            { "id": 1, "name": "John Doe" },
+            { "id": 2, "name": "Jane Smith" },
+            { "id": 3, "name": "Bob Johnson" },
+            { "id": 4, "name": "Alice Williams" }
+          ],
+          "searchEnabled": true,
+          "searchPlaceholder": "Search employees...",
+          "selectionMode": "single"
+        }
+      },
+      "right": {
+        "type": "Card",
+        "props": {
+          "title": "Employee Details",
+          "padding": "lg"
+        },
+        "children": [
+          {
+            "type": "Text",
+            "props": {
+              "children": "Select an employee from the list to view their details."
+            }
+          }
+        ]
+      }
+    }
+  }
+}

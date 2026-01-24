@@ -10,6 +10,23 @@ export { UIProvider, useUIContext, withUIProvider } from './context';
 // Theme exports
 export { getDesignTokens, applyCSSTokens, createMUITheme } from './theme';
 
+// Template exports
+export {
+  DashboardLayout,
+  TwoColumnLayout,
+  TabsLayout,
+} from './templates';
+
+// Composite exports
+export {
+  SearchGridComposite,
+  HeaderComposite,
+  SidebarComposite,
+} from './composites';
+
+// Behavior exports
+export * from './behaviors';
+
 // Type exports (explicit to avoid UIProvider name conflict)
 export type {
   UIProvider as UIProviderType,
@@ -67,5 +84,25 @@ export type {
   GridProps,
   PaperProps,
   TypographyProps,
+  // Template types
+  BaseSlots,
+  DashboardLayoutSlots,
+  TwoColumnLayoutSlots,
+  TabsLayoutSlots,
+  BaseLayoutProps,
+  DashboardLayoutProps,
+  TwoColumnLayoutProps,
+  TabsLayoutProps,
+  // Composite types
+  ColumnDefinition,
+  FilterDefinition,
+  ActionDefinition,
+  NavigationItem,
+  BreadcrumbItem,
+  FormFieldDefinition,
+  SearchGridCompositeProps,
+  HeaderCompositeProps,
+  SidebarCompositeProps,
+  FormCompositeProps,
 } from './types';
 

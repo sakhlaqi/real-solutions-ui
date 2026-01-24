@@ -5,6 +5,29 @@
  * They provide MUI-based implementations with consistent APIs.
  */
 
+// Provider-Adapter Integration
+export type { UIProvider } from './resolver';
+export {
+  resolveComponentAdapter,
+  resolveTemplateAdapter,
+  hasComponentAdapter,
+  hasTemplateAdapter,
+  getComponentAdapterTypes,
+  getTemplateAdapterTypes,
+  clearAdapterCache,
+} from './resolver';
+
+// MUI Composite Adapters
+export * from './mui/composites';
+// MUI Template Adapters
+export * from './mui/templates';
+
+// Internal Composite Adapters
+export * from './internal/composites';
+// Internal Template Adapters
+export * from './internal/templates';
+
+// Atomic UI Components
 export { Button } from './Button';
 export { IconButton } from './IconButton';
 export { Input } from './Input';

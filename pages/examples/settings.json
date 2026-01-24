@@ -1,0 +1,92 @@
+{
+  "version": "1.0.0",
+  "title": "Settings",
+  "description": "Application settings with tabbed navigation",
+  "template": {
+    "type": "TabsLayout",
+    "props": {
+      "activeTab": "profile",
+      "tabLabels": {
+        "profile": "Profile",
+        "account": "Account",
+        "notifications": "Notifications",
+        "security": "Security"
+      }
+    },
+    "slots": {
+      "header": {
+        "type": "HeaderComposite",
+        "props": {
+          "title": "Settings",
+          "subtitle": "Manage your account preferences",
+          "breadcrumbs": [
+            { "label": "Home", "href": "/" },
+            { "label": "Settings", "href": "/settings" }
+          ]
+        }
+      },
+      "tabs": {
+        "profile": {
+          "type": "Card",
+          "props": {
+            "title": "Profile Information",
+            "padding": "lg"
+          },
+          "children": [
+            {
+              "type": "Text",
+              "props": {
+                "children": "Update your profile information and photo."
+              }
+            }
+          ]
+        },
+        "account": {
+          "type": "Card",
+          "props": {
+            "title": "Account Settings",
+            "padding": "lg"
+          },
+          "children": [
+            {
+              "type": "Text",
+              "props": {
+                "children": "Manage your account settings and preferences."
+              }
+            }
+          ]
+        },
+        "notifications": {
+          "type": "Card",
+          "props": {
+            "title": "Notification Preferences",
+            "padding": "lg"
+          },
+          "children": [
+            {
+              "type": "Text",
+              "props": {
+                "children": "Configure how you receive notifications."
+              }
+            }
+          ]
+        },
+        "security": {
+          "type": "Card",
+          "props": {
+            "title": "Security Settings",
+            "padding": "lg"
+          },
+          "children": [
+            {
+              "type": "Text",
+              "props": {
+                "children": "Manage your security preferences and two-factor authentication."
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

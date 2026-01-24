@@ -1,0 +1,81 @@
+{
+  "version": "1.0.0",
+  "title": "Dashboard",
+  "description": "Main application dashboard with widgets and data grid",
+  "template": {
+    "type": "DashboardLayout",
+    "props": {
+      "sidebarWidth": 280,
+      "sidebarVisible": true
+    },
+    "slots": {
+      "header": {
+        "type": "HeaderComposite",
+        "props": {
+          "title": "Dashboard",
+          "subtitle": "Welcome back! Here's what's happening today.",
+          "breadcrumbs": [
+            { "label": "Home", "href": "/" },
+            { "label": "Dashboard", "href": "/dashboard" }
+          ]
+        }
+      },
+      "sidebar": {
+        "type": "SidebarComposite",
+        "props": {
+          "items": [
+            {
+              "id": "dashboard",
+              "label": "Dashboard",
+              "icon": "📊",
+              "href": "/dashboard"
+            },
+            {
+              "id": "employees",
+              "label": "Employees",
+              "icon": "👥",
+              "badge": { "label": "12", "variant": "info" },
+              "children": [
+                { "id": "employees-list", "label": "All Employees", "href": "/employees" },
+                { "id": "employees-new", "label": "Add Employee", "href": "/employees/new" }
+              ]
+            },
+            {
+              "id": "reports",
+              "label": "Reports",
+              "icon": "📈",
+              "href": "/reports"
+            },
+            {
+              "id": "settings",
+              "label": "Settings",
+              "icon": "⚙️",
+              "href": "/settings"
+            }
+          ],
+          "activeItemId": "dashboard"
+        }
+      },
+      "main": {
+        "type": "SearchGridComposite",
+        "props": {
+          "dataSource": "employees",
+          "columns": [
+            { "id": "name", "label": "Name", "field": "name", "sortable": true },
+            { "id": "email", "label": "Email", "field": "email" },
+            { "id": "department", "label": "Department", "field": "department", "sortable": true },
+            { "id": "role", "label": "Role", "field": "role" }
+          ],
+          "data": [
+            { "id": 1, "name": "John Doe", "email": "john@example.com", "department": "Engineering", "role": "Senior Engineer" },
+            { "id": 2, "name": "Jane Smith", "email": "jane@example.com", "department": "Design", "role": "Lead Designer" },
+            { "id": 3, "name": "Bob Johnson", "email": "bob@example.com", "department": "Engineering", "role": "Engineer" }
+          ],
+          "searchEnabled": true,
+          "searchPlaceholder": "Search employees...",
+          "defaultPageSize": 10
+        }
+      }
+    }
+  }
+}

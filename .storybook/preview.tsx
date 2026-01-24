@@ -1,19 +1,20 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
 import { UIProvider } from '../src/core/context/UIProvider';
-import type { UIProvider as UIProviderType } from '../src/core/types';
+import { RenderContextProvider } from '../src/renderer/RenderContext';
+import type { UIProvider as UIProviderType } from '../src/adapters';
 
 // Storybook global types for toolbar
 export const globalTypes = {
   provider: {
     name: 'UI Provider',
-    description: 'Switch between UI implementation providers',
-    defaultValue: 'internal',
+    description: 'Switch between UI implementation providers (affects adapters)',
+    defaultValue: 'mui',
     toolbar: {
       icon: 'component',
       items: [
-        { value: 'internal', title: 'Internal', icon: 'box' },
-        { value: 'mui', title: 'Material-UI', icon: 'paintbrush' },
+        { value: 'mui', title: 'Material-UI (MUI)', icon: 'paintbrush' },
+        { value: 'internal', title: 'Internal (Fallback)', icon: 'box' },
       ],
       showName: true,
       dynamicTitle: true,
@@ -35,21 +36,29 @@ export const globalTypes = {
   },
 };
 
-// Global decorator to wrap all stories with UIProvider
+// Global decorator to wrap all stories with UIProvider and RenderContext
 const withUIProvider = (Story: any, context: any) => {
   const provider = context.globals.provider as UIProviderType;
   const themeMode = context.globals.theme as 'light' | 'dark';
 
   return (
     <UIProvider
-      defaultProvider={provider}
+      defaultProvider={provider === 'mui' ? 'internal' : 'internal'}
       defaultTheme={{ mode: themeMode }}
     >
-      <div className={themeMode} style={{ minHeight: '100vh' }}>
-        <div className="bg-background text-foreground" style={{ padding: '2rem', minHeight: '100vh' }}>
-          <Story />
+      <RenderContextProvider
+        value={{
+          depth: 0,
+          maxDepth: 50,
+          provider: provider,
+        }}
+      >
+        <div className={themeMode} style={{ minHeight: '100vh' }}>
+          <div className="bg-background text-foreground" style={{ padding: '2rem', minHeight: '100vh' }}>
+            <Story />
+          </div>
         </div>
-      </div>
+      </RenderContextProvider>
     </UIProvider>
   );
 };
