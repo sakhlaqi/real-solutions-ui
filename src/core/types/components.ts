@@ -295,10 +295,12 @@ export interface AccordionItem {
 
 export interface AccordionProps {
   items: AccordionItem[];
+  expanded?: string | string[];
   defaultExpanded?: string | string[];
   multiple?: boolean;
   onChange?: (expandedIds: string | string[]) => void;
   className?: string;
+  disabled?: boolean;
 }
 
 export interface TabItem {

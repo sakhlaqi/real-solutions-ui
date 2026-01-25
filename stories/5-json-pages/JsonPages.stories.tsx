@@ -31,7 +31,7 @@ function PageStoryWrapper({ config }: { config: any }) {
 
   if (!validation.success) {
     // Display validation errors inline
-    const errors = validation.error ? parseZodErrors(validation.error) : [];
+    const errors = validation.errors || [];
     return (
       <>
         <ValidationErrorDisplay 
@@ -553,18 +553,21 @@ The validator will show:
   },
   render: () => {
     const invalidConfig = {
-      version: '1.0.0',
-      title: 'Invalid Page',
-      description: 'This config has validation errors',
-      template: {
-        type: 'NonExistentTemplate',
-        props: {},
-        slots: {},
+      meta: {
+        title: 'Invalid Page',
+        description: 'This config has validation errors',
+      },
+      template: 'NonExistentTemplate', // Invalid: template doesn't exist
+      slots: {
+        main: {
+          type: 'InvalidComponent', // Invalid: component doesn't exist
+          props: {},
+        },
       },
     };
 
     const validation = validatePageConfig(invalidConfig);
-    const errors = validation.error ? parseZodErrors(validation.error) : [];
+    const errors = validation.errors || [];
 
     return (
       <div style={{ padding: '24px' }}>

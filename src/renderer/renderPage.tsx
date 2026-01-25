@@ -112,26 +112,74 @@ export function PageRenderer({
   const [adapterWarnings, setAdapterWarnings] = useState<AdapterWarning[]>([]);
 
   // Parse and validate config
-  const pageConfig = useMemo<PageConfig | null>(() => {
+  const validationResult = useMemo(() => {
     try {
       // Parse JSON if string
       const parsedConfig = typeof config === 'string' ? JSON.parse(config) : config;
 
       // Validate config
-      const validation = validatePageConfig(parsedConfig);
-      if (!validation.success) {
-        console.error('[PageRenderer] Validation failed:', validation.errors);
-        throw new Error(
-          `Page configuration validation failed: ${validation.errors?.map((e) => e.message).join(', ')}`
-        );
-      }
-
-      return validation.data!;
+      return validatePageConfig(parsedConfig);
     } catch (error) {
-      console.error('[PageRenderer] Failed to parse/validate config:', error);
-      throw error;
+      console.error('[PageRenderer] Failed to parse config:', error);
+      return {
+        success: false,
+        errors: [{
+          path: [],
+          message: error instanceof Error ? error.message : 'Failed to parse configuration',
+          code: 'PARSE_ERROR',
+        }],
+      };
     }
   }, [config]);
+
+  // If validation failed, show validation errors
+  if (!validationResult.success) {
+    console.error('[PageRenderer] Validation failed:', validationResult.errors);
+    const errorMessage = validationResult.errors?.map((e) => e.message).join(', ') || 'Unknown validation error';
+    
+    return (
+      <div style={{ 
+        padding: '24px', 
+        color: '#c92a2a', 
+        border: '2px solid #ff6b6b', 
+        borderRadius: '8px',
+        backgroundColor: '#fff5f5',
+        margin: '16px' 
+      }}>
+        <h2 style={{ marginTop: 0 }}>❌ Page Configuration Validation Failed</h2>
+        <p><strong>The following validation errors were found:</strong></p>
+        <ul style={{ marginBottom: '16px' }}>
+          {validationResult.errors?.map((err, idx) => (
+            <li key={idx} style={{ marginBottom: '8px' }}>
+              {err.path.length > 0 && <><code style={{ 
+                backgroundColor: '#f1f3f5',
+                padding: '2px 6px',
+                borderRadius: '4px',
+                marginRight: '8px'
+              }}>{err.path.join('.')}</code></>}
+              {err.message}
+              {err.code && <span style={{ color: '#868e96', fontSize: '0.85em' }}> ({err.code})</span>}
+            </li>
+          ))}
+        </ul>
+        <details>
+          <summary style={{ cursor: 'pointer', marginBottom: '8px' }}>View Raw Errors</summary>
+          <pre style={{ 
+            fontSize: '12px', 
+            overflow: 'auto',
+            backgroundColor: '#f8f9fa',
+            padding: '12px',
+            borderRadius: '4px',
+            border: '1px solid #dee2e6'
+          }}>
+            {JSON.stringify(validationResult.errors, null, 2)}
+          </pre>
+        </details>
+      </div>
+    );
+  }
+
+  const pageConfig = validationResult.data!;
 
   // Error handler
   const handleError = (error: RenderError) => {
@@ -142,10 +190,6 @@ export function PageRenderer({
   };
 
   // Render with error handling
-  if (!pageConfig) {
-    return <ErrorComponent error={new Error('Invalid page configuration')} errors={errors} />;
-  }
-
   return (
     <PageRendererInternal
       config={pageConfig}

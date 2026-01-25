@@ -79,7 +79,7 @@ function InvalidConfigDemo({
       {!result.success && (
         <div style={{ marginBottom: '20px' }}>
           <ValidationErrorDisplay
-            errors={result.error.errors}
+            errors={result.errors || []}
             title="Schema Validation Failed"
             collapsible={false}
           />

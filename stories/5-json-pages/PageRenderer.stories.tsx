@@ -145,37 +145,33 @@ type Story = StoryObj<typeof meta>;
 export const Minimal: Story = {
   args: {
     config: {
-      version: '1.0.0',
-      title: 'Minimal Page',
-      description: 'A minimal page with just a header',
-      template: {
-        type: 'DashboardLayout',
-        props: {
-          sidebarVisible: false,
+      meta: {
+        title: 'Minimal Page',
+        description: 'A minimal page with just a header',
+      },
+      template: 'DashboardLayout',
+      slots: {
+        header: {
+          type: 'HeaderComposite',
+          props: {
+            title: 'Minimal Page',
+            subtitle: 'This page has just a header and main content area.',
+          },
         },
-        slots: {
-          header: {
-            type: 'HeaderComposite',
-            props: {
-              title: 'Minimal Page',
-              subtitle: 'This page has just a header and main content area.',
-            },
+        main: {
+          type: 'Card',
+          props: {
+            title: 'Welcome',
+            padding: 'lg',
           },
-          main: {
-            type: 'Card',
-            props: {
-              title: 'Welcome',
-              padding: 'lg',
-            },
-            children: [
-              {
-                type: 'Text',
-                props: {
-                  children: 'This is a minimal page configuration with just a header and a card.',
-                },
+          children: [
+            {
+              type: 'Text',
+              props: {
+                children: 'This is a minimal page configuration with just a header and a card.',
               },
-            ],
-          },
+            },
+          ],
         },
       },
     } as PageConfig,
@@ -188,119 +184,114 @@ export const Minimal: Story = {
 export const Complex: Story = {
   args: {
     config: {
-      version: '1.0.0',
-      title: 'Complex Page',
-      description: 'A complex page demonstrating nested components',
-      template: {
-        type: 'DashboardLayout',
-        props: {
-          sidebarWidth: 320,
-          sidebarVisible: true,
+      meta: {
+        title: 'Complex Page',
+        description: 'A complex page demonstrating nested components',
+      },
+      template: 'DashboardLayout',
+      slots: {
+        header: {
+          type: 'HeaderComposite',
+          props: {
+            title: 'Project Management',
+            subtitle: 'Manage your projects and team',
+            breadcrumbs: [
+              { label: 'Home', href: '/' },
+              { label: 'Projects', href: '/projects' },
+              { label: 'Project Alpha', href: '/projects/1' },
+            ],
+            showBackButton: true,
+            actions: [
+              { id: 'save', label: 'Save', variant: 'primary' },
+              { id: 'delete', label: 'Delete', variant: 'danger' },
+            ],
+          },
         },
-        slots: {
-          header: {
-            type: 'HeaderComposite',
-            props: {
-              title: 'Project Management',
-              subtitle: 'Manage your projects and team',
-              breadcrumbs: [
-                { label: 'Home', href: '/' },
-                { label: 'Projects', href: '/projects' },
-                { label: 'Project Alpha', href: '/projects/1' },
-              ],
-              showBackButton: true,
-              actions: [
-                { id: 'save', label: 'Save', variant: 'primary' },
-                { id: 'delete', label: 'Delete', variant: 'danger' },
-              ],
-            },
+        sidebar: {
+          type: 'SidebarComposite',
+          props: {
+            items: [
+              { id: 'overview', label: 'Overview', icon: '📊', href: '/projects/1' },
+              { 
+                id: 'tasks', 
+                label: 'Tasks', 
+                icon: '✅',
+                badge: { label: '5', variant: 'warning' },
+                children: [
+                  { id: 'tasks-active', label: 'Active', href: '/projects/1/tasks/active' },
+                  { id: 'tasks-completed', label: 'Completed', href: '/projects/1/tasks/completed' },
+                ]
+              },
+              { id: 'team', label: 'Team', icon: '👥', href: '/projects/1/team' },
+              { id: 'files', label: 'Files', icon: '📁', badge: { label: '12', variant: 'info' }, href: '/projects/1/files' },
+              { id: 'settings', label: 'Settings', icon: '⚙️', href: '/projects/1/settings' },
+            ],
+            activeItemId: 'tasks-active',
           },
-          sidebar: {
-            type: 'SidebarComposite',
-            props: {
-              items: [
-                { id: 'overview', label: 'Overview', icon: '📊', href: '/projects/1' },
-                { 
-                  id: 'tasks', 
-                  label: 'Tasks', 
-                  icon: '✅',
-                  badge: { label: '5', variant: 'warning' },
-                  children: [
-                    { id: 'tasks-active', label: 'Active', href: '/projects/1/tasks/active' },
-                    { id: 'tasks-completed', label: 'Completed', href: '/projects/1/tasks/completed' },
-                  ]
-                },
-                { id: 'team', label: 'Team', icon: '👥', href: '/projects/1/team' },
-                { id: 'files', label: 'Files', icon: '📁', badge: { label: '12', variant: 'info' }, href: '/projects/1/files' },
-                { id: 'settings', label: 'Settings', icon: '⚙️', href: '/projects/1/settings' },
-              ],
-              activeItemId: 'tasks-active',
-            },
+        },
+        main: {
+          type: 'SearchGridComposite',
+          props: {
+            dataSource: 'tasks',
+            columns: [
+              { id: 'title', label: 'Task', field: 'title', sortable: true },
+              { id: 'assignee', label: 'Assignee', field: 'assignee' },
+              { id: 'status', label: 'Status', field: 'status', sortable: true },
+              { id: 'priority', label: 'Priority', field: 'priority', sortable: true },
+              { id: 'dueDate', label: 'Due Date', field: 'dueDate', sortable: true },
+            ],
+            data: [
+              { id: 1, title: 'Implement login', assignee: 'John Doe', status: 'In Progress', priority: 'High', dueDate: '2024-02-15' },
+              { id: 2, title: 'Design dashboard', assignee: 'Jane Smith', status: 'In Progress', priority: 'High', dueDate: '2024-02-16' },
+              { id: 3, title: 'Write documentation', assignee: 'Bob Johnson', status: 'Not Started', priority: 'Medium', dueDate: '2024-02-20' },
+              { id: 4, title: 'Setup CI/CD', assignee: 'Alice Williams', status: 'Not Started', priority: 'Low', dueDate: '2024-02-22' },
+              { id: 5, title: 'Code review', assignee: 'Charlie Brown', status: 'Completed', priority: 'Medium', dueDate: '2024-02-10' },
+            ],
+            filters: [
+              {
+                id: 'status',
+                label: 'Status',
+                type: 'select',
+                field: 'status',
+                options: [
+                  { label: 'In Progress', value: 'In Progress' },
+                  { label: 'Not Started', value: 'Not Started' },
+                  { label: 'Completed', value: 'Completed' },
+                ],
+              },
+              {
+                id: 'priority',
+                label: 'Priority',
+                type: 'select',
+                field: 'priority',
+                options: [
+                  { label: 'High', value: 'High' },
+                  { label: 'Medium', value: 'Medium' },
+                  { label: 'Low', value: 'Low' },
+                ],
+              },
+            ],
+            searchEnabled: true,
+            searchPlaceholder: 'Search tasks...',
+            selectionMode: 'multiple',
+            rowActions: (row: any) => [
+              { id: 'edit', label: 'Edit', variant: 'contained', color: 'primary', onClick: () => console.log('Edit', row) },
+              { id: 'delete', label: 'Delete', variant: 'outlined', color: 'error', onClick: () => console.log('Delete', row) },
+            ],
+            toolbarActions: [
+              { id: 'add', label: 'Add Task', variant: 'contained', color: 'primary', onClick: () => console.log('Add task') },
+              { id: 'export', label: 'Export', variant: 'outlined', color: 'primary', onClick: () => console.log('Export') },
+            ],
+            defaultPageSize: 5,
+            pageSizeOptions: [5, 10, 25],
           },
-          main: {
-            type: 'SearchGridComposite',
-            props: {
-              dataSource: 'tasks',
-              columns: [
-                { id: 'title', label: 'Task', field: 'title', sortable: true },
-                { id: 'assignee', label: 'Assignee', field: 'assignee' },
-                { id: 'status', label: 'Status', field: 'status', sortable: true },
-                { id: 'priority', label: 'Priority', field: 'priority', sortable: true },
-                { id: 'dueDate', label: 'Due Date', field: 'dueDate', sortable: true },
-              ],
-              data: [
-                { id: 1, title: 'Implement login', assignee: 'John Doe', status: 'In Progress', priority: 'High', dueDate: '2024-02-15' },
-                { id: 2, title: 'Design dashboard', assignee: 'Jane Smith', status: 'In Progress', priority: 'High', dueDate: '2024-02-16' },
-                { id: 3, title: 'Write documentation', assignee: 'Bob Johnson', status: 'Not Started', priority: 'Medium', dueDate: '2024-02-20' },
-                { id: 4, title: 'Setup CI/CD', assignee: 'Alice Williams', status: 'Not Started', priority: 'Low', dueDate: '2024-02-22' },
-                { id: 5, title: 'Code review', assignee: 'Charlie Brown', status: 'Completed', priority: 'Medium', dueDate: '2024-02-10' },
-              ],
-              filters: [
-                {
-                  id: 'status',
-                  label: 'Status',
-                  type: 'select',
-                  field: 'status',
-                  options: [
-                    { label: 'In Progress', value: 'In Progress' },
-                    { label: 'Not Started', value: 'Not Started' },
-                    { label: 'Completed', value: 'Completed' },
-                  ],
-                },
-                {
-                  id: 'priority',
-                  label: 'Priority',
-                  type: 'select',
-                  field: 'priority',
-                  options: [
-                    { label: 'High', value: 'High' },
-                    { label: 'Medium', value: 'Medium' },
-                    { label: 'Low', value: 'Low' },
-                  ],
-                },
-              ],
-              searchEnabled: true,
-              searchPlaceholder: 'Search tasks...',
-              selectionMode: 'multiple',
-              rowActions: (row: any) => [
-                { id: 'edit', label: 'Edit', variant: 'contained', color: 'primary', onClick: () => console.log('Edit', row) },
-                { id: 'delete', label: 'Delete', variant: 'outlined', color: 'error', onClick: () => console.log('Delete', row) },
-              ],
-              toolbarActions: [
-                { id: 'add', label: 'Add Task', variant: 'contained', color: 'primary', onClick: () => console.log('Add task') },
-                { id: 'export', label: 'Export', variant: 'outlined', color: 'primary', onClick: () => console.log('Export') },
-              ],
-              defaultPageSize: 5,
-              pageSizeOptions: [5, 10, 25],
-            },
-          },
-          footer: {
-            type: 'Text',
-            props: {
-              children: '© 2024 Project Management System',
-              size: 'sm',
-              color: 'secondary',
-            },
+        },
+        footer: {
+          type: 'Text',
+          props: {
+            children: '© 2024 Project Management System',
+            size: 'sm',
+            color: 'secondary',
           },
         },
       },
@@ -314,14 +305,12 @@ export const Complex: Story = {
 export const InvalidTemplate: Story = {
   args: {
     config: {
-      version: '1.0.0',
-      title: 'Invalid Template',
-      description: 'This will show an error',
-      template: {
-        type: 'NonExistentTemplate' as any,
-        props: {},
-        slots: {},
+      meta: {
+        title: 'Invalid Template',
+        description: 'This will show an error',
       },
+      template: 'NonExistentTemplate' as any,
+      slots: {},
     } as PageConfig,
   },
 };
@@ -332,19 +321,15 @@ export const InvalidTemplate: Story = {
 export const InvalidComponent: Story = {
   args: {
     config: {
-      version: '1.0.0',
-      title: 'Invalid Component',
-      description: 'This will show an error',
-      template: {
-        type: 'DashboardLayout',
-        props: {
-          sidebarVisible: false,
-        },
-        slots: {
-          main: {
-            type: 'NonExistentComponent' as any,
-            props: {},
-          },
+      meta: {
+        title: 'Invalid Component',
+        description: 'This will show an error',
+      },
+      template: 'DashboardLayout',
+      slots: {
+        main: {
+          type: 'NonExistentComponent' as any,
+          props: {},
         },
       },
     } as PageConfig,

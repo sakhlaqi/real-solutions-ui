@@ -13,7 +13,7 @@ import {
 } from '../providers/mui';
 
 export interface SimpleTreeViewProps {
-  items: SimpleTreeViewItem[];
+  items?: SimpleTreeViewItem[];
   defaultExpanded?: string[];
   defaultSelected?: string | string[];
   expanded?: string[];
@@ -26,6 +26,7 @@ export interface SimpleTreeViewProps {
   onNodeFocus?: (event: React.SyntheticEvent | null, nodeId: string) => void;
   className?: string;
   sx?: any;
+  children?: React.ReactNode;
 }
 
 /**

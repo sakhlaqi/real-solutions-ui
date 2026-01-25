@@ -277,6 +277,7 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
         pagination
         autoHeight
         disableColumnMenu
+        hideFooter={rowsWithIds.length === 0 && loading} // Hide footer when loading with no data to avoid state errors
         slots={{
           noRowsOverlay: () => (
             <Stack height="100%" alignItems="center" justifyContent="center">

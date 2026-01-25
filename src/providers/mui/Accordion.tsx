@@ -2,7 +2,7 @@
  * MUI Accordion Wrapper Component
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Accordion as MUIAccordion,
   AccordionSummary,
@@ -21,7 +21,8 @@ export interface AccordionItem {
 export interface AccordionProps {
   items: AccordionItem[];
   expanded?: string | string[];
-  onChange?: (id: string) => void;
+  defaultExpanded?: string | string[];
+  onChange?: (id: string | string[]) => void;
   multiple?: boolean;
   disabled?: boolean;
 }
@@ -31,10 +32,23 @@ export interface AccordionProps {
  */
 export const Accordion: React.FC<AccordionProps> = ({
   items,
-  expanded,
+  expanded: controlledExpanded,
+  defaultExpanded,
   onChange,
+  multiple = false,
   disabled = false,
 }) => {
+  // Internal state for uncontrolled mode
+  const [internalExpanded, setInternalExpanded] = useState<string | string[]>(() => {
+    if (defaultExpanded !== undefined) {
+      return defaultExpanded;
+    }
+    return multiple ? [] : '';
+  });
+
+  // Use controlled value if provided, otherwise use internal state
+  const expanded = controlledExpanded !== undefined ? controlledExpanded : internalExpanded;
+
   const isExpanded = (id: string) => {
     if (Array.isArray(expanded)) {
       return expanded.includes(id);
@@ -43,9 +57,29 @@ export const Accordion: React.FC<AccordionProps> = ({
   };
 
   const handleChange = (id: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
-    if (onChange && isExpanded) {
-      // Only trigger onChange when expanding (not collapsing)
-      onChange(id);
+    let newExpanded: string | string[];
+
+    if (multiple) {
+      // Multiple mode: manage array of expanded items
+      const currentExpanded = Array.isArray(expanded) ? expanded : expanded ? [expanded] : [];
+      if (isExpanded) {
+        newExpanded = [...currentExpanded, id];
+      } else {
+        newExpanded = currentExpanded.filter((item) => item !== id);
+      }
+    } else {
+      // Single mode: only one item can be expanded
+      newExpanded = isExpanded ? id : '';
+    }
+
+    // Update internal state if uncontrolled
+    if (controlledExpanded === undefined) {
+      setInternalExpanded(newExpanded);
+    }
+
+    // Call onChange callback
+    if (onChange) {
+      onChange(newExpanded);
     }
   };
 

@@ -74,6 +74,7 @@ export const Loading: Story = {
     columns: userColumns,
     loading: true,
     autoHeight: true,
+    hideFooter: true, // Hide footer to avoid state initialization issues with empty data
   },
 };
 
@@ -416,6 +417,7 @@ export const Empty: Story = {
     rows: [],
     columns: userColumns,
     autoHeight: true,
+    hideFooter: true, // Hide footer to avoid state initialization issues with empty data
   },
 };
 

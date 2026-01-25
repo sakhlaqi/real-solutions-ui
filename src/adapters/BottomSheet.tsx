@@ -9,7 +9,8 @@ import React from 'react';
 import { Drawer } from '../providers/mui';
 
 export interface BottomSheetProps {
-  isOpen: boolean;
+  open?: boolean;
+  isOpen?: boolean; // Deprecated: use 'open' instead
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
@@ -26,7 +27,7 @@ export interface BottomSheetProps {
  * @example
  * ```tsx
  * <BottomSheet
- *   isOpen={isOpen}
+ *   open={isOpen}
  *   onClose={() => setIsOpen(false)}
  *   snapPoints={[50, 100]}
  * >
@@ -35,6 +36,7 @@ export interface BottomSheetProps {
  * ```
  */
 export const BottomSheet: React.FC<BottomSheetProps> = ({
+  open,
   isOpen,
   onClose,
   title,
@@ -45,10 +47,12 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
   ...rest
 }) => {
   const height = snapPoints[0];
+  // Support both 'open' and 'isOpen' for backward compatibility
+  const isSheetOpen = open !== undefined ? open : (isOpen || false);
 
   return (
     <Drawer
-      open={isOpen}
+      open={isSheetOpen}
       onClose={onClose}
       anchor="bottom"
       width="100%"

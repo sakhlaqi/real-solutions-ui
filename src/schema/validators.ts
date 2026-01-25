@@ -37,6 +37,24 @@ export interface ValidationError {
  * Convert Zod errors to ValidationError format
  */
 function formatZodErrors(error: ZodError): ValidationError[] {
+  if (!error) {
+    console.error('[formatZodErrors] Error is null or undefined:', error);
+    return [{
+      path: [],
+      message: 'Error object is null or undefined',
+      code: 'NULL_ERROR',
+    }];
+  }
+  
+  if (!error.errors) {
+    console.error('[formatZodErrors] Error.errors is missing:', error);
+    return [{
+      path: [],
+      message: 'Error object missing errors array',
+      code: 'MISSING_ERRORS',
+    }];
+  }
+  
   return error.errors.map((err) => ({
     path: err.path.map(String),
     message: err.message,
@@ -60,12 +78,36 @@ export function validatePageConfig(config: unknown): ValidationResult<PageConfig
       data,
     };
   } catch (error) {
+    console.log('[validatePageConfig] Caught error:', error);
+    console.log('[validatePageConfig] Error instanceof ZodError:', error instanceof ZodError);
+    console.log('[validatePageConfig] Error type:', typeof error);
+    console.log('[validatePageConfig] Error constructor:', error?.constructor?.name);
+    console.log('[validatePageConfig] Has issues property:', 'issues' in (error as any));
+    console.log('[validatePageConfig] Has errors property:', 'errors' in (error as any));
+    
+    // Check for ZodError by duck-typing (more reliable with HMR)
+    if (error && typeof error === 'object' && 'issues' in error) {
+      const zodError = error as any;
+      console.log('[validatePageConfig] Using issues array:', zodError.issues);
+      return {
+        success: false,
+        errors: zodError.issues.map((err: any) => ({
+          path: err.path.map(String),
+          message: err.message,
+          code: err.code,
+        })),
+      };
+    }
+    
+    // Fallback for instanceof check
     if (error instanceof ZodError) {
+      console.log('[validatePageConfig] ZodError.errors:', error.errors);
       return {
         success: false,
         errors: formatZodErrors(error),
       };
     }
+    
     return {
       success: false,
       errors: [

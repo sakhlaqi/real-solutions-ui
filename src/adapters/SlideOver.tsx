@@ -9,7 +9,8 @@ import React from 'react';
 import { Drawer } from '../providers/mui';
 
 export interface SlideOverProps {
-  isOpen: boolean;
+  open?: boolean;
+  isOpen?: boolean; // Deprecated: use 'open' instead
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
@@ -35,7 +36,7 @@ const sizeMap = {
  * @example
  * ```tsx
  * <SlideOver
- *   isOpen={isOpen}
+ *   open={isOpen}
  *   onClose={() => setIsOpen(false)}
  *   position="right"
  * >
@@ -44,6 +45,7 @@ const sizeMap = {
  * ```
  */
 export const SlideOver: React.FC<SlideOverProps> = ({
+  open,
   isOpen,
   onClose,
   title,
@@ -55,9 +57,12 @@ export const SlideOver: React.FC<SlideOverProps> = ({
   className,
   ...rest
 }) => {
+  // Support both 'open' and 'isOpen' for backward compatibility
+  const isPanelOpen = open !== undefined ? open : (isOpen || false);
+
   return (
     <Drawer
-      open={isOpen}
+      open={isPanelOpen}
       onClose={onClose}
       anchor={position}
       width={sizeMap[size]}

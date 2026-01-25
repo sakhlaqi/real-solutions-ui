@@ -19,8 +19,8 @@ import { Button as MUIButton } from '../providers/mui';
  * <Button variant="contained">Click Me</Button>
  * ```
  */
-export const Button: React.FC<BaseButtonProps> = (props) => {
-  return <MUIButton {...props} />;
-};
+export const Button = React.forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref) => {
+  return <MUIButton {...props} ref={ref} />;
+});
 
 Button.displayName = 'AdapterButton';

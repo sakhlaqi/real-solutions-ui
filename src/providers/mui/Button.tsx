@@ -17,7 +17,7 @@ const colorMap = {
   success: 'success' as const,
 };
 
-export const Button: React.FC<BaseButtonProps> = ({
+export const Button = React.forwardRef<HTMLButtonElement, BaseButtonProps>(({
   children,
   onClick,
   disabled = false,
@@ -29,9 +29,10 @@ export const Button: React.FC<BaseButtonProps> = ({
   endIcon,
   className,
   type = 'button',
-}) => {
+}, ref) => {
   return (
     <MuiButton
+      ref={ref}
       onClick={onClick}
       disabled={disabled}
       variant={variant}
@@ -46,6 +47,6 @@ export const Button: React.FC<BaseButtonProps> = ({
       {children}
     </MuiButton>
   );
-};
+});
 
 Button.displayName = 'MUIButton';
