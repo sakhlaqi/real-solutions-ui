@@ -6,10 +6,10 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { UIProvider } from '../src/core/context/UIProvider';
-import { ThemeRegistry } from '../src/theme/registry';
-import { useTokens } from '../src/core/context/useTokens';
-import type { Theme } from '../src/theme.types';
+import { UIProvider } from '../core/context/UIProvider';
+import { ThemeRegistry } from '../theme/registry';
+import { useTokens } from '../core/context/useTokens';
+import type { Theme } from '../theme/theme.types';
 
 /**
  * Theme Preset Viewer Component
