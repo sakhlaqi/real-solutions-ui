@@ -8,7 +8,7 @@
 export { UIProvider, useUIContext, withUIProvider } from './context';
 
 // Theme exports
-export { getDesignTokens, applyCSSTokens, createMUITheme } from './theme';
+export { createMUIThemeFromTokens } from './theme';
 
 // Template exports
 export {
@@ -32,7 +32,6 @@ export type {
   UIProvider as UIProviderType,
   ThemeMode,
   ThemeConfig,
-  DesignTokens,
   Size,
   Variant,
   ColorVariant,
@@ -98,7 +97,6 @@ export type {
   FilterDefinition,
   ActionDefinition,
   NavigationItem,
-  BreadcrumbItem,
   FormFieldDefinition,
   SearchGridCompositeProps,
   HeaderCompositeProps,

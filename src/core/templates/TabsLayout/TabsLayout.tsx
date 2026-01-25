@@ -39,30 +39,29 @@ export const TabsLayout: React.FC<TabsLayoutProps> = ({
   style,
   testId = 'tabs-layout',
 }) => {
-  const { theme } = useUIContext();
-  const tokens = theme.tokens;
+  const { tokens } = useUIContext();
 
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    backgroundColor: tokens.colors.background.default,
-    color: tokens.colors.text.primary,
+    backgroundColor: tokens.colors.background,
+    color: tokens.colors.textPrimary,
     ...style,
   };
 
   const headerStyle: React.CSSProperties = {
     flexShrink: 0,
-    backgroundColor: tokens.colors.background.paper,
-    borderBottom: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderBottom: `1px solid ${tokens.colors.border}`,
   };
 
   const tabsContainerStyle: React.CSSProperties = {
     display: 'flex',
     gap: tokens.spacing.xs,
     padding: `0 ${tokens.spacing.lg}`,
-    backgroundColor: tokens.colors.background.paper,
-    borderBottom: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderBottom: `1px solid ${tokens.colors.border}`,
   };
 
   const getTabStyle = (tabKey: string): React.CSSProperties => ({
@@ -70,12 +69,12 @@ export const TabsLayout: React.FC<TabsLayoutProps> = ({
     cursor: 'pointer',
     backgroundColor: 'transparent',
     border: 'none',
-    borderBottom: tabKey === activeTab ? `2px solid ${tokens.colors.primary.main}` : '2px solid transparent',
-    color: tabKey === activeTab ? tokens.colors.primary.main : tokens.colors.text.secondary,
+    borderBottom: tabKey === activeTab ? `2px solid ${tokens.colors.primary}` : '2px solid transparent',
+    color: tabKey === activeTab ? tokens.colors.primary : tokens.colors.textSecondary,
     fontWeight: tabKey === activeTab ? 600 : 400,
-    fontSize: tokens.typography.fontSize.md,
+    fontSize: tokens.typography.fontSize.base,
     transition: 'all 0.2s ease',
-    fontFamily: tokens.typography.fontFamily,
+    fontFamily: tokens.typography.fontFamily.primary,
   });
 
   const contentStyle: React.CSSProperties = {
@@ -86,8 +85,8 @@ export const TabsLayout: React.FC<TabsLayoutProps> = ({
 
   const footerStyle: React.CSSProperties = {
     flexShrink: 0,
-    backgroundColor: tokens.colors.background.paper,
-    borderTop: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderTop: `1px solid ${tokens.colors.border}`,
     padding: `${tokens.spacing.md} ${tokens.spacing.lg}`,
   };
 

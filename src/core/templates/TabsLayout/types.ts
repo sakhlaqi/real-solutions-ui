@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
  * Base template slot interface
  */
 export interface BaseSlots {
-  [key: string]: ReactNode;
+  // Base interface for template slots - no index signature to allow flexible extensions
 }
 
 /**

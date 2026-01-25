@@ -32,15 +32,17 @@
 // ============================================================================
 // CORE INFRASTRUCTURE (Provider, Context, Theme)
 // ============================================================================
-export { UIProvider, useUIContext, withUIProvider } from './core/context';
-export { getDesignTokens, applyCSSTokens, createMUITheme } from './core/theme';
+export { UIProvider, useUIContext, withUIProvider, useTokens } from './core/context';
+export { createMUIThemeFromTokens } from './core/theme';
+
+// Export theme system (types, schemas, utils, presets)
+export * from './theme';
 
 // Export core types without wildcard to avoid conflicts
 export type {
   UIProvider as UIProviderType,
   ThemeMode,
   ThemeConfig,
-  DesignTokens,
   Size,
   Variant,
   ColorVariant,

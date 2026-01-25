@@ -31,6 +31,9 @@ export interface BaseButtonProps {
   endIcon?: React.ReactNode;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
+  testId?: string;
+  style?: React.CSSProperties;
+  'aria-label'?: string;
 }
 
 export interface IconButtonProps {
@@ -66,6 +69,8 @@ export interface BaseInputProps {
   name?: string;
   autoComplete?: string;
   type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
+  testId?: string;
+  style?: React.CSSProperties;
 }
 
 
@@ -86,6 +91,8 @@ export interface SelectProps extends Omit<BaseInputProps, 'startAdornment' | 'en
   options: SelectOption[];
   onChange?: (value: string | number) => void;
   multiple?: boolean;
+  testId?: string;
+  style?: React.CSSProperties;
 }
 
 export interface CheckboxProps {
@@ -334,6 +341,7 @@ export interface BreadcrumbsProps {
   separator?: React.ReactNode;
   maxItems?: number;
   className?: string;
+  testId?: string;
 }
 
 // ============================================================================
@@ -562,6 +570,8 @@ export interface TypographyProps {
   noWrap?: boolean;
   className?: string;
   component?: React.ElementType;
+  testId?: string;
+  style?: React.CSSProperties;
 }
 
 // ============================================================================
@@ -569,14 +579,16 @@ export interface TypographyProps {
 // ============================================================================
 
 export interface BadgeProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   badgeContent?: React.ReactNode;
+  content?: string | number;
   color?: ColorVariant;
   variant?: 'standard' | 'dot';
   size?: Size;
   max?: number;
   showZero?: boolean;
   invisible?: boolean;
+  testId?: string;
   anchorOrigin?: {
     vertical: 'top' | 'bottom';
     horizontal: 'left' | 'right';
@@ -770,9 +782,12 @@ export interface LinearProgressProps {
 }
 
 export interface PaginationProps {
-  count: number;
-  page: number;
-  onChange: (page: number) => void;
+  count?: number;
+  page?: number;
+  currentPage?: number;
+  totalPages?: number;
+  onChange?: (page: number) => void;
+  onPageChange?: (page: number) => void;
   siblingCount?: number;
   boundaryCount?: number;
   disabled?: boolean;
@@ -781,6 +796,7 @@ export interface PaginationProps {
   size?: Size;
   color?: ColorVariant;
   className?: string;
+  testId?: string;
 }
 
 export interface AutocompleteProps {

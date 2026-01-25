@@ -85,6 +85,11 @@
       "require": "./dist/utility/index.cjs",
       "types": "./dist/utility/index.d.ts"
     },
+    "./theme": {
+      "import": "./dist/theme/index.js",
+      "require": "./dist/theme/index.cjs",
+      "types": "./dist/theme/index.d.ts"
+    },
     "./styles": "./dist/styles/index.css",
     "./dist/styles/index.css": "./dist/styles/index.css"
   },

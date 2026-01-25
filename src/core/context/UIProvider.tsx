@@ -1,27 +1,39 @@
 /**
  * UI Provider Context
  * 
- * Manages the UI implementation provider (internal or MUI) and theme configuration.
- * Consumers use this context to switch between different UI implementations.
+ * Manages the UI implementation provider (internal or MUI) and design tokens.
+ * Consumers use this context to access design tokens and switch between UI implementations.
+ * 
+ * The provider is agnostic to where tokens come from - they can be provided externally
+ * (e.g., from a tenant theme system) or use built-in defaults.
  */
 
-import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
+import React, { createContext, useMemo, useState, useEffect } from 'react';
 import { UIProvider as UIProviderType, ThemeConfig } from '../types';
+import type { DesignTokens } from '../../theme/theme.types';
+import { getDefaultTokens } from './defaultTokens';
 
-interface UIContextValue {
+export interface UIContextValue {
   provider: UIProviderType;
   setProvider: (provider: UIProviderType) => void;
   theme: ThemeConfig;
   setTheme: (theme: ThemeConfig) => void;
   toggleThemeMode: () => void;
+  tokens: DesignTokens;
+  setTokens: (tokens: DesignTokens) => void;
 }
 
-const UIContext = createContext<UIContextValue | undefined>(undefined);
+export const UIContext = createContext<UIContextValue | undefined>(undefined);
 
 export interface UIProviderProps {
   children: React.ReactNode;
   defaultProvider?: UIProviderType;
   defaultTheme?: ThemeConfig;
+  /**
+   * External design tokens (e.g., from tenant theme system)
+   * If not provided, will use default tokens based on theme mode
+   */
+  tokens?: DesignTokens;
 }
 
 const defaultThemeConfig: ThemeConfig = {
@@ -36,25 +48,35 @@ const defaultThemeConfig: ThemeConfig = {
 /**
  * UIProvider Component
  * 
- * Wraps the application to provide UI implementation and theme configuration.
+ * Wraps the application to provide UI implementation and design tokens.
  * 
  * @example
  * ```tsx
- * <UIProvider defaultProvider="internal" defaultTheme={{ mode: 'dark' }}>
+ * // Using default tokens
+ * <UIProvider defaultProvider="mui" defaultTheme={{ mode: 'dark' }}>
+ *   <App />
+ * </UIProvider>
+ * 
+ * // Using external tokens (e.g., from tenant theme)
+ * <UIProvider tokens={resolvedTheme.tokens}>
  *   <App />
  * </UIProvider>
  * ```
  */
 export const UIProvider: React.FC<UIProviderProps> = ({
   children,
-  defaultProvider = 'internal',
+  defaultProvider = 'mui',
   defaultTheme = defaultThemeConfig,
+  tokens: externalTokens,
 }) => {
   const [provider, setProvider] = useState<UIProviderType>(defaultProvider);
   const [theme, setTheme] = useState<ThemeConfig>({
     ...defaultThemeConfig,
     ...defaultTheme,
   });
+  const [tokens, setTokens] = useState<DesignTokens>(
+    externalTokens || getDefaultTokens(defaultTheme.mode || 'light')
+  );
 
   // Update provider when defaultProvider prop changes (for Storybook)
   useEffect(() => {
@@ -69,17 +91,22 @@ export const UIProvider: React.FC<UIProviderProps> = ({
     }));
   }, [defaultTheme]);
 
+  // Update tokens when external tokens change
+  useEffect(() => {
+    if (externalTokens) {
+      setTokens(externalTokens);
+    } else {
+      // Use default tokens based on theme mode
+      setTokens(getDefaultTokens(theme.mode));
+    }
+  }, [externalTokens, theme.mode]);
+
   const toggleThemeMode = () => {
     setTheme((prev) => ({
       ...prev,
       mode: prev.mode === 'light' ? 'dark' : 'light',
     }));
   };
-
-  // Clean up provider-specific classes from HTML element (no longer needed)
-  useEffect(() => {
-    // No cleanup needed for internal/MUI providers
-  }, [provider]);
 
   const value = useMemo(
     () => ({
@@ -88,34 +115,36 @@ export const UIProvider: React.FC<UIProviderProps> = ({
       theme,
       setTheme,
       toggleThemeMode,
+      tokens,
+      setTokens,
     }),
-    [provider, theme]
+    [provider, theme, tokens]
   );
 
-  // No provider-specific theme wrappers needed
-  const content = children;
-
-  return <UIContext.Provider value={value}>{content}</UIContext.Provider>;
+  return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
 };
 
 /**
  * useUIContext Hook
  * 
- * Access the UI provider and theme configuration.
+ * Access the UI provider, theme configuration, and design tokens.
  * 
  * @example
  * ```tsx
- * const { provider, setProvider, theme, toggleThemeMode } = useUIContext();
+ * const { provider, setProvider, theme, toggleThemeMode, tokens } = useUIContext();
  * 
  * // Switch to MUI provider
  * setProvider('mui');
  * 
  * // Toggle dark mode
  * toggleThemeMode();
+ * 
+ * // Access tokens
+ * const primaryColor = tokens.colors.primary;
  * ```
  */
 export const useUIContext = (): UIContextValue => {
-  const context = useContext(UIContext);
+  const context = React.useContext(UIContext);
   if (!context) {
     throw new Error('useUIContext must be used within a UIProvider');
   }

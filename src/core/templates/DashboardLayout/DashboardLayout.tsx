@@ -30,22 +30,21 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   style,
   testId = 'dashboard-layout',
 }) => {
-  const { theme } = useUIContext();
-  const tokens = theme.tokens;
+  const { tokens } = useUIContext();
 
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    backgroundColor: tokens.colors.background.default,
-    color: tokens.colors.text.primary,
+    backgroundColor: tokens.colors.background,
+    color: tokens.colors.textPrimary,
     ...style,
   };
 
   const headerStyle: React.CSSProperties = {
     flexShrink: 0,
-    backgroundColor: tokens.colors.background.paper,
-    borderBottom: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderBottom: `1px solid ${tokens.colors.border}`,
     zIndex: 1000,
   };
 
@@ -58,8 +57,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const sidebarStyle: React.CSSProperties = {
     width: sidebarVisible ? `${sidebarWidth}px` : 0,
     flexShrink: 0,
-    backgroundColor: tokens.colors.background.paper,
-    borderRight: sidebarVisible ? `1px solid ${tokens.colors.divider}` : 'none',
+    backgroundColor: tokens.colors.surface,
+    borderRight: sidebarVisible ? `1px solid ${tokens.colors.border}` : 'none',
     overflow: 'auto',
     transition: 'width 0.3s ease',
   };
@@ -72,8 +71,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
   const footerStyle: React.CSSProperties = {
     flexShrink: 0,
-    backgroundColor: tokens.colors.background.paper,
-    borderTop: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderTop: `1px solid ${tokens.colors.border}`,
     padding: `${tokens.spacing.md} ${tokens.spacing.lg}`,
   };
 

@@ -183,7 +183,13 @@ export function renderNode(
     // Render children
     const childContext = createChildContext(context, type);
     const renderedChildren = children
-      ? children.map((child) => renderNode(child, childContext, options))
+      ? Array.isArray(children)
+        ? children.map((child) => renderNode(child, childContext, options))
+        : Object.entries(children).map(([slotName, slotContent]) =>
+            Array.isArray(slotContent)
+              ? slotContent.map((child) => renderNode(child, childContext, options))
+              : renderNode(slotContent, childContext, options)
+          )
       : undefined;
 
     return (

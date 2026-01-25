@@ -17,15 +17,9 @@ export {
   clearAdapterCache,
 } from './resolver';
 
-// MUI Composite Adapters
-export * from './mui/composites';
-// MUI Template Adapters
-export * from './mui/templates';
-
-// Internal Composite Adapters
-export * from './internal/composites';
-// Internal Template Adapters
-export * from './internal/templates';
+// NOTE: Composite and Template adapters are NOT exported directly
+// Use resolveComponentAdapter() and resolveTemplateAdapter() instead
+// This prevents conflicts between MUI and internal implementations
 
 // Atomic UI Components
 export { Button } from './Button';

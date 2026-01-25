@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { Badge as MUIBadge, MUIBadgeProps as BadgeProps } from '../providers/mui';
+import { Badge as MUIBadge } from '../providers/mui';
+import { BadgeProps } from '../core/types';
 
 export type { BadgeProps };
 
@@ -22,8 +23,19 @@ export type { BadgeProps };
  * </Badge>
  * ```
  */
-export const Badge: React.FC<BadgeProps> = (props) => {
-  return <MUIBadge {...props} />;
+export const Badge: React.FC<BadgeProps> = ({ content, testId, children, ...props }) => {
+  // Support both 'content' and 'badgeContent' props
+  const badgeContent = content ?? props.badgeContent;
+  
+  return (
+    <MUIBadge 
+      {...props}
+      badgeContent={badgeContent}
+      data-testid={testId}
+    >
+      {children}
+    </MUIBadge>
+  );
 };
 
 Badge.displayName = 'AdapterBadge';

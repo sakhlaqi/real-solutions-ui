@@ -30,22 +30,21 @@ export const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
   style,
   testId = 'two-column-layout',
 }) => {
-  const { theme } = useUIContext();
-  const tokens = theme.tokens;
+  const { tokens } = useUIContext();
 
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    backgroundColor: tokens.colors.background.default,
-    color: tokens.colors.text.primary,
+    backgroundColor: tokens.colors.background,
+    color: tokens.colors.textPrimary,
     ...style,
   };
 
   const headerStyle: React.CSSProperties = {
     flexShrink: 0,
-    backgroundColor: tokens.colors.background.paper,
-    borderBottom: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderBottom: `1px solid ${tokens.colors.border}`,
   };
 
   const columnsContainerStyle: React.CSSProperties = {
@@ -59,8 +58,8 @@ export const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
   const leftColumnStyle: React.CSSProperties = {
     flex: `0 0 ${leftWidth * 100}%`,
     overflow: 'auto',
-    backgroundColor: tokens.colors.background.paper,
-    borderRadius: tokens.shape.borderRadius,
+    backgroundColor: tokens.colors.surface,
+    borderRadius: tokens.radius.md,
     padding: tokens.spacing.md,
     boxShadow: tokens.shadows.sm,
   };
@@ -68,16 +67,16 @@ export const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
   const rightColumnStyle: React.CSSProperties = {
     flex: 1,
     overflow: 'auto',
-    backgroundColor: tokens.colors.background.paper,
-    borderRadius: tokens.shape.borderRadius,
+    backgroundColor: tokens.colors.surface,
+    borderRadius: tokens.radius.md,
     padding: tokens.spacing.md,
     boxShadow: tokens.shadows.sm,
   };
 
   const footerStyle: React.CSSProperties = {
     flexShrink: 0,
-    backgroundColor: tokens.colors.background.paper,
-    borderTop: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderTop: `1px solid ${tokens.colors.border}`,
     padding: `${tokens.spacing.md} ${tokens.spacing.lg}`,
   };
 

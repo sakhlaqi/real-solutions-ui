@@ -22,7 +22,7 @@ import {
 export interface TableColumn<T = any> {
   key: string;
   label: string;
-  render?: (row: T) => React.ReactNode;
+  render?: (value: any, row: T) => React.ReactNode;
   align?: 'left' | 'center' | 'right';
 }
 
@@ -37,6 +37,7 @@ export interface TableProps<T = any> {
   emptyMessage?: string;
   onRowClick?: (row: T) => void;
   className?: string;
+  testId?: string;
 }
 
 /**
@@ -108,7 +109,7 @@ export const Table = <T extends Record<string, any>>({
             >
               {columns.map((column) => (
                 <TableCell key={column.key} align={column.align || 'left'}>
-                  {column.render ? column.render(row) : row[column.key]}
+                  {column.render ? column.render(row[column.key], row) : row[column.key]}
                 </TableCell>
               ))}
             </TableRow>

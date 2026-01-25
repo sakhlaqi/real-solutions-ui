@@ -109,8 +109,8 @@ export const HeaderCompositeAdapter: React.FC<HeaderCompositeProps> = ({
             {actions.map((action) => (
               <Button
                 key={action.id}
-                variant={action.variant === 'primary' ? 'contained' : 'outlined'}
-                color={action.variant === 'danger' ? 'error' : 'primary'}
+                variant={action.variant || 'contained'}
+                color={action.color || 'primary'}
                 onClick={() => action.onClick?.()}
                 disabled={action.disabled}
                 startIcon={action.icon}

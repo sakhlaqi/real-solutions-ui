@@ -37,16 +37,15 @@ export const HeaderComposite: React.FC<HeaderCompositeProps> = ({
   className = '',
   testId = 'header-composite',
 }) => {
-  const { theme } = useUIContext();
-  const tokens = theme.tokens;
+  const { tokens } = useUIContext();
 
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     gap: tokens.spacing.md,
     padding: tokens.spacing.lg,
-    backgroundColor: tokens.colors.background.paper,
-    borderBottom: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderBottom: `1px solid ${tokens.colors.border}`,
   };
 
   const topRowStyle: React.CSSProperties = {
@@ -117,7 +116,7 @@ export const HeaderComposite: React.FC<HeaderCompositeProps> = ({
               variant="h4"
               style={{
                 margin: 0,
-                color: tokens.colors.text.primary,
+                color: tokens.colors.textPrimary,
                 fontWeight: 600,
               }}
               testId={`${testId}-title`}
@@ -132,7 +131,7 @@ export const HeaderComposite: React.FC<HeaderCompositeProps> = ({
               variant="body1"
               style={{
                 margin: 0,
-                color: tokens.colors.text.secondary,
+                color: tokens.colors.textSecondary,
               }}
               testId={`${testId}-subtitle`}
             >

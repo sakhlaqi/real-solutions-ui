@@ -46,8 +46,7 @@ export const SidebarComposite: React.FC<SidebarCompositeProps> = ({
   className = '',
   testId = 'sidebar-composite',
 }) => {
-  const { theme } = useUIContext();
-  const tokens = theme.tokens;
+  const { tokens } = useUIContext();
 
   // Internal collapse state (used if not controlled)
   const [internalCollapsed, setInternalCollapsed] = useState(false);
@@ -94,15 +93,15 @@ export const SidebarComposite: React.FC<SidebarCompositeProps> = ({
     flexDirection: 'column',
     height: '100%',
     width: collapsed ? '64px' : '280px',
-    backgroundColor: tokens.colors.background.paper,
-    borderRight: `1px solid ${tokens.colors.divider}`,
+    backgroundColor: tokens.colors.surface,
+    borderRight: `1px solid ${tokens.colors.border}`,
     transition: 'width 0.3s ease',
     overflow: 'hidden',
   };
 
   const headerStyle: React.CSSProperties = {
     padding: tokens.spacing.md,
-    borderBottom: `1px solid ${tokens.colors.divider}`,
+    borderBottom: `1px solid ${tokens.colors.border}`,
     flexShrink: 0,
   };
 
@@ -115,7 +114,7 @@ export const SidebarComposite: React.FC<SidebarCompositeProps> = ({
 
   const footerStyle: React.CSSProperties = {
     padding: tokens.spacing.md,
-    borderTop: `1px solid ${tokens.colors.divider}`,
+    borderTop: `1px solid ${tokens.colors.border}`,
     flexShrink: 0,
   };
 
@@ -129,12 +128,12 @@ export const SidebarComposite: React.FC<SidebarCompositeProps> = ({
           tokens.spacing.md + level * 16
         }px`,
     cursor: item.disabled ? 'not-allowed' : 'pointer',
-    backgroundColor: item.active ? tokens.colors.primary.light : 'transparent',
-    color: item.active ? tokens.colors.primary.main : tokens.colors.text.primary,
+    backgroundColor: item.active ? tokens.colors.primaryLight : 'transparent',
+    color: item.active ? tokens.colors.primary : tokens.colors.textPrimary,
     opacity: item.disabled ? 0.5 : 1,
     transition: 'all 0.2s ease',
-    borderLeft: item.active ? `3px solid ${tokens.colors.primary.main}` : '3px solid transparent',
-    fontSize: tokens.typography.fontSize.md,
+    borderLeft: item.active ? `3px solid ${tokens.colors.primary}` : '3px solid transparent',
+    fontSize: tokens.typography.fontSize.base,
     fontWeight: item.active ? 600 : 400,
     whiteSpace: 'nowrap',
   });
@@ -226,7 +225,7 @@ export const SidebarComposite: React.FC<SidebarCompositeProps> = ({
 
       {/* Collapse Toggle */}
       {collapsible && (
-        <div style={{ padding: tokens.spacing.sm, borderTop: `1px solid ${tokens.colors.divider}` }}>
+        <div style={{ padding: tokens.spacing.sm, borderTop: `1px solid ${tokens.colors.border}` }}>
           <Button
             onClick={handleCollapseToggle}
             variant="text"

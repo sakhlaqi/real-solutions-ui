@@ -19,6 +19,20 @@
  * ```
  */
 
+// Import for local use in functions
+import { 
+  getComponentKeys as _getComponentKeys,
+  type ComponentKey as _ComponentKey 
+} from './ComponentRegistry';
+import { 
+  getTemplateKeys as _getTemplateKeys,
+  type TemplateKey as _TemplateKey 
+} from './TemplateRegistry';
+import { 
+  getBehaviorKeys as _getBehaviorKeys,
+  type BehaviorKey as _BehaviorKey 
+} from './BehaviorRegistry';
+
 // Component Registry
 export {
   ComponentRegistry,
@@ -78,9 +92,9 @@ export type {
  * Useful for comprehensive validation
  */
 export type RegistryKey = {
-  component: ComponentKey;
-  template: TemplateKey;
-  behavior: BehaviorKey;
+  component: _ComponentKey;
+  template: _TemplateKey;
+  behavior: _BehaviorKey;
 };
 
 /**
@@ -89,9 +103,9 @@ export type RegistryKey = {
  */
 export function getRegistryStats() {
   return {
-    components: getComponentKeys().length,
-    templates: getTemplateKeys().length,
-    behaviors: getBehaviorKeys().length,
+    components: _getComponentKeys().length,
+    templates: _getTemplateKeys().length,
+    behaviors: _getBehaviorKeys().length,
   };
 }
 
@@ -107,19 +121,19 @@ export function validateRegistry(): {
 
   try {
     // Validate component registry
-    const componentKeys = getComponentKeys();
+    const componentKeys = _getComponentKeys();
     if (componentKeys.length === 0) {
       errors.push('ComponentRegistry is empty');
     }
 
     // Validate template registry
-    const templateKeys = getTemplateKeys();
+    const templateKeys = _getTemplateKeys();
     if (templateKeys.length === 0) {
       errors.push('TemplateRegistry is empty');
     }
 
     // Validate behavior registry
-    const behaviorKeys = getBehaviorKeys();
+    const behaviorKeys = _getBehaviorKeys();
     if (behaviorKeys.length === 0) {
       errors.push('BehaviorRegistry is empty');
     }

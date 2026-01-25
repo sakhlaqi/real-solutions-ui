@@ -9,7 +9,7 @@ import type { z } from 'zod';
  */
 
 export interface ValidationError {
-  path: (string | number)[];
+  path: PropertyKey[];
   message: string;
   code?: string;
 }
@@ -23,11 +23,14 @@ export interface ValidationDisplayProps {
 /**
  * Format a validation path to a readable string
  */
-function formatPath(path: (string | number)[]): string {
+function formatPath(path: PropertyKey[]): string {
   if (path.length === 0) return 'root';
   return path.map((segment, idx) => {
     if (typeof segment === 'number') {
       return `[${segment}]`;
+    }
+    if (typeof segment === 'symbol') {
+      return `[${String(segment)}]`;
     }
     return idx === 0 ? segment : `.${segment}`;
   }).join('');
@@ -154,7 +157,7 @@ export function parseZodErrors(zodError: z.ZodError): ValidationError[] {
   return zodError.issues.map(err => ({
     path: err.path,
     message: err.message,
-    code: err.code,
+    code: 'UNKNOWN' as const,
   }));
 }
 

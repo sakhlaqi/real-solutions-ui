@@ -57,7 +57,7 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
     pageSize: defaultPageSize,
   });
   const [sortModel, setSortModel] = useState<GridSortModel>([]);
-  const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>([]);
+  const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>([] as unknown as GridRowSelectionModel);
 
   // Convert columns to MUI DataGrid format
   const gridColumns: GridColDef[] = useMemo(() => {
@@ -164,8 +164,13 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
   const handleSelectionChange = (newSelection: GridRowSelectionModel) => {
     setSelectionModel(newSelection);
     if (onSelectionChange) {
+      // Convert GridRowSelectionModel to array
+      const selectionArray = Array.isArray(newSelection) 
+        ? newSelection 
+        : Array.from(newSelection as unknown as Iterable<string | number>);
+      const selectionSet = new Set(selectionArray);
       const selectedRows = rowsWithIds.filter((row) =>
-        newSelection.includes(row.id)
+        selectionSet.has(row.id)
       );
       onSelectionChange(selectedRows);
     }

@@ -43,8 +43,7 @@ export const SearchGridComposite = <T extends Record<string, any>>({
   className = '',
   testId = 'search-grid-composite',
 }: SearchGridCompositeProps<T>) => {
-  const { theme } = useUIContext();
-  const tokens = theme.tokens;
+  const { tokens } = useUIContext();
 
   // State management
   const [searchQuery, setSearchQuery] = useState('');
@@ -143,8 +142,8 @@ export const SearchGridComposite = <T extends Record<string, any>>({
     display: 'flex',
     flexDirection: 'column',
     gap: tokens.spacing.md,
-    backgroundColor: tokens.colors.background.paper,
-    borderRadius: tokens.shape.borderRadius,
+    backgroundColor: tokens.colors.surface,
+    borderRadius: tokens.radius.md,
     padding: tokens.spacing.md,
   };
 
@@ -201,7 +200,7 @@ export const SearchGridComposite = <T extends Record<string, any>>({
                   <Select
                     key={filter.id}
                     value={filterValues[filter.id] || ''}
-                    onChange={(e) => handleFilterChange(filter.id, e.target.value)}
+                    onChange={(value) => handleFilterChange(filter.id, value)}
                     options={[
                       { label: `All ${filter.label}`, value: '' },
                       ...(filter.options || []),
@@ -253,10 +252,8 @@ export const SearchGridComposite = <T extends Record<string, any>>({
       {/* Data Grid */}
       <Table
         columns={columns.map((col) => ({
+          key: col.id,
           ...col,
-          id: col.id,
-          label: col.label,
-          width: col.width,
         }))}
         data={paginatedData}
         loading={loading}
@@ -268,7 +265,7 @@ export const SearchGridComposite = <T extends Record<string, any>>({
       {/* Pagination */}
       {filteredData.length > 0 && (
         <div style={paginationContainerStyle} data-testid={`${testId}-pagination-container`}>
-          <div style={{ color: tokens.colors.text.secondary, fontSize: tokens.typography.fontSize.sm }}>
+          <div style={{ color: tokens.colors.textSecondary, fontSize: tokens.typography.fontSize.sm }}>
             Showing {Math.min((currentPage - 1) * pageSize + 1, filteredData.length)} to{' '}
             {Math.min(currentPage * pageSize, filteredData.length)} of {filteredData.length} results
           </div>
