@@ -25,9 +25,9 @@ export const CURRENT_SCHEMA_VERSION = '1.0.0';
  */
 export const ComponentTypeSchema = z.string().refine(
   (type) => getComponentKeys().includes(type as ComponentKey),
-  (type) => ({ 
-    message: `Component type "${type}" not found in ComponentRegistry. Available: ${getComponentKeys().join(', ')}` 
-  })
+  {
+    message: 'Component type not found in ComponentRegistry',
+  }
 );
 
 /**
@@ -36,9 +36,9 @@ export const ComponentTypeSchema = z.string().refine(
  */
 export const TemplateTypeSchema = z.string().refine(
   (type) => getTemplateKeys().includes(type as TemplateKey),
-  (type) => ({ 
-    message: `Template type "${type}" not found in TemplateRegistry. Available: ${getTemplateKeys().join(', ')}` 
-  })
+  {
+    message: 'Template type not found in TemplateRegistry',
+  }
 );
 
 /**
@@ -47,22 +47,23 @@ export const TemplateTypeSchema = z.string().refine(
  */
 export const BehaviorKeySchema = z.string().refine(
   (key) => getBehaviorKeys().includes(key as BehaviorKey),
-  (key) => ({ 
-    message: `Behavior "${key}" not found in BehaviorRegistry. Available: ${getBehaviorKeys().join(', ')}` 
-  })
+  {
+    message: 'Behavior not found in BehaviorRegistry',
+  }
 );
 
 /**
  * Props Schema
  * Accepts any valid JSON object for component props
  */
-export const PropsSchema = z.record(z.any()).optional();
+export const PropsSchema = z.record(z.string(), z.any()).optional();
 
 /**
  * Event Handlers Schema
  * Maps event names to behavior keys
  */
 export const EventHandlersSchema = z.record(
+  z.string(),
   z.union([
     BehaviorKeySchema,
     z.object({
@@ -95,7 +96,7 @@ export const JsonNodeSchema: JsonNodeSchema = z.lazy(() =>
     /** Children nodes or slots */
     children: z.union([
       z.array(JsonNodeSchema),
-      z.record(z.union([JsonNodeSchema, z.array(JsonNodeSchema)])),
+      z.record(z.string(), z.union([JsonNodeSchema, z.array(JsonNodeSchema)])),
     ]).optional(),
     
     /** Event handlers mapping to behaviors */
@@ -119,7 +120,7 @@ export const SlotContentSchema = z.union([
  * Slots Schema
  * Maps slot names to their content
  */
-export const SlotsSchema = z.record(SlotContentSchema);
+export const SlotsSchema = z.record(z.string(), SlotContentSchema);
 
 /**
  * Page Metadata Schema
@@ -182,7 +183,7 @@ export const PageConfigSchema = z.object({
   slots: SlotsSchema,
   
   /** Global behaviors for the page */
-  behaviors: z.record(BehaviorKeySchema).optional(),
+  behaviors: z.record(z.string(), BehaviorKeySchema).optional(),
   
   /** Data sources configuration */
   dataSources: z.array(DataSourceSchema).optional(),

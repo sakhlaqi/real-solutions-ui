@@ -17,16 +17,8 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(__dirname, 'src/index.ts'),
-        base: resolve(__dirname, 'src/base/index.ts'),
-        layout: resolve(__dirname, 'src/layout/index.ts'),
-        navigation: resolve(__dirname, 'src/navigation/index.ts'),
-        forms: resolve(__dirname, 'src/forms/index.ts'),
-        buttons: resolve(__dirname, 'src/buttons/index.ts'),
-        'data-display': resolve(__dirname, 'src/data-display/index.ts'),
-        feedback: resolve(__dirname, 'src/feedback/index.ts'),
-        overlay: resolve(__dirname, 'src/overlay/index.ts'),
-        typography: resolve(__dirname, 'src/typography/index.ts'),
-        utility: resolve(__dirname, 'src/utility/index.ts'),
+        core: resolve(__dirname, 'src/core/index.ts'),
+        adapters: resolve(__dirname, 'src/adapters/index.ts'),
       },
       formats: ['es', 'cjs'],
       fileName: (format, entryName) => {

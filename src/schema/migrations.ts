@@ -258,7 +258,7 @@ export function validateAndMigrate(
 
   if (!result.success) {
     throw new Error(
-      `Config validation failed after migration: ${result.errors?.map((e) => e.message).join(', ')}`
+      `Config validation failed after migration: ${result.errors?.map((e: any) => e.message).join(', ')}`
     );
   }
 

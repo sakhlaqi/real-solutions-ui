@@ -151,7 +151,7 @@ export const ValidationErrorDisplay: React.FC<ValidationDisplayProps> = ({
  * Parse Zod validation errors into our format
  */
 export function parseZodErrors(zodError: z.ZodError): ValidationError[] {
-  return zodError.errors.map(err => ({
+  return zodError.issues.map(err => ({
     path: err.path,
     message: err.message,
     code: err.code,

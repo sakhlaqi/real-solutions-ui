@@ -24,6 +24,8 @@
  * ```
  */
 
+import type { PageConfig } from './pageSchema';
+
 // Schema Definitions
 export {
   PageConfigSchema,

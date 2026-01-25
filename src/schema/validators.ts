@@ -46,16 +46,16 @@ function formatZodErrors(error: ZodError): ValidationError[] {
     }];
   }
   
-  if (!error.errors) {
-    console.error('[formatZodErrors] Error.errors is missing:', error);
+  if (!error.issues) {
+    console.error('[formatZodErrors] Error.issues is missing:', error);
     return [{
       path: [],
-      message: 'Error object missing errors array',
+      message: 'Error object missing issues array',
       code: 'MISSING_ERRORS',
     }];
   }
   
-  return error.errors.map((err) => ({
+  return error.issues.map((err) => ({
     path: err.path.map(String),
     message: err.message,
     code: err.code,
@@ -101,7 +101,7 @@ export function validatePageConfig(config: unknown): ValidationResult<PageConfig
     
     // Fallback for instanceof check
     if (error instanceof ZodError) {
-      console.log('[validatePageConfig] ZodError.errors:', error.errors);
+      console.log('[validatePageConfig] ZodError.issues:', error.issues);
       return {
         success: false,
         errors: formatZodErrors(error),

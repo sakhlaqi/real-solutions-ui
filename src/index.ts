@@ -168,6 +168,59 @@ export * as InternalComponents from './providers/internal';
 export * as MUIComponents from './providers/mui';
 
 // ============================================================================
+// RENDERER & PAGE CONFIGURATION
+// For JSON-to-React rendering and page configuration
+// ============================================================================
+export {
+  PageRenderer,
+  renderPage,
+  renderPageSync,
+  renderNode,
+  renderNodes,
+  RenderContextProvider,
+  useRenderContext,
+  useRenderDepth,
+  ValidationErrorDisplay,
+  ValidationSuccessDisplay,
+  AdapterWarningsDisplay,
+  ErrorWarningOverlay,
+} from './renderer';
+
+export type {
+  PageRendererProps,
+  RenderContext,
+  RenderOptions,
+  RenderError,
+  FallbackComponentProps,
+} from './renderer';
+
+// ============================================================================
+// SCHEMA & VALIDATION
+// For page configuration schemas and validation
+// ============================================================================
+export {
+  PageConfigSchema,
+  validatePageConfig,
+  getValidationSummary,
+  validateJsonNode,
+  safeParsePageConfig,
+  assertValidPageConfig,
+  validateOrThrow,
+  SchemaUtils,
+} from './schema';
+
+export type {
+  PageConfig,
+  JsonNode,
+  SlotContent,
+  Slots,
+  PageMetadata,
+  DataSource,
+  ValidationResult,
+  ValidationError,
+} from './schema';
+
+// ============================================================================
 // LEGACY EXPORTS (Backward Compatibility)
 // Original internal components - direct imports
 // Note: These may conflict with adaptive components above.
