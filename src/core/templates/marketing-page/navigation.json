@@ -1,0 +1,83 @@
+{
+  "id": "marketing-page-nav",
+  "structure": {
+    "header": {
+      "logo": {
+        "text": "Company",
+        "href": "/"
+      },
+      "links": [
+        {
+          "label": "Features",
+          "href": "#features"
+        },
+        {
+          "label": "Testimonials",
+          "href": "#testimonials"
+        },
+        {
+          "label": "Highlights",
+          "href": "#highlights"
+        },
+        {
+          "label": "Pricing",
+          "href": "#pricing"
+        },
+        {
+          "label": "FAQ",
+          "href": "#faq"
+        }
+      ],
+      "actions": [
+        {
+          "type": "button",
+          "label": "Sign in",
+          "variant": "text",
+          "href": "/signin"
+        },
+        {
+          "type": "button",
+          "label": "Sign up",
+          "variant": "contained",
+          "href": "/signup"
+        }
+      ]
+    },
+    "footer": {
+      "columns": [
+        {
+          "title": "Product",
+          "links": [
+            { "label": "Features", "href": "#features" },
+            { "label": "Testimonials", "href": "#testimonials" },
+            { "label": "Highlights", "href": "#highlights" },
+            { "label": "Pricing", "href": "#pricing" },
+            { "label": "FAQs", "href": "#faq" }
+          ]
+        },
+        {
+          "title": "Company",
+          "links": [
+            { "label": "About us", "href": "/about" },
+            { "label": "Careers", "href": "/careers" },
+            { "label": "Press", "href": "/press" }
+          ]
+        },
+        {
+          "title": "Legal",
+          "links": [
+            { "label": "Terms", "href": "/terms" },
+            { "label": "Privacy", "href": "/privacy" },
+            { "label": "Contact", "href": "/contact" }
+          ]
+        }
+      ],
+      "social": [
+        { "platform": "twitter", "href": "https://twitter.com" },
+        { "platform": "linkedin", "href": "https://linkedin.com" },
+        { "platform": "github", "href": "https://github.com" }
+      ],
+      "copyright": "© 2026 Company. All rights reserved."
+    }
+  }
+}

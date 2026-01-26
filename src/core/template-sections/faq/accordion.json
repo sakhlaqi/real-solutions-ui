@@ -1,0 +1,178 @@
+{
+  "id": "faq-accordion",
+  "name": "FAQ Accordion",
+  "category": "faq",
+  "version": "1.0.0",
+  "description": "Expandable accordion-style FAQ section",
+  "tags": ["faq", "accordion", "expandable"],
+  "previewImage": "/previews/faq-accordion.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string"
+      },
+      "subheading": {
+        "type": "string"
+      },
+      "questions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for accordion panel"
+            },
+            "question": {
+              "type": "string"
+            },
+            "answer": {
+              "type": "string"
+            },
+            "defaultExpanded": {
+              "type": "boolean",
+              "description": "Whether this panel is expanded by default"
+            }
+          },
+          "required": ["id", "question", "answer"]
+        },
+        "minItems": 3,
+        "maxItems": 12
+      },
+      "contactCta": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "linkText": {
+            "type": "string"
+          },
+          "linkUrl": {
+            "type": "string"
+          }
+        },
+        "description": "Optional contact CTA at the bottom"
+      }
+    },
+    "required": ["heading", "questions"]
+  },
+  "defaultProps": {
+    "heading": "Frequently asked questions",
+    "subheading": "",
+    "questions": [
+      {
+        "id": "panel1",
+        "question": "How do I contact customer support if I have a question or issue?",
+        "answer": "You can reach our customer support team by emailing support@email.com or calling our toll-free number. We're here to assist you promptly.",
+        "defaultExpanded": true
+      },
+      {
+        "id": "panel2",
+        "question": "Can I return the product if it doesn't meet my expectations?",
+        "answer": "Absolutely! We offer a hassle-free return policy. If you're not completely satisfied, you can return the product within [number of days] days for a full refund or exchange.",
+        "defaultExpanded": false
+      },
+      {
+        "id": "panel3",
+        "question": "What makes your product stand out from others in the market?",
+        "answer": "Our product distinguishes itself through its adaptability, durability, and innovative features. We prioritize user satisfaction and continually strive to exceed expectations in every aspect.",
+        "defaultExpanded": false
+      },
+      {
+        "id": "panel4",
+        "question": "Is there a warranty on the product, and what does it cover?",
+        "answer": "Yes, our product comes with a [length of warranty] warranty. It covers defects in materials and workmanship. If you encounter any issues covered by the warranty, please contact our customer support for assistance.",
+        "defaultExpanded": false
+      }
+    ],
+    "contactCta": {
+      "text": "Still have questions?",
+      "linkText": "Contact us",
+      "linkUrl": "/contact"
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "optional": true
+    },
+    "questions": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "question": { "type": "text", "maxLength": 200 },
+        "answer": { "type": "richtext", "maxLength": 1000 },
+        "defaultExpanded": { "type": "boolean" }
+      }
+    },
+    "contactCta": {
+      "type": "object",
+      "editable": true,
+      "optional": true
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "md",
+    "spacing": {
+      "py": { "xs": 8, "sm": 16 }
+    }
+  },
+  "interactions": {
+    "allowMultipleExpanded": false,
+    "expandIcon": "ExpandMore"
+  },
+  "examples": [
+    {
+      "name": "SaaS Product FAQ",
+      "props": {
+        "heading": "Common Questions",
+        "subheading": "Find answers to frequently asked questions about our platform",
+        "questions": [
+          {
+            "id": "q1",
+            "question": "How does the free trial work?",
+            "answer": "Our 14-day free trial gives you full access to all features. No credit card required. You can upgrade, downgrade, or cancel anytime during or after the trial period.",
+            "defaultExpanded": true
+          },
+          {
+            "id": "q2",
+            "question": "Can I change my plan later?",
+            "answer": "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate your billing accordingly.",
+            "defaultExpanded": false
+          },
+          {
+            "id": "q3",
+            "question": "What payment methods do you accept?",
+            "answer": "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for annual plans.",
+            "defaultExpanded": false
+          },
+          {
+            "id": "q4",
+            "question": "Is my data secure?",
+            "answer": "Absolutely. We use bank-level encryption (AES-256), regular security audits, and are SOC 2 Type II certified. Your data is backed up daily and stored in secure, redundant data centers.",
+            "defaultExpanded": false
+          },
+          {
+            "id": "q5",
+            "question": "Do you offer refunds?",
+            "answer": "Yes, we offer a 30-day money-back guarantee on all paid plans. If you're not satisfied, contact us for a full refund within the first 30 days.",
+            "defaultExpanded": false
+          }
+        ],
+        "contactCta": {
+          "text": "Can't find what you're looking for?",
+          "linkText": "Get in touch",
+          "linkUrl": "/support"
+        }
+      }
+    }
+  ]
+}

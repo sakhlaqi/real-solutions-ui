@@ -1,0 +1,136 @@
+{
+  "id": "marketing-pricing",
+  "title": "Pricing - Marketing Page",
+  "description": "Dedicated pricing page with detailed plan comparison",
+  "layout": {
+    "type": "marketing-layout",
+    "props": {
+      "stickyHeader": true,
+      "maxWidth": 1200,
+      "sidebarVisible": false
+    }
+  },
+  "sections": [
+    {
+      "id": "pricing-hero",
+      "type": "hero-simple-centered",
+      "props": {
+        "heading": "Pricing",
+        "subheading": "Choose the perfect plan for your needs. All plans include access to our core features.",
+        "centered": true
+      }
+    },
+    {
+      "id": "pricing-table",
+      "type": "pricing-three-tier",
+      "props": {
+        "title": "Compare plans",
+        "plans": [
+          {
+            "title": "Free",
+            "price": "$0",
+            "period": "month",
+            "description": "Get started with basic features to explore our platform.",
+            "features": [
+              "10 users included",
+              "2 GB of storage",
+              "Help center access",
+              "Email support"
+            ],
+            "cta": {
+              "text": "Start now",
+              "variant": "outlined"
+            }
+          },
+          {
+            "title": "Professional",
+            "price": "$15",
+            "period": "month",
+            "description": "Perfect for professionals who need more features and support.",
+            "features": [
+              "20 users included",
+              "10 GB of storage",
+              "Help center access",
+              "Priority email support",
+              "Dedicated team",
+              "Best deals"
+            ],
+            "cta": {
+              "text": "Start now",
+              "variant": "contained"
+            },
+            "featured": true,
+            "badge": "Most popular"
+          },
+          {
+            "title": "Enterprise",
+            "price": "$30",
+            "period": "month",
+            "description": "For large teams needing advanced features and dedicated support.",
+            "features": [
+              "50 users included",
+              "30 GB of storage",
+              "Help center access",
+              "Phone & email support",
+              "Dedicated team",
+              "Best deals"
+            ],
+            "cta": {
+              "text": "Contact us",
+              "variant": "outlined"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "pricing-faq",
+      "type": "faq-accordion",
+      "props": {
+        "title": "Pricing FAQs",
+        "faqs": [
+          {
+            "question": "Can I upgrade or downgrade my plan at any time?",
+            "answer": "Yes, you can change your plan at any time. Upgrades take effect immediately, while downgrades take effect at the start of your next billing cycle."
+          },
+          {
+            "question": "What payment methods do you accept?",
+            "answer": "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for Enterprise plans."
+          },
+          {
+            "question": "Is there a discount for annual plans?",
+            "answer": "Yes! Save 20% when you choose annual billing. Contact our sales team for custom Enterprise pricing."
+          },
+          {
+            "question": "What happens if I exceed my plan limits?",
+            "answer": "We'll notify you when you're approaching your limits. You can either upgrade your plan or purchase additional resources as needed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pricing-cta",
+      "type": "cta-simple-centered",
+      "props": {
+        "heading": "Still have questions?",
+        "subheading": "Our team is here to help you find the perfect plan for your needs.",
+        "primaryCta": {
+          "text": "Contact sales",
+          "href": "/contact",
+          "variant": "contained"
+        },
+        "secondaryCta": {
+          "text": "View documentation",
+          "href": "/docs",
+          "variant": "text"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "template": "marketing-page-mui",
+    "createdAt": "2026-01-25",
+    "updatedAt": "2026-01-25",
+    "status": "active"
+  }
+}

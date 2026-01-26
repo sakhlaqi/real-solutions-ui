@@ -1,0 +1,235 @@
+{
+  "id": "stats-grid",
+  "name": "Stats Grid",
+  "category": "stats",
+  "version": "1.0.0",
+  "description": "Grid of key metrics and statistics",
+  "tags": ["stats", "metrics", "numbers", "achievements"],
+  "previewImage": "/previews/stats-grid.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string"
+      },
+      "subheading": {
+        "type": "string"
+      },
+      "stats": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "Numeric value or percentage"
+            },
+            "label": {
+              "type": "string",
+              "description": "Metric description"
+            },
+            "suffix": {
+              "type": "string",
+              "description": "Optional suffix like '+', '%', 'M', 'K'"
+            },
+            "icon": {
+              "type": "string",
+              "description": "Optional Material icon name"
+            },
+            "trend": {
+              "type": "object",
+              "properties": {
+                "direction": {
+                  "type": "string",
+                  "enum": ["up", "down", "stable"]
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "description": "Optional trend indicator"
+            }
+          },
+          "required": ["value", "label"]
+        },
+        "minItems": 2,
+        "maxItems": 8
+      },
+      "columns": {
+        "type": "object",
+        "properties": {
+          "xs": { "type": "number" },
+          "sm": { "type": "number" },
+          "md": { "type": "number" }
+        }
+      },
+      "animated": {
+        "type": "boolean",
+        "description": "Animate numbers on scroll into view"
+      }
+    },
+    "required": ["stats"]
+  },
+  "defaultProps": {
+    "heading": "Our Impact",
+    "subheading": "See the difference we're making",
+    "stats": [
+      {
+        "value": "10",
+        "suffix": "M+",
+        "label": "Active Users",
+        "icon": "People"
+      },
+      {
+        "value": "50",
+        "suffix": "K+",
+        "label": "Companies",
+        "icon": "Business"
+      },
+      {
+        "value": "99.9",
+        "suffix": "%",
+        "label": "Uptime",
+        "icon": "CheckCircle"
+      },
+      {
+        "value": "4.9",
+        "suffix": "/5",
+        "label": "Customer Rating",
+        "icon": "Star",
+        "trend": {
+          "direction": "up",
+          "value": "0.3"
+        }
+      }
+    ],
+    "columns": {
+      "xs": 6,
+      "sm": 6,
+      "md": 3
+    },
+    "animated": true
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "optional": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "optional": true
+    },
+    "stats": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "value": { "type": "text", "maxLength": 10 },
+        "label": { "type": "text", "maxLength": 50 },
+        "suffix": { "type": "text", "maxLength": 5, "optional": true },
+        "icon": { "type": "icon", "optional": true },
+        "trend": {
+          "type": "object",
+          "optional": true,
+          "properties": {
+            "direction": { "type": "select", "options": ["up", "down", "stable"] },
+            "value": { "type": "text", "maxLength": 10 }
+          }
+        }
+      }
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 6, "sm": 10 }
+    }
+  },
+  "styling": {
+    "textAlign": "center",
+    "valueSize": "h3",
+    "labelSize": "body1",
+    "valueColor": "primary.main",
+    "iconSize": 48,
+    "iconColor": "primary.light"
+  },
+  "animations": {
+    "countUp": {
+      "duration": 2000,
+      "ease": "easeOut",
+      "delay": 200
+    },
+    "fadeIn": {
+      "duration": 800,
+      "threshold": 0.3
+    }
+  },
+  "examples": [
+    {
+      "name": "SaaS Metrics",
+      "props": {
+        "heading": "Trusted by millions worldwide",
+        "subheading": "Join the fastest-growing platform in the industry",
+        "stats": [
+          {
+            "value": "2",
+            "suffix": "M+",
+            "label": "Projects Created",
+            "icon": "Assignment"
+          },
+          {
+            "value": "150",
+            "suffix": "+",
+            "label": "Countries",
+            "icon": "Public"
+          },
+          {
+            "value": "500",
+            "suffix": "B+",
+            "label": "API Requests/Month",
+            "icon": "Api"
+          },
+          {
+            "value": "24",
+            "suffix": "/7",
+            "label": "Support Available",
+            "icon": "SupportAgent"
+          }
+        ],
+        "columns": { "xs": 6, "md": 4 },
+        "animated": true
+      }
+    },
+    {
+      "name": "Company Achievements",
+      "props": {
+        "heading": "By the numbers",
+        "stats": [
+          {
+            "value": "15",
+            "suffix": "+",
+            "label": "Years in Business"
+          },
+          {
+            "value": "1000",
+            "suffix": "+",
+            "label": "Happy Clients"
+          },
+          {
+            "value": "50",
+            "label": "Team Members"
+          },
+          {
+            "value": "98",
+            "suffix": "%",
+            "label": "Client Retention"
+          }
+        ],
+        "columns": { "xs": 6, "sm": 3 },
+        "animated": false
+      }
+    }
+  ]
+}

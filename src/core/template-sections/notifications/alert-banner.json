@@ -1,0 +1,221 @@
+{
+  "id": "notifications-alert-banner",
+  "category": "notifications",
+  "name": "Alert Banner",
+  "description": "Dismissible alert banners with severity levels and action buttons. Perfect for important announcements, warnings, and contextual messages.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "severity": {
+        "type": "string",
+        "enum": ["success", "error", "warning", "info"],
+        "default": "info"
+      },
+      "title": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "message": {
+        "type": "string",
+        "maxLength": 300
+      },
+      "variant": {
+        "type": "string",
+        "enum": ["filled", "outlined", "standard"],
+        "default": "standard"
+      },
+      "dismissible": {
+        "type": "boolean",
+        "default": true
+      },
+      "actions": {
+        "type": "array",
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "required": ["label"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 30
+            },
+            "href": {
+              "type": "string"
+            },
+            "onClick": {
+              "type": "string",
+              "description": "Action handler function name"
+            },
+            "variant": {
+              "type": "string",
+              "enum": ["text", "outlined", "contained"],
+              "default": "text"
+            }
+          }
+        }
+      },
+      "icon": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show icon for severity"
+      },
+      "fullWidth": {
+        "type": "boolean",
+        "default": false
+      }
+    },
+    "required": ["message"]
+  },
+  "defaultProps": {
+    "severity": "info",
+    "message": "This is an informational alert — check it out!",
+    "variant": "standard",
+    "dismissible": true,
+    "icon": true,
+    "fullWidth": false
+  },
+  "slots": {
+    "title": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "message": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 300,
+      "required": true
+    },
+    "actions": {
+      "type": "collection",
+      "itemType": "action",
+      "maxItems": 3,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "href",
+          "type": "url"
+        }
+      ]
+    }
+  },
+  "layout": {
+    "container": {
+      "maxWidth": "lg",
+      "paddingX": { "xs": 2, "sm": 3 },
+      "paddingY": { "xs": 1, "sm": 2 }
+    }
+  },
+  "styling": {
+    "alert": {
+      "borderRadius": 1,
+      "marginBottom": 2
+    },
+    "title": {
+      "variant": "h6",
+      "fontWeight": 600,
+      "marginBottom": 0.5
+    },
+    "message": {
+      "variant": "body2"
+    },
+    "actions": {
+      "marginTop": 1,
+      "display": "flex",
+      "gap": 1
+    },
+    "actionButton": {
+      "size": "small"
+    }
+  },
+  "interactions": {
+    "dismiss": {
+      "type": "click",
+      "description": "Close the alert"
+    },
+    "actionClick": {
+      "type": "click",
+      "description": "Execute action"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "alert": "{severity} alert",
+      "closeButton": "Close {severity} alert",
+      "action": "{label}"
+    },
+    "role": "alert",
+    "ariaLive": "polite"
+  },
+  "examples": [
+    {
+      "name": "Success Banner",
+      "description": "Success alert with title",
+      "props": {
+        "severity": "success",
+        "title": "Success",
+        "message": "Your changes have been saved successfully!",
+        "dismissible": true
+      }
+    },
+    {
+      "name": "Error with Action",
+      "description": "Error alert with retry button",
+      "props": {
+        "severity": "error",
+        "title": "Error",
+        "message": "There was a problem processing your request. Please try again.",
+        "actions": [
+          {
+            "label": "Retry",
+            "onClick": "handleRetry",
+            "variant": "outlined"
+          }
+        ],
+        "variant": "filled"
+      }
+    },
+    {
+      "name": "Warning Banner",
+      "description": "Warning with multiple actions",
+      "props": {
+        "severity": "warning",
+        "title": "Action Required",
+        "message": "Your subscription expires in 3 days. Renew now to avoid service interruption.",
+        "actions": [
+          {
+            "label": "Renew Now",
+            "href": "/billing",
+            "variant": "contained"
+          },
+          {
+            "label": "Remind Me Later",
+            "onClick": "handleDismiss",
+            "variant": "text"
+          }
+        ],
+        "variant": "outlined"
+      }
+    },
+    {
+      "name": "Info Banner",
+      "description": "Informational banner",
+      "props": {
+        "severity": "info",
+        "message": "We've updated our privacy policy. Review the changes to learn how we protect your data.",
+        "actions": [
+          {
+            "label": "Learn More",
+            "href": "/privacy"
+          }
+        ],
+        "dismissible": false,
+        "fullWidth": true
+      }
+    }
+  ]
+}

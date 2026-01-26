@@ -1,0 +1,346 @@
+{
+  "id": "checkout-payment-form",
+  "name": "Payment Method Form",
+  "category": "checkout",
+  "version": "1.0.0",
+  "description": "Payment collection form supporting multiple payment methods including credit card, debit card, and bank transfer. Includes field validation and secure input handling.",
+  "tags": ["checkout", "payment", "credit-card", "bank-transfer", "form", "validation"],
+  "previewImage": "/previews/payment-form.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["paymentMethods", "defaultMethod"],
+    "properties": {
+      "heading": {"type": "string", "maxLength": 100},
+      "paymentMethods": {
+        "type": "array",
+        "description": "Available payment methods",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string"},
+            "label": {"type": "string"},
+            "icon": {"type": "string"}
+          }
+        }
+      },
+      "defaultMethod": {
+        "type": "string",
+        "description": "Default selected payment method"
+      },
+      "creditCardFields": {
+        "type": "object",
+        "properties": {
+          "cardNumber": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "maxLength": {"type": "number"}
+            }
+          },
+          "cardName": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"}
+            }
+          },
+          "expiryDate": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "pattern": {"type": "string"}
+            }
+          },
+          "cvv": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "maxLength": {"type": "number"}
+            }
+          }
+        }
+      },
+      "bankTransferFields": {
+        "type": "object",
+        "properties": {
+          "accountName": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"}
+            }
+          },
+          "accountNumber": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"}
+            }
+          },
+          "routingNumber": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"}
+            }
+          }
+        }
+      },
+      "showSaveCard": {"type": "boolean"},
+      "saveCardLabel": {"type": "string"}
+    }
+  },
+  "defaultProps": {
+    "heading": "Payment details",
+    "paymentMethods": [
+      {"id": "creditCard", "label": "Credit / Debit Card", "icon": "CreditCard"},
+      {"id": "bankTransfer", "label": "Bank Account Transfer", "icon": "AccountBalance"}
+    ],
+    "defaultMethod": "creditCard",
+    "creditCardFields": {
+      "cardNumber": {
+        "label": "Card number",
+        "placeholder": "1234 5678 9012 3456",
+        "required": true,
+        "maxLength": 19
+      },
+      "cardName": {
+        "label": "Name on card",
+        "placeholder": "John Doe",
+        "required": true
+      },
+      "expiryDate": {
+        "label": "Expiry date",
+        "placeholder": "MM/YY",
+        "required": true,
+        "pattern": "^(0[1-9]|1[0-2])\\/([0-9]{2})$"
+      },
+      "cvv": {
+        "label": "CVV",
+        "placeholder": "123",
+        "required": true,
+        "maxLength": 4
+      }
+    },
+    "bankTransferFields": {
+      "accountName": {
+        "label": "Account holder name",
+        "placeholder": "John Doe",
+        "required": true
+      },
+      "accountNumber": {
+        "label": "Account number",
+        "placeholder": "000123456789",
+        "required": true
+      },
+      "routingNumber": {
+        "label": "Routing number",
+        "placeholder": "110000000",
+        "required": true
+      }
+    },
+    "showSaveCard": true,
+    "saveCardLabel": "Remember credit card details for next time"
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "label": "Form Heading",
+      "required": false
+    },
+    "paymentMethods": {
+      "type": "collection",
+      "label": "Payment Methods",
+      "required": true,
+      "itemLabel": "Payment Method",
+      "fields": [
+        {"name": "id", "type": "text", "label": "Method ID", "required": true},
+        {"name": "label", "type": "text", "label": "Display Label", "required": true},
+        {"name": "icon", "type": "text", "label": "Icon Name", "required": false}
+      ]
+    },
+    "cardNumber": {
+      "type": "field",
+      "label": "Card Number Field",
+      "fieldType": "text",
+      "required": true,
+      "masked": true
+    },
+    "cardName": {
+      "type": "field",
+      "label": "Cardholder Name",
+      "fieldType": "text",
+      "required": true
+    },
+    "expiryDate": {
+      "type": "field",
+      "label": "Expiry Date",
+      "fieldType": "text",
+      "required": true,
+      "masked": true
+    },
+    "cvv": {
+      "type": "field",
+      "label": "CVV Field",
+      "fieldType": "password",
+      "required": true
+    },
+    "accountName": {
+      "type": "field",
+      "label": "Account Name",
+      "fieldType": "text",
+      "required": true
+    },
+    "accountNumber": {
+      "type": "field",
+      "label": "Account Number",
+      "fieldType": "text",
+      "required": true
+    },
+    "routingNumber": {
+      "type": "field",
+      "label": "Routing Number",
+      "fieldType": "text",
+      "required": true
+    },
+    "saveCard": {
+      "type": "checkbox",
+      "label": "Save Payment Checkbox",
+      "required": false
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "sm"},
+    "grid": {
+      "spacing": 3,
+      "creditCard": {
+        "fullWidth": ["cardNumber", "cardName"],
+        "halfWidth": [["expiryDate", "cvv"]]
+      },
+      "bankTransfer": {
+        "fullWidth": ["accountName", "accountNumber", "routingNumber"]
+      }
+    }
+  },
+  "styling": {
+    "heading": {
+      "variant": "h6",
+      "gutterBottom": true,
+      "mb": 2
+    },
+    "radioGroup": {
+      "row": false,
+      "mb": 2
+    },
+    "radio": {
+      "color": "primary"
+    },
+    "textField": {
+      "variant": "outlined",
+      "size": "small",
+      "fullWidth": true
+    },
+    "checkbox": {
+      "color": "primary"
+    },
+    "methodIcon": {
+      "mr": 1,
+      "fontSize": "small",
+      "color": "action.active"
+    }
+  },
+  "validation": {
+    "cardNumber": {
+      "required": true,
+      "pattern": "^[0-9]{13,19}$",
+      "luhn": true
+    },
+    "cardName": {
+      "required": true,
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "expiryDate": {
+      "required": true,
+      "pattern": "^(0[1-9]|1[0-2])\\/([0-9]{2})$",
+      "futureDate": true
+    },
+    "cvv": {
+      "required": true,
+      "pattern": "^[0-9]{3,4}$"
+    },
+    "accountName": {
+      "required": true,
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "accountNumber": {
+      "required": true,
+      "pattern": "^[0-9]{8,17}$"
+    },
+    "routingNumber": {
+      "required": true,
+      "pattern": "^[0-9]{9}$"
+    }
+  },
+  "interactions": {
+    "paymentMethodChange": {
+      "onChange": "switchPaymentForm"
+    },
+    "cardNumberInput": {
+      "onInput": "formatCardNumber"
+    },
+    "expiryDateInput": {
+      "onInput": "formatExpiryDate"
+    }
+  },
+  "security": {
+    "cardNumber": {"mask": true, "secure": true},
+    "cvv": {"mask": true, "secure": true, "autocomplete": "off"},
+    "accountNumber": {"mask": true, "secure": true}
+  },
+  "accessibility": {
+    "formRole": "form",
+    "ariaLabel": "Payment information form",
+    "fieldLabels": "visible",
+    "requiredIndicator": "*",
+    "errorMessages": true,
+    "secureInputs": ["cardNumber", "cvv", "accountNumber"]
+  },
+  "examples": [
+    {
+      "name": "Credit Card Only",
+      "props": {
+        "heading": "Enter your card details",
+        "paymentMethods": [
+          {"id": "creditCard", "label": "Credit Card", "icon": "CreditCard"}
+        ],
+        "defaultMethod": "creditCard",
+        "showSaveCard": false
+      }
+    },
+    {
+      "name": "Multiple Methods",
+      "props": {
+        "heading": "How would you like to pay?",
+        "paymentMethods": [
+          {"id": "creditCard", "label": "Card", "icon": "CreditCard"},
+          {"id": "bankTransfer", "label": "Bank", "icon": "AccountBalance"},
+          {"id": "paypal", "label": "PayPal", "icon": "Payment"}
+        ],
+        "showSaveCard": true
+      }
+    }
+  ]
+}

@@ -6,47 +6,58 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { UIProvider } from '../core/context/UIProvider';
-import { ThemeRegistry } from '../theme/registry';
-import { useTokens } from '../core/context/useTokens';
-import type { Theme } from '../theme/theme.types';
+import { themePresetRegistry } from '../core/theme/registry';
+import type { ThemePreset } from '../core/theme/types';
+import '../core/theme/presets'; // Auto-register presets
 
 /**
  * Theme Preset Viewer Component
  */
-function ThemePresetViewer() {
-  const [selectedThemeId, setSelectedThemeId] = useState('default');
-  const [selectedMode, setSelectedMode] = useState<string | undefined>(undefined);
+function ThemePresetViewerContent() {
+  const allPresets = themePresetRegistry.getAll();
+  const [selectedPresetId, setSelectedPresetId] = useState(allPresets[0]?.id || 'marketing-page-mui');
+  const [selectedMode, setSelectedMode] = useState<'light' | 'dark'>('light');
   
-  const allThemes = ThemeRegistry.getAll();
-  const selectedTheme = ThemeRegistry.getById(selectedThemeId);
-  const supportedModes = selectedTheme ? ThemeRegistry.getSupportedModes(selectedThemeId) : [];
-  
-  const tokens = useTokens();
+  const selectedPreset = themePresetRegistry.get(selectedPresetId);
 
-  if (!selectedTheme) {
-    return <div>Theme not found</div>;
+  // Check if there are any themes
+  if (allPresets.length === 0) {
+    return (
+      <div style={{ padding: '40px', textAlign: 'center' }}>
+        <p>No theme presets registered. Please register theme presets first.</p>
+      </div>
+    );
   }
+
+  if (!selectedPreset) {
+    return <div>Theme preset not found</div>;
+  }
+
+  // Use the preset's tokens directly (flat structure)
+  const { colors, typography, spacing, radius, shadows } = selectedPreset;
+  
+  // Helper to convert spacing number to px
+  const sp = (key: keyof typeof spacing) => `${spacing[key]}px`;
 
   return (
     <div style={{ 
-      padding: tokens.spacing.xl,
-      backgroundColor: tokens.colors.background.primary,
+      padding: sp('xl'),
+      backgroundColor: colors.background || '#fff',
       minHeight: '100vh',
     }}>
       {/* Header */}
-      <div style={{ marginBottom: tokens.spacing['2xl'] }}>
+      <div style={{ marginBottom: sp('2xl') }}>
         <h1 style={{ 
-          fontSize: tokens.typography.fontSize['3xl'],
-          fontWeight: tokens.typography.fontWeight.bold,
-          marginBottom: tokens.spacing.md,
-          color: tokens.colors.text.primary,
+          fontSize: '1.875rem',
+          fontWeight: 700,
+          marginBottom: sp('md'),
+          color: colors.textPrimary || '#000',
         }}>
           Theme Presets
         </h1>
         <p style={{ 
-          fontSize: tokens.typography.fontSize.lg,
-          color: tokens.colors.text.secondary,
+          fontSize: '1.125rem',
+          color: colors.textSecondary || '#666',
         }}>
           Official built-in themes with mode support
         </p>
@@ -54,321 +65,221 @@ function ThemePresetViewer() {
 
       {/* Theme Selector */}
       <div style={{ 
-        marginBottom: tokens.spacing.xl,
-        padding: tokens.spacing.lg,
-        backgroundColor: tokens.colors.background.secondary,
-        borderRadius: tokens.radius.lg,
-        boxShadow: tokens.shadows.sm,
+        marginBottom: sp('xl'),
+        padding: sp('lg'),
+        backgroundColor: colors.surface || '#f5f5f5',
+        borderRadius: `${radius.lg}px`,
+        boxShadow: shadows.sm,
       }}>
         <label style={{ 
           display: 'block',
-          fontSize: tokens.typography.fontSize.sm,
-          fontWeight: tokens.typography.fontWeight.medium,
-          marginBottom: tokens.spacing.sm,
-          color: tokens.colors.text.secondary,
+          fontSize: '0.875rem',
+          fontWeight: 500,
+          marginBottom: sp('sm'),
+          color: colors.textSecondary || '#666',
         }}>
           Select Theme Preset
         </label>
         <select
-          value={selectedThemeId}
+          value={selectedPresetId}
           onChange={(e) => {
-            setSelectedThemeId(e.target.value);
-            setSelectedMode(undefined);
+            setSelectedPresetId(e.target.value);
+            setSelectedMode('light');
           }}
           style={{ 
             width: '100%',
-            padding: tokens.spacing.md,
-            fontSize: tokens.typography.fontSize.base,
-            borderRadius: tokens.radius.md,
-            border: `1px solid ${tokens.colors.border.default}`,
-            backgroundColor: tokens.colors.background.primary,
-            color: tokens.colors.text.primary,
+            padding: sp('md'),
+            fontSize: '1rem',
+            borderRadius: `${radius.md}px`,
+            border: `1px solid ${colors.border || '#e0e0e0'}`,
+            backgroundColor: colors.background || '#fff',
+            color: colors.textPrimary || '#000',
           }}
         >
-          {allThemes.map((theme) => (
-            <option key={theme.meta.id} value={theme.meta.id}>
-              {theme.meta.name} (v{theme.meta.version})
+          {allPresets.map((preset) => (
+            <option key={preset.id} value={preset.id}>
+              {preset.name}
             </option>
           ))}
         </select>
 
         {/* Mode Selector */}
-        {supportedModes.length > 0 && (
-          <div style={{ marginTop: tokens.spacing.lg }}>
-            <label style={{ 
-              display: 'block',
-              fontSize: tokens.typography.fontSize.sm,
-              fontWeight: tokens.typography.fontWeight.medium,
-              marginBottom: tokens.spacing.sm,
-              color: tokens.colors.text.secondary,
-            }}>
-              Select Mode
-            </label>
-            <div style={{ display: 'flex', gap: tokens.spacing.sm, flexWrap: 'wrap' }}>
+        <div style={{ marginTop: sp('lg') }}>
+          <label style={{ 
+            display: 'block',
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            marginBottom: sp('sm'),
+            color: colors.textSecondary || '#666',
+          }}>
+            Theme Mode
+          </label>
+          <div style={{ display: 'flex', gap: sp('sm') }}>
+            {(['light', 'dark'] as const).map((mode) => (
               <button
-                onClick={() => setSelectedMode(undefined)}
+                key={mode}
+                onClick={() => setSelectedMode(mode)}
                 style={{
-                  padding: `${tokens.spacing.sm} ${tokens.spacing.md}`,
-                  fontSize: tokens.typography.fontSize.sm,
-                  borderRadius: tokens.radius.md,
-                  border: selectedMode === undefined 
-                    ? `2px solid ${tokens.colors.brand.primary}`
-                    : `1px solid ${tokens.colors.border.default}`,
-                  backgroundColor: selectedMode === undefined
-                    ? tokens.colors.brand.primary
-                    : tokens.colors.background.primary,
-                  color: selectedMode === undefined
-                    ? tokens.colors.text.inverse
-                    : tokens.colors.text.primary,
+                  padding: `${sp('sm')} ${sp('md')}`,
+                  fontSize: '0.875rem',
+                  borderRadius: `${radius.md}px`,
+                  border: selectedMode === mode 
+                    ? `2px solid ${colors.primary}`
+                    : `1px solid ${colors.border || '#e0e0e0'}`,
+                  backgroundColor: selectedMode === mode
+                    ? colors.primary
+                    : colors.background || '#fff',
+                  color: selectedMode === mode
+                    ? colors.primaryContrast || '#fff'
+                    : colors.textPrimary || '#000',
                   cursor: 'pointer',
-                  fontWeight: selectedMode === undefined 
-                    ? tokens.typography.fontWeight.semibold 
-                    : tokens.typography.fontWeight.normal,
+                  fontWeight: selectedMode === mode ? 600 : 400,
+                  textTransform: 'capitalize',
                 }}
               >
-                Base (No Mode)
+                {mode}
               </button>
-              {supportedModes.map((mode) => (
-                <button
-                  key={mode}
-                  onClick={() => setSelectedMode(mode)}
-                  style={{
-                    padding: `${tokens.spacing.sm} ${tokens.spacing.md}`,
-                    fontSize: tokens.typography.fontSize.sm,
-                    borderRadius: tokens.radius.md,
-                    border: selectedMode === mode 
-                      ? `2px solid ${tokens.colors.brand.primary}`
-                      : `1px solid ${tokens.colors.border.default}`,
-                    backgroundColor: selectedMode === mode
-                      ? tokens.colors.brand.primary
-                      : tokens.colors.background.primary,
-                    color: selectedMode === mode
-                      ? tokens.colors.text.inverse
-                      : tokens.colors.text.primary,
-                    cursor: 'pointer',
-                    fontWeight: selectedMode === mode 
-                      ? tokens.typography.fontWeight.semibold 
-                      : tokens.typography.fontWeight.normal,
-                  }}
-                >
-                  {mode}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
-        )}
+        </div>
       </div>
 
       {/* Theme Metadata */}
       <div style={{ 
-        marginBottom: tokens.spacing.xl,
-        padding: tokens.spacing.lg,
-        backgroundColor: tokens.colors.background.secondary,
-        borderRadius: tokens.radius.lg,
-        boxShadow: tokens.shadows.sm,
+        marginBottom: sp('xl'),
+        padding: sp('lg'),
+        backgroundColor: colors.surface || '#f5f5f5',
+        borderRadius: `${radius.lg}px`,
+        boxShadow: shadows.sm,
       }}>
         <h2 style={{ 
-          fontSize: tokens.typography.fontSize.xl,
-          fontWeight: tokens.typography.fontWeight.semibold,
-          marginBottom: tokens.spacing.md,
-          color: tokens.colors.text.primary,
+          fontSize: '1.25rem',
+          fontWeight: 600,
+          marginBottom: sp('md'),
+          color: colors.textPrimary || '#000',
         }}>
           Theme Metadata
         </h2>
         <dl style={{ 
           display: 'grid',
           gridTemplateColumns: 'auto 1fr',
-          gap: tokens.spacing.md,
-          fontSize: tokens.typography.fontSize.sm,
+          gap: sp('md'),
+          fontSize: '0.875rem',
         }}>
-          <dt style={{ fontWeight: tokens.typography.fontWeight.medium, color: tokens.colors.text.secondary }}>
+          <dt style={{ fontWeight: 500, color: colors.textSecondary || '#666' }}>
             ID:
           </dt>
-          <dd style={{ color: tokens.colors.text.primary, fontFamily: tokens.typography.fontFamily.mono }}>
-            {selectedTheme.meta.id}
+          <dd style={{ color: colors.textPrimary || '#000', fontFamily: 'monospace' }}>
+            {selectedPreset.id}
           </dd>
           
-          <dt style={{ fontWeight: tokens.typography.fontWeight.medium, color: tokens.colors.text.secondary }}>
+          <dt style={{ fontWeight: 500, color: colors.textSecondary || '#666' }}>
             Name:
           </dt>
-          <dd style={{ color: tokens.colors.text.primary }}>
-            {selectedTheme.meta.name}
+          <dd style={{ color: colors.textPrimary || '#000' }}>
+            {selectedPreset.name}
           </dd>
           
-          <dt style={{ fontWeight: tokens.typography.fontWeight.medium, color: tokens.colors.text.secondary }}>
+          <dt style={{ fontWeight: 500, color: colors.textSecondary || '#666' }}>
             Description:
           </dt>
-          <dd style={{ color: tokens.colors.text.primary }}>
-            {selectedTheme.meta.description}
+          <dd style={{ color: colors.textPrimary || '#000' }}>
+            {selectedPreset.description}
           </dd>
           
-          <dt style={{ fontWeight: tokens.typography.fontWeight.medium, color: tokens.colors.text.secondary }}>
+          <dt style={{ fontWeight: 500, color: colors.textSecondary || '#666' }}>
             Version:
           </dt>
-          <dd style={{ color: tokens.colors.text.primary }}>
-            {selectedTheme.meta.version}
+          <dd style={{ color: colors.textPrimary || '#000' }}>
+            {selectedPreset.version}
           </dd>
           
-          <dt style={{ fontWeight: tokens.typography.fontWeight.medium, color: tokens.colors.text.secondary }}>
-            Author:
+          <dt style={{ fontWeight: 500, color: colors.textSecondary || '#666' }}>
+            Mode:
           </dt>
-          <dd style={{ color: tokens.colors.text.primary }}>
-            {selectedTheme.meta.author}
+          <dd style={{ color: colors.textPrimary || '#000' }}>
+            {selectedPreset.mode}
           </dd>
           
-          <dt style={{ fontWeight: tokens.typography.fontWeight.medium, color: tokens.colors.text.secondary }}>
-            Supported Modes:
-          </dt>
-          <dd style={{ color: tokens.colors.text.primary }}>
-            {supportedModes.length > 0 ? supportedModes.join(', ') : 'None'}
-          </dd>
-          
-          <dt style={{ fontWeight: tokens.typography.fontWeight.medium, color: tokens.colors.text.secondary }}>
+          <dt style={{ fontWeight: 500, color: colors.textSecondary || '#666' }}>
             Active Mode:
           </dt>
-          <dd style={{ color: tokens.colors.text.primary }}>
-            {selectedMode || 'Base theme (no mode)'}
+          <dd style={{ color: colors.textPrimary || '#000' }}>
+            {selectedMode}
           </dd>
         </dl>
       </div>
 
       {/* Color Palette Preview */}
       <div style={{ 
-        marginBottom: tokens.spacing.xl,
+        marginBottom: sp('xl'),
       }}>
         <h2 style={{ 
-          fontSize: tokens.typography.fontSize.xl,
-          fontWeight: tokens.typography.fontWeight.semibold,
-          marginBottom: tokens.spacing.lg,
-          color: tokens.colors.text.primary,
+          fontSize: '1.25rem',
+          fontWeight: 600,
+          marginBottom: sp('lg'),
+          color: colors.textPrimary || '#000',
         }}>
           Color Palette
         </h2>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: tokens.spacing.md }}>
-          {/* Brand Colors */}
-          <ColorSwatch label="Brand Primary" color={tokens.colors.brand.primary} />
-          <ColorSwatch label="Brand Secondary" color={tokens.colors.brand.secondary} />
-          <ColorSwatch label="Brand Accent" color={tokens.colors.brand.accent} />
-          
-          {/* Background Colors */}
-          <ColorSwatch label="BG Primary" color={tokens.colors.background.primary} />
-          <ColorSwatch label="BG Secondary" color={tokens.colors.background.secondary} />
-          <ColorSwatch label="BG Tertiary" color={tokens.colors.background.tertiary} />
-          
-          {/* Text Colors */}
-          <ColorSwatch label="Text Primary" color={tokens.colors.text.primary} />
-          <ColorSwatch label="Text Secondary" color={tokens.colors.text.secondary} />
-          
-          {/* State Colors */}
-          <ColorSwatch label="Error" color={tokens.colors.state.error} />
-          <ColorSwatch label="Warning" color={tokens.colors.state.warning} />
-          <ColorSwatch label="Success" color={tokens.colors.state.success} />
-          <ColorSwatch label="Info" color={tokens.colors.state.info} />
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', 
+          gap: sp('md') 
+        }}>
+          <ColorSwatch label="Primary" color={colors.primary} preset={selectedPreset} />
+          <ColorSwatch label="Secondary" color={colors.secondary} preset={selectedPreset} />
+          {colors.background && <ColorSwatch label="Background" color={colors.background} preset={selectedPreset} />}
+          {colors.surface && <ColorSwatch label="Surface" color={colors.surface} preset={selectedPreset} />}
+          {colors.textPrimary && <ColorSwatch label="Text Primary" color={colors.textPrimary} preset={selectedPreset} />}
+          {colors.textSecondary && <ColorSwatch label="Text Secondary" color={colors.textSecondary} preset={selectedPreset} />}
+          {colors.success && <ColorSwatch label="Success" color={colors.success} preset={selectedPreset} />}
+          {colors.warning && <ColorSwatch label="Warning" color={colors.warning} preset={selectedPreset} />}
+          {colors.error && <ColorSwatch label="Error" color={colors.error} preset={selectedPreset} />}
+          {colors.info && <ColorSwatch label="Info" color={colors.info} preset={selectedPreset} />}
         </div>
       </div>
 
-      {/* Component Preview */}
+      {/* Typography Preview */}
       <div style={{ 
-        padding: tokens.spacing.lg,
-        backgroundColor: tokens.colors.background.secondary,
-        borderRadius: tokens.radius.lg,
-        boxShadow: tokens.shadows.sm,
+        marginBottom: sp('xl'),
       }}>
         <h2 style={{ 
-          fontSize: tokens.typography.fontSize.xl,
-          fontWeight: tokens.typography.fontWeight.semibold,
-          marginBottom: tokens.spacing.lg,
-          color: tokens.colors.text.primary,
+          fontSize: '1.25rem',
+          fontWeight: 600,
+          marginBottom: sp('lg'),
+          color: colors.textPrimary || '#000',
         }}>
-          Component Preview
+          Typography
         </h2>
-        
-        {/* Sample Components */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: tokens.spacing.lg }}>
-          {/* Buttons */}
-          <div>
-            <h3 style={{ 
-              fontSize: tokens.typography.fontSize.md,
-              fontWeight: tokens.typography.fontWeight.medium,
-              marginBottom: tokens.spacing.md,
-              color: tokens.colors.text.secondary,
-            }}>
-              Buttons
-            </h3>
-            <div style={{ display: 'flex', gap: tokens.spacing.md, flexWrap: 'wrap' }}>
-              <button style={{
-                padding: `${tokens.spacing.sm} ${tokens.spacing.lg}`,
-                backgroundColor: tokens.colors.brand.primary,
-                color: tokens.colors.text.inverse,
-                border: 'none',
-                borderRadius: tokens.radius.md,
-                fontSize: tokens.typography.fontSize.base,
-                fontWeight: tokens.typography.fontWeight.medium,
-                cursor: 'pointer',
-                boxShadow: tokens.shadows.sm,
-              }}>
-                Primary Button
-              </button>
-              <button style={{
-                padding: `${tokens.spacing.sm} ${tokens.spacing.lg}`,
-                backgroundColor: 'transparent',
-                color: tokens.colors.brand.primary,
-                border: `2px solid ${tokens.colors.brand.primary}`,
-                borderRadius: tokens.radius.md,
-                fontSize: tokens.typography.fontSize.base,
-                fontWeight: tokens.typography.fontWeight.medium,
-                cursor: 'pointer',
-              }}>
-                Secondary Button
-              </button>
+        <div style={{ 
+          padding: sp('lg'),
+          backgroundColor: colors.surface || '#f5f5f5',
+          borderRadius: `${radius.lg}px`,
+        }}>
+          <div style={{ fontFamily: typography.fontFamily, marginBottom: sp('md') }}>
+            <div style={{ fontSize: '0.75rem', color: colors.textSecondary || '#666', marginBottom: sp('xs') }}>
+              Font Family
+            </div>
+            <div style={{ color: colors.textPrimary || '#000' }}>
+              {typography.fontFamily}
             </div>
           </div>
-
-          {/* Cards */}
-          <div>
-            <h3 style={{ 
-              fontSize: tokens.typography.fontSize.md,
-              fontWeight: tokens.typography.fontWeight.medium,
-              marginBottom: tokens.spacing.md,
-              color: tokens.colors.text.secondary,
-            }}>
-              Cards
-            </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: tokens.spacing.md }}>
-              {['Error', 'Warning', 'Success', 'Info'].map((state) => {
-                const stateKey = state.toLowerCase() as 'error' | 'warning' | 'success' | 'info';
-                return (
-                  <div
-                    key={state}
-                    style={{
-                      padding: tokens.spacing.lg,
-                      backgroundColor: tokens.colors.background.primary,
-                      borderLeft: `4px solid ${tokens.colors.state[stateKey]}`,
-                      borderRadius: tokens.radius.md,
-                      boxShadow: tokens.shadows.md,
-                    }}
-                  >
-                    <h4 style={{ 
-                      fontSize: tokens.typography.fontSize.md,
-                      fontWeight: tokens.typography.fontWeight.semibold,
-                      marginBottom: tokens.spacing.sm,
-                      color: tokens.colors.state[stateKey],
-                    }}>
-                      {state}
-                    </h4>
-                    <p style={{ 
-                      fontSize: tokens.typography.fontSize.sm,
-                      color: tokens.colors.text.secondary,
-                      lineHeight: tokens.typography.lineHeight.normal,
-                    }}>
-                      This is a {state.toLowerCase()} state card example.
-                    </p>
-                  </div>
-                );
-              })}
+          {typography.h1 && (
+            <div style={{...typography.h1, color: colors.textPrimary || '#000', marginBottom: sp('sm')}}>
+              Heading 1
             </div>
-          </div>
+          )}
+          {typography.h2 && (
+            <div style={{...typography.h2, color: colors.textPrimary || '#000', marginBottom: sp('sm')}}>
+              Heading 2
+            </div>
+          )}
+          {typography.body && (
+            <div style={{...typography.body, color: colors.textPrimary || '#000'}}>
+              Body text sample
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -376,40 +287,41 @@ function ThemePresetViewer() {
 }
 
 /**
- * Color Swatch Component
+ * Color Swatch Component  
  */
-function ColorSwatch({ label, color }: { label: string; color: string }) {
-  const tokens = useTokens();
+function ColorSwatch({ label, color, preset }: { label: string; color: string; preset: ThemePreset }) {
+  const { spacing, radius, shadows, colors } = preset;
+  const sp = (key: keyof typeof spacing) => `${spacing[key]}px`;
   
   return (
     <div style={{
-      padding: tokens.spacing.md,
-      backgroundColor: tokens.colors.background.primary,
-      borderRadius: tokens.radius.md,
-      boxShadow: tokens.shadows.sm,
-      border: `1px solid ${tokens.colors.border.default}`,
+      padding: sp('md'),
+      backgroundColor: colors.background || '#fff',
+      borderRadius: `${radius.md}px`,
+      boxShadow: shadows.sm,
+      border: `1px solid ${colors.border || '#e0e0e0'}`,
     }}>
       <div
         style={{
           width: '100%',
           height: '80px',
           backgroundColor: color,
-          borderRadius: tokens.radius.sm,
-          marginBottom: tokens.spacing.sm,
+          borderRadius: `${radius.sm}px`,
+          marginBottom: sp('sm'),
         }}
       />
       <div style={{ 
-        fontSize: tokens.typography.fontSize.sm,
-        fontWeight: tokens.typography.fontWeight.medium,
-        marginBottom: tokens.spacing.xs,
-        color: tokens.colors.text.primary,
+        fontSize: '0.875rem',
+        fontWeight: 500,
+        marginBottom: sp('xs'),
+        color: colors.textPrimary || '#000',
       }}>
         {label}
       </div>
       <div style={{ 
-        fontSize: tokens.typography.fontSize.xs,
-        fontFamily: tokens.typography.fontFamily.mono,
-        color: tokens.colors.text.disabled,
+        fontSize: '0.75rem',
+        fontFamily: 'monospace',
+        color: colors.textDisabled || '#999',
       }}>
         {color}
       </div>
@@ -420,9 +332,9 @@ function ColorSwatch({ label, color }: { label: string; color: string }) {
 /**
  * Storybook Meta Configuration
  */
-const meta: Meta<typeof ThemePresetViewer> = {
+const meta: Meta<typeof ThemePresetViewerContent> = {
   title: 'Theme/Presets',
-  component: ThemePresetViewer,
+  component: ThemePresetViewerContent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -431,17 +343,10 @@ const meta: Meta<typeof ThemePresetViewer> = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <UIProvider provider="mui">
-        <Story />
-      </UIProvider>
-    ),
-  ],
 };
 
 export default meta;
-type Story = StoryObj<typeof ThemePresetViewer>;
+type Story = StoryObj<typeof ThemePresetViewerContent>;
 
 /**
  * Interactive Preset Viewer
@@ -455,79 +360,64 @@ export const PresetViewer: Story = {};
  */
 export const AllPresetsGrid: Story = {
   render: () => {
-    const tokens = useTokens();
-    const allThemes = ThemeRegistry.getAll();
+    const allPresets = themePresetRegistry.getAll();
     
     return (
-      <UIProvider provider="mui">
-        <div style={{ 
-          padding: tokens.spacing.xl,
-          backgroundColor: tokens.colors.background.primary,
-          minHeight: '100vh',
+      <div style={{ 
+        padding: '32px',
+        backgroundColor: '#fff',
+        minHeight: '100vh',
+      }}>
+        <h1 style={{ 
+          fontSize: '1.875rem',
+          fontWeight: 700,
+          marginBottom: '32px',
+          color: '#000',
         }}>
-          <h1 style={{ 
-            fontSize: tokens.typography.fontSize['3xl'],
-            fontWeight: tokens.typography.fontWeight.bold,
-            marginBottom: tokens.spacing.xl,
-            color: tokens.colors.text.primary,
-          }}>
-            All Theme Presets
-          </h1>
-          
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: tokens.spacing.lg 
-          }}>
-            {allThemes.map((theme) => (
-              <div
-                key={theme.meta.id}
-                style={{
-                  padding: tokens.spacing.lg,
-                  backgroundColor: tokens.colors.background.secondary,
-                  borderRadius: tokens.radius.lg,
-                  boxShadow: tokens.shadows.md,
-                }}
-              >
-                <h2 style={{ 
-                  fontSize: tokens.typography.fontSize.xl,
-                  fontWeight: tokens.typography.fontWeight.semibold,
-                  marginBottom: tokens.spacing.sm,
-                  color: tokens.colors.text.primary,
-                }}>
-                  {theme.meta.name}
-                </h2>
-                <p style={{ 
-                  fontSize: tokens.typography.fontSize.sm,
-                  color: tokens.colors.text.secondary,
-                  marginBottom: tokens.spacing.md,
-                }}>
-                  {theme.meta.description}
-                </p>
-                
-                {/* Color swatches */}
-                <div style={{ 
-                  display: 'flex', 
-                  gap: tokens.spacing.xs,
-                  marginTop: tokens.spacing.md,
-                }}>
-                  {Object.values(theme.tokens.colors.brand).slice(0, 3).map((color, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        flex: 1,
-                        height: '40px',
-                        backgroundColor: color,
-                        borderRadius: tokens.radius.sm,
-                      }}
-                    />
-                  ))}
-                </div>
+          All Theme Presets
+        </h1>
+        
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '24px' 
+        }}>
+          {allPresets.map((preset) => (
+            <div
+              key={preset.id}
+              style={{
+                padding: '24px',
+                backgroundColor: preset.colors.surface || '#f5f5f5',
+                borderRadius: `${preset.radius.lg}px`,
+                boxShadow: preset.shadows.md,
+              }}
+            >
+              <h2 style={{ 
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                marginBottom: '8px',
+                color: preset.colors.textPrimary || '#000',
+              }}>
+                {preset.name}
+              </h2>
+              <p style={{ 
+                fontSize: '0.875rem',
+                color: preset.colors.textSecondary || '#666',
+                marginBottom: '16px',
+              }}>
+                {preset.description}
+              </p>
+              <div style={{ 
+                fontSize: '0.75rem',
+                color: preset.colors.textDisabled || '#999',
+                marginTop: '8px',
+              }}>
+                Mode: {preset.mode} • v{preset.version}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </UIProvider>
+      </div>
     );
   },
 };

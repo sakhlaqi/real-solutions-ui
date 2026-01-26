@@ -1,0 +1,153 @@
+{
+  "id": "features-tabbed",
+  "name": "Tabbed Features Showcase",
+  "category": "features",
+  "version": "1.0.0",
+  "description": "Interactive tabbed interface with feature details and images",
+  "tags": ["interactive", "tabs", "images"],
+  "previewImage": "/previews/features-tabbed.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string"
+      },
+      "subheading": {
+        "type": "string"
+      },
+      "features": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "icon": {
+              "type": "string",
+              "description": "Material icon name"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "imageLight": {
+              "type": "string",
+              "description": "Feature image URL for light mode"
+            },
+            "imageDark": {
+              "type": "string",
+              "description": "Feature image URL for dark mode"
+            }
+          },
+          "required": ["icon", "title", "description", "imageLight"]
+        },
+        "minItems": 2,
+        "maxItems": 6
+      },
+      "defaultSelectedIndex": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Index of default selected feature"
+      }
+    },
+    "required": ["heading", "features"]
+  },
+  "defaultProps": {
+    "heading": "Product features",
+    "subheading": "Provide a brief overview of the key features of the product. For example, you could list the number of features, their types or benefits, and add-ons.",
+    "features": [
+      {
+        "icon": "ViewQuilt",
+        "title": "Dashboard",
+        "description": "This item could provide a snapshot of the most important metrics or data points related to the product.",
+        "imageLight": "/features/dash-light.png",
+        "imageDark": "/features/dash-dark.png"
+      },
+      {
+        "icon": "EdgesensorHigh",
+        "title": "Mobile integration",
+        "description": "This item could provide information about the mobile app version of the product.",
+        "imageLight": "/features/mobile-light.png",
+        "imageDark": "/features/mobile-dark.png"
+      },
+      {
+        "icon": "Devices",
+        "title": "Available on all platforms",
+        "description": "This item could let users know the product is available on all platforms, such as web, mobile, and desktop.",
+        "imageLight": "/features/devices-light.png",
+        "imageDark": "/features/devices-dark.png"
+      }
+    ],
+    "defaultSelectedIndex": 0
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "optional": true
+    },
+    "features": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "icon": { "type": "icon" },
+        "title": { "type": "text", "maxLength": 50 },
+        "description": { "type": "text", "maxLength": 200 },
+        "imageLight": { "type": "media", "accepts": ["image/*"] },
+        "imageDark": { "type": "media", "accepts": ["image/*"], "optional": true }
+      }
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 8, "sm": 16 }
+    }
+  },
+  "interactions": {
+    "type": "tabs",
+    "behavior": {
+      "clickToActivate": true,
+      "mobileVariant": "carousel",
+      "desktopLayout": "vertical-tabs"
+    }
+  },
+  "examples": [
+    {
+      "name": "Platform Features",
+      "props": {
+        "heading": "Everything You Need",
+        "subheading": "Our comprehensive platform brings together the tools you need to succeed.",
+        "features": [
+          {
+            "icon": "Analytics",
+            "title": "Advanced Analytics",
+            "description": "Deep insights into your business metrics with customizable dashboards and reports.",
+            "imageLight": "/features/analytics-light.png",
+            "imageDark": "/features/analytics-dark.png"
+          },
+          {
+            "icon": "People",
+            "title": "Team Collaboration",
+            "description": "Work together seamlessly with built-in chat, file sharing, and project management.",
+            "imageLight": "/features/collaboration-light.png",
+            "imageDark": "/features/collaboration-dark.png"
+          },
+          {
+            "icon": "Integration",
+            "title": "Seamless Integrations",
+            "description": "Connect with over 100+ tools and services you already use every day.",
+            "imageLight": "/features/integrations-light.png",
+            "imageDark": "/features/integrations-dark.png"
+          }
+        ],
+        "defaultSelectedIndex": 0
+      }
+    }
+  ]
+}

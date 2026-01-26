@@ -341,3 +341,88 @@ export type {
 //   ThumbnailProps,
 // } from './media';
 
+// ============================================================================
+// TEMPLATE MARKETPLACE SYSTEM
+// ============================================================================
+export {
+  PageSectionRegistry,
+  WebsiteTemplateRegistry,
+  BaseRegistry,
+  // New registry system
+  templateRegistry,
+  sectionRegistry,
+  registerTemplate,
+  registerSection,
+  getTemplate,
+  getSection,
+  getSectionsByCategory,
+  getTemplatesByCategory,
+  searchTemplates,
+  searchSections,
+} from './core/registry';
+
+export type {
+  // Core registry types
+  TemplateMetadata,
+  RegistryEntryStatus,
+  BaseRegistryEntry,
+  RegistryConfig,
+  RegistryQueryOptions,
+  RegistryStats,
+  // Page section types
+  PageSectionCategory,
+  PageSectionProps,
+  PageSectionSchema,
+  PageSectionDefinition,
+  PageSectionEntry,
+  PageSectionInstance,
+  // Website template types
+  WebsiteTemplateCategory,
+  PageDefinition,
+  NavigationConfig,
+  WebsiteTemplateDefinition,
+  WebsiteTemplateEntry,
+  TenantTemplateInstance,
+  // New registry types
+  TemplateComponent,
+  TemplateRegistryEntry,
+  SectionComponent,
+  SectionRegistryEntry,
+} from './core/registry';
+
+// ============================================================================
+// LAYOUT TEMPLATES
+// ============================================================================
+export {
+  // Application Layouts
+  DashboardLayout,
+  TwoColumnLayout,
+  TabsLayout,
+  // Marketing Layouts (Phase 3)
+  MarketingLayout,
+  LandingLayout,
+  BlankPageLayout,
+  // Layout Registration
+  registerAllLayouts,
+} from './core/templates';
+
+export type {
+  // Dashboard Layout
+  DashboardLayoutProps,
+  DashboardLayoutSlots,
+  // Two Column Layout
+  TwoColumnLayoutProps,
+  TwoColumnLayoutSlots,
+  // Tabs Layout
+  TabsLayoutProps,
+  TabsLayoutSlots,
+  // Marketing Layout (Phase 3)
+  MarketingLayoutProps,
+  MarketingLayoutSlots,
+  // Landing Layout (Phase 3)
+  LandingLayoutProps,
+  LandingLayoutSlots,
+  // Blank Page Layout (Phase 3)
+  BlankPageLayoutProps,
+  BlankPageLayoutSlots,
+} from './core/templates';

@@ -1,0 +1,147 @@
+{
+  "id": "hero-with-image",
+  "name": "Hero with Screenshot/Image",
+  "category": "hero",
+  "version": "1.0.0",
+  "description": "Hero section with product screenshot or featured image",
+  "tags": ["image", "screenshot", "visual"],
+  "previewImage": "/previews/hero-with-image.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "description": "Main heading text"
+      },
+      "subheading": {
+        "type": "string",
+        "description": "Supporting text below heading"
+      },
+      "ctaText": {
+        "type": "string",
+        "description": "Primary CTA button text"
+      },
+      "ctaLink": {
+        "type": "string",
+        "description": "Primary CTA link"
+      },
+      "secondaryCtaText": {
+        "type": "string",
+        "description": "Optional secondary CTA text"
+      },
+      "secondaryCtaLink": {
+        "type": "string",
+        "description": "Optional secondary CTA link"
+      },
+      "image": {
+        "type": "object",
+        "properties": {
+          "light": {
+            "type": "string",
+            "description": "Image URL for light mode"
+          },
+          "dark": {
+            "type": "string",
+            "description": "Image URL for dark mode"
+          },
+          "alt": {
+            "type": "string",
+            "description": "Image alt text"
+          }
+        },
+        "required": ["light", "alt"]
+      },
+      "imagePosition": {
+        "type": "string",
+        "enum": ["below", "right", "background"],
+        "description": "Where to position the image"
+      }
+    },
+    "required": ["heading", "subheading", "ctaText", "ctaLink", "image"]
+  },
+  "defaultProps": {
+    "heading": "Transform Your Workflow",
+    "subheading": "Experience the power of our platform with an intuitive dashboard designed for productivity.",
+    "ctaText": "Get Started",
+    "ctaLink": "/signup",
+    "secondaryCtaText": "View Demo",
+    "secondaryCtaLink": "/demo",
+    "image": {
+      "light": "/screenshots/dashboard-light.jpg",
+      "dark": "/screenshots/dashboard-dark.jpg",
+      "alt": "Product dashboard screenshot"
+    },
+    "imagePosition": "below"
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 300
+    },
+    "primaryCta": {
+      "type": "button",
+      "editable": true
+    },
+    "secondaryCta": {
+      "type": "button",
+      "editable": true,
+      "optional": true
+    },
+    "image": {
+      "type": "media",
+      "editable": true,
+      "accepts": ["image/jpeg", "image/png", "image/webp"],
+      "maxSize": "2MB",
+      "dimensions": {
+        "recommended": { "width": 1200, "height": 800 }
+      }
+    }
+  },
+  "layout": {
+    "container": "full",
+    "maxWidth": "xl",
+    "spacing": {
+      "pt": { "xs": 14, "sm": 20 },
+      "pb": { "xs": 8, "sm": 12 }
+    }
+  },
+  "examples": [
+    {
+      "name": "Dashboard Product",
+      "props": {
+        "heading": "The Analytics Platform Teams Love",
+        "subheading": "Real-time insights, powerful reports, and seamless integrations—all in one place.",
+        "ctaText": "Start Free Trial",
+        "ctaLink": "/trial",
+        "secondaryCtaText": "Watch Video",
+        "secondaryCtaLink": "#video",
+        "image": {
+          "light": "/products/analytics-dashboard-light.jpg",
+          "dark": "/products/analytics-dashboard-dark.jpg",
+          "alt": "Analytics dashboard with charts and metrics"
+        },
+        "imagePosition": "below"
+      }
+    },
+    {
+      "name": "Mobile App",
+      "props": {
+        "heading": "Your Fitness Journey Starts Here",
+        "subheading": "Track workouts, monitor progress, and achieve your goals with our intuitive mobile app.",
+        "ctaText": "Download Now",
+        "ctaLink": "/download",
+        "image": {
+          "light": "/apps/fitness-app-mockup.png",
+          "alt": "Fitness app on mobile devices"
+        },
+        "imagePosition": "right"
+      }
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "id": "contact-form",
+  "name": "Contact Form",
+  "category": "contact",
+  "version": "1.0.0",
+  "description": "Contact or inquiry form section",
+  "tags": ["contact", "form", "inquiry", "support"],
+  "previewImage": "/previews/contact-form.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string"
+      },
+      "subheading": {
+        "type": "string"
+      },
+      "fields": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Field name/ID"
+            },
+            "label": {
+              "type": "string",
+              "description": "Field label"
+            },
+            "type": {
+              "type": "string",
+              "enum": ["text", "email", "tel", "textarea", "select"],
+              "description": "Input type"
+            },
+            "placeholder": {
+              "type": "string"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "options": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Options for select field"
+            },
+            "validation": {
+              "type": "object",
+              "properties": {
+                "pattern": { "type": "string" },
+                "minLength": { "type": "number" },
+                "maxLength": { "type": "number" }
+              }
+            }
+          },
+          "required": ["name", "label", "type"]
+        }
+      },
+      "submitText": {
+        "type": "string"
+      },
+      "successMessage": {
+        "type": "string"
+      },
+      "privacyText": {
+        "type": "string"
+      },
+      "contactInfo": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "address": { "type": "string" },
+          "hours": { "type": "string" }
+        },
+        "description": "Optional contact information sidebar"
+      }
+    },
+    "required": ["heading", "fields", "submitText"]
+  },
+  "defaultProps": {
+    "heading": "Get in touch",
+    "subheading": "We'd love to hear from you. Fill out the form and we'll get back to you within 24 hours.",
+    "fields": [
+      {
+        "name": "name",
+        "label": "Full Name",
+        "type": "text",
+        "placeholder": "John Doe",
+        "required": true,
+        "validation": {
+          "minLength": 2,
+          "maxLength": 100
+        }
+      },
+      {
+        "name": "email",
+        "label": "Email Address",
+        "type": "email",
+        "placeholder": "john@example.com",
+        "required": true
+      },
+      {
+        "name": "phone",
+        "label": "Phone Number",
+        "type": "tel",
+        "placeholder": "+1 (555) 000-0000",
+        "required": false
+      },
+      {
+        "name": "subject",
+        "label": "Subject",
+        "type": "select",
+        "required": true,
+        "options": [
+          "General Inquiry",
+          "Sales",
+          "Support",
+          "Partnership",
+          "Other"
+        ]
+      },
+      {
+        "name": "message",
+        "label": "Message",
+        "type": "textarea",
+        "placeholder": "Tell us more about your inquiry...",
+        "required": true,
+        "validation": {
+          "minLength": 10,
+          "maxLength": 1000
+        }
+      }
+    ],
+    "submitText": "Send Message",
+    "successMessage": "Thank you! We'll get back to you soon.",
+    "privacyText": "By submitting this form, you agree to our Privacy Policy.",
+    "contactInfo": {
+      "email": "hello@company.com",
+      "phone": "+1 (555) 123-4567",
+      "address": "123 Business St, Suite 100, San Francisco, CA 94105",
+      "hours": "Monday - Friday, 9am - 5pm PST"
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "optional": true
+    },
+    "fields": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "name": { "type": "text", "maxLength": 30 },
+        "label": { "type": "text", "maxLength": 50 },
+        "type": { "type": "select" },
+        "placeholder": { "type": "text", "maxLength": 100, "optional": true },
+        "required": { "type": "boolean" },
+        "options": {
+          "type": "array",
+          "optional": true,
+          "items": { "type": "text" }
+        }
+      }
+    },
+    "submitText": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 30
+    },
+    "contactInfo": {
+      "type": "object",
+      "editable": true,
+      "optional": true
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "md",
+    "spacing": {
+      "py": { "xs": 8, "sm": 16 }
+    },
+    "formWidth": {
+      "xs": 12,
+      "md": 8
+    }
+  },
+  "styling": {
+    "fieldSpacing": 3,
+    "textareaRows": 5,
+    "buttonWidth": "auto",
+    "labelColor": "text.primary",
+    "helperTextColor": "text.secondary"
+  },
+  "validation": {
+    "realtime": false,
+    "showErrorsOnBlur": true,
+    "requiredIndicator": "*"
+  },
+  "examples": [
+    {
+      "name": "Sales Inquiry",
+      "props": {
+        "heading": "Talk to our sales team",
+        "subheading": "Get a personalized demo and learn how we can help your business grow.",
+        "fields": [
+          {
+            "name": "firstName",
+            "label": "First Name",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "lastName",
+            "label": "Last Name",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "workEmail",
+            "label": "Work Email",
+            "type": "email",
+            "required": true
+          },
+          {
+            "name": "company",
+            "label": "Company Name",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "companySize",
+            "label": "Company Size",
+            "type": "select",
+            "required": true,
+            "options": [
+              "1-10 employees",
+              "11-50 employees",
+              "51-200 employees",
+              "201-1000 employees",
+              "1000+ employees"
+            ]
+          },
+          {
+            "name": "needs",
+            "label": "Tell us about your needs",
+            "type": "textarea",
+            "required": true
+          }
+        ],
+        "submitText": "Request Demo",
+        "contactInfo": {
+          "email": "sales@company.com",
+          "phone": "+1 (555) 987-6543",
+          "hours": "Monday - Friday, 9am - 6pm EST"
+        }
+      }
+    },
+    {
+      "name": "Simple Contact",
+      "props": {
+        "heading": "Contact us",
+        "subheading": "Have a question? We're here to help.",
+        "fields": [
+          {
+            "name": "name",
+            "label": "Name",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "email",
+            "label": "Email",
+            "type": "email",
+            "required": true
+          },
+          {
+            "name": "message",
+            "label": "Message",
+            "type": "textarea",
+            "required": true
+          }
+        ],
+        "submitText": "Send",
+        "successMessage": "Thanks for reaching out! We'll respond within 48 hours."
+      }
+    }
+  ]
+}

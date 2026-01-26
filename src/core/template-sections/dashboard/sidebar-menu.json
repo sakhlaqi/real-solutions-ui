@@ -1,0 +1,365 @@
+{
+  "id": "dashboard-sidebar-menu",
+  "name": "Dashboard Sidebar Navigation",
+  "category": "dashboard",
+  "version": "1.0.0",
+  "description": "Collapsible sidebar navigation menu with nested items, icons, badges, and responsive drawer behavior. Perfect for admin dashboards and application navigation.",
+  "tags": ["dashboard", "navigation", "sidebar", "menu", "drawer", "collapsible"],
+  "previewImage": "/previews/sidebar-menu.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["menuItems"],
+    "properties": {
+      "menuItems": {
+        "type": "array",
+        "description": "Navigation menu items",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["id", "label"],
+          "properties": {
+            "id": {"type": "string"},
+            "label": {"type": "string", "maxLength": 100},
+            "icon": {"type": "string"},
+            "path": {"type": "string"},
+            "badge": {
+              "type": "object",
+              "properties": {
+                "text": {"type": "string"},
+                "color": {"type": "string", "enum": ["default", "primary", "secondary", "error", "warning", "info", "success"]},
+                "variant": {"type": "string", "enum": ["standard", "dot"]}
+              }
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "label"],
+                "properties": {
+                  "id": {"type": "string"},
+                  "label": {"type": "string", "maxLength": 100},
+                  "icon": {"type": "string"},
+                  "path": {"type": "string"},
+                  "badge": {
+                    "type": "object",
+                    "properties": {
+                      "text": {"type": "string"},
+                      "color": {"type": "string"},
+                      "variant": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "variant": {
+        "type": "string",
+        "enum": ["permanent", "persistent", "temporary"],
+        "description": "Drawer variant"
+      },
+      "anchor": {
+        "type": "string",
+        "enum": ["left", "right"],
+        "description": "Drawer position"
+      },
+      "width": {
+        "type": "number",
+        "minimum": 200,
+        "maximum": 400,
+        "description": "Drawer width in pixels"
+      },
+      "collapsible": {"type": "boolean"},
+      "defaultOpen": {"type": "boolean"},
+      "showDividers": {"type": "boolean"}
+    }
+  },
+  "defaultProps": {
+    "menuItems": [
+      {
+        "id": "dashboard",
+        "label": "Dashboard",
+        "icon": "Dashboard",
+        "path": "/dashboard"
+      },
+      {
+        "id": "analytics",
+        "label": "Analytics",
+        "icon": "BarChart",
+        "badge": {"text": "New", "color": "primary", "variant": "standard"},
+        "children": [
+          {"id": "overview", "label": "Overview", "path": "/analytics/overview"},
+          {"id": "reports", "label": "Reports", "path": "/analytics/reports"},
+          {"id": "insights", "label": "Insights", "path": "/analytics/insights"}
+        ]
+      },
+      {
+        "id": "customers",
+        "label": "Customers",
+        "icon": "People",
+        "badge": {"text": "142", "color": "default", "variant": "standard"},
+        "children": [
+          {"id": "all-customers", "label": "All Customers", "path": "/customers"},
+          {"id": "segments", "label": "Segments", "path": "/customers/segments"},
+          {"id": "activity", "label": "Activity", "path": "/customers/activity"}
+        ]
+      },
+      {
+        "id": "orders",
+        "label": "Orders",
+        "icon": "ShoppingCart",
+        "badge": {"text": "8", "color": "error", "variant": "standard"},
+        "children": [
+          {"id": "all-orders", "label": "All Orders", "path": "/orders"},
+          {"id": "pending", "label": "Pending", "icon": "Schedule", "path": "/orders/pending", "badge": {"text": "5", "color": "warning"}},
+          {"id": "completed", "label": "Completed", "icon": "CheckCircle", "path": "/orders/completed"},
+          {"id": "refunds", "label": "Refunds", "icon": "Undo", "path": "/orders/refunds"}
+        ]
+      },
+      {
+        "id": "products",
+        "label": "Products",
+        "icon": "Inventory",
+        "children": [
+          {"id": "all-products", "label": "All Products", "path": "/products"},
+          {"id": "categories", "label": "Categories", "path": "/products/categories"},
+          {"id": "inventory", "label": "Inventory", "path": "/products/inventory", "badge": {"text": "!", "color": "error", "variant": "dot"}}
+        ]
+      },
+      {
+        "id": "marketing",
+        "label": "Marketing",
+        "icon": "Campaign",
+        "children": [
+          {"id": "campaigns", "label": "Campaigns", "path": "/marketing/campaigns"},
+          {"id": "email", "label": "Email", "path": "/marketing/email"},
+          {"id": "social", "label": "Social Media", "path": "/marketing/social"}
+        ]
+      },
+      {
+        "id": "settings",
+        "label": "Settings",
+        "icon": "Settings",
+        "path": "/settings"
+      }
+    ],
+    "variant": "permanent",
+    "anchor": "left",
+    "width": 280,
+    "collapsible": true,
+    "defaultOpen": true,
+    "showDividers": false
+  },
+  "slots": {
+    "menuItems": {
+      "type": "collection",
+      "label": "Navigation Items",
+      "required": true,
+      "itemLabel": "Menu Item",
+      "nestable": true,
+      "fields": [
+        {"name": "id", "type": "text", "label": "Item ID", "required": true},
+        {"name": "label", "type": "text", "label": "Label", "required": true},
+        {"name": "icon", "type": "text", "label": "Icon Name", "required": false},
+        {"name": "path", "type": "text", "label": "URL Path", "required": false},
+        {"name": "badge", "type": "object", "label": "Badge", "required": false}
+      ]
+    }
+  },
+  "layout": {
+    "drawer": {
+      "sx": {
+        "width": "{{width}}px",
+        "flexShrink": 0,
+        "& .MuiDrawer-paper": {
+          "width": "{{width}}px",
+          "boxSizing": "border-box"
+        }
+      }
+    }
+  },
+  "styling": {
+    "drawer": {
+      "backgroundColor": "background.paper",
+      "borderRight": "1px solid",
+      "borderColor": "divider"
+    },
+    "toolbar": {
+      "minHeight": 64,
+      "display": "flex",
+      "alignItems": "center",
+      "px": 3
+    },
+    "logo": {
+      "variant": "h6",
+      "fontWeight": "bold",
+      "color": "primary.main"
+    },
+    "list": {
+      "px": 2,
+      "py": 1
+    },
+    "listItem": {
+      "borderRadius": 1,
+      "mb": 0.5
+    },
+    "listItemButton": {
+      "borderRadius": 1,
+      "px": 2,
+      "py": 1.5,
+      "&:hover": {
+        "backgroundColor": "action.hover"
+      },
+      "&.active": {
+        "backgroundColor": "primary.main",
+        "color": "primary.contrastText",
+        "&:hover": {
+          "backgroundColor": "primary.dark"
+        }
+      }
+    },
+    "listItemIcon": {
+      "minWidth": 40,
+      "color": "inherit"
+    },
+    "listItemText": {
+      "primary": {
+        "fontSize": "0.875rem",
+        "fontWeight": "medium"
+      }
+    },
+    "badge": {
+      "mr": 1,
+      "fontSize": "0.75rem"
+    },
+    "nestedList": {
+      "pl": 4
+    },
+    "divider": {
+      "my": 2
+    },
+    "collapseIcon": {
+      "ml": "auto",
+      "transition": "transform 0.3s"
+    }
+  },
+  "interactions": {
+    "itemClick": {
+      "action": "navigate"
+    },
+    "expandCollapse": {
+      "action": "toggleSubmenu",
+      "icon": "ExpandMore",
+      "rotateOnExpand": true
+    },
+    "drawerToggle": {
+      "enabled": true,
+      "action": "toggleDrawer"
+    }
+  },
+  "responsive": {
+    "breakpoint": "md",
+    "belowBreakpoint": {
+      "variant": "temporary"
+    },
+    "aboveBreakpoint": {
+      "variant": "permanent"
+    }
+  },
+  "accessibility": {
+    "navRole": "navigation",
+    "ariaLabel": "Main navigation",
+    "listRole": "list",
+    "itemRole": "listitem",
+    "expandedAriaLabel": "{{label}} submenu expanded",
+    "collapsedAriaLabel": "{{label}} submenu collapsed"
+  },
+  "examples": [
+    {
+      "name": "Simple Sidebar",
+      "props": {
+        "menuItems": [
+          {"id": "home", "label": "Home", "icon": "Home", "path": "/"},
+          {"id": "products", "label": "Products", "icon": "Store", "path": "/products"},
+          {"id": "orders", "label": "Orders", "icon": "Receipt", "path": "/orders"},
+          {"id": "customers", "label": "Customers", "icon": "People", "path": "/customers"},
+          {"id": "settings", "label": "Settings", "icon": "Settings", "path": "/settings"}
+        ],
+        "variant": "permanent",
+        "width": 240,
+        "collapsible": false
+      }
+    },
+    {
+      "name": "Compact Menu",
+      "props": {
+        "menuItems": [
+          {
+            "id": "main",
+            "label": "Main",
+            "children": [
+              {"id": "dashboard", "label": "Dashboard", "icon": "Dashboard", "path": "/"},
+              {"id": "analytics", "label": "Analytics", "icon": "Analytics", "path": "/analytics"}
+            ]
+          },
+          {
+            "id": "management",
+            "label": "Management",
+            "children": [
+              {"id": "users", "label": "Users", "icon": "People", "path": "/users", "badge": {"text": "23", "color": "info"}},
+              {"id": "products", "label": "Products", "icon": "Store", "path": "/products"},
+              {"id": "orders", "label": "Orders", "icon": "ShoppingCart", "path": "/orders", "badge": {"text": "!", "color": "error", "variant": "dot"}}
+            ]
+          }
+        ],
+        "variant": "permanent",
+        "width": 260,
+        "showDividers": true
+      }
+    },
+    {
+      "name": "Admin Panel",
+      "props": {
+        "menuItems": [
+          {"id": "overview", "label": "Overview", "icon": "ViewQuilt", "path": "/admin"},
+          {
+            "id": "content",
+            "label": "Content",
+            "icon": "Article",
+            "children": [
+              {"id": "pages", "label": "Pages", "path": "/admin/pages"},
+              {"id": "blog", "label": "Blog Posts", "path": "/admin/blog"},
+              {"id": "media", "label": "Media Library", "path": "/admin/media"}
+            ]
+          },
+          {
+            "id": "users",
+            "label": "Users & Roles",
+            "icon": "SupervisorAccount",
+            "children": [
+              {"id": "all-users", "label": "All Users", "path": "/admin/users"},
+              {"id": "roles", "label": "Roles", "path": "/admin/roles"},
+              {"id": "permissions", "label": "Permissions", "path": "/admin/permissions"}
+            ]
+          },
+          {
+            "id": "system",
+            "label": "System",
+            "icon": "Build",
+            "children": [
+              {"id": "settings", "label": "Settings", "path": "/admin/settings"},
+              {"id": "logs", "label": "Logs", "path": "/admin/logs"},
+              {"id": "backups", "label": "Backups", "path": "/admin/backups"}
+            ]
+          }
+        ],
+        "variant": "persistent",
+        "width": 300,
+        "collapsible": true,
+        "defaultOpen": true
+      }
+    }
+  ]
+}

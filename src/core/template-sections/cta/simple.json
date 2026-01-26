@@ -1,0 +1,118 @@
+{
+  "id": "cta-simple",
+  "name": "Simple CTA Banner",
+  "category": "cta",
+  "version": "1.0.0",
+  "description": "Centered call-to-action banner with heading and button",
+  "tags": ["cta", "banner", "centered"],
+  "previewImage": "/previews/cta-simple.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string"
+      },
+      "subheading": {
+        "type": "string"
+      },
+      "primaryCtaText": {
+        "type": "string"
+      },
+      "primaryCtaLink": {
+        "type": "string"
+      },
+      "secondaryCtaText": {
+        "type": "string"
+      },
+      "secondaryCtaLink": {
+        "type": "string"
+      },
+      "background": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["gradient", "solid", "image"]
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "required": ["heading", "primaryCtaText", "primaryCtaLink"]
+  },
+  "defaultProps": {
+    "heading": "Ready to get started?",
+    "subheading": "Join thousands of teams already using our platform to streamline their workflow.",
+    "primaryCtaText": "Start Free Trial",
+    "primaryCtaLink": "/signup",
+    "secondaryCtaText": "Contact Sales",
+    "secondaryCtaLink": "/contact",
+    "background": {
+      "type": "gradient",
+      "value": "linear-gradient(135deg, hsl(220, 60%, 95%) 0%, hsl(210, 60%, 90%) 100%)"
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 200,
+      "optional": true
+    },
+    "primaryCta": {
+      "type": "button",
+      "editable": true
+    },
+    "secondaryCta": {
+      "type": "button",
+      "editable": true,
+      "optional": true
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "md",
+    "spacing": {
+      "py": { "xs": 8, "sm": 12 }
+    },
+    "textAlign": "center"
+  },
+  "styling": {
+    "borderRadius": 2,
+    "padding": { "xs": 4, "sm": 6 },
+    "elevation": 0
+  },
+  "examples": [
+    {
+      "name": "Newsletter Signup",
+      "props": {
+        "heading": "Never miss an update",
+        "subheading": "Get the latest product news and exclusive offers delivered to your inbox.",
+        "primaryCtaText": "Subscribe Now",
+        "primaryCtaLink": "/newsletter",
+        "background": {
+          "type": "solid",
+          "value": "primary.main"
+        }
+      }
+    },
+    {
+      "name": "Trial Conversion",
+      "props": {
+        "heading": "Your trial ends in 3 days",
+        "subheading": "Upgrade now to keep all your data and unlock advanced features.",
+        "primaryCtaText": "Upgrade to Pro",
+        "primaryCtaLink": "/upgrade",
+        "secondaryCtaText": "Compare Plans",
+        "secondaryCtaLink": "/pricing"
+      }
+    }
+  ]
+}

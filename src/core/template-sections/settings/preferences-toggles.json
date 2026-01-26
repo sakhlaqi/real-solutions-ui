@@ -1,0 +1,342 @@
+{
+  "id": "settings-preferences-toggles",
+  "category": "settings",
+  "name": "Preferences Toggles",
+  "description": "Collection of toggle switches for user preferences and feature flags. Perfect for settings pages and configuration interfaces.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "description": {
+        "type": "string",
+        "maxLength": 300
+      },
+      "sections": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": ["title", "toggles"],
+          "properties": {
+            "title": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "toggles": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 20,
+              "items": {
+                "type": "object",
+                "required": ["id", "label"],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string",
+                    "maxLength": 100
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "defaultValue": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "disabled": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "saveButtonText": {
+        "type": "string",
+        "maxLength": 30,
+        "default": "Save Preferences"
+      }
+    },
+    "required": ["sections"]
+  },
+  "defaultProps": {
+    "heading": "Preferences",
+    "description": "Customize your experience with these settings",
+    "sections": [
+      {
+        "title": "Privacy",
+        "description": "Control your privacy and data sharing",
+        "toggles": [
+          {
+            "id": "profilePublic",
+            "label": "Public profile",
+            "description": "Allow others to find and view your profile",
+            "defaultValue": true
+          },
+          {
+            "id": "showEmail",
+            "label": "Show email address",
+            "description": "Display your email on your public profile",
+            "defaultValue": false
+          },
+          {
+            "id": "allowMessages",
+            "label": "Allow messages from anyone",
+            "description": "Receive messages from all users, not just connections",
+            "defaultValue": true
+          }
+        ]
+      },
+      {
+        "title": "Notifications",
+        "description": "Choose what updates you want to receive",
+        "toggles": [
+          {
+            "id": "emailNotifications",
+            "label": "Email notifications",
+            "description": "Receive email updates about your activity",
+            "defaultValue": true
+          },
+          {
+            "id": "pushNotifications",
+            "label": "Push notifications",
+            "description": "Get push notifications on your devices",
+            "defaultValue": true
+          },
+          {
+            "id": "weeklyDigest",
+            "label": "Weekly digest",
+            "description": "Receive a weekly summary of your activity",
+            "defaultValue": false
+          },
+          {
+            "id": "marketingEmails",
+            "label": "Marketing emails",
+            "description": "Get updates about new features and offers",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "title": "Accessibility",
+        "description": "Adjust settings to improve accessibility",
+        "toggles": [
+          {
+            "id": "reducedMotion",
+            "label": "Reduce motion",
+            "description": "Minimize animations and transitions",
+            "defaultValue": false
+          },
+          {
+            "id": "highContrast",
+            "label": "High contrast mode",
+            "description": "Increase color contrast for better visibility",
+            "defaultValue": false
+          },
+          {
+            "id": "largeText",
+            "label": "Large text",
+            "description": "Use larger font sizes throughout the app",
+            "defaultValue": false
+          }
+        ]
+      }
+    ],
+    "saveButtonText": "Save Preferences"
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 300
+    },
+    "sections": {
+      "type": "collection",
+      "itemType": "section",
+      "minItems": 1,
+      "maxItems": 10,
+      "fields": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "toggles",
+          "type": "nested-collection"
+        }
+      ]
+    }
+  },
+  "layout": {
+    "container": {
+      "maxWidth": "md",
+      "paddingX": { "xs": 2, "sm": 3, "md": 4 },
+      "paddingY": { "xs": 4, "sm": 6, "md": 8 }
+    }
+  },
+  "styling": {
+    "heading": {
+      "variant": "h4",
+      "component": "h1",
+      "fontWeight": 700,
+      "gutterBottom": true
+    },
+    "description": {
+      "variant": "body1",
+      "color": "text.secondary",
+      "marginBottom": 4
+    },
+    "section": {
+      "marginBottom": 4,
+      "padding": 3,
+      "borderRadius": 2,
+      "backgroundColor": "background.paper",
+      "border": "1px solid",
+      "borderColor": "divider"
+    },
+    "sectionTitle": {
+      "variant": "h6",
+      "fontWeight": 600,
+      "gutterBottom": true
+    },
+    "sectionDescription": {
+      "variant": "body2",
+      "color": "text.secondary",
+      "marginBottom": 2
+    },
+    "toggleItem": {
+      "display": "flex",
+      "alignItems": "flex-start",
+      "justifyContent": "space-between",
+      "paddingY": 2,
+      "borderBottom": "1px solid",
+      "borderColor": "divider",
+      "&:last-child": {
+        "borderBottom": "none"
+      }
+    },
+    "toggleContent": {
+      "flex": 1,
+      "marginRight": 2
+    },
+    "toggleLabel": {
+      "variant": "body1",
+      "fontWeight": 500,
+      "marginBottom": 0.5
+    },
+    "toggleDescription": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "saveButton": {
+      "marginTop": 3,
+      "minWidth": 140
+    }
+  },
+  "interactions": {
+    "toggleSwitch": {
+      "type": "change",
+      "description": "Toggle preference on/off"
+    },
+    "savePreferences": {
+      "type": "submit",
+      "description": "Save all preference changes"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "toggle": "{label}",
+      "section": "{title} preferences",
+      "saveButton": "Save preferences"
+    },
+    "keyboardSupport": true,
+    "descriptions": {
+      "toggle": "{description}"
+    }
+  },
+  "examples": [
+    {
+      "name": "Simple Toggles",
+      "description": "Basic preference toggles",
+      "props": {
+        "heading": "Quick Settings",
+        "sections": [
+          {
+            "title": "Display",
+            "toggles": [
+              {
+                "id": "darkMode",
+                "label": "Dark mode",
+                "description": "Use dark theme across the app",
+                "defaultValue": false
+              },
+              {
+                "id": "compactView",
+                "label": "Compact view",
+                "description": "Show more content with tighter spacing",
+                "defaultValue": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Feature Flags",
+      "description": "Beta features and experimental options",
+      "props": {
+        "heading": "Experimental Features",
+        "description": "Try out new features before they're released",
+        "sections": [
+          {
+            "title": "Beta Features",
+            "description": "These features are still in development",
+            "toggles": [
+              {
+                "id": "newDashboard",
+                "label": "New dashboard",
+                "description": "Try the redesigned dashboard interface",
+                "defaultValue": false
+              },
+              {
+                "id": "aiAssistant",
+                "label": "AI assistant",
+                "description": "Enable the AI-powered help assistant",
+                "defaultValue": false
+              },
+              {
+                "id": "advancedAnalytics",
+                "label": "Advanced analytics",
+                "description": "Access detailed analytics and reports",
+                "defaultValue": false
+              }
+            ]
+          }
+        ],
+        "saveButtonText": "Enable Features"
+      }
+    }
+  ]
+}

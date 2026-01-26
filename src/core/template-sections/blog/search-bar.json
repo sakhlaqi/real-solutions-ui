@@ -1,0 +1,57 @@
+{
+  "id": "search-bar",
+  "name": "Search Bar with Filters",
+  "category": "blog",
+  "version": "1.0.0",
+  "description": "Search input field with filter chips for blog posts or content. Includes search functionality and category filtering.",
+  "tags": ["search", "filter", "input", "chips", "blog"],
+  "previewImage": "/previews/search-bar.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "placeholder": {"type": "string", "maxLength": 100},
+      "filters": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string"},
+            "label": {"type": "string"},
+            "value": {"type": "string"}
+          }
+        }
+      },
+      "showRssIcon": {"type": "boolean"}
+    }
+  },
+  "defaultProps": {
+    "placeholder": "Search articles...",
+    "filters": [
+      {"id": "all", "label": "All", "value": "all"},
+      {"id": "engineering", "label": "Engineering", "value": "engineering"},
+      {"id": "product", "label": "Product", "value": "product"},
+      {"id": "design", "label": "Design", "value": "design"}
+    ],
+    "showRssIcon": true
+  },
+  "slots": {
+    "placeholder": {"type": "text", "label": "Search Placeholder"},
+    "filters": {"type": "collection", "label": "Filter Chips"}
+  },
+  "layout": {"container": {"maxWidth": "lg"}},
+  "styling": {
+    "searchInput": {"variant": "outlined", "size": "small"},
+    "filterChip": {"size": "small", "variant": "outlined"}
+  },
+  "examples": [
+    {
+      "name": "Simple Search",
+      "props": {
+        "placeholder": "Search...",
+        "filters": [],
+        "showRssIcon": false
+      }
+    }
+  ]
+}

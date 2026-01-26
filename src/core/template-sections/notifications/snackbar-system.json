@@ -1,0 +1,230 @@
+{
+  "id": "notifications-snackbar",
+  "category": "notifications",
+  "name": "Snackbar Notification System",
+  "description": "Toast-style notification system with multiple variants, positions, and actions. Perfect for showing success, error, warning, and info messages.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "variant": {
+        "type": "string",
+        "enum": ["success", "error", "warning", "info", "default"],
+        "default": "info"
+      },
+      "message": {
+        "type": "string",
+        "maxLength": 200
+      },
+      "position": {
+        "type": "object",
+        "properties": {
+          "vertical": {
+            "type": "string",
+            "enum": ["top", "bottom"],
+            "default": "bottom"
+          },
+          "horizontal": {
+            "type": "string",
+            "enum": ["left", "center", "right"],
+            "default": "left"
+          }
+        }
+      },
+      "autoHideDuration": {
+        "type": "integer",
+        "minimum": 1000,
+        "maximum": 10000,
+        "default": 6000,
+        "description": "Auto-hide duration in milliseconds"
+      },
+      "showCloseButton": {
+        "type": "boolean",
+        "default": true
+      },
+      "action": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "onClick": {
+            "type": "string",
+            "description": "Action handler function name"
+          }
+        }
+      },
+      "enableUndo": {
+        "type": "boolean",
+        "default": false,
+        "description": "Show undo action button"
+      }
+    },
+    "required": ["message"]
+  },
+  "defaultProps": {
+    "variant": "info",
+    "message": "This is an informational message",
+    "position": {
+      "vertical": "bottom",
+      "horizontal": "left"
+    },
+    "autoHideDuration": 6000,
+    "showCloseButton": true
+  },
+  "slots": {
+    "message": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 200,
+      "required": true
+    },
+    "action": {
+      "type": "object",
+      "editable": true,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text"
+        }
+      ]
+    }
+  },
+  "layout": {
+    "snackbar": {
+      "minWidth": 288,
+      "maxWidth": 568
+    }
+  },
+  "styling": {
+    "snackbar": {
+      "borderRadius": 1,
+      "boxShadow": 3
+    },
+    "variants": {
+      "success": {
+        "backgroundColor": "success.main",
+        "color": "success.contrastText"
+      },
+      "error": {
+        "backgroundColor": "error.main",
+        "color": "error.contrastText"
+      },
+      "warning": {
+        "backgroundColor": "warning.main",
+        "color": "warning.contrastText"
+      },
+      "info": {
+        "backgroundColor": "info.main",
+        "color": "info.contrastText"
+      },
+      "default": {
+        "backgroundColor": "grey.800",
+        "color": "common.white"
+      }
+    },
+    "message": {
+      "variant": "body2",
+      "display": "flex",
+      "alignItems": "center",
+      "gap": 1
+    },
+    "icon": {
+      "fontSize": 20
+    },
+    "action": {
+      "color": "inherit",
+      "fontWeight": 600,
+      "textTransform": "uppercase",
+      "fontSize": "0.875rem"
+    },
+    "closeButton": {
+      "color": "inherit",
+      "padding": 0.5
+    }
+  },
+  "interactions": {
+    "open": {
+      "type": "state",
+      "description": "Shows the snackbar"
+    },
+    "close": {
+      "type": "click",
+      "description": "Closes the snackbar"
+    },
+    "autoHide": {
+      "type": "timer",
+      "description": "Automatically hides after duration"
+    },
+    "actionClick": {
+      "type": "click",
+      "description": "Triggers custom action"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "snackbar": "{variant} notification",
+      "closeButton": "Close notification",
+      "action": "{label}"
+    },
+    "role": "alert",
+    "ariaLive": "polite",
+    "keyboardSupport": true
+  },
+  "examples": [
+    {
+      "name": "Success Message",
+      "description": "Success notification with auto-hide",
+      "props": {
+        "variant": "success",
+        "message": "Changes saved successfully!",
+        "position": {
+          "vertical": "top",
+          "horizontal": "center"
+        },
+        "autoHideDuration": 4000
+      }
+    },
+    {
+      "name": "Error with Action",
+      "description": "Error message with retry action",
+      "props": {
+        "variant": "error",
+        "message": "Failed to save changes",
+        "action": {
+          "label": "Retry",
+          "onClick": "handleRetry"
+        },
+        "autoHideDuration": 8000
+      }
+    },
+    {
+      "name": "Undo Action",
+      "description": "Success message with undo option",
+      "props": {
+        "variant": "success",
+        "message": "Item deleted",
+        "enableUndo": true,
+        "action": {
+          "label": "Undo",
+          "onClick": "handleUndo"
+        },
+        "autoHideDuration": 5000
+      }
+    },
+    {
+      "name": "Warning",
+      "description": "Warning notification",
+      "props": {
+        "variant": "warning",
+        "message": "Your session will expire in 5 minutes",
+        "position": {
+          "vertical": "top",
+          "horizontal": "right"
+        },
+        "showCloseButton": false,
+        "autoHideDuration": 10000
+      }
+    }
+  ]
+}

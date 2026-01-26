@@ -1,0 +1,391 @@
+{
+  "id": "auth-signin-form",
+  "name": "Sign In Form",
+  "category": "auth",
+  "version": "1.0.0",
+  "description": "Complete sign-in form with email/password fields, remember me checkbox, forgot password link, and social login options. Includes form validation and error handling.",
+  "tags": ["auth", "signin", "login", "form", "validation", "oauth", "social-login"],
+  "previewImage": "/previews/signin-form.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["heading", "submitButtonText"],
+    "properties": {
+      "heading": {"type": "string", "maxLength": 100},
+      "subheading": {"type": "string", "maxLength": 200},
+      "emailField": {
+        "type": "object",
+        "properties": {
+          "label": {"type": "string"},
+          "placeholder": {"type": "string"},
+          "required": {"type": "boolean"},
+          "autoComplete": {"type": "string"}
+        }
+      },
+      "passwordField": {
+        "type": "object",
+        "properties": {
+          "label": {"type": "string"},
+          "placeholder": {"type": "string"},
+          "required": {"type": "boolean"},
+          "autoComplete": {"type": "string"},
+          "showToggle": {"type": "boolean"}
+        }
+      },
+      "rememberMe": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "label": {"type": "string"},
+          "defaultChecked": {"type": "boolean"}
+        }
+      },
+      "forgotPassword": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "text": {"type": "string"},
+          "url": {"type": "string"}
+        }
+      },
+      "submitButtonText": {"type": "string", "maxLength": 50},
+      "socialLogins": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "heading": {"type": "string"},
+          "providers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "icon": {"type": "string"},
+                "color": {"type": "string"}
+              }
+            }
+          }
+        }
+      },
+      "signupLink": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "text": {"type": "string"},
+          "linkText": {"type": "string"},
+          "url": {"type": "string"}
+        }
+      }
+    }
+  },
+  "defaultProps": {
+    "heading": "Sign in",
+    "subheading": "Welcome back! Please enter your details.",
+    "emailField": {
+      "label": "Email",
+      "placeholder": "your@email.com",
+      "required": true,
+      "autoComplete": "email"
+    },
+    "passwordField": {
+      "label": "Password",
+      "placeholder": "Enter your password",
+      "required": true,
+      "autoComplete": "current-password",
+      "showToggle": true
+    },
+    "rememberMe": {
+      "enabled": true,
+      "label": "Remember me",
+      "defaultChecked": false
+    },
+    "forgotPassword": {
+      "enabled": true,
+      "text": "Forgot password?",
+      "url": "/auth/forgot-password"
+    },
+    "submitButtonText": "Sign in",
+    "socialLogins": {
+      "enabled": true,
+      "heading": "Or continue with",
+      "providers": [
+        {"id": "google", "name": "Google", "icon": "Google", "color": "#DB4437"},
+        {"id": "github", "name": "GitHub", "icon": "GitHub", "color": "#333"},
+        {"id": "facebook", "name": "Facebook", "icon": "Facebook", "color": "#1877F2"}
+      ]
+    },
+    "signupLink": {
+      "enabled": true,
+      "text": "Don't have an account?",
+      "linkText": "Sign up",
+      "url": "/auth/signup"
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "label": "Form Heading",
+      "required": true
+    },
+    "subheading": {
+      "type": "text",
+      "label": "Subheading",
+      "required": false
+    },
+    "emailField": {
+      "type": "field",
+      "label": "Email Field",
+      "fieldType": "email",
+      "required": true
+    },
+    "passwordField": {
+      "type": "field",
+      "label": "Password Field",
+      "fieldType": "password",
+      "required": true
+    },
+    "rememberMe": {
+      "type": "checkbox",
+      "label": "Remember Me Checkbox",
+      "required": false
+    },
+    "forgotPasswordLink": {
+      "type": "link",
+      "label": "Forgot Password Link",
+      "required": false
+    },
+    "submitButton": {
+      "type": "button",
+      "label": "Submit Button",
+      "required": true
+    },
+    "socialProviders": {
+      "type": "collection",
+      "label": "Social Login Providers",
+      "required": false,
+      "itemLabel": "Provider",
+      "fields": [
+        {"name": "id", "type": "text", "label": "Provider ID", "required": true},
+        {"name": "name", "type": "text", "label": "Provider Name", "required": true},
+        {"name": "icon", "type": "text", "label": "Icon Name", "required": false},
+        {"name": "color", "type": "text", "label": "Brand Color", "required": false}
+      ]
+    },
+    "signupLink": {
+      "type": "link",
+      "label": "Sign Up Link",
+      "required": false
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "xs"},
+    "spacing": 3,
+    "padding": 4
+  },
+  "styling": {
+    "form": {
+      "width": "100%",
+      "mt": 1
+    },
+    "heading": {
+      "variant": "h4",
+      "fontWeight": "bold",
+      "textAlign": "center",
+      "mb": 1
+    },
+    "subheading": {
+      "variant": "body2",
+      "color": "text.secondary",
+      "textAlign": "center",
+      "mb": 3
+    },
+    "textField": {
+      "variant": "outlined",
+      "fullWidth": true,
+      "margin": "normal",
+      "size": "medium"
+    },
+    "rememberMeRow": {
+      "display": "flex",
+      "justifyContent": "space-between",
+      "alignItems": "center",
+      "mb": 2
+    },
+    "checkbox": {
+      "color": "primary"
+    },
+    "forgotPasswordLink": {
+      "variant": "body2",
+      "color": "primary.main",
+      "textDecoration": "none",
+      "&:hover": {
+        "textDecoration": "underline"
+      }
+    },
+    "submitButton": {
+      "variant": "contained",
+      "fullWidth": true,
+      "size": "large",
+      "sx": {"mt": 2, "mb": 2}
+    },
+    "divider": {
+      "my": 3
+    },
+    "dividerText": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "socialButton": {
+      "variant": "outlined",
+      "fullWidth": true,
+      "size": "medium",
+      "sx": {"mb": 1.5, "textTransform": "none"}
+    },
+    "socialIcon": {
+      "mr": 1,
+      "fontSize": "small"
+    },
+    "signupLink": {
+      "textAlign": "center",
+      "mt": 2
+    },
+    "signupLinkText": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "signupLinkButton": {
+      "variant": "body2",
+      "color": "primary.main",
+      "fontWeight": "medium",
+      "ml": 0.5,
+      "textDecoration": "none",
+      "&:hover": {
+        "textDecoration": "underline"
+      }
+    }
+  },
+  "validation": {
+    "email": {
+      "required": true,
+      "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+      "errorMessages": {
+        "required": "Email is required",
+        "pattern": "Please enter a valid email address"
+      }
+    },
+    "password": {
+      "required": true,
+      "minLength": 8,
+      "errorMessages": {
+        "required": "Password is required",
+        "minLength": "Password must be at least 8 characters"
+      }
+    }
+  },
+  "interactions": {
+    "submitForm": {
+      "onSubmit": "handleSignIn",
+      "preventDefault": true
+    },
+    "socialLogin": {
+      "onClick": "handleSocialLogin"
+    },
+    "forgotPassword": {
+      "onClick": "navigateToForgotPassword"
+    },
+    "signup": {
+      "onClick": "navigateToSignUp"
+    },
+    "togglePassword": {
+      "onClick": "togglePasswordVisibility"
+    }
+  },
+  "security": {
+    "csrfProtection": true,
+    "httpsOnly": true,
+    "autocomplete": {
+      "email": "email",
+      "password": "current-password"
+    }
+  },
+  "accessibility": {
+    "formRole": "form",
+    "ariaLabel": "Sign in form",
+    "fieldLabels": "visible",
+    "requiredIndicator": "*",
+    "errorMessages": true,
+    "passwordToggleAriaLabel": "Toggle password visibility"
+  },
+  "examples": [
+    {
+      "name": "Minimal Sign In",
+      "props": {
+        "heading": "Welcome back",
+        "subheading": "",
+        "rememberMe": {"enabled": false},
+        "forgotPassword": {"enabled": false},
+        "socialLogins": {"enabled": false},
+        "signupLink": {"enabled": false},
+        "submitButtonText": "Log in"
+      }
+    },
+    {
+      "name": "Social Login Only",
+      "props": {
+        "heading": "Sign in to continue",
+        "subheading": "Choose your preferred sign-in method",
+        "emailField": {"label": "Email", "required": false},
+        "passwordField": {"label": "Password", "required": false},
+        "rememberMe": {"enabled": false},
+        "forgotPassword": {"enabled": false},
+        "submitButtonText": "Sign in with Email",
+        "socialLogins": {
+          "enabled": true,
+          "heading": "Sign in with",
+          "providers": [
+            {"id": "google", "name": "Google", "icon": "Google"},
+            {"id": "microsoft", "name": "Microsoft", "icon": "Microsoft"},
+            {"id": "apple", "name": "Apple", "icon": "Apple"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Enterprise Login",
+      "props": {
+        "heading": "Sign in to your account",
+        "subheading": "Access your enterprise dashboard",
+        "emailField": {
+          "label": "Work Email",
+          "placeholder": "you@company.com"
+        },
+        "rememberMe": {
+          "enabled": true,
+          "label": "Keep me signed in",
+          "defaultChecked": true
+        },
+        "forgotPassword": {
+          "enabled": true,
+          "text": "Forgot your password?",
+          "url": "/auth/reset"
+        },
+        "submitButtonText": "Sign in to workspace",
+        "socialLogins": {
+          "enabled": true,
+          "heading": "Or use SSO",
+          "providers": [
+            {"id": "okta", "name": "Okta", "icon": "Security"},
+            {"id": "saml", "name": "SAML SSO", "icon": "VpnKey"}
+          ]
+        },
+        "signupLink": {
+          "enabled": true,
+          "text": "New to the platform?",
+          "linkText": "Request access",
+          "url": "/auth/request-access"
+        }
+      }
+    }
+  ]
+}

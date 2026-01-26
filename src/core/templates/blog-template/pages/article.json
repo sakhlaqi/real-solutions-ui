@@ -1,0 +1,69 @@
+{
+  "id": "article",
+  "title": "Article - The Blog",
+  "description": "Read the full article",
+  "layout": {
+    "type": "two-column-layout"
+  },
+  "sections": [
+    {
+      "type": "blog-article-header",
+      "props": {
+        "title": "Article Title Placeholder",
+        "author": {
+          "name": "Author Name",
+          "avatar": "/authors/default.jpg",
+          "bio": "Author bio"
+        },
+        "date": "2026-01-25",
+        "readTime": "8 min read",
+        "category": "Development",
+        "tags": ["react", "typescript", "tutorial"]
+      }
+    },
+    {
+      "type": "blog-article-content",
+      "props": {
+        "content": "Article content will be rendered here with rich formatting support."
+      }
+    },
+    {
+      "type": "blog-related-posts",
+      "props": {
+        "title": "Related Articles",
+        "posts": []
+      }
+    },
+    {
+      "type": "blog-comments",
+      "props": {
+        "enabled": true,
+        "provider": "built-in"
+      }
+    }
+  ],
+  "sidebar": {
+    "sections": [
+      {
+        "type": "blog-author-card",
+        "props": {
+          "showBio": true,
+          "showSocial": true
+        }
+      },
+      {
+        "type": "blog-table-of-contents",
+        "props": {
+          "title": "Table of Contents"
+        }
+      },
+      {
+        "type": "blog-popular-posts",
+        "props": {
+          "title": "Popular Posts",
+          "limit": 5
+        }
+      }
+    ]
+  }
+}

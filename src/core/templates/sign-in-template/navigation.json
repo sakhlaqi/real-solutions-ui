@@ -1,0 +1,21 @@
+{
+  "structure": {
+    "header": {
+      "logo": {
+        "text": "AppName",
+        "href": "/"
+      },
+      "links": [],
+      "actions": []
+    },
+    "footer": {
+      "columns": [],
+      "copyright": "© 2026 AppName. All rights reserved.",
+      "links": [
+        { "label": "Privacy", "href": "/privacy" },
+        { "label": "Terms", "href": "/terms" },
+        { "label": "Help", "href": "/help" }
+      ]
+    }
+  }
+}

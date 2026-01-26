@@ -1,0 +1,169 @@
+{
+  "id": "article-list",
+  "name": "Article List with Pagination",
+  "category": "blog",
+  "version": "1.0.0",
+  "description": "A list-based layout for latest blog articles with title, description, authors, date, and pagination. Ideal for blog archive pages and article feeds.",
+  "tags": ["blog", "list", "articles", "pagination", "feed"],
+  "previewImage": "/previews/article-list.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["heading", "articles"],
+    "properties": {
+      "heading": {
+        "type": "string",
+        "description": "Section heading",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "articles": {
+        "type": "array",
+        "description": "Array of articles",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["id", "title", "description", "category"],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "category": {
+              "type": "string"
+            },
+            "authors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "avatar": {"type": "string"}
+                }
+              }
+            },
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "pagination": {
+        "type": "object",
+        "properties": {
+          "totalPages": {"type": "number", "minimum": 1},
+          "currentPage": {"type": "number", "minimum": 1},
+          "itemsPerPage": {"type": "number", "minimum": 1}
+        }
+      },
+      "showAuthor": {"type": "boolean"},
+      "showDate": {"type": "boolean"}
+    }
+  },
+  "defaultProps": {
+    "heading": "Latest",
+    "articles": [
+      {
+        "id": "article-1",
+        "title": "The future of AI in software engineering",
+        "description": "Artificial intelligence is revolutionizing software engineering. Explore how AI-driven tools are enhancing development processes and improving software quality.",
+        "category": "Engineering",
+        "authors": [
+          {"name": "Remy Sharp", "avatar": "/avatars/1.jpg"},
+          {"name": "Travis Howard", "avatar": "/avatars/2.jpg"}
+        ],
+        "date": "2024-07-14",
+        "url": "/blog/future-of-ai"
+      },
+      {
+        "id": "article-2",
+        "title": "Driving growth with user-centric product design",
+        "description": "Our user-centric product design approach is driving significant growth. Learn about the strategies we employ to create products that resonate with users.",
+        "category": "Product",
+        "authors": [{"name": "Erica Johns", "avatar": "/avatars/6.jpg"}],
+        "date": "2024-07-12",
+        "url": "/blog/user-centric-design"
+      },
+      {
+        "id": "article-3",
+        "title": "Embracing minimalism in modern design",
+        "description": "Minimalism is a key trend in modern design. Discover how our design team incorporates minimalist principles to create clean and impactful user experiences.",
+        "category": "Design",
+        "authors": [{"name": "Kate Morrison", "avatar": "/avatars/7.jpg"}],
+        "date": "2024-07-10",
+        "url": "/blog/minimalism-in-design"
+      }
+    ],
+    "pagination": {
+      "totalPages": 10,
+      "currentPage": 1,
+      "itemsPerPage": 10
+    },
+    "showAuthor": true,
+    "showDate": true
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "label": "Heading",
+      "required": true
+    },
+    "articles": {
+      "type": "collection",
+      "label": "Articles",
+      "required": true,
+      "itemLabel": "Article",
+      "fields": [
+        {"name": "title", "type": "text", "label": "Title", "required": true},
+        {"name": "description", "type": "textarea", "label": "Description", "required": true},
+        {"name": "category", "type": "text", "label": "Category", "required": true},
+        {"name": "url", "type": "url", "label": "URL", "required": true}
+      ]
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "lg"},
+    "spacing": 8
+  },
+  "styling": {
+    "heading": {"variant": "h2", "gutterBottom": true},
+    "title": {"variant": "h6", "gutterBottom": true},
+    "description": {"variant": "body2", "color": "text.secondary"}
+  },
+  "interactions": {
+    "articleHover": {"enabled": true, "effect": "underline"},
+    "pagination": {"enabled": true, "hidePrevButton": false, "hideNextButton": false}
+  },
+  "examples": [
+    {
+      "name": "Simple List",
+      "props": {
+        "heading": "Recent Articles",
+        "articles": [
+          {
+            "id": "1",
+            "title": "Getting Started with React",
+            "description": "Learn the fundamentals of React and build your first component.",
+            "category": "Tutorial",
+            "date": "2024-07-20",
+            "url": "/blog/react-getting-started"
+          }
+        ],
+        "showAuthor": false,
+        "showDate": true
+      }
+    }
+  ]
+}

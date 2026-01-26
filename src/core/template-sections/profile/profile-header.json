@@ -1,0 +1,391 @@
+{
+  "id": "profile-header",
+  "category": "profile",
+  "name": "Profile Header",
+  "description": "User profile header section with avatar, name, bio, social links, and action buttons. Perfect for user profiles, team member pages, and author bios.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "avatar": {
+        "type": "string",
+        "format": "uri",
+        "description": "User avatar image URL"
+      },
+      "name": {
+        "type": "string",
+        "maxLength": 100,
+        "description": "User's display name"
+      },
+      "title": {
+        "type": "string",
+        "maxLength": 100,
+        "description": "User's title or role"
+      },
+      "bio": {
+        "type": "string",
+        "maxLength": 500,
+        "description": "User biography or description"
+      },
+      "location": {
+        "type": "string",
+        "maxLength": 100,
+        "description": "Location (city, country)"
+      },
+      "website": {
+        "type": "string",
+        "format": "uri",
+        "description": "Personal website URL"
+      },
+      "email": {
+        "type": "string",
+        "format": "email",
+        "description": "Contact email"
+      },
+      "socialLinks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": ["platform", "url"],
+          "properties": {
+            "platform": {
+              "type": "string",
+              "enum": ["twitter", "linkedin", "github", "facebook", "instagram", "youtube", "dribbble", "behance", "medium", "custom"]
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 50
+            }
+          }
+        }
+      },
+      "stats": {
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "required": ["label", "value"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "value": {
+              "type": "string",
+              "maxLength": 20
+            }
+          }
+        },
+        "description": "Statistics to display (followers, posts, etc.)"
+      },
+      "primaryAction": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "href": {
+            "type": "string"
+          }
+        }
+      },
+      "secondaryAction": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "href": {
+            "type": "string"
+          }
+        }
+      },
+      "showCoverImage": {
+        "type": "boolean",
+        "default": false
+      },
+      "coverImage": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "required": ["name"]
+  },
+  "defaultProps": {
+    "avatar": "https://i.pravatar.cc/200?img=3",
+    "name": "Sarah Johnson",
+    "title": "UI/UX Designer & Developer",
+    "bio": "Passionate about creating beautiful, accessible user experiences. 5+ years of experience in digital product design.",
+    "location": "San Francisco, CA",
+    "website": "https://sarahjohnson.design",
+    "email": "sarah@example.com",
+    "socialLinks": [
+      {
+        "platform": "twitter",
+        "url": "https://twitter.com/sarahjohnson",
+        "label": "Follow on Twitter"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://linkedin.com/in/sarahjohnson",
+        "label": "Connect on LinkedIn"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/sarahjohnson",
+        "label": "View on GitHub"
+      },
+      {
+        "platform": "dribbble",
+        "url": "https://dribbble.com/sarahjohnson",
+        "label": "Follow on Dribbble"
+      }
+    ],
+    "stats": [
+      {
+        "label": "Followers",
+        "value": "2.5k"
+      },
+      {
+        "label": "Following",
+        "value": "340"
+      },
+      {
+        "label": "Projects",
+        "value": "48"
+      }
+    ],
+    "primaryAction": {
+      "label": "Follow",
+      "href": "#follow"
+    },
+    "secondaryAction": {
+      "label": "Message",
+      "href": "#message"
+    },
+    "showCoverImage": false,
+    "coverImage": ""
+  },
+  "slots": {
+    "avatar": {
+      "type": "image",
+      "editable": true,
+      "aspectRatio": "1:1"
+    },
+    "name": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100,
+      "required": true
+    },
+    "title": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "bio": {
+      "type": "richtext",
+      "editable": true,
+      "maxLength": 500
+    },
+    "stats": {
+      "type": "collection",
+      "itemType": "stat",
+      "maxItems": 6,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    "socialLinks": {
+      "type": "collection",
+      "itemType": "social-link",
+      "maxItems": 10,
+      "fields": [
+        {
+          "name": "platform",
+          "type": "select",
+          "options": ["twitter", "linkedin", "github", "facebook", "instagram", "youtube", "dribbble", "behance", "medium", "custom"],
+          "required": true
+        },
+        {
+          "name": "url",
+          "type": "url",
+          "required": true
+        }
+      ]
+    }
+  },
+  "layout": {
+    "container": {
+      "maxWidth": "md",
+      "paddingX": { "xs": 2, "sm": 3, "md": 4 },
+      "paddingY": { "xs": 4, "sm": 6, "md": 8 }
+    },
+    "grid": {
+      "display": "flex",
+      "flexDirection": "column",
+      "alignItems": "center",
+      "textAlign": "center"
+    }
+  },
+  "styling": {
+    "coverImage": {
+      "height": 300,
+      "width": "100%",
+      "objectFit": "cover",
+      "marginBottom": -8
+    },
+    "avatar": {
+      "width": { "xs": 120, "sm": 150 },
+      "height": { "xs": 120, "sm": 150 },
+      "border": "4px solid",
+      "borderColor": "background.paper",
+      "boxShadow": 3
+    },
+    "name": {
+      "variant": "h4",
+      "component": "h1",
+      "fontWeight": 700,
+      "marginTop": 2
+    },
+    "title": {
+      "variant": "h6",
+      "color": "text.secondary",
+      "fontWeight": 500
+    },
+    "bio": {
+      "variant": "body1",
+      "color": "text.secondary",
+      "marginTop": 2,
+      "maxWidth": 600
+    },
+    "stats": {
+      "display": "flex",
+      "gap": 4,
+      "marginTop": 3,
+      "marginBottom": 3,
+      "justifyContent": "center"
+    },
+    "statItem": {
+      "textAlign": "center"
+    },
+    "statValue": {
+      "variant": "h5",
+      "fontWeight": 700
+    },
+    "statLabel": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "actions": {
+      "display": "flex",
+      "gap": 2,
+      "marginTop": 3,
+      "justifyContent": "center"
+    },
+    "socialLinks": {
+      "display": "flex",
+      "gap": 1,
+      "marginTop": 2,
+      "justifyContent": "center"
+    }
+  },
+  "interactions": {
+    "followButton": {
+      "type": "button",
+      "variant": "contained",
+      "action": "follow"
+    },
+    "messageButton": {
+      "type": "button",
+      "variant": "outlined",
+      "action": "message"
+    },
+    "socialLinks": {
+      "type": "link",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "avatar": "Profile picture of {name}",
+      "stats": "Profile statistics",
+      "socialLinks": "Social media links",
+      "follow": "Follow {name}",
+      "message": "Send message to {name}"
+    },
+    "semanticHTML": true
+  },
+  "examples": [
+    {
+      "name": "Simple Profile",
+      "description": "Minimal profile without stats or cover image",
+      "props": {
+        "avatar": "https://i.pravatar.cc/200?img=5",
+        "name": "Alex Chen",
+        "title": "Software Engineer",
+        "bio": "Building great products with React and Node.js",
+        "socialLinks": [
+          {
+            "platform": "github",
+            "url": "https://github.com/alexchen"
+          },
+          {
+            "platform": "twitter",
+            "url": "https://twitter.com/alexchen"
+          }
+        ],
+        "primaryAction": {
+          "label": "Connect",
+          "href": "#connect"
+        }
+      }
+    },
+    {
+      "name": "Team Member",
+      "description": "Team member profile with cover image",
+      "props": {
+        "avatar": "https://i.pravatar.cc/200?img=8",
+        "name": "Maria Garcia",
+        "title": "Chief Technology Officer",
+        "bio": "Leading engineering teams to build scalable solutions. 15 years of experience in tech leadership.",
+        "location": "New York, NY",
+        "email": "maria@company.com",
+        "showCoverImage": true,
+        "coverImage": "https://images.unsplash.com/photo-1557804506-669a67965ba0",
+        "stats": [
+          {
+            "label": "Team Size",
+            "value": "45"
+          },
+          {
+            "label": "Projects",
+            "value": "120+"
+          }
+        ],
+        "socialLinks": [
+          {
+            "platform": "linkedin",
+            "url": "https://linkedin.com/in/mariagarcia"
+          }
+        ]
+      }
+    }
+  ]
+}

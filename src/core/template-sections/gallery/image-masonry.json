@@ -1,0 +1,296 @@
+{
+  "id": "gallery-image-masonry",
+  "category": "gallery",
+  "name": "Masonry Image Gallery",
+  "description": "Pinterest-style masonry layout gallery with variable image heights. Perfect for dynamic content galleries, inspiration boards, and visual storytelling.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "maxLength": 100,
+        "description": "Main gallery heading"
+      },
+      "subheading": {
+        "type": "string",
+        "maxLength": 200,
+        "description": "Optional descriptive text"
+      },
+      "images": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 100,
+        "items": {
+          "type": "object",
+          "required": ["src", "alt"],
+          "properties": {
+            "src": {
+              "type": "string",
+              "format": "uri"
+            },
+            "alt": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "rows": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "default": 1,
+              "description": "Height span in rows"
+            },
+            "cols": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2,
+              "default": 1,
+              "description": "Width span in columns"
+            }
+          }
+        }
+      },
+      "columns": {
+        "type": "integer",
+        "minimum": 2,
+        "maximum": 6,
+        "default": 3,
+        "description": "Number of columns"
+      },
+      "gap": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 8,
+        "default": 1,
+        "description": "Gap between images"
+      },
+      "enableLightbox": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["images"]
+  },
+  "defaultProps": {
+    "heading": "Inspiration",
+    "subheading": "Discover beautiful visuals",
+    "images": [
+      {
+        "src": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+        "alt": "Breakfast",
+        "title": "Breakfast",
+        "rows": 2,
+        "cols": 1
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+        "alt": "Burger",
+        "title": "Burger",
+        "rows": 1,
+        "cols": 1
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+        "alt": "Camera",
+        "title": "Camera",
+        "rows": 1,
+        "cols": 2
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+        "alt": "Coffee",
+        "title": "Coffee",
+        "rows": 1,
+        "cols": 1
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
+        "alt": "Hats",
+        "title": "Hats",
+        "rows": 2,
+        "cols": 1
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+        "alt": "Honey",
+        "title": "Honey",
+        "rows": 1,
+        "cols": 1
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
+        "alt": "Basketball",
+        "title": "Basketball",
+        "rows": 1,
+        "cols": 1
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
+        "alt": "Fern",
+        "title": "Fern",
+        "rows": 2,
+        "cols": 2
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
+        "alt": "Mushrooms",
+        "title": "Mushrooms",
+        "rows": 1,
+        "cols": 1
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
+        "alt": "Tomato basil",
+        "title": "Tomato basil",
+        "rows": 1,
+        "cols": 1
+      }
+    ],
+    "columns": 3,
+    "gap": 1,
+    "enableLightbox": true
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 200
+    },
+    "images": {
+      "type": "collection",
+      "itemType": "image-masonry",
+      "minItems": 1,
+      "maxItems": 100,
+      "fields": [
+        {
+          "name": "src",
+          "type": "image",
+          "required": true
+        },
+        {
+          "name": "alt",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "min": 1,
+          "max": 4
+        },
+        {
+          "name": "cols",
+          "type": "number",
+          "min": 1,
+          "max": 2
+        }
+      ]
+    }
+  },
+  "layout": {
+    "container": {
+      "maxWidth": "xl",
+      "paddingX": { "xs": 2, "sm": 3, "md": 4 },
+      "paddingY": { "xs": 6, "sm": 8, "md": 10 }
+    },
+    "masonry": {
+      "columns": 3,
+      "spacing": 1
+    }
+  },
+  "styling": {
+    "heading": {
+      "variant": "h3",
+      "component": "h2",
+      "align": "center",
+      "gutterBottom": true,
+      "fontWeight": 700
+    },
+    "subheading": {
+      "variant": "body1",
+      "align": "center",
+      "color": "text.secondary",
+      "marginBottom": 4
+    },
+    "imageItem": {
+      "position": "relative",
+      "overflow": "hidden",
+      "borderRadius": 1,
+      "transition": "opacity 0.3s ease-in-out",
+      "cursor": "pointer",
+      "&:hover": {
+        "opacity": 0.85
+      }
+    },
+    "image": {
+      "width": "100%",
+      "height": "auto",
+      "display": "block"
+    }
+  },
+  "interactions": {
+    "imageClick": {
+      "type": "lightbox",
+      "enabled": true
+    },
+    "infiniteScroll": {
+      "enabled": false,
+      "description": "Load more images on scroll"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "gallery": "Masonry image gallery",
+      "image": "Gallery image"
+    }
+  },
+  "examples": [
+    {
+      "name": "Simple Masonry",
+      "description": "Basic masonry layout with 4 columns",
+      "props": {
+        "heading": "Gallery",
+        "images": [
+          {
+            "src": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+            "alt": "Image 1",
+            "rows": 1,
+            "cols": 1
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+            "alt": "Image 2",
+            "rows": 2,
+            "cols": 1
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+            "alt": "Image 3",
+            "rows": 1,
+            "cols": 1
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+            "alt": "Image 4",
+            "rows": 1,
+            "cols": 1
+          }
+        ],
+        "columns": 4,
+        "gap": 2
+      }
+    }
+  ]
+}

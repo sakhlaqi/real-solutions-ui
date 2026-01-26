@@ -1,0 +1,224 @@
+{
+  "id": "gallery-image-woven",
+  "category": "gallery",
+  "name": "Woven Image Gallery",
+  "description": "Woven/quilted layout gallery with alternating image sizes creating a flowing, organic pattern. Ideal for creative portfolios and visual storytelling.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "subheading": {
+        "type": "string",
+        "maxLength": 200
+      },
+      "images": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 50,
+        "items": {
+          "type": "object",
+          "required": ["src", "alt"],
+          "properties": {
+            "src": {
+              "type": "string",
+              "format": "uri"
+            },
+            "alt": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 100
+            }
+          }
+        }
+      },
+      "columns": {
+        "type": "integer",
+        "minimum": 2,
+        "maximum": 5,
+        "default": 3
+      },
+      "gap": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 8,
+        "default": 1
+      },
+      "enableLightbox": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["images"]
+  },
+  "defaultProps": {
+    "heading": "Visual Stories",
+    "subheading": "Explore our curated collection",
+    "images": [
+      {
+        "src": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+        "alt": "Breakfast",
+        "title": "Morning Delight"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+        "alt": "Burger",
+        "title": "Gourmet Burger"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+        "alt": "Camera",
+        "title": "Photography"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+        "alt": "Coffee",
+        "title": "Coffee Time"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
+        "alt": "Hats",
+        "title": "Fashion"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+        "alt": "Honey",
+        "title": "Natural Honey"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
+        "alt": "Basketball",
+        "title": "Sports"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
+        "alt": "Fern",
+        "title": "Nature"
+      }
+    ],
+    "columns": 3,
+    "gap": 1,
+    "enableLightbox": true
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 200
+    },
+    "images": {
+      "type": "collection",
+      "itemType": "image",
+      "minItems": 1,
+      "maxItems": 50,
+      "fields": [
+        {
+          "name": "src",
+          "type": "image",
+          "required": true
+        },
+        {
+          "name": "alt",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "text"
+        }
+      ]
+    }
+  },
+  "layout": {
+    "container": {
+      "maxWidth": "xl",
+      "paddingX": { "xs": 2, "sm": 3, "md": 4 },
+      "paddingY": { "xs": 6, "sm": 8, "md": 10 }
+    },
+    "woven": {
+      "columns": 3,
+      "gap": 1,
+      "variant": "woven"
+    }
+  },
+  "styling": {
+    "heading": {
+      "variant": "h3",
+      "component": "h2",
+      "align": "center",
+      "gutterBottom": true,
+      "fontWeight": 700
+    },
+    "subheading": {
+      "variant": "body1",
+      "align": "center",
+      "color": "text.secondary",
+      "marginBottom": 4
+    },
+    "imageItem": {
+      "borderRadius": 1,
+      "overflow": "hidden",
+      "cursor": "pointer",
+      "transition": "transform 0.2s ease-in-out",
+      "&:hover": {
+        "transform": "scale(1.05)"
+      }
+    },
+    "image": {
+      "width": "100%",
+      "height": "100%",
+      "objectFit": "cover",
+      "display": "block"
+    }
+  },
+  "interactions": {
+    "imageClick": {
+      "type": "lightbox",
+      "enabled": true
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "gallery": "Woven image gallery",
+      "image": "Gallery image"
+    }
+  },
+  "examples": [
+    {
+      "name": "Simple Woven",
+      "description": "Basic woven layout",
+      "props": {
+        "heading": "Gallery",
+        "images": [
+          {
+            "src": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+            "alt": "Image 1"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+            "alt": "Image 2"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+            "alt": "Image 3"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+            "alt": "Image 4"
+          }
+        ],
+        "columns": 3
+      }
+    }
+  ]
+}

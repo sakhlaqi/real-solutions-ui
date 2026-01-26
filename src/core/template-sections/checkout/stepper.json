@@ -1,0 +1,86 @@
+{
+  "id": "checkout-stepper",
+  "name": "Checkout Progress Stepper",
+  "category": "checkout",
+  "version": "1.0.0",
+  "description": "Multi-step progress indicator for checkout flow. Shows current step, completed steps, and upcoming steps in the purchase process.",
+  "tags": ["checkout", "stepper", "progress", "multi-step", "wizard"],
+  "previewImage": "/previews/checkout-stepper.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["steps", "activeStep"],
+    "properties": {
+      "steps": {
+        "type": "array",
+        "description": "Array of step labels",
+        "minItems": 2,
+        "maxItems": 6,
+        "items": {"type": "string"}
+      },
+      "activeStep": {
+        "type": "number",
+        "description": "Current active step index (0-based)",
+        "minimum": 0
+      },
+      "orientation": {
+        "type": "string",
+        "enum": ["horizontal", "vertical"],
+        "description": "Stepper orientation"
+      },
+      "showConnectors": {"type": "boolean"}
+    }
+  },
+  "defaultProps": {
+    "steps": ["Shipping address", "Payment details", "Review your order"],
+    "activeStep": 0,
+    "orientation": "horizontal",
+    "showConnectors": true
+  },
+  "slots": {
+    "steps": {
+      "type": "collection",
+      "label": "Steps",
+      "required": true,
+      "itemLabel": "Step",
+      "fields": [
+        {"name": "label", "type": "text", "label": "Step Label", "required": true}
+      ]
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "md"},
+    "height": 40
+  },
+  "styling": {
+    "stepper": {"width": "100%"},
+    "step": {
+      "firstChild": {"pl": 0},
+      "lastChild": {"pr": 0}
+    },
+    "stepLabel": {"maxWidth": "70px"}
+  },
+  "interactions": {
+    "clickable": false,
+    "alternativeLabel": false
+  },
+  "accessibility": {
+    "ariaLabel": "Checkout progress"
+  },
+  "examples": [
+    {
+      "name": "3-Step Checkout",
+      "props": {
+        "steps": ["Cart", "Shipping", "Payment"],
+        "activeStep": 1
+      }
+    },
+    {
+      "name": "5-Step Process",
+      "props": {
+        "steps": ["Account", "Shipping", "Payment", "Review", "Confirmation"],
+        "activeStep": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,328 @@
+{
+  "id": "profile-account-menu",
+  "category": "profile",
+  "name": "Account Menu",
+  "description": "Dropdown account menu for authenticated users with profile info, navigation, and account actions. Perfect for app headers and navigation bars.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "user": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "avatar": {
+            "type": "string",
+            "format": "uri"
+          },
+          "initials": {
+            "type": "string",
+            "maxLength": 2,
+            "description": "Fallback initials if no avatar"
+          }
+        }
+      },
+      "menuItems": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 15,
+        "items": {
+          "type": "object",
+          "required": ["label", "href"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "href": {
+              "type": "string"
+            },
+            "icon": {
+              "type": "string",
+              "enum": ["profile", "account", "settings", "billing", "notifications", "help", "logout", "dashboard", "custom"]
+            },
+            "divider": {
+              "type": "boolean",
+              "default": false,
+              "description": "Show divider after this item"
+            }
+          }
+        }
+      },
+      "showUserInfo": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show user info in menu header"
+      },
+      "tooltipText": {
+        "type": "string",
+        "maxLength": 100,
+        "default": "Account settings"
+      }
+    },
+    "required": ["user", "menuItems"]
+  },
+  "defaultProps": {
+    "user": {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "avatar": "https://i.pravatar.cc/40?img=1",
+      "initials": "JD"
+    },
+    "menuItems": [
+      {
+        "label": "Profile",
+        "href": "/profile",
+        "icon": "profile"
+      },
+      {
+        "label": "My Account",
+        "href": "/account",
+        "icon": "account"
+      },
+      {
+        "label": "Settings",
+        "href": "/settings",
+        "icon": "settings",
+        "divider": true
+      },
+      {
+        "label": "Add Another Account",
+        "href": "/add-account",
+        "icon": "custom"
+      },
+      {
+        "label": "Logout",
+        "href": "/logout",
+        "icon": "logout",
+        "divider": true
+      }
+    ],
+    "showUserInfo": true,
+    "tooltipText": "Account settings"
+  },
+  "slots": {
+    "user": {
+      "type": "object",
+      "editable": true,
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "email"
+        },
+        {
+          "name": "avatar",
+          "type": "image"
+        }
+      ]
+    },
+    "menuItems": {
+      "type": "collection",
+      "itemType": "menu-item",
+      "minItems": 1,
+      "maxItems": 15,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "href",
+          "type": "url",
+          "required": true
+        },
+        {
+          "name": "icon",
+          "type": "select",
+          "options": ["profile", "account", "settings", "billing", "notifications", "help", "logout", "dashboard", "custom"]
+        },
+        {
+          "name": "divider",
+          "type": "boolean"
+        }
+      ]
+    }
+  },
+  "layout": {
+    "trigger": {
+      "display": "inline-flex",
+      "alignItems": "center"
+    },
+    "menu": {
+      "minWidth": 220,
+      "maxWidth": 320,
+      "marginTop": 1
+    }
+  },
+  "styling": {
+    "trigger": {
+      "cursor": "pointer",
+      "padding": 0.5,
+      "borderRadius": "50%",
+      "&:hover": {
+        "backgroundColor": "action.hover"
+      }
+    },
+    "avatar": {
+      "width": 32,
+      "height": 32
+    },
+    "menu": {
+      "boxShadow": 2,
+      "borderRadius": 1
+    },
+    "userInfo": {
+      "padding": 2,
+      "borderBottom": "1px solid",
+      "borderColor": "divider"
+    },
+    "userName": {
+      "variant": "subtitle1",
+      "fontWeight": 600
+    },
+    "userEmail": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "menuItem": {
+      "paddingY": 1.5,
+      "paddingX": 2,
+      "display": "flex",
+      "alignItems": "center",
+      "gap": 1.5,
+      "&:hover": {
+        "backgroundColor": "action.hover"
+      }
+    },
+    "icon": {
+      "fontSize": 20,
+      "color": "text.secondary"
+    },
+    "divider": {
+      "marginY": 0.5
+    }
+  },
+  "interactions": {
+    "menuOpen": {
+      "type": "click",
+      "description": "Opens account menu"
+    },
+    "menuClose": {
+      "type": "clickaway",
+      "description": "Closes menu when clicking outside"
+    },
+    "menuItemClick": {
+      "type": "navigate",
+      "description": "Navigates to menu item href"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "trigger": "Open account menu",
+      "menu": "Account menu",
+      "menuItem": "{label}"
+    },
+    "keyboardSupport": true,
+    "focusManagement": true,
+    "roles": {
+      "trigger": "button",
+      "menu": "menu",
+      "menuItem": "menuitem"
+    }
+  },
+  "examples": [
+    {
+      "name": "Simple Menu",
+      "description": "Minimal account menu without user info",
+      "props": {
+        "user": {
+          "name": "Jane Smith",
+          "initials": "JS"
+        },
+        "menuItems": [
+          {
+            "label": "Profile",
+            "href": "/profile",
+            "icon": "profile"
+          },
+          {
+            "label": "Settings",
+            "href": "/settings",
+            "icon": "settings"
+          },
+          {
+            "label": "Logout",
+            "href": "/logout",
+            "icon": "logout"
+          }
+        ],
+        "showUserInfo": false
+      }
+    },
+    {
+      "name": "Full Menu",
+      "description": "Complete account menu with all sections",
+      "props": {
+        "user": {
+          "name": "Michael Brown",
+          "email": "michael.brown@company.com",
+          "avatar": "https://i.pravatar.cc/40?img=12"
+        },
+        "menuItems": [
+          {
+            "label": "Dashboard",
+            "href": "/dashboard",
+            "icon": "dashboard"
+          },
+          {
+            "label": "Profile",
+            "href": "/profile",
+            "icon": "profile"
+          },
+          {
+            "label": "Account Settings",
+            "href": "/account",
+            "icon": "account",
+            "divider": true
+          },
+          {
+            "label": "Billing",
+            "href": "/billing",
+            "icon": "billing"
+          },
+          {
+            "label": "Notifications",
+            "href": "/notifications",
+            "icon": "notifications",
+            "divider": true
+          },
+          {
+            "label": "Help Center",
+            "href": "/help",
+            "icon": "help"
+          },
+          {
+            "label": "Logout",
+            "href": "/logout",
+            "icon": "logout",
+            "divider": true
+          }
+        ],
+        "showUserInfo": true
+      }
+    }
+  ]
+}

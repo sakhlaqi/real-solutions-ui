@@ -1,0 +1,410 @@
+{
+  "id": "dashboard-charts",
+  "name": "Analytics Charts",
+  "category": "dashboard",
+  "version": "1.0.0",
+  "description": "Collection of chart types for data visualization including line charts, bar charts, pie charts, and area charts. Perfect for analytics dashboards and reporting.",
+  "tags": ["dashboard", "charts", "graphs", "analytics", "visualization", "data"],
+  "previewImage": "/previews/charts.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["charts"],
+    "properties": {
+      "charts": {
+        "type": "array",
+        "description": "Array of chart configurations",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["id", "type", "title", "data"],
+          "properties": {
+            "id": {"type": "string"},
+            "type": {"type": "string", "enum": ["line", "bar", "pie", "area", "donut"]},
+            "title": {"type": "string", "maxLength": 100},
+            "subtitle": {"type": "string", "maxLength": 200},
+            "data": {
+              "type": "object",
+              "properties": {
+                "labels": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                },
+                "datasets": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {"type": "string"},
+                      "data": {
+                        "type": "array",
+                        "items": {"type": "number"}
+                      },
+                      "color": {"type": "string"},
+                      "backgroundColor": {"type": "string"},
+                      "borderColor": {"type": "string"},
+                      "fill": {"type": "boolean"}
+                    }
+                  }
+                }
+              }
+            },
+            "height": {"type": "number", "minimum": 200, "maximum": 800},
+            "showLegend": {"type": "boolean"},
+            "showGrid": {"type": "boolean"},
+            "showTooltip": {"type": "boolean"}
+          }
+        }
+      },
+      "columns": {
+        "type": "object",
+        "properties": {
+          "xs": {"type": "number", "minimum": 1, "maximum": 12},
+          "sm": {"type": "number", "minimum": 1, "maximum": 12},
+          "md": {"type": "number", "minimum": 1, "maximum": 12},
+          "lg": {"type": "number", "minimum": 1, "maximum": 12}
+        }
+      }
+    }
+  },
+  "defaultProps": {
+    "charts": [
+      {
+        "id": "1",
+        "type": "line",
+        "title": "Monthly Revenue",
+        "subtitle": "Revenue trend over the past 6 months",
+        "data": {
+          "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          "datasets": [
+            {
+              "label": "Revenue",
+              "data": [45000, 52000, 48000, 61000, 58000, 67000],
+              "color": "primary",
+              "borderColor": "primary.main",
+              "backgroundColor": "primary.light",
+              "fill": true
+            }
+          ]
+        },
+        "height": 300,
+        "showLegend": true,
+        "showGrid": true,
+        "showTooltip": true
+      },
+      {
+        "id": "2",
+        "type": "bar",
+        "title": "Sales by Category",
+        "subtitle": "Current month performance",
+        "data": {
+          "labels": ["Electronics", "Clothing", "Food", "Books", "Toys"],
+          "datasets": [
+            {
+              "label": "Sales",
+              "data": [12500, 8900, 6700, 4300, 5600],
+              "color": "success",
+              "backgroundColor": "success.main"
+            }
+          ]
+        },
+        "height": 300,
+        "showLegend": false,
+        "showGrid": true,
+        "showTooltip": true
+      },
+      {
+        "id": "3",
+        "type": "pie",
+        "title": "Traffic Sources",
+        "subtitle": "Visitor breakdown by channel",
+        "data": {
+          "labels": ["Direct", "Organic Search", "Social Media", "Referral", "Email"],
+          "datasets": [
+            {
+              "label": "Visitors",
+              "data": [3500, 5200, 2100, 1800, 900],
+              "backgroundColor": ["primary.main", "success.main", "info.main", "warning.main", "error.main"]
+            }
+          ]
+        },
+        "height": 300,
+        "showLegend": true,
+        "showGrid": false,
+        "showTooltip": true
+      },
+      {
+        "id": "4",
+        "type": "area",
+        "title": "User Growth",
+        "subtitle": "Active users over time",
+        "data": {
+          "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
+          "datasets": [
+            {
+              "label": "New Users",
+              "data": [450, 580, 620, 750],
+              "color": "info",
+              "borderColor": "info.main",
+              "backgroundColor": "info.light",
+              "fill": true
+            },
+            {
+              "label": "Returning Users",
+              "data": [1200, 1350, 1420, 1680],
+              "color": "secondary",
+              "borderColor": "secondary.main",
+              "backgroundColor": "secondary.light",
+              "fill": true
+            }
+          ]
+        },
+        "height": 300,
+        "showLegend": true,
+        "showGrid": true,
+        "showTooltip": true
+      }
+    ],
+    "columns": {
+      "xs": 12,
+      "sm": 12,
+      "md": 6,
+      "lg": 6
+    }
+  },
+  "slots": {
+    "charts": {
+      "type": "collection",
+      "label": "Chart Collection",
+      "required": true,
+      "itemLabel": "Chart",
+      "fields": [
+        {"name": "id", "type": "text", "label": "Chart ID", "required": true},
+        {"name": "type", "type": "select", "label": "Chart Type", "options": ["line", "bar", "pie", "area", "donut"], "required": true},
+        {"name": "title", "type": "text", "label": "Chart Title", "required": true},
+        {"name": "subtitle", "type": "text", "label": "Subtitle", "required": false},
+        {"name": "height", "type": "number", "label": "Chart Height", "required": false},
+        {"name": "showLegend", "type": "boolean", "label": "Show Legend", "required": false},
+        {"name": "showGrid", "type": "boolean", "label": "Show Grid", "required": false}
+      ]
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "xl"},
+    "grid": {
+      "spacing": 3,
+      "responsive": true
+    }
+  },
+  "styling": {
+    "paper": {
+      "variant": "outlined",
+      "sx": {"p": 3, "height": "100%"}
+    },
+    "title": {
+      "variant": "h6",
+      "gutterBottom": true,
+      "fontWeight": "medium"
+    },
+    "subtitle": {
+      "variant": "body2",
+      "color": "text.secondary",
+      "mb": 2
+    },
+    "chart": {
+      "responsive": true,
+      "maintainAspectRatio": false
+    }
+  },
+  "chartOptions": {
+    "line": {
+      "tension": 0.4,
+      "pointRadius": 4,
+      "pointHoverRadius": 6
+    },
+    "bar": {
+      "borderRadius": 4,
+      "barThickness": "flex"
+    },
+    "pie": {
+      "cutout": "0%",
+      "rotation": 0
+    },
+    "donut": {
+      "cutout": "60%",
+      "rotation": 0
+    },
+    "area": {
+      "tension": 0.4,
+      "fill": true,
+      "pointRadius": 0
+    }
+  },
+  "interactions": {
+    "chartClick": {
+      "enabled": false,
+      "action": "drillDown"
+    },
+    "legendClick": {
+      "enabled": true,
+      "action": "toggleDataset"
+    }
+  },
+  "accessibility": {
+    "ariaLabel": "Chart",
+    "role": "img",
+    "dataTableFallback": true
+  },
+  "examples": [
+    {
+      "name": "Single Line Chart",
+      "props": {
+        "charts": [
+          {
+            "id": "1",
+            "type": "line",
+            "title": "Website Traffic",
+            "subtitle": "Page views per day",
+            "data": {
+              "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+              "datasets": [
+                {
+                  "label": "Page Views",
+                  "data": [1200, 1900, 1500, 2100, 2400, 1800, 1400],
+                  "borderColor": "primary.main",
+                  "backgroundColor": "primary.light",
+                  "fill": true
+                }
+              ]
+            },
+            "height": 400,
+            "showLegend": false
+          }
+        ],
+        "columns": {"xs": 12, "sm": 12, "md": 12, "lg": 12}
+      }
+    },
+    {
+      "name": "Comparison Charts",
+      "props": {
+        "charts": [
+          {
+            "id": "1",
+            "type": "bar",
+            "title": "Q1 vs Q2 Sales",
+            "data": {
+              "labels": ["Product A", "Product B", "Product C", "Product D"],
+              "datasets": [
+                {
+                  "label": "Q1 2024",
+                  "data": [8500, 6200, 7800, 5400],
+                  "backgroundColor": "primary.main"
+                },
+                {
+                  "label": "Q2 2024",
+                  "data": [9200, 7100, 8500, 6800],
+                  "backgroundColor": "success.main"
+                }
+              ]
+            },
+            "height": 350,
+            "showLegend": true
+          },
+          {
+            "id": "2",
+            "type": "donut",
+            "title": "Market Share",
+            "data": {
+              "labels": ["Our Product", "Competitor A", "Competitor B", "Others"],
+              "datasets": [
+                {
+                  "data": [42, 28, 18, 12],
+                  "backgroundColor": ["primary.main", "error.main", "warning.main", "grey.500"]
+                }
+              ]
+            },
+            "height": 350,
+            "showLegend": true
+          }
+        ],
+        "columns": {"xs": 12, "sm": 12, "md": 6, "lg": 6}
+      }
+    },
+    {
+      "name": "Analytics Dashboard",
+      "props": {
+        "charts": [
+          {
+            "id": "1",
+            "type": "area",
+            "title": "Sessions Overview",
+            "data": {
+              "labels": ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
+              "datasets": [
+                {
+                  "label": "Sessions",
+                  "data": [120, 80, 450, 890, 1200, 950, 320],
+                  "borderColor": "info.main",
+                  "backgroundColor": "info.light",
+                  "fill": true
+                }
+              ]
+            },
+            "height": 250
+          },
+          {
+            "id": "2",
+            "type": "bar",
+            "title": "Top Pages",
+            "data": {
+              "labels": ["Home", "Products", "About", "Contact", "Blog"],
+              "datasets": [
+                {
+                  "label": "Views",
+                  "data": [4500, 3200, 1800, 900, 2100],
+                  "backgroundColor": "success.main"
+                }
+              ]
+            },
+            "height": 250,
+            "showLegend": false
+          },
+          {
+            "id": "3",
+            "type": "pie",
+            "title": "Device Types",
+            "data": {
+              "labels": ["Desktop", "Mobile", "Tablet"],
+              "datasets": [
+                {
+                  "data": [58, 35, 7],
+                  "backgroundColor": ["primary.main", "secondary.main", "warning.main"]
+                }
+              ]
+            },
+            "height": 250
+          },
+          {
+            "id": "4",
+            "type": "line",
+            "title": "Conversion Rate",
+            "data": {
+              "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+              "datasets": [
+                {
+                  "label": "Rate %",
+                  "data": [2.4, 2.8, 3.1, 2.9, 3.5, 3.8],
+                  "borderColor": "error.main",
+                  "backgroundColor": "transparent",
+                  "fill": false
+                }
+              ]
+            },
+            "height": 250
+          }
+        ],
+        "columns": {"xs": 12, "sm": 6, "md": 6, "lg": 6}
+      }
+    }
+  ]
+}

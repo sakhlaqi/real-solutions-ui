@@ -1,0 +1,45 @@
+{
+  "id": "sign-in",
+  "title": "Sign In",
+  "description": "Sign in to your account",
+  "layout": {
+    "type": "blank-page-layout"
+  },
+  "sections": [
+    {
+      "type": "auth-sign-in-form",
+      "props": {
+        "title": "Sign in",
+        "subtitle": "Welcome back! Please enter your details.",
+        "fields": [
+          {
+            "name": "email",
+            "type": "email",
+            "label": "Email",
+            "placeholder": "name@example.com",
+            "required": true
+          },
+          {
+            "name": "password",
+            "type": "password",
+            "label": "Password",
+            "placeholder": "Enter your password",
+            "required": true
+          }
+        ],
+        "rememberMe": true,
+        "forgotPasswordLink": "/forgot-password",
+        "submitButton": "Sign in",
+        "socialLogins": [
+          { "provider": "google", "label": "Continue with Google" },
+          { "provider": "github", "label": "Continue with GitHub" }
+        ],
+        "signUpLink": {
+          "text": "Don't have an account?",
+          "linkText": "Sign up",
+          "href": "/sign-up"
+        }
+      }
+    }
+  ]
+}

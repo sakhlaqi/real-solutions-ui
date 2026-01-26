@@ -1,0 +1,237 @@
+{
+  "id": "landing-home",
+  "title": "Home - Landing Page",
+  "description": "Conversion-optimized single-page landing",
+  "layout": {
+    "type": "landing-layout",
+    "props": {
+      "transparentHeader": true,
+      "smoothScroll": true,
+      "maxWidth": 1200
+    }
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero-with-image-right",
+      "props": {
+        "heading": "Our latest product is here",
+        "subheading": "Explore our cutting-edge dashboard, delivering high-quality solutions tailored to your needs. Elevate your experience with top-tier features and services.",
+        "primaryCta": {
+          "text": "Start now",
+          "href": "/signup",
+          "variant": "contained",
+          "size": "large"
+        },
+        "secondaryCta": {
+          "text": "Get a demo",
+          "href": "#demo",
+          "variant": "text",
+          "size": "large"
+        },
+        "image": {
+          "src": "/images/hero-product.png",
+          "alt": "Product dashboard"
+        },
+        "badge": {
+          "text": "New release",
+          "color": "primary"
+        }
+      }
+    },
+    {
+      "id": "logo-cloud",
+      "type": "logo-cloud-simple-with-title",
+      "props": {
+        "title": "Trusted by industry leaders",
+        "logos": [
+          { "src": "/logos/logo1.svg", "alt": "Company 1" },
+          { "src": "/logos/logo2.svg", "alt": "Company 2" },
+          { "src": "/logos/logo3.svg", "alt": "Company 3" },
+          { "src": "/logos/logo4.svg", "alt": "Company 4" },
+          { "src": "/logos/logo5.svg", "alt": "Company 5" },
+          { "src": "/logos/logo6.svg", "alt": "Company 6" }
+        ]
+      }
+    },
+    {
+      "id": "features",
+      "type": "features-with-alternating-layouts",
+      "props": {
+        "title": "Product features",
+        "subtitle": "This product is packed with premium features to enhance your experience.",
+        "features": [
+          {
+            "title": "Adaptability",
+            "description": "Our product seamlessly adjusts to your needs, boosting efficiency and simplifying your tasks.",
+            "image": "/images/feature1.png",
+            "icon": "settings"
+          },
+          {
+            "title": "Built to last",
+            "description": "Experience unmatched durability that goes above and beyond with lasting investment.",
+            "image": "/images/feature2.png",
+            "icon": "shield"
+          },
+          {
+            "title": "Great user experience",
+            "description": "Integrate our product into your routine with an intuitive and easy-to-use interface.",
+            "image": "/images/feature3.png",
+            "icon": "star"
+          },
+          {
+            "title": "Innovative functionality",
+            "description": "Stay ahead with features that set new standards, addressing your evolving needs.",
+            "image": "/images/feature4.png",
+            "icon": "lightbulb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "testimonials",
+      "type": "testimonials-carousel",
+      "props": {
+        "title": "Testimonials",
+        "subtitle": "See what our customers love about our product. Discover excellence in every experience.",
+        "testimonials": [
+          {
+            "quote": "This product has completely transformed how I work. The intuitive interface and powerful features have made my daily tasks so much easier!",
+            "author": "Sarah Johnson",
+            "role": "Product Manager",
+            "company": "Tech Corp",
+            "avatar": "/avatars/avatar1.jpg",
+            "rating": 5
+          },
+          {
+            "quote": "Outstanding customer support and a product that delivers on all its promises. Highly recommended!",
+            "author": "Michael Chen",
+            "role": "Founder",
+            "company": "StartupXYZ",
+            "avatar": "/avatars/avatar2.jpg",
+            "rating": 5
+          },
+          {
+            "quote": "The ROI we've seen since implementing this solution has exceeded our expectations. It's a game-changer.",
+            "author": "Emily Rodriguez",
+            "role": "Director of Operations",
+            "company": "Enterprise Inc",
+            "avatar": "/avatars/avatar3.jpg",
+            "rating": 5
+          }
+        ],
+        "autoplay": true,
+        "interval": 5000
+      }
+    },
+    {
+      "id": "highlights",
+      "type": "highlights-grid-with-icons",
+      "props": {
+        "title": "Why choose us",
+        "highlights": [
+          {
+            "icon": "speed",
+            "title": "Fast Performance",
+            "description": "Lightning-fast load times and responsive interactions"
+          },
+          {
+            "icon": "security",
+            "title": "Secure",
+            "description": "Enterprise-grade security to protect your data"
+          },
+          {
+            "icon": "support",
+            "title": "24/7 Support",
+            "description": "Round-the-clock assistance whenever you need it"
+          },
+          {
+            "icon": "analytics",
+            "title": "Advanced Analytics",
+            "description": "Powerful insights to drive better decisions"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pricing",
+      "type": "pricing-single-price",
+      "props": {
+        "title": "Simple, transparent pricing",
+        "subtitle": "Get started with our product today",
+        "price": "$29",
+        "period": "month",
+        "description": "Everything you need to get started",
+        "features": [
+          "Unlimited projects",
+          "Advanced analytics",
+          "24/7 priority support",
+          "Custom integrations",
+          "Team collaboration tools"
+        ],
+        "cta": {
+          "text": "Get started",
+          "href": "/signup",
+          "variant": "contained",
+          "size": "large"
+        },
+        "badge": "Limited time offer",
+        "highlight": "Save 20% with annual billing"
+      }
+    },
+    {
+      "id": "faq",
+      "type": "faq-accordion",
+      "props": {
+        "title": "Frequently asked questions",
+        "faqs": [
+          {
+            "question": "How do I get started?",
+            "answer": "Simply sign up for an account and you'll have instant access to all features. Our onboarding process will guide you through the setup."
+          },
+          {
+            "question": "Can I cancel anytime?",
+            "answer": "Yes, you can cancel your subscription at any time with no penalties. You'll continue to have access until the end of your billing period."
+          },
+          {
+            "question": "What payment methods do you accept?",
+            "answer": "We accept all major credit cards, PayPal, and offer invoicing for enterprise customers."
+          },
+          {
+            "question": "Is my data secure?",
+            "answer": "Absolutely. We use enterprise-grade encryption and follow industry best practices to ensure your data is always protected."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-cta",
+      "type": "cta-with-app-store-badges",
+      "props": {
+        "heading": "Ready to get started?",
+        "subheading": "Join thousands of satisfied customers using our product every day.",
+        "primaryCta": {
+          "text": "Start free trial",
+          "href": "/signup",
+          "variant": "contained",
+          "size": "large"
+        },
+        "badges": {
+          "appStore": true,
+          "playStore": true
+        },
+        "stats": [
+          { "value": "50K+", "label": "Active users" },
+          { "value": "4.9/5", "label": "Average rating" },
+          { "value": "99.9%", "label": "Uptime" }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "template": "landing-page-mui",
+    "createdAt": "2026-01-25",
+    "updatedAt": "2026-01-25",
+    "status": "active"
+  }
+}

@@ -1,0 +1,382 @@
+{
+  "id": "navigation-sticky-header-tabs",
+  "category": "navigation",
+  "name": "Sticky Header with Tabs",
+  "description": "Fixed navigation header with tab navigation that sticks to the top on scroll. Perfect for multi-section pages and dashboard layouts.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "logo": {
+        "type": "object",
+        "properties": {
+          "src": {
+            "type": "string",
+            "format": "uri"
+          },
+          "alt": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "href": {
+            "type": "string",
+            "default": "/"
+          }
+        }
+      },
+      "tabs": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": ["label", "href"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 30
+            },
+            "href": {
+              "type": "string"
+            },
+            "icon": {
+              "type": "string"
+            },
+            "badge": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "maxLength": 5
+                },
+                "color": {
+                  "type": "string",
+                  "enum": ["default", "primary", "secondary", "error", "warning", "info", "success"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "actions": {
+        "type": "array",
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["button", "icon", "menu", "search"]
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 30
+            },
+            "icon": {
+              "type": "string"
+            },
+            "href": {
+              "type": "string"
+            },
+            "onClick": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "elevation": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 24,
+        "default": 4
+      },
+      "transparent": {
+        "type": "boolean",
+        "default": false,
+        "description": "Transparent background until scroll"
+      }
+    },
+    "required": ["tabs"]
+  },
+  "defaultProps": {
+    "logo": {
+      "text": "Company",
+      "href": "/"
+    },
+    "tabs": [
+      {
+        "label": "Overview",
+        "href": "#overview"
+      },
+      {
+        "label": "Features",
+        "href": "#features"
+      },
+      {
+        "label": "Pricing",
+        "href": "#pricing"
+      },
+      {
+        "label": "About",
+        "href": "#about"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
+    ],
+    "actions": [
+      {
+        "type": "button",
+        "label": "Get Started",
+        "href": "/signup"
+      }
+    ],
+    "elevation": 4,
+    "transparent": false
+  },
+  "slots": {
+    "logo": {
+      "type": "object",
+      "editable": true,
+      "fields": [
+        {
+          "name": "src",
+          "type": "image"
+        },
+        {
+          "name": "text",
+          "type": "text"
+        }
+      ]
+    },
+    "tabs": {
+      "type": "collection",
+      "itemType": "tab",
+      "minItems": 2,
+      "maxItems": 10,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "href",
+          "type": "url",
+          "required": true
+        }
+      ]
+    },
+    "actions": {
+      "type": "collection",
+      "itemType": "action",
+      "maxItems": 3,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text"
+        },
+        {
+          "name": "href",
+          "type": "url"
+        }
+      ]
+    }
+  },
+  "layout": {
+    "appBar": {
+      "position": "sticky",
+      "top": 0
+    },
+    "toolbar": {
+      "display": "flex",
+      "alignItems": "center",
+      "paddingX": { "xs": 2, "sm": 3, "md": 4 },
+      "minHeight": { "xs": 56, "sm": 64 }
+    },
+    "tabs": {
+      "flex": 1,
+      "marginLeft": 3
+    }
+  },
+  "styling": {
+    "appBar": {
+      "zIndex": "appBar",
+      "transition": "all 0.3s ease-in-out",
+      "backgroundColor": "background.paper",
+      "borderBottom": "1px solid",
+      "borderColor": "divider"
+    },
+    "transparentMode": {
+      "backgroundColor": "transparent",
+      "borderBottom": "none",
+      "backdropFilter": "blur(8px)"
+    },
+    "logo": {
+      "display": "flex",
+      "alignItems": "center",
+      "gap": 1,
+      "textDecoration": "none",
+      "color": "text.primary"
+    },
+    "logoImage": {
+      "height": 32
+    },
+    "logoText": {
+      "variant": "h6",
+      "fontWeight": 700,
+      "display": { "xs": "none", "sm": "block" }
+    },
+    "tabs": {
+      "display": { "xs": "none", "md": "flex" }
+    },
+    "tab": {
+      "minWidth": 90,
+      "fontWeight": 500,
+      "textTransform": "none",
+      "fontSize": "0.875rem"
+    },
+    "actions": {
+      "display": "flex",
+      "gap": 1,
+      "alignItems": "center"
+    },
+    "button": {
+      "textTransform": "none",
+      "fontWeight": 600
+    }
+  },
+  "interactions": {
+    "tabClick": {
+      "type": "navigate",
+      "smoothScroll": true,
+      "description": "Navigate to section"
+    },
+    "scroll": {
+      "type": "scroll",
+      "description": "Change appearance on scroll"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "appBar": "Main navigation",
+      "logo": "Company logo",
+      "tabs": "Navigation tabs",
+      "tab": "{label}"
+    },
+    "keyboardSupport": true,
+    "focusManagement": true
+  },
+  "examples": [
+    {
+      "name": "Simple Header",
+      "description": "Basic sticky header with tabs",
+      "props": {
+        "logo": {
+          "text": "App"
+        },
+        "tabs": [
+          {
+            "label": "Home",
+            "href": "/"
+          },
+          {
+            "label": "Products",
+            "href": "/products"
+          },
+          {
+            "label": "About",
+            "href": "/about"
+          }
+        ],
+        "elevation": 2
+      }
+    },
+    {
+      "name": "Dashboard Header",
+      "description": "Dashboard with tabs and notifications",
+      "props": {
+        "logo": {
+          "src": "/logo.svg",
+          "alt": "Dashboard",
+          "text": "Dashboard"
+        },
+        "tabs": [
+          {
+            "label": "Overview",
+            "href": "/dashboard",
+            "icon": "dashboard"
+          },
+          {
+            "label": "Analytics",
+            "href": "/analytics",
+            "icon": "analytics"
+          },
+          {
+            "label": "Reports",
+            "href": "/reports",
+            "icon": "reports"
+          },
+          {
+            "label": "Settings",
+            "href": "/settings",
+            "icon": "settings"
+          }
+        ],
+        "actions": [
+          {
+            "type": "icon",
+            "icon": "notifications",
+            "onClick": "handleNotifications"
+          },
+          {
+            "type": "menu",
+            "icon": "account",
+            "onClick": "handleAccountMenu"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Transparent Header",
+      "description": "Transparent header with scroll effect",
+      "props": {
+        "logo": {
+          "text": "Brand"
+        },
+        "tabs": [
+          {
+            "label": "Features",
+            "href": "#features"
+          },
+          {
+            "label": "Testimonials",
+            "href": "#testimonials"
+          },
+          {
+            "label": "Pricing",
+            "href": "#pricing"
+          },
+          {
+            "label": "FAQ",
+            "href": "#faq"
+          }
+        ],
+        "actions": [
+          {
+            "type": "button",
+            "label": "Sign Up",
+            "href": "/signup"
+          }
+        ],
+        "transparent": true,
+        "elevation": 0
+      }
+    }
+  ]
+}

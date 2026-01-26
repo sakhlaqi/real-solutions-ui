@@ -1,0 +1,97 @@
+{
+  "id": "hero-with-email",
+  "name": "Hero with Email Capture",
+  "category": "hero",
+  "version": "1.0.0",
+  "description": "Hero section with email input field for lead generation",
+  "tags": ["email", "lead-gen", "newsletter"],
+  "previewImage": "/previews/hero-with-email.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "description": "Main heading text (supports HTML formatting)"
+      },
+      "subheading": {
+        "type": "string",
+        "description": "Supporting text below heading"
+      },
+      "emailPlaceholder": {
+        "type": "string",
+        "description": "Placeholder text for email input"
+      },
+      "submitText": {
+        "type": "string",
+        "description": "Submit button text"
+      },
+      "privacyText": {
+        "type": "string",
+        "description": "Privacy policy text below form"
+      },
+      "alignment": {
+        "type": "string",
+        "enum": ["left", "center", "right"]
+      }
+    },
+    "required": ["heading", "subheading", "emailPlaceholder", "submitText"]
+  },
+  "defaultProps": {
+    "heading": "Our latest <span>products</span>",
+    "subheading": "Explore our cutting-edge dashboard, delivering high-quality solutions tailored to your needs. Elevate your experience with top-tier features and services.",
+    "emailPlaceholder": "Your email address",
+    "submitText": "Start now",
+    "privacyText": "By clicking \"Start now\" you agree to our Terms & Conditions.",
+    "alignment": "center"
+  },
+  "slots": {
+    "heading": {
+      "type": "richtext",
+      "editable": true,
+      "maxLength": 150,
+      "supportsHTML": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 300
+    },
+    "form": {
+      "type": "component",
+      "editable": true,
+      "validation": {
+        "email": "required|email"
+      }
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "lg",
+    "spacing": {
+      "pt": { "xs": 14, "sm": 20 },
+      "pb": { "xs": 8, "sm": 12 }
+    }
+  },
+  "examples": [
+    {
+      "name": "Newsletter Signup",
+      "props": {
+        "heading": "Stay Updated with <span>Weekly Insights</span>",
+        "subheading": "Join 50,000+ professionals receiving expert tips and industry news every week.",
+        "emailPlaceholder": "Enter your email",
+        "submitText": "Subscribe",
+        "privacyText": "We respect your privacy. Unsubscribe at any time."
+      }
+    },
+    {
+      "name": "Product Waitlist",
+      "props": {
+        "heading": "Be First to Try <span>Our New Platform</span>",
+        "subheading": "Join the waitlist and get exclusive early access when we launch next month.",
+        "emailPlaceholder": "Your work email",
+        "submitText": "Join Waitlist",
+        "privacyText": "Limited spots available. No spam, ever."
+      }
+    }
+  ]
+}

@@ -1,0 +1,293 @@
+{
+  "id": "checkout-address-form",
+  "name": "Shipping & Billing Address Form",
+  "category": "checkout",
+  "version": "1.0.0",
+  "description": "Comprehensive address collection form for shipping and billing information. Includes validation, country selection, and optional billing address toggle.",
+  "tags": ["checkout", "form", "address", "shipping", "billing", "validation"],
+  "previewImage": "/previews/address-form.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["fields"],
+    "properties": {
+      "heading": {"type": "string", "maxLength": 100},
+      "showBillingAddress": {"type": "boolean"},
+      "sameAsShipping": {"type": "boolean"},
+      "fields": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"}
+            }
+          },
+          "lastName": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"}
+            }
+          },
+          "address1": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"}
+            }
+          },
+          "address2": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"}
+            }
+          },
+          "city": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"}
+            }
+          },
+          "state": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"}
+            }
+          },
+          "zip": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"},
+              "pattern": {"type": "string"}
+            }
+          },
+          "country": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"},
+              "options": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProps": {
+    "heading": "Shipping address",
+    "showBillingAddress": true,
+    "sameAsShipping": true,
+    "fields": {
+      "firstName": {
+        "label": "First name",
+        "placeholder": "John",
+        "required": true,
+        "autoComplete": "given-name"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeholder": "Doe",
+        "required": true,
+        "autoComplete": "family-name"
+      },
+      "address1": {
+        "label": "Address line 1",
+        "placeholder": "123 Main Street",
+        "required": true,
+        "autoComplete": "address-line1"
+      },
+      "address2": {
+        "label": "Address line 2",
+        "placeholder": "Apt 4B",
+        "required": false,
+        "autoComplete": "address-line2"
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "New York",
+        "required": true,
+        "autoComplete": "address-level2"
+      },
+      "state": {
+        "label": "State/Province/Region",
+        "placeholder": "NY",
+        "required": true,
+        "autoComplete": "address-level1"
+      },
+      "zip": {
+        "label": "Zip / Postal code",
+        "placeholder": "10001",
+        "required": true,
+        "autoComplete": "postal-code",
+        "pattern": "[0-9]{5}"
+      },
+      "country": {
+        "label": "Country",
+        "required": true,
+        "autoComplete": "country",
+        "options": ["United States", "Canada", "United Kingdom", "Australia", "Germany", "France", "Japan"]
+      }
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "label": "Form Heading",
+      "required": false
+    },
+    "firstName": {
+      "type": "field",
+      "label": "First Name Field",
+      "fieldType": "text",
+      "required": true
+    },
+    "lastName": {
+      "type": "field",
+      "label": "Last Name Field",
+      "fieldType": "text",
+      "required": true
+    },
+    "address1": {
+      "type": "field",
+      "label": "Address Line 1",
+      "fieldType": "text",
+      "required": true
+    },
+    "address2": {
+      "type": "field",
+      "label": "Address Line 2",
+      "fieldType": "text",
+      "required": false
+    },
+    "city": {
+      "type": "field",
+      "label": "City Field",
+      "fieldType": "text",
+      "required": true
+    },
+    "state": {
+      "type": "field",
+      "label": "State Field",
+      "fieldType": "text",
+      "required": true
+    },
+    "zip": {
+      "type": "field",
+      "label": "Postal Code Field",
+      "fieldType": "text",
+      "required": true,
+      "validation": "pattern"
+    },
+    "country": {
+      "type": "field",
+      "label": "Country Selector",
+      "fieldType": "select",
+      "required": true
+    },
+    "billingToggle": {
+      "type": "checkbox",
+      "label": "Billing Address Toggle",
+      "defaultText": "Billing address is the same as shipping address"
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "sm"},
+    "grid": {
+      "spacing": 3,
+      "columns": {
+        "fullWidth": ["address1", "address2"],
+        "halfWidth": [
+          ["firstName", "lastName"],
+          ["city", "state"],
+          ["zip", "country"]
+        ]
+      }
+    }
+  },
+  "styling": {
+    "heading": {
+      "variant": "h6",
+      "gutterBottom": true,
+      "mb": 2
+    },
+    "textField": {
+      "variant": "outlined",
+      "size": "small",
+      "fullWidth": true
+    },
+    "select": {
+      "variant": "outlined",
+      "size": "small",
+      "fullWidth": true
+    },
+    "checkbox": {
+      "color": "primary"
+    }
+  },
+  "validation": {
+    "firstName": {"required": true, "minLength": 1, "maxLength": 50},
+    "lastName": {"required": true, "minLength": 1, "maxLength": 50},
+    "address1": {"required": true, "minLength": 5, "maxLength": 100},
+    "address2": {"required": false, "maxLength": 100},
+    "city": {"required": true, "minLength": 2, "maxLength": 50},
+    "state": {"required": true, "minLength": 2, "maxLength": 50},
+    "zip": {"required": true, "pattern": "^[0-9]{5}(-[0-9]{4})?$"},
+    "country": {"required": true}
+  },
+  "interactions": {
+    "billingToggle": {
+      "onChange": "toggleBillingAddressForm"
+    },
+    "countryChange": {
+      "onChange": "updateZipPattern"
+    }
+  },
+  "accessibility": {
+    "formRole": "form",
+    "ariaLabel": "Shipping and billing address form",
+    "fieldLabels": "visible",
+    "requiredIndicator": "*",
+    "errorMessages": true
+  },
+  "examples": [
+    {
+      "name": "Shipping Only",
+      "props": {
+        "heading": "Where should we ship?",
+        "showBillingAddress": false
+      }
+    },
+    {
+      "name": "Separate Billing",
+      "props": {
+        "heading": "Delivery information",
+        "showBillingAddress": true,
+        "sameAsShipping": false
+      }
+    }
+  ]
+}

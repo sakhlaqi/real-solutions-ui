@@ -1,0 +1,557 @@
+{
+  "id": "auth-signup-form",
+  "name": "Sign Up Form",
+  "category": "auth",
+  "version": "1.0.0",
+  "description": "Complete registration form with name, email, password fields, password strength indicator, terms acceptance, and social signup options. Includes comprehensive validation.",
+  "tags": ["auth", "signup", "registration", "form", "validation", "oauth", "social-login"],
+  "previewImage": "/previews/signup-form.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["heading", "submitButtonText"],
+    "properties": {
+      "heading": {"type": "string", "maxLength": 100},
+      "subheading": {"type": "string", "maxLength": 200},
+      "fields": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "object",
+            "properties": {
+              "enabled": {"type": "boolean"},
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"}
+            }
+          },
+          "lastName": {
+            "type": "object",
+            "properties": {
+              "enabled": {"type": "boolean"},
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"}
+            }
+          },
+          "email": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"}
+            }
+          },
+          "password": {
+            "type": "object",
+            "properties": {
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"},
+              "autoComplete": {"type": "string"},
+              "showToggle": {"type": "boolean"},
+              "showStrength": {"type": "boolean"}
+            }
+          },
+          "confirmPassword": {
+            "type": "object",
+            "properties": {
+              "enabled": {"type": "boolean"},
+              "label": {"type": "string"},
+              "placeholder": {"type": "string"},
+              "required": {"type": "boolean"}
+            }
+          }
+        }
+      },
+      "termsAndConditions": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "text": {"type": "string"},
+          "linkText": {"type": "string"},
+          "linkUrl": {"type": "string"},
+          "required": {"type": "boolean"}
+        }
+      },
+      "privacyPolicy": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "linkText": {"type": "string"},
+          "linkUrl": {"type": "string"}
+        }
+      },
+      "submitButtonText": {"type": "string", "maxLength": 50},
+      "socialLogins": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "heading": {"type": "string"},
+          "providers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "icon": {"type": "string"},
+                "color": {"type": "string"}
+              }
+            }
+          }
+        }
+      },
+      "signinLink": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "text": {"type": "string"},
+          "linkText": {"type": "string"},
+          "url": {"type": "string"}
+        }
+      }
+    }
+  },
+  "defaultProps": {
+    "heading": "Create an account",
+    "subheading": "Get started with your free account today.",
+    "fields": {
+      "firstName": {
+        "enabled": true,
+        "label": "First name",
+        "placeholder": "John",
+        "required": true
+      },
+      "lastName": {
+        "enabled": true,
+        "label": "Last name",
+        "placeholder": "Doe",
+        "required": true
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "your@email.com",
+        "required": true,
+        "autoComplete": "email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Create a strong password",
+        "required": true,
+        "autoComplete": "new-password",
+        "showToggle": true,
+        "showStrength": true
+      },
+      "confirmPassword": {
+        "enabled": true,
+        "label": "Confirm password",
+        "placeholder": "Re-enter your password",
+        "required": true
+      }
+    },
+    "termsAndConditions": {
+      "enabled": true,
+      "text": "I agree to the",
+      "linkText": "Terms and Conditions",
+      "linkUrl": "/terms",
+      "required": true
+    },
+    "privacyPolicy": {
+      "enabled": true,
+      "linkText": "Privacy Policy",
+      "linkUrl": "/privacy"
+    },
+    "submitButtonText": "Sign up",
+    "socialLogins": {
+      "enabled": true,
+      "heading": "Or sign up with",
+      "providers": [
+        {"id": "google", "name": "Google", "icon": "Google", "color": "#DB4437"},
+        {"id": "github", "name": "GitHub", "icon": "GitHub", "color": "#333"}
+      ]
+    },
+    "signinLink": {
+      "enabled": true,
+      "text": "Already have an account?",
+      "linkText": "Sign in",
+      "url": "/auth/signin"
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "label": "Form Heading",
+      "required": true
+    },
+    "subheading": {
+      "type": "text",
+      "label": "Subheading",
+      "required": false
+    },
+    "firstName": {
+      "type": "field",
+      "label": "First Name Field",
+      "fieldType": "text",
+      "required": false
+    },
+    "lastName": {
+      "type": "field",
+      "label": "Last Name Field",
+      "fieldType": "text",
+      "required": false
+    },
+    "email": {
+      "type": "field",
+      "label": "Email Field",
+      "fieldType": "email",
+      "required": true
+    },
+    "password": {
+      "type": "field",
+      "label": "Password Field",
+      "fieldType": "password",
+      "required": true
+    },
+    "confirmPassword": {
+      "type": "field",
+      "label": "Confirm Password Field",
+      "fieldType": "password",
+      "required": false
+    },
+    "terms": {
+      "type": "checkbox",
+      "label": "Terms Acceptance",
+      "required": false
+    },
+    "submitButton": {
+      "type": "button",
+      "label": "Submit Button",
+      "required": true
+    },
+    "socialProviders": {
+      "type": "collection",
+      "label": "Social Signup Providers",
+      "required": false,
+      "itemLabel": "Provider",
+      "fields": [
+        {"name": "id", "type": "text", "label": "Provider ID", "required": true},
+        {"name": "name", "type": "text", "label": "Provider Name", "required": true},
+        {"name": "icon", "type": "text", "label": "Icon Name", "required": false}
+      ]
+    },
+    "signinLink": {
+      "type": "link",
+      "label": "Sign In Link",
+      "required": false
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "xs"},
+    "spacing": 3,
+    "padding": 4,
+    "nameRow": {
+      "grid": true,
+      "spacing": 2,
+      "columns": {"xs": 12, "sm": 6}
+    }
+  },
+  "styling": {
+    "form": {
+      "width": "100%",
+      "mt": 1
+    },
+    "heading": {
+      "variant": "h4",
+      "fontWeight": "bold",
+      "textAlign": "center",
+      "mb": 1
+    },
+    "subheading": {
+      "variant": "body2",
+      "color": "text.secondary",
+      "textAlign": "center",
+      "mb": 3
+    },
+    "textField": {
+      "variant": "outlined",
+      "fullWidth": true,
+      "margin": "normal",
+      "size": "medium"
+    },
+    "passwordStrength": {
+      "mt": 1,
+      "mb": 1
+    },
+    "strengthBar": {
+      "height": 4,
+      "borderRadius": 2,
+      "transition": "all 0.3s"
+    },
+    "strengthText": {
+      "variant": "caption",
+      "mt": 0.5,
+      "display": "block"
+    },
+    "termsCheckbox": {
+      "display": "flex",
+      "alignItems": "flex-start",
+      "mt": 2,
+      "mb": 2
+    },
+    "checkbox": {
+      "color": "primary",
+      "pt": 0
+    },
+    "termsText": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "termsLink": {
+      "color": "primary.main",
+      "textDecoration": "none",
+      "&:hover": {
+        "textDecoration": "underline"
+      }
+    },
+    "submitButton": {
+      "variant": "contained",
+      "fullWidth": true,
+      "size": "large",
+      "sx": {"mt": 2, "mb": 2}
+    },
+    "divider": {
+      "my": 3
+    },
+    "dividerText": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "socialButton": {
+      "variant": "outlined",
+      "fullWidth": true,
+      "size": "medium",
+      "sx": {"mb": 1.5, "textTransform": "none"}
+    },
+    "socialIcon": {
+      "mr": 1,
+      "fontSize": "small"
+    },
+    "signinLink": {
+      "textAlign": "center",
+      "mt": 2
+    },
+    "signinLinkText": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "signinLinkButton": {
+      "variant": "body2",
+      "color": "primary.main",
+      "fontWeight": "medium",
+      "ml": 0.5,
+      "textDecoration": "none",
+      "&:hover": {
+        "textDecoration": "underline"
+      }
+    }
+  },
+  "validation": {
+    "firstName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z\\s-']+$",
+      "errorMessages": {
+        "required": "First name is required",
+        "minLength": "First name must be at least 2 characters",
+        "pattern": "Please enter a valid name"
+      }
+    },
+    "lastName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z\\s-']+$",
+      "errorMessages": {
+        "required": "Last name is required",
+        "minLength": "Last name must be at least 2 characters",
+        "pattern": "Please enter a valid name"
+      }
+    },
+    "email": {
+      "required": true,
+      "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+      "errorMessages": {
+        "required": "Email is required",
+        "pattern": "Please enter a valid email address",
+        "unique": "This email is already registered"
+      }
+    },
+    "password": {
+      "required": true,
+      "minLength": 8,
+      "maxLength": 128,
+      "requireUppercase": true,
+      "requireLowercase": true,
+      "requireNumber": true,
+      "requireSpecial": false,
+      "errorMessages": {
+        "required": "Password is required",
+        "minLength": "Password must be at least 8 characters",
+        "strength": "Password must contain uppercase, lowercase, and numbers"
+      }
+    },
+    "confirmPassword": {
+      "required": true,
+      "matchField": "password",
+      "errorMessages": {
+        "required": "Please confirm your password",
+        "match": "Passwords do not match"
+      }
+    },
+    "terms": {
+      "required": true,
+      "errorMessages": {
+        "required": "You must accept the terms and conditions"
+      }
+    }
+  },
+  "passwordStrength": {
+    "levels": [
+      {"min": 0, "max": 25, "label": "Weak", "color": "error.main"},
+      {"min": 26, "max": 50, "label": "Fair", "color": "warning.main"},
+      {"min": 51, "max": 75, "label": "Good", "color": "info.main"},
+      {"min": 76, "max": 100, "label": "Strong", "color": "success.main"}
+    ]
+  },
+  "interactions": {
+    "submitForm": {
+      "onSubmit": "handleSignUp",
+      "preventDefault": true
+    },
+    "socialSignup": {
+      "onClick": "handleSocialSignup"
+    },
+    "signin": {
+      "onClick": "navigateToSignIn"
+    },
+    "togglePassword": {
+      "onClick": "togglePasswordVisibility"
+    },
+    "passwordChange": {
+      "onChange": "calculatePasswordStrength"
+    }
+  },
+  "security": {
+    "csrfProtection": true,
+    "httpsOnly": true,
+    "autocomplete": {
+      "firstName": "given-name",
+      "lastName": "family-name",
+      "email": "email",
+      "password": "new-password"
+    },
+    "passwordHashing": "bcrypt"
+  },
+  "accessibility": {
+    "formRole": "form",
+    "ariaLabel": "Sign up form",
+    "fieldLabels": "visible",
+    "requiredIndicator": "*",
+    "errorMessages": true,
+    "passwordToggleAriaLabel": "Toggle password visibility",
+    "strengthIndicatorAriaLive": "polite"
+  },
+  "examples": [
+    {
+      "name": "Minimal Signup",
+      "props": {
+        "heading": "Get started",
+        "subheading": "Create your account",
+        "fields": {
+          "firstName": {"enabled": false},
+          "lastName": {"enabled": false},
+          "email": {"label": "Email", "required": true},
+          "password": {"label": "Password", "required": true, "showStrength": false},
+          "confirmPassword": {"enabled": false}
+        },
+        "termsAndConditions": {"enabled": false},
+        "privacyPolicy": {"enabled": false},
+        "socialLogins": {"enabled": false},
+        "submitButtonText": "Create account"
+      }
+    },
+    {
+      "name": "Social Signup",
+      "props": {
+        "heading": "Join us today",
+        "subheading": "Sign up in seconds",
+        "fields": {
+          "firstName": {"enabled": false},
+          "lastName": {"enabled": false},
+          "email": {"label": "Email"},
+          "password": {"label": "Password", "showStrength": false},
+          "confirmPassword": {"enabled": false}
+        },
+        "submitButtonText": "Sign up with Email",
+        "socialLogins": {
+          "enabled": true,
+          "heading": "Quick signup with",
+          "providers": [
+            {"id": "google", "name": "Google", "icon": "Google"},
+            {"id": "apple", "name": "Apple", "icon": "Apple"},
+            {"id": "microsoft", "name": "Microsoft", "icon": "Microsoft"}
+          ]
+        },
+        "termsAndConditions": {
+          "enabled": true,
+          "text": "By signing up, you agree to our",
+          "linkText": "Terms",
+          "required": false
+        }
+      }
+    },
+    {
+      "name": "Enterprise Signup",
+      "props": {
+        "heading": "Create your workspace",
+        "subheading": "Start your 14-day free trial. No credit card required.",
+        "fields": {
+          "firstName": {"enabled": true, "label": "First name", "required": true},
+          "lastName": {"enabled": true, "label": "Last name", "required": true},
+          "email": {"label": "Work email", "placeholder": "you@company.com", "required": true},
+          "password": {
+            "label": "Password",
+            "placeholder": "Min. 8 characters",
+            "required": true,
+            "showToggle": true,
+            "showStrength": true
+          },
+          "confirmPassword": {"enabled": true, "required": true}
+        },
+        "termsAndConditions": {
+          "enabled": true,
+          "text": "I agree to the",
+          "linkText": "Terms of Service",
+          "linkUrl": "/terms",
+          "required": true
+        },
+        "privacyPolicy": {
+          "enabled": true,
+          "linkText": "Privacy Policy",
+          "linkUrl": "/privacy"
+        },
+        "submitButtonText": "Start free trial",
+        "socialLogins": {"enabled": false},
+        "signinLink": {
+          "enabled": true,
+          "text": "Already using our platform?",
+          "linkText": "Sign in to your workspace",
+          "url": "/auth/signin"
+        }
+      }
+    }
+  ]
+}

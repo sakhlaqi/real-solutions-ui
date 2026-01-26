@@ -1,0 +1,271 @@
+{
+  "id": "logo-collection-simple",
+  "name": "Logo Collection",
+  "category": "logo-collection",
+  "version": "1.0.0",
+  "description": "Showcase of partner, client, or customer logos",
+  "tags": ["logos", "partners", "clients", "trust"],
+  "previewImage": "/previews/logo-collection-simple.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "description": "Optional section heading"
+      },
+      "subheading": {
+        "type": "string",
+        "description": "Optional section subheading"
+      },
+      "logos": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Company/partner name"
+            },
+            "logoLight": {
+              "type": "string",
+              "description": "Logo URL for light mode"
+            },
+            "logoDark": {
+              "type": "string",
+              "description": "Logo URL for dark mode"
+            },
+            "url": {
+              "type": "string",
+              "description": "Optional link to company website"
+            },
+            "width": {
+              "type": "number",
+              "description": "Logo width in pixels"
+            },
+            "height": {
+              "type": "number",
+              "description": "Logo height in pixels"
+            }
+          },
+          "required": ["name", "logoLight"]
+        },
+        "minItems": 4,
+        "maxItems": 20
+      },
+      "layout": {
+        "type": "string",
+        "enum": ["grid", "carousel", "marquee"],
+        "description": "How to display logos"
+      },
+      "grayscale": {
+        "type": "boolean",
+        "description": "Display logos in grayscale (colored on hover)"
+      }
+    },
+    "required": ["logos"]
+  },
+  "defaultProps": {
+    "heading": "Trusted by industry leaders",
+    "subheading": "",
+    "logos": [
+      {
+        "name": "Microsoft",
+        "logoLight": "/logos/microsoft-light.svg",
+        "logoDark": "/logos/microsoft-dark.svg",
+        "url": "https://microsoft.com",
+        "width": 120,
+        "height": 40
+      },
+      {
+        "name": "Google",
+        "logoLight": "/logos/google-light.svg",
+        "logoDark": "/logos/google-dark.svg",
+        "url": "https://google.com",
+        "width": 120,
+        "height": 40
+      },
+      {
+        "name": "Amazon",
+        "logoLight": "/logos/amazon-light.svg",
+        "logoDark": "/logos/amazon-dark.svg",
+        "url": "https://amazon.com",
+        "width": 120,
+        "height": 40
+      },
+      {
+        "name": "Netflix",
+        "logoLight": "/logos/netflix-light.svg",
+        "logoDark": "/logos/netflix-dark.svg",
+        "url": "https://netflix.com",
+        "width": 120,
+        "height": 40
+      },
+      {
+        "name": "Meta",
+        "logoLight": "/logos/meta-light.svg",
+        "logoDark": "/logos/meta-dark.svg",
+        "url": "https://meta.com",
+        "width": 120,
+        "height": 40
+      },
+      {
+        "name": "Spotify",
+        "logoLight": "/logos/spotify-light.svg",
+        "logoDark": "/logos/spotify-dark.svg",
+        "url": "https://spotify.com",
+        "width": 120,
+        "height": 40
+      }
+    ],
+    "layout": "grid",
+    "grayscale": true
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100,
+      "optional": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 200,
+      "optional": true
+    },
+    "logos": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "name": { "type": "text", "maxLength": 50 },
+        "logoLight": { "type": "media", "accepts": ["image/svg+xml", "image/png"] },
+        "logoDark": { "type": "media", "accepts": ["image/svg+xml", "image/png"], "optional": true },
+        "url": { "type": "text", "optional": true },
+        "width": { "type": "number", "min": 50, "max": 300 },
+        "height": { "type": "number", "min": 20, "max": 100 }
+      }
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 4, "sm": 8 }
+    },
+    "grid": {
+      "xs": 6,
+      "sm": 4,
+      "md": 3,
+      "lg": 2
+    }
+  },
+  "styling": {
+    "logoFilter": "grayscale(100%)",
+    "logoFilterHover": "grayscale(0%)",
+    "logoOpacity": 0.6,
+    "logoOpacityHover": 1,
+    "transition": "all 0.3s ease",
+    "alignItems": "center",
+    "justifyContent": "center"
+  },
+  "interactions": {
+    "clickable": true,
+    "openInNewTab": true,
+    "hoverEffect": "scale"
+  },
+  "examples": [
+    {
+      "name": "SaaS Customers",
+      "props": {
+        "heading": "Join 10,000+ companies",
+        "subheading": "From startups to Fortune 500, teams trust our platform",
+        "logos": [
+          {
+            "name": "Slack",
+            "logoLight": "/customers/slack.svg",
+            "url": "https://slack.com",
+            "width": 100,
+            "height": 40
+          },
+          {
+            "name": "Shopify",
+            "logoLight": "/customers/shopify.svg",
+            "url": "https://shopify.com",
+            "width": 120,
+            "height": 40
+          },
+          {
+            "name": "Stripe",
+            "logoLight": "/customers/stripe.svg",
+            "url": "https://stripe.com",
+            "width": 80,
+            "height": 40
+          },
+          {
+            "name": "Notion",
+            "logoLight": "/customers/notion.svg",
+            "url": "https://notion.so",
+            "width": 100,
+            "height": 40
+          },
+          {
+            "name": "Figma",
+            "logoLight": "/customers/figma.svg",
+            "url": "https://figma.com",
+            "width": 80,
+            "height": 40
+          },
+          {
+            "name": "Vercel",
+            "logoLight": "/customers/vercel.svg",
+            "url": "https://vercel.com",
+            "width": 100,
+            "height": 40
+          }
+        ],
+        "layout": "grid",
+        "grayscale": true
+      }
+    },
+    {
+      "name": "Partners Carousel",
+      "props": {
+        "heading": "Our Technology Partners",
+        "logos": [
+          {
+            "name": "AWS",
+            "logoLight": "/partners/aws.svg",
+            "width": 80,
+            "height": 40
+          },
+          {
+            "name": "Azure",
+            "logoLight": "/partners/azure.svg",
+            "width": 100,
+            "height": 40
+          },
+          {
+            "name": "Google Cloud",
+            "logoLight": "/partners/gcp.svg",
+            "width": 120,
+            "height": 40
+          },
+          {
+            "name": "Docker",
+            "logoLight": "/partners/docker.svg",
+            "width": 100,
+            "height": 40
+          },
+          {
+            "name": "Kubernetes",
+            "logoLight": "/partners/kubernetes.svg",
+            "width": 100,
+            "height": 40
+          }
+        ],
+        "layout": "carousel",
+        "grayscale": false
+      }
+    }
+  ]
+}

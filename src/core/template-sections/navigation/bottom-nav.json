@@ -1,0 +1,232 @@
+{
+  "id": "navigation-bottom-nav",
+  "category": "navigation",
+  "name": "Bottom Navigation Bar",
+  "description": "Mobile-friendly bottom navigation with icons and labels. Perfect for mobile apps and responsive web applications.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "items": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "required": ["label", "icon", "href"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 20
+            },
+            "icon": {
+              "type": "string",
+              "description": "Icon name or component"
+            },
+            "href": {
+              "type": "string"
+            },
+            "badge": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "maxLength": 5
+                },
+                "color": {
+                  "type": "string",
+                  "enum": ["default", "primary", "secondary", "error", "warning", "info", "success"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "showLabels": {
+        "type": "string",
+        "enum": ["always", "selected", "never"],
+        "default": "always"
+      },
+      "elevation": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 24,
+        "default": 8
+      }
+    },
+    "required": ["items"]
+  },
+  "defaultProps": {
+    "items": [
+      {
+        "label": "Home",
+        "icon": "home",
+        "href": "/"
+      },
+      {
+        "label": "Explore",
+        "icon": "explore",
+        "href": "/explore"
+      },
+      {
+        "label": "Notifications",
+        "icon": "notifications",
+        "href": "/notifications",
+        "badge": {
+          "content": "3",
+          "color": "error"
+        }
+      },
+      {
+        "label": "Profile",
+        "icon": "person",
+        "href": "/profile"
+      }
+    ],
+    "showLabels": "always",
+    "elevation": 8
+  },
+  "slots": {
+    "items": {
+      "type": "collection",
+      "itemType": "nav-item",
+      "minItems": 3,
+      "maxItems": 5,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "icon",
+          "type": "icon",
+          "required": true
+        },
+        {
+          "name": "href",
+          "type": "url",
+          "required": true
+        }
+      ]
+    }
+  },
+  "layout": {
+    "bottomNav": {
+      "position": "fixed",
+      "bottom": 0,
+      "left": 0,
+      "right": 0,
+      "display": { "xs": "flex", "md": "none" }
+    }
+  },
+  "styling": {
+    "bottomNav": {
+      "zIndex": "appBar",
+      "backgroundColor": "background.paper",
+      "borderTop": "1px solid",
+      "borderColor": "divider",
+      "height": 56
+    },
+    "action": {
+      "minWidth": 80,
+      "paddingTop": 0.5,
+      "color": "text.secondary",
+      "&.Mui-selected": {
+        "color": "primary.main"
+      }
+    },
+    "icon": {
+      "fontSize": 24
+    },
+    "label": {
+      "fontSize": "0.75rem",
+      "fontWeight": 500,
+      "marginTop": 0.5
+    }
+  },
+  "interactions": {
+    "itemClick": {
+      "type": "navigate",
+      "description": "Navigate to selected item"
+    },
+    "activeState": {
+      "type": "state",
+      "description": "Highlight active navigation item"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "navigation": "Bottom navigation",
+      "item": "{label}"
+    },
+    "keyboardSupport": true,
+    "roles": {
+      "navigation": "navigation",
+      "item": "button"
+    }
+  },
+  "examples": [
+    {
+      "name": "Simple Bottom Nav",
+      "description": "Basic 3-item navigation",
+      "props": {
+        "items": [
+          {
+            "label": "Feed",
+            "icon": "feed",
+            "href": "/feed"
+          },
+          {
+            "label": "Search",
+            "icon": "search",
+            "href": "/search"
+          },
+          {
+            "label": "Account",
+            "icon": "account",
+            "href": "/account"
+          }
+        ],
+        "showLabels": "selected"
+      }
+    },
+    {
+      "name": "E-commerce Nav",
+      "description": "Shopping app navigation",
+      "props": {
+        "items": [
+          {
+            "label": "Shop",
+            "icon": "store",
+            "href": "/shop"
+          },
+          {
+            "label": "Categories",
+            "icon": "category",
+            "href": "/categories"
+          },
+          {
+            "label": "Cart",
+            "icon": "shopping_cart",
+            "href": "/cart",
+            "badge": {
+              "content": "2",
+              "color": "primary"
+            }
+          },
+          {
+            "label": "Favorites",
+            "icon": "favorite",
+            "href": "/favorites"
+          },
+          {
+            "label": "Account",
+            "icon": "person",
+            "href": "/account"
+          }
+        ],
+        "showLabels": "always"
+      }
+    }
+  ]
+}

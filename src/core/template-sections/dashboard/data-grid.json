@@ -1,0 +1,368 @@
+{
+  "id": "dashboard-data-grid",
+  "name": "Data Table Grid",
+  "category": "dashboard",
+  "version": "1.0.0",
+  "description": "Sortable, filterable data table with pagination, column configuration, and row actions. Supports various data types and custom cell rendering.",
+  "tags": ["dashboard", "table", "grid", "data", "pagination", "sorting", "filtering"],
+  "previewImage": "/previews/data-grid.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["columns", "rows"],
+    "properties": {
+      "heading": {"type": "string", "maxLength": 100},
+      "columns": {
+        "type": "array",
+        "description": "Table column definitions",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["field", "headerName"],
+          "properties": {
+            "field": {"type": "string"},
+            "headerName": {"type": "string", "maxLength": 100},
+            "width": {"type": "number", "minimum": 50},
+            "type": {"type": "string", "enum": ["string", "number", "date", "boolean", "actions"]},
+            "sortable": {"type": "boolean"},
+            "filterable": {"type": "boolean"},
+            "hideable": {"type": "boolean"},
+            "align": {"type": "string", "enum": ["left", "center", "right"]},
+            "headerAlign": {"type": "string", "enum": ["left", "center", "right"]},
+            "valueFormatter": {"type": "string"},
+            "renderCell": {"type": "string"}
+          }
+        }
+      },
+      "rows": {
+        "type": "array",
+        "description": "Table row data",
+        "minItems": 0,
+        "items": {
+          "type": "object",
+          "required": ["id"],
+          "properties": {
+            "id": {"type": ["string", "number"]}
+          },
+          "additionalProperties": true
+        }
+      },
+      "pagination": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "pageSize": {"type": "number", "minimum": 5, "maximum": 100},
+          "pageSizeOptions": {
+            "type": "array",
+            "items": {"type": "number"}
+          }
+        }
+      },
+      "sorting": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "field": {"type": "string"},
+              "sort": {"type": "string", "enum": ["asc", "desc"]}
+            }
+          }
+        }
+      },
+      "filtering": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "mode": {"type": "string", "enum": ["client", "server"]}
+        }
+      },
+      "checkboxSelection": {"type": "boolean"},
+      "disableRowSelectionOnClick": {"type": "boolean"},
+      "autoHeight": {"type": "boolean"},
+      "density": {"type": "string", "enum": ["compact", "standard", "comfortable"]}
+    }
+  },
+  "defaultProps": {
+    "heading": "Recent Transactions",
+    "columns": [
+      {
+        "field": "id",
+        "headerName": "ID",
+        "width": 80,
+        "type": "number",
+        "sortable": true,
+        "filterable": true,
+        "hideable": true
+      },
+      {
+        "field": "date",
+        "headerName": "Date",
+        "width": 120,
+        "type": "date",
+        "sortable": true,
+        "filterable": true,
+        "valueFormatter": "formatDate"
+      },
+      {
+        "field": "customer",
+        "headerName": "Customer",
+        "width": 200,
+        "type": "string",
+        "sortable": true,
+        "filterable": true
+      },
+      {
+        "field": "product",
+        "headerName": "Product",
+        "width": 180,
+        "type": "string",
+        "sortable": true,
+        "filterable": true
+      },
+      {
+        "field": "amount",
+        "headerName": "Amount",
+        "width": 120,
+        "type": "number",
+        "sortable": true,
+        "filterable": true,
+        "align": "right",
+        "headerAlign": "right",
+        "valueFormatter": "formatCurrency"
+      },
+      {
+        "field": "status",
+        "headerName": "Status",
+        "width": 130,
+        "type": "string",
+        "sortable": true,
+        "filterable": true,
+        "renderCell": "statusChip"
+      },
+      {
+        "field": "actions",
+        "headerName": "Actions",
+        "width": 100,
+        "type": "actions",
+        "sortable": false,
+        "filterable": false,
+        "renderCell": "actionButtons"
+      }
+    ],
+    "rows": [
+      {
+        "id": 1,
+        "date": "2024-01-15",
+        "customer": "John Doe",
+        "product": "Professional Plan",
+        "amount": 299.99,
+        "status": "completed"
+      },
+      {
+        "id": 2,
+        "date": "2024-01-15",
+        "customer": "Jane Smith",
+        "product": "Starter Plan",
+        "amount": 49.99,
+        "status": "pending"
+      },
+      {
+        "id": 3,
+        "date": "2024-01-14",
+        "customer": "Bob Johnson",
+        "product": "Enterprise Plan",
+        "amount": 999.99,
+        "status": "completed"
+      },
+      {
+        "id": 4,
+        "date": "2024-01-14",
+        "customer": "Alice Williams",
+        "product": "Premium Support",
+        "amount": 99.99,
+        "status": "completed"
+      },
+      {
+        "id": 5,
+        "date": "2024-01-13",
+        "customer": "Charlie Brown",
+        "product": "Professional Plan",
+        "amount": 299.99,
+        "status": "failed"
+      },
+      {
+        "id": 6,
+        "date": "2024-01-13",
+        "customer": "Diana Prince",
+        "product": "Starter Plan",
+        "amount": 49.99,
+        "status": "completed"
+      },
+      {
+        "id": 7,
+        "date": "2024-01-12",
+        "customer": "Edward Norton",
+        "product": "Professional Plan",
+        "amount": 299.99,
+        "status": "refunded"
+      },
+      {
+        "id": 8,
+        "date": "2024-01-12",
+        "customer": "Fiona Green",
+        "product": "Enterprise Plan",
+        "amount": 999.99,
+        "status": "completed"
+      }
+    ],
+    "pagination": {
+      "enabled": true,
+      "pageSize": 10,
+      "pageSizeOptions": [5, 10, 25, 50]
+    },
+    "sorting": {
+      "enabled": true,
+      "defaultSort": {
+        "field": "date",
+        "sort": "desc"
+      }
+    },
+    "filtering": {
+      "enabled": true,
+      "mode": "client"
+    },
+    "checkboxSelection": false,
+    "disableRowSelectionOnClick": true,
+    "autoHeight": false,
+    "density": "standard"
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "label": "Table Heading",
+      "required": false
+    },
+    "columns": {
+      "type": "collection",
+      "label": "Table Columns",
+      "required": true,
+      "itemLabel": "Column",
+      "fields": [
+        {"name": "field", "type": "text", "label": "Field Name", "required": true},
+        {"name": "headerName", "type": "text", "label": "Header Label", "required": true},
+        {"name": "width", "type": "number", "label": "Column Width", "required": false},
+        {"name": "type", "type": "select", "label": "Data Type", "options": ["string", "number", "date", "boolean", "actions"], "required": false},
+        {"name": "sortable", "type": "boolean", "label": "Sortable", "required": false},
+        {"name": "filterable", "type": "boolean", "label": "Filterable", "required": false}
+      ]
+    },
+    "rows": {
+      "type": "collection",
+      "label": "Table Rows",
+      "required": true,
+      "itemLabel": "Row",
+      "dynamic": true
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "xl"},
+    "height": 400
+  },
+  "styling": {
+    "heading": {
+      "variant": "h6",
+      "gutterBottom": true,
+      "mb": 2
+    },
+    "dataGrid": {
+      "border": 1,
+      "borderColor": "divider",
+      "borderRadius": 1,
+      "sx": {
+        "& .MuiDataGrid-cell:focus": {
+          "outline": "none"
+        },
+        "& .MuiDataGrid-row:hover": {
+          "backgroundColor": "action.hover"
+        }
+      }
+    },
+    "statusChip": {
+      "completed": {"color": "success", "label": "Completed"},
+      "pending": {"color": "warning", "label": "Pending"},
+      "failed": {"color": "error", "label": "Failed"},
+      "refunded": {"color": "default", "label": "Refunded"}
+    }
+  },
+  "interactions": {
+    "rowClick": {
+      "enabled": false,
+      "action": "viewDetails"
+    },
+    "cellEdit": {
+      "enabled": false
+    },
+    "columnResize": {
+      "enabled": true
+    },
+    "columnReorder": {
+      "enabled": false
+    },
+    "actions": {
+      "view": {"icon": "Visibility", "label": "View", "action": "viewRow"},
+      "edit": {"icon": "Edit", "label": "Edit", "action": "editRow"},
+      "delete": {"icon": "Delete", "label": "Delete", "action": "deleteRow"}
+    }
+  },
+  "accessibility": {
+    "ariaLabel": "Data table",
+    "tableRole": "grid",
+    "columnHeaderRole": "columnheader",
+    "rowRole": "row",
+    "cellRole": "gridcell"
+  },
+  "examples": [
+    {
+      "name": "Simple Table",
+      "props": {
+        "heading": "User List",
+        "columns": [
+          {"field": "id", "headerName": "ID", "width": 70, "type": "number"},
+          {"field": "name", "headerName": "Name", "width": 200, "type": "string"},
+          {"field": "email", "headerName": "Email", "width": 250, "type": "string"},
+          {"field": "role", "headerName": "Role", "width": 120, "type": "string"}
+        ],
+        "rows": [
+          {"id": 1, "name": "John Doe", "email": "john@example.com", "role": "Admin"},
+          {"id": 2, "name": "Jane Smith", "email": "jane@example.com", "role": "User"},
+          {"id": 3, "name": "Bob Johnson", "email": "bob@example.com", "role": "User"}
+        ],
+        "pagination": {"enabled": false},
+        "checkboxSelection": false
+      }
+    },
+    {
+      "name": "Orders Dashboard",
+      "props": {
+        "heading": "Order Management",
+        "columns": [
+          {"field": "orderId", "headerName": "Order #", "width": 100, "type": "string"},
+          {"field": "customer", "headerName": "Customer", "width": 180, "type": "string"},
+          {"field": "total", "headerName": "Total", "width": 120, "type": "number", "align": "right", "valueFormatter": "formatCurrency"},
+          {"field": "status", "headerName": "Status", "width": 130, "type": "string", "renderCell": "statusChip"},
+          {"field": "date", "headerName": "Date", "width": 120, "type": "date"}
+        ],
+        "rows": [
+          {"id": 1, "orderId": "ORD-001", "customer": "Alice W.", "total": 1234.56, "status": "completed", "date": "2024-01-15"},
+          {"id": 2, "orderId": "ORD-002", "customer": "Bob J.", "total": 567.89, "status": "pending", "date": "2024-01-14"},
+          {"id": 3, "orderId": "ORD-003", "customer": "Charlie B.", "total": 890.12, "status": "failed", "date": "2024-01-13"}
+        ],
+        "pagination": {"enabled": true, "pageSize": 5},
+        "checkboxSelection": true,
+        "density": "compact"
+      }
+    }
+  ]
+}

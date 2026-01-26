@@ -1,0 +1,267 @@
+{
+  "id": "marketing-home",
+  "title": "Home - Marketing Page",
+  "description": "Main landing page for the marketing website",
+  "layout": {
+    "type": "marketing-layout",
+    "props": {
+      "stickyHeader": true,
+      "maxWidth": 1200,
+      "sidebarVisible": false
+    }
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero-center-aligned",
+      "props": {
+        "heading": "Build faster with Sitemark",
+        "subheading": "Sitemark streamlines project development with an intuitive platform, enabling you to build, test, and deploy quickly without compromising on quality.",
+        "primaryCta": {
+          "text": "Start now",
+          "href": "/signup",
+          "variant": "contained"
+        },
+        "secondaryCta": {
+          "text": "Get a demo",
+          "href": "#demo",
+          "variant": "outlined"
+        },
+        "image": {
+          "src": "/images/hero-light.png",
+          "alt": "Product screenshot"
+        },
+        "backgroundGradient": true
+      }
+    },
+    {
+      "id": "logo-collection",
+      "type": "logo-cloud-simple-with-title",
+      "props": {
+        "title": "Trusted by the best companies",
+        "logos": [
+          { "src": "/logos/logo1.svg", "alt": "Company 1" },
+          { "src": "/logos/logo2.svg", "alt": "Company 2" },
+          { "src": "/logos/logo3.svg", "alt": "Company 3" },
+          { "src": "/logos/logo4.svg", "alt": "Company 4" },
+          { "src": "/logos/logo5.svg", "alt": "Company 5" },
+          { "src": "/logos/logo6.svg", "alt": "Company 6" }
+        ],
+        "backgroundColor": "surface"
+      }
+    },
+    {
+      "id": "features",
+      "type": "features-grid-3-columns",
+      "props": {
+        "title": "Product features",
+        "subtitle": "Provide a brief overview of the key features of the product. For example, you could list the number of features, their types or benefits, and add-ons.",
+        "features": [
+          {
+            "icon": "dashboard",
+            "title": "Dashboard",
+            "description": "This feature provides a comprehensive overview of your operations at a glance. The dashboard provides real-time insights and analytics."
+          },
+          {
+            "icon": "mobile",
+            "title": "Mobile integration",
+            "description": "The product seamlessly integrates with popular mobile apps. This feature simplifies the management of multiple accounts from a single interface."
+          },
+          {
+            "icon": "analytics",
+            "title": "Available on all platforms",
+            "description": "Whether you're working from a laptop, tablet, or smartphone, our product delivers a consistent user experience across all operating systems."
+          },
+          {
+            "icon": "thumbsup",
+            "title": "Innovative functionality",
+            "description": "Stay ahead of the curve with advanced features that leverage the latest technologies, ensuring your operations remain competitive."
+          },
+          {
+            "icon": "support",
+            "title": "Reliable support",
+            "description": "Count on our dedicated support team to assist you at any stage. We are committed to promptly and effectively resolving your questions."
+          },
+          {
+            "icon": "speed",
+            "title": "Precision in every detail",
+            "description": "Enjoy a meticulously crafted product where every detail is optimized for your benefit, ensuring a seamless experience."
+          }
+        ]
+      }
+    },
+    {
+      "id": "testimonials",
+      "type": "testimonials-grid",
+      "props": {
+        "title": "Testimonials",
+        "subtitle": "See what our customers love about our products. Discover how we excel in efficiency, durability, and satisfaction. Join us for quality, innovation, and reliable support.",
+        "testimonials": [
+          {
+            "quote": "I absolutely love how versatile this product is! Whether I'm tackling work projects or diving into personal endeavors, it seamlessly adapts to my changing needs. Its intuitive design has truly enhanced my daily routine. A game-changer!",
+            "author": "Remy Sharp",
+            "role": "Senior Engineer",
+            "avatar": "/avatars/avatar1.jpg"
+          },
+          {
+            "quote": "One of the standout features of this product is the exceptional customer support. In my experience, the team behind this product has been quick to respond and incredibly helpful. It's reassuring to know that they stand firmly behind their product.",
+            "author": "Travis Howard",
+            "role": "Lead Product Designer",
+            "avatar": "/avatars/avatar2.jpg"
+          },
+          {
+            "quote": "The level of simplicity and user-friendliness in this product has significantly simplified my workflow. It's highly intuitive, making it easy to navigate and use. I've been able to integrate it into my daily routine seamlessly.",
+            "author": "Cindy Baker",
+            "role": "CTO",
+            "avatar": "/avatars/avatar3.jpg"
+          },
+          {
+            "quote": "I appreciate the attention to detail in the design of this product. The small touches make a big difference, and it's evident that the creators focused on delivering a premium experience.",
+            "author": "Julia Stewart",
+            "role": "Senior Engineer",
+            "avatar": "/avatars/avatar4.jpg"
+          },
+          {
+            "quote": "I've tried other similar products, but this one stands out for its innovative features. It's clear that the makers put a lot of thought into creating a solution that truly addresses user needs.",
+            "author": "John Smith",
+            "role": "Product Designer",
+            "avatar": "/avatars/avatar5.jpg"
+          },
+          {
+            "quote": "The quality of this product exceeded my expectations. It's durable, well-designed, and built to last. Definitely worth the investment!",
+            "author": "Daniel Wolf",
+            "role": "CDO",
+            "avatar": "/avatars/avatar6.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "highlights",
+      "type": "highlights-alternating-with-images",
+      "props": {
+        "title": "Highlights",
+        "subtitle": "Explore why our product stands out: adaptability, durability, user-friendly design, and innovation. Enjoy reliable customer support and precision in every detail.",
+        "highlights": [
+          {
+            "title": "Adaptability",
+            "description": "Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.",
+            "image": "/images/highlight1.png"
+          },
+          {
+            "title": "Built to last",
+            "description": "Experience unmatched durability that goes above and beyond with lasting investment.",
+            "image": "/images/highlight2.png"
+          },
+          {
+            "title": "Great user experience",
+            "description": "Integrate our product into your routine with an intuitive and easy-to-use interface.",
+            "image": "/images/highlight3.png"
+          },
+          {
+            "title": "Innovative functionality",
+            "description": "Stay ahead with features that set new standards, addressing your evolving needs better than the rest.",
+            "image": "/images/highlight4.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pricing",
+      "type": "pricing-three-tier",
+      "props": {
+        "title": "Pricing",
+        "subtitle": "Quickly build an effective pricing table for your potential customers with this layout. It's built with default Material UI components with little customization.",
+        "plans": [
+          {
+            "title": "Free",
+            "price": "$0",
+            "period": "month",
+            "description": "Get started with basic features to explore our platform.",
+            "features": [
+              "10 users included",
+              "2 GB of storage",
+              "Help center access",
+              "Email support"
+            ],
+            "cta": {
+              "text": "Start now",
+              "variant": "outlined"
+            },
+            "featured": false
+          },
+          {
+            "title": "Professional",
+            "price": "$15",
+            "period": "month",
+            "description": "Perfect for professionals who need more features and support.",
+            "features": [
+              "20 users included",
+              "10 GB of storage",
+              "Help center access",
+              "Priority email support",
+              "Dedicated team",
+              "Best deals"
+            ],
+            "cta": {
+              "text": "Start now",
+              "variant": "contained"
+            },
+            "featured": true,
+            "badge": "Most popular"
+          },
+          {
+            "title": "Enterprise",
+            "price": "$30",
+            "period": "month",
+            "description": "For large teams needing advanced features and dedicated support.",
+            "features": [
+              "50 users included",
+              "30 GB of storage",
+              "Help center access",
+              "Phone & email support",
+              "Dedicated team",
+              "Best deals"
+            ],
+            "cta": {
+              "text": "Contact us",
+              "variant": "outlined"
+            },
+            "featured": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "faq",
+      "type": "faq-accordion",
+      "props": {
+        "title": "Frequently asked questions",
+        "faqs": [
+          {
+            "question": "How do I contact customer support if I have a question or issue?",
+            "answer": "You can reach our customer support team by emailing support@email.com or calling our toll-free number. We're here to assist you promptly."
+          },
+          {
+            "question": "Can I return the product if it doesn't meet my expectations?",
+            "answer": "Absolutely! We offer a hassle-free return policy. If you're not completely satisfied, you can return the product within 30 days for a full refund or exchange."
+          },
+          {
+            "question": "What makes your product stand out from others in the market?",
+            "answer": "Our product distinguishes itself through its adaptability, durability, and innovative features. We prioritize user satisfaction and continually strive to exceed expectations in every aspect."
+          },
+          {
+            "question": "Is there a warranty on the product, and what does it cover?",
+            "answer": "Yes, our product comes with a comprehensive warranty. It covers defects in materials and workmanship for a specified period. Please refer to our warranty policy for more details on coverage and terms."
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "template": "marketing-page-mui",
+    "createdAt": "2026-01-25",
+    "updatedAt": "2026-01-25",
+    "status": "active"
+  }
+}

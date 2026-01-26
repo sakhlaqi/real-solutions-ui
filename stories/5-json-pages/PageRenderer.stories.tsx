@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { PageRenderer } from '../../src/renderer/renderPage';
-import type { PageConfig } from '../../src/schema';
+import type { PageConfig } from '../../src/schema/pageSchema';
 
 /**
  * PageRenderer
@@ -45,6 +45,7 @@ const meta = {
   component: PageRenderer,
   parameters: {
     layout: 'fullscreen',
+    actions: { argTypesRegex: '^on.*' },
     docs: {
       description: {
         component: `
@@ -79,10 +80,20 @@ The example JSON pages demonstrate:
     },
   },
   tags: ['autodocs'],
+  args: {
+    onRenderComplete: (result) => console.log('Render complete:', result),
+    onAdapterWarning: (warning) => console.log('Adapter warning:', warning),
+  },
   argTypes: {
     config: {
       control: 'object',
       description: 'Page configuration (JSON or object)',
+    },
+    onRenderComplete: {
+      description: 'Callback when rendering completes',
+    },
+    onAdapterWarning: {
+      description: 'Callback when adapter warnings occur',
     },
   },
 } satisfies Meta<typeof PageRenderer>;
@@ -201,10 +212,6 @@ export const Complex: Story = {
               { label: 'Project Alpha', href: '/projects/1' },
             ],
             showBackButton: true,
-            actions: [
-              { id: 'save', label: 'Save', variant: 'primary' },
-              { id: 'delete', label: 'Delete', variant: 'danger' },
-            ],
           },
         },
         sidebar: {
@@ -230,61 +237,27 @@ export const Complex: Story = {
           },
         },
         main: {
-          type: 'SearchGridComposite',
+          type: 'Card',
           props: {
-            dataSource: 'tasks',
-            columns: [
-              { id: 'title', label: 'Task', field: 'title', sortable: true },
-              { id: 'assignee', label: 'Assignee', field: 'assignee' },
-              { id: 'status', label: 'Status', field: 'status', sortable: true },
-              { id: 'priority', label: 'Priority', field: 'priority', sortable: true },
-              { id: 'dueDate', label: 'Due Date', field: 'dueDate', sortable: true },
-            ],
-            data: [
-              { id: 1, title: 'Implement login', assignee: 'John Doe', status: 'In Progress', priority: 'High', dueDate: '2024-02-15' },
-              { id: 2, title: 'Design dashboard', assignee: 'Jane Smith', status: 'In Progress', priority: 'High', dueDate: '2024-02-16' },
-              { id: 3, title: 'Write documentation', assignee: 'Bob Johnson', status: 'Not Started', priority: 'Medium', dueDate: '2024-02-20' },
-              { id: 4, title: 'Setup CI/CD', assignee: 'Alice Williams', status: 'Not Started', priority: 'Low', dueDate: '2024-02-22' },
-              { id: 5, title: 'Code review', assignee: 'Charlie Brown', status: 'Completed', priority: 'Medium', dueDate: '2024-02-10' },
-            ],
-            filters: [
-              {
-                id: 'status',
-                label: 'Status',
-                type: 'select',
-                field: 'status',
-                options: [
-                  { label: 'In Progress', value: 'In Progress' },
-                  { label: 'Not Started', value: 'Not Started' },
-                  { label: 'Completed', value: 'Completed' },
-                ],
-              },
-              {
-                id: 'priority',
-                label: 'Priority',
-                type: 'select',
-                field: 'priority',
-                options: [
-                  { label: 'High', value: 'High' },
-                  { label: 'Medium', value: 'Medium' },
-                  { label: 'Low', value: 'Low' },
-                ],
-              },
-            ],
-            searchEnabled: true,
-            searchPlaceholder: 'Search tasks...',
-            selectionMode: 'multiple',
-            rowActions: (row: any) => [
-              { id: 'edit', label: 'Edit', variant: 'contained', color: 'primary', onClick: () => console.log('Edit', row) },
-              { id: 'delete', label: 'Delete', variant: 'outlined', color: 'error', onClick: () => console.log('Delete', row) },
-            ],
-            toolbarActions: [
-              { id: 'add', label: 'Add Task', variant: 'contained', color: 'primary', onClick: () => console.log('Add task') },
-              { id: 'export', label: 'Export', variant: 'outlined', color: 'primary', onClick: () => console.log('Export') },
-            ],
-            defaultPageSize: 5,
-            pageSizeOptions: [5, 10, 25],
+            title: 'Active Tasks',
+            padding: 'lg',
           },
+          children: [
+            {
+              type: 'Text',
+              props: {
+                children: 'This is a complex page with a header, sidebar, and main content area.',
+              },
+            },
+            {
+              type: 'Text',
+              props: {
+                children: 'In a real application, this would contain a data grid or other complex component.',
+                size: 'sm',
+                color: 'secondary',
+              },
+            },
+          ],
         },
         footer: {
           type: 'Text',

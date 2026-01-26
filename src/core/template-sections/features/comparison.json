@@ -1,0 +1,219 @@
+{
+  "id": "features-comparison",
+  "name": "Feature Comparison List",
+  "category": "features",
+  "version": "1.0.0",
+  "description": "Side-by-side comparison of features across plans or products",
+  "tags": ["comparison", "list", "detailed"],
+  "previewImage": "/previews/features-comparison.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string"
+      },
+      "subheading": {
+        "type": "string"
+      },
+      "plans": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "badge": {
+              "type": "string",
+              "description": "Optional badge text (e.g., 'Popular', 'Best Value')"
+            }
+          },
+          "required": ["name"]
+        },
+        "minItems": 2,
+        "maxItems": 4
+      },
+      "featureCategories": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Category name (e.g., 'Core Features', 'Advanced Features')"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "tooltip": {
+                    "type": "string",
+                    "description": "Optional tooltip explanation"
+                  },
+                  "availability": {
+                    "type": "array",
+                    "items": {
+                      "type": ["boolean", "string"],
+                      "description": "true/false or custom text like '10 users' per plan"
+                    }
+                  }
+                },
+                "required": ["name", "availability"]
+              }
+            }
+          },
+          "required": ["category", "features"]
+        }
+      }
+    },
+    "required": ["heading", "plans", "featureCategories"]
+  },
+  "defaultProps": {
+    "heading": "Compare Plans",
+    "subheading": "Choose the perfect plan for your needs. All plans include our core features.",
+    "plans": [
+      { "name": "Free" },
+      { "name": "Professional", "badge": "Popular" },
+      { "name": "Enterprise" }
+    ],
+    "featureCategories": [
+      {
+        "category": "Core Features",
+        "features": [
+          {
+            "name": "Users included",
+            "availability": ["10 users", "20 users", "50 users"]
+          },
+          {
+            "name": "Storage",
+            "availability": ["2 GB", "10 GB", "30 GB"]
+          },
+          {
+            "name": "Help center access",
+            "availability": [true, true, true]
+          },
+          {
+            "name": "Email support",
+            "availability": [true, true, true]
+          }
+        ]
+      },
+      {
+        "category": "Advanced Features",
+        "features": [
+          {
+            "name": "Priority email support",
+            "availability": [false, true, true]
+          },
+          {
+            "name": "Dedicated team",
+            "availability": [false, true, true]
+          },
+          {
+            "name": "Phone support",
+            "availability": [false, false, true]
+          },
+          {
+            "name": "Custom integrations",
+            "availability": [false, false, true]
+          }
+        ]
+      }
+    ]
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "optional": true
+    },
+    "plans": {
+      "type": "array",
+      "editable": true
+    },
+    "featureCategories": {
+      "type": "array",
+      "editable": true
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 8, "sm": 16 }
+    },
+    "responsive": {
+      "mobile": "stacked",
+      "tablet": "scrollable-table",
+      "desktop": "full-table"
+    }
+  },
+  "styling": {
+    "alternatingRows": true,
+    "highlightColumn": 1,
+    "checkmarkIcon": "CheckCircle",
+    "crossIcon": "Cancel"
+  },
+  "examples": [
+    {
+      "name": "SaaS Pricing Tiers",
+      "props": {
+        "heading": "Find Your Perfect Fit",
+        "subheading": "Transparent pricing with no hidden fees. Start free, upgrade anytime.",
+        "plans": [
+          { "name": "Starter" },
+          { "name": "Growth", "badge": "Most Popular" },
+          { "name": "Scale" }
+        ],
+        "featureCategories": [
+          {
+            "category": "Usage Limits",
+            "features": [
+              {
+                "name": "Projects",
+                "availability": ["5 projects", "25 projects", "Unlimited"]
+              },
+              {
+                "name": "Team members",
+                "availability": ["3 members", "15 members", "Unlimited"]
+              },
+              {
+                "name": "API calls/month",
+                "availability": ["10,000", "100,000", "Unlimited"]
+              }
+            ]
+          },
+          {
+            "category": "Features",
+            "features": [
+              {
+                "name": "Advanced analytics",
+                "availability": [false, true, true]
+              },
+              {
+                "name": "Custom branding",
+                "availability": [false, true, true]
+              },
+              {
+                "name": "SSO & SAML",
+                "availability": [false, false, true]
+              },
+              {
+                "name": "99.99% SLA",
+                "availability": [false, false, true]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

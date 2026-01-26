@@ -1,0 +1,239 @@
+{
+  "id": "navigation-breadcrumbs",
+  "category": "navigation",
+  "name": "Breadcrumbs Navigation",
+  "description": "Hierarchical navigation breadcrumbs showing the current page's location. Perfect for multi-level sites and applications.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": ["label"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "href": {
+              "type": "string",
+              "description": "Omit for current/last item"
+            },
+            "icon": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "separator": {
+        "type": "string",
+        "enum": ["/", ">", "›", "·", "arrow"],
+        "default": "/"
+      },
+      "maxItems": {
+        "type": "integer",
+        "minimum": 3,
+        "maximum": 10,
+        "default": 8,
+        "description": "Maximum items to show before collapsing"
+      },
+      "expandText": {
+        "type": "string",
+        "maxLength": 20,
+        "default": "..."
+      }
+    },
+    "required": ["items"]
+  },
+  "defaultProps": {
+    "items": [
+      {
+        "label": "Home",
+        "href": "/",
+        "icon": "home"
+      },
+      {
+        "label": "Products",
+        "href": "/products"
+      },
+      {
+        "label": "Electronics",
+        "href": "/products/electronics"
+      },
+      {
+        "label": "Laptops"
+      }
+    ],
+    "separator": "/",
+    "maxItems": 8,
+    "expandText": "..."
+  },
+  "slots": {
+    "items": {
+      "type": "collection",
+      "itemType": "breadcrumb",
+      "minItems": 1,
+      "maxItems": 10,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "href",
+          "type": "url"
+        },
+        {
+          "name": "icon",
+          "type": "icon"
+        }
+      ]
+    }
+  },
+  "layout": {
+    "container": {
+      "paddingX": { "xs": 2, "sm": 3, "md": 4 },
+      "paddingY": { "xs": 1, "sm": 2 }
+    }
+  },
+  "styling": {
+    "breadcrumbs": {
+      "fontSize": "0.875rem"
+    },
+    "link": {
+      "color": "text.primary",
+      "textDecoration": "none",
+      "display": "flex",
+      "alignItems": "center",
+      "gap": 0.5,
+      "&:hover": {
+        "textDecoration": "underline",
+        "color": "primary.main"
+      }
+    },
+    "currentItem": {
+      "color": "text.secondary",
+      "fontWeight": 500
+    },
+    "icon": {
+      "fontSize": 20
+    },
+    "separator": {
+      "color": "text.disabled",
+      "marginX": 0.5
+    }
+  },
+  "interactions": {
+    "linkClick": {
+      "type": "navigate",
+      "description": "Navigate to breadcrumb level"
+    },
+    "expandClick": {
+      "type": "expand",
+      "description": "Show collapsed items"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "nav": "Breadcrumb navigation",
+      "link": "Navigate to {label}"
+    },
+    "semanticHTML": true,
+    "microdata": {
+      "itemscope": "itemscope",
+      "itemtype": "https://schema.org/BreadcrumbList"
+    }
+  },
+  "examples": [
+    {
+      "name": "Simple Breadcrumbs",
+      "description": "Basic breadcrumb navigation",
+      "props": {
+        "items": [
+          {
+            "label": "Home",
+            "href": "/"
+          },
+          {
+            "label": "Blog",
+            "href": "/blog"
+          },
+          {
+            "label": "Getting Started"
+          }
+        ],
+        "separator": ">"
+      }
+    },
+    {
+      "name": "E-commerce Breadcrumbs",
+      "description": "Product category breadcrumbs",
+      "props": {
+        "items": [
+          {
+            "label": "Home",
+            "href": "/",
+            "icon": "home"
+          },
+          {
+            "label": "Men's Fashion",
+            "href": "/mens"
+          },
+          {
+            "label": "Shoes",
+            "href": "/mens/shoes"
+          },
+          {
+            "label": "Running Shoes",
+            "href": "/mens/shoes/running"
+          },
+          {
+            "label": "Nike Air Zoom Pegasus"
+          }
+        ],
+        "separator": "›"
+      }
+    },
+    {
+      "name": "Deep Navigation",
+      "description": "Multi-level navigation with collapse",
+      "props": {
+        "items": [
+          {
+            "label": "Root",
+            "href": "/"
+          },
+          {
+            "label": "Level 1",
+            "href": "/level1"
+          },
+          {
+            "label": "Level 2",
+            "href": "/level1/level2"
+          },
+          {
+            "label": "Level 3",
+            "href": "/level1/level2/level3"
+          },
+          {
+            "label": "Level 4",
+            "href": "/level1/level2/level3/level4"
+          },
+          {
+            "label": "Level 5",
+            "href": "/level1/level2/level3/level4/level5"
+          },
+          {
+            "label": "Current Page"
+          }
+        ],
+        "maxItems": 4,
+        "separator": "arrow"
+      }
+    }
+  ]
+}

@@ -1,0 +1,337 @@
+{
+  "id": "dashboard-stat-cards",
+  "name": "Dashboard Statistic Cards",
+  "category": "dashboard",
+  "version": "1.0.0",
+  "description": "Metric cards displaying key performance indicators with values, trends (up/down/neutral), percentage changes, and optional sparkline charts. Perfect for dashboards and analytics.",
+  "tags": ["dashboard", "metrics", "stats", "kpi", "analytics", "trends", "charts"],
+  "previewImage": "/previews/stat-cards.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["stats"],
+    "properties": {
+      "stats": {
+        "type": "array",
+        "description": "Array of stat cards",
+        "minItems": 1,
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "required": ["id", "label", "value"],
+          "properties": {
+            "id": {"type": "string"},
+            "label": {"type": "string", "maxLength": 100},
+            "value": {"type": ["string", "number"]},
+            "unit": {"type": "string", "maxLength": 20},
+            "trend": {"type": "string", "enum": ["up", "down", "neutral"]},
+            "trendValue": {"type": "number"},
+            "trendLabel": {"type": "string", "maxLength": 50},
+            "icon": {"type": "string"},
+            "showSparkline": {"type": "boolean"},
+            "sparklineData": {
+              "type": "array",
+              "items": {"type": "number"}
+            },
+            "color": {"type": "string"}
+          }
+        }
+      },
+      "columns": {
+        "type": "object",
+        "properties": {
+          "xs": {"type": "number", "minimum": 1, "maximum": 12},
+          "sm": {"type": "number", "minimum": 1, "maximum": 12},
+          "md": {"type": "number", "minimum": 1, "maximum": 12},
+          "lg": {"type": "number", "minimum": 1, "maximum": 12}
+        }
+      },
+      "cardVariant": {
+        "type": "string",
+        "enum": ["outlined", "elevation"]
+      }
+    }
+  },
+  "defaultProps": {
+    "stats": [
+      {
+        "id": "1",
+        "label": "Total Revenue",
+        "value": "$45,231",
+        "unit": "USD",
+        "trend": "up",
+        "trendValue": 12.5,
+        "trendLabel": "vs last month",
+        "icon": "TrendingUp",
+        "showSparkline": true,
+        "sparklineData": [4000, 3000, 5000, 4500, 6000, 5500, 7000],
+        "color": "primary"
+      },
+      {
+        "id": "2",
+        "label": "Active Users",
+        "value": "2,845",
+        "trend": "up",
+        "trendValue": 8.2,
+        "trendLabel": "vs last week",
+        "icon": "People",
+        "showSparkline": true,
+        "sparklineData": [2000, 2100, 2400, 2300, 2700, 2600, 2845],
+        "color": "success"
+      },
+      {
+        "id": "3",
+        "label": "Conversion Rate",
+        "value": "3.24%",
+        "trend": "down",
+        "trendValue": -1.5,
+        "trendLabel": "vs last month",
+        "icon": "TrendingDown",
+        "showSparkline": true,
+        "sparklineData": [4.5, 4.2, 3.8, 3.5, 3.4, 3.3, 3.24],
+        "color": "error"
+      },
+      {
+        "id": "4",
+        "label": "Avg. Order Value",
+        "value": "$156.42",
+        "unit": "USD",
+        "trend": "neutral",
+        "trendValue": 0,
+        "trendLabel": "no change",
+        "icon": "AttachMoney",
+        "showSparkline": false,
+        "color": "info"
+      }
+    ],
+    "columns": {
+      "xs": 12,
+      "sm": 6,
+      "md": 6,
+      "lg": 3
+    },
+    "cardVariant": "outlined"
+  },
+  "slots": {
+    "stats": {
+      "type": "collection",
+      "label": "Statistic Cards",
+      "required": true,
+      "itemLabel": "Stat Card",
+      "fields": [
+        {"name": "id", "type": "text", "label": "Card ID", "required": true},
+        {"name": "label", "type": "text", "label": "Metric Label", "required": true},
+        {"name": "value", "type": "text", "label": "Metric Value", "required": true},
+        {"name": "unit", "type": "text", "label": "Unit (optional)", "required": false},
+        {"name": "trend", "type": "select", "label": "Trend Direction", "options": ["up", "down", "neutral"], "required": false},
+        {"name": "trendValue", "type": "number", "label": "Trend Percentage", "required": false},
+        {"name": "trendLabel", "type": "text", "label": "Trend Label", "required": false},
+        {"name": "icon", "type": "text", "label": "Icon Name", "required": false},
+        {"name": "showSparkline", "type": "boolean", "label": "Show Sparkline Chart", "required": false},
+        {"name": "sparklineData", "type": "array", "label": "Sparkline Data Points", "required": false},
+        {"name": "color", "type": "select", "label": "Color Theme", "options": ["primary", "success", "error", "warning", "info"], "required": false}
+      ]
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "xl"},
+    "grid": {
+      "spacing": 3,
+      "responsive": true
+    }
+  },
+  "styling": {
+    "card": {
+      "height": "100%",
+      "display": "flex",
+      "flexDirection": "column",
+      "p": 3
+    },
+    "cardHeader": {
+      "display": "flex",
+      "justifyContent": "space-between",
+      "alignItems": "center",
+      "mb": 2
+    },
+    "label": {
+      "variant": "body2",
+      "color": "text.secondary",
+      "fontWeight": "medium"
+    },
+    "icon": {
+      "fontSize": "small",
+      "color": "action.active"
+    },
+    "value": {
+      "variant": "h4",
+      "fontWeight": "bold",
+      "mb": 1
+    },
+    "trend": {
+      "display": "flex",
+      "alignItems": "center",
+      "gap": 0.5,
+      "mb": 1
+    },
+    "trendIcon": {
+      "fontSize": "small"
+    },
+    "trendValue": {
+      "variant": "body2",
+      "fontWeight": "medium"
+    },
+    "trendLabel": {
+      "variant": "caption",
+      "color": "text.secondary"
+    },
+    "sparkline": {
+      "height": 50,
+      "mt": 2
+    }
+  },
+  "colors": {
+    "up": {
+      "color": "success.main",
+      "background": "success.light",
+      "icon": "TrendingUp"
+    },
+    "down": {
+      "color": "error.main",
+      "background": "error.light",
+      "icon": "TrendingDown"
+    },
+    "neutral": {
+      "color": "text.secondary",
+      "background": "action.hover",
+      "icon": "Remove"
+    }
+  },
+  "interactions": {
+    "cardClick": {
+      "enabled": false,
+      "action": "navigateToDetail"
+    },
+    "cardHover": {
+      "elevation": 2
+    }
+  },
+  "accessibility": {
+    "cardRole": "article",
+    "ariaLabel": "Metric card",
+    "trendAriaLabel": "{{trend}} {{trendValue}}% {{trendLabel}}"
+  },
+  "examples": [
+    {
+      "name": "Revenue Metrics",
+      "props": {
+        "stats": [
+          {
+            "id": "1",
+            "label": "Monthly Revenue",
+            "value": "$125,000",
+            "trend": "up",
+            "trendValue": 15.3,
+            "trendLabel": "vs last month",
+            "showSparkline": true,
+            "sparklineData": [95000, 105000, 115000, 110000, 120000, 118000, 125000]
+          },
+          {
+            "id": "2",
+            "label": "Annual Revenue",
+            "value": "$1.2M",
+            "trend": "up",
+            "trendValue": 22.1,
+            "trendLabel": "vs last year",
+            "showSparkline": false
+          }
+        ],
+        "columns": {"xs": 12, "sm": 6, "md": 6, "lg": 6},
+        "cardVariant": "elevation"
+      }
+    },
+    {
+      "name": "User Analytics",
+      "props": {
+        "stats": [
+          {
+            "id": "1",
+            "label": "Page Views",
+            "value": "125,842",
+            "trend": "up",
+            "trendValue": 5.2,
+            "icon": "Visibility",
+            "showSparkline": true,
+            "sparklineData": [100000, 110000, 115000, 120000, 122000, 124000, 125842]
+          },
+          {
+            "id": "2",
+            "label": "Bounce Rate",
+            "value": "42.3%",
+            "trend": "down",
+            "trendValue": -3.1,
+            "trendLabel": "improvement",
+            "icon": "ExitToApp",
+            "showSparkline": false
+          },
+          {
+            "id": "3",
+            "label": "Session Duration",
+            "value": "3m 24s",
+            "trend": "up",
+            "trendValue": 12.4,
+            "icon": "Schedule",
+            "showSparkline": false
+          }
+        ],
+        "columns": {"xs": 12, "sm": 4, "md": 4, "lg": 4}
+      }
+    },
+    {
+      "name": "Sales Dashboard",
+      "props": {
+        "stats": [
+          {
+            "id": "1",
+            "label": "Total Sales",
+            "value": "1,234",
+            "trend": "up",
+            "trendValue": 18.2,
+            "showSparkline": true,
+            "sparklineData": [800, 900, 1000, 950, 1100, 1150, 1234],
+            "color": "primary"
+          },
+          {
+            "id": "2",
+            "label": "Pending Orders",
+            "value": "45",
+            "trend": "neutral",
+            "trendValue": 0,
+            "showSparkline": false,
+            "color": "warning"
+          },
+          {
+            "id": "3",
+            "label": "Completed",
+            "value": "1,189",
+            "trend": "up",
+            "trendValue": 20.5,
+            "showSparkline": false,
+            "color": "success"
+          },
+          {
+            "id": "4",
+            "label": "Cancelled",
+            "value": "12",
+            "trend": "down",
+            "trendValue": -5.2,
+            "trendLabel": "improvement",
+            "showSparkline": false,
+            "color": "error"
+          }
+        ],
+        "columns": {"xs": 12, "sm": 6, "md": 3, "lg": 3},
+        "cardVariant": "outlined"
+      }
+    }
+  ]
+}

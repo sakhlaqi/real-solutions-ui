@@ -1,0 +1,569 @@
+{
+  "id": "blog-cards",
+  "name": "Blog Cards Grid",
+  "category": "blog",
+  "version": "1.0.0",
+  "description": "A responsive grid of blog post cards with images, categories, titles, descriptions, authors, and metadata. Perfect for blog homepages and article listings.",
+  "tags": ["blog", "cards", "articles", "content", "grid", "posts"],
+  "previewImage": "/previews/blog-cards.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["heading", "posts"],
+    "properties": {
+      "heading": {
+        "type": "string",
+        "description": "Main section heading",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "subheading": {
+        "type": "string",
+        "description": "Optional subheading text",
+        "maxLength": 200
+      },
+      "posts": {
+        "type": "array",
+        "description": "Array of blog post cards",
+        "minItems": 1,
+        "maxItems": 12,
+        "items": {
+          "type": "object",
+          "required": ["id", "title", "description", "image", "category"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique post identifier"
+            },
+            "title": {
+              "type": "string",
+              "description": "Post title",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "description": {
+              "type": "string",
+              "description": "Post excerpt or summary",
+              "maxLength": 500
+            },
+            "image": {
+              "type": "string",
+              "description": "Featured image URL",
+              "format": "uri"
+            },
+            "category": {
+              "type": "string",
+              "description": "Post category/tag"
+            },
+            "authors": {
+              "type": "array",
+              "description": "Post authors",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              }
+            },
+            "date": {
+              "type": "string",
+              "description": "Publication date",
+              "format": "date"
+            },
+            "readTime": {
+              "type": "string",
+              "description": "Estimated read time (e.g., '5 min read')"
+            },
+            "url": {
+              "type": "string",
+              "description": "Post URL",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "columns": {
+        "type": "object",
+        "description": "Grid column configuration per breakpoint",
+        "properties": {
+          "xs": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 12
+          },
+          "sm": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 12
+          },
+          "md": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 12
+          },
+          "lg": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 12
+          }
+        }
+      },
+      "cardVariant": {
+        "type": "string",
+        "enum": ["outlined", "elevation", "filled"],
+        "description": "Card visual style"
+      },
+      "showAuthor": {
+        "type": "boolean",
+        "description": "Display author information"
+      },
+      "showDate": {
+        "type": "boolean",
+        "description": "Display publication date"
+      },
+      "showReadTime": {
+        "type": "boolean",
+        "description": "Display read time estimate"
+      }
+    }
+  },
+  "defaultProps": {
+    "heading": "Latest Articles",
+    "subheading": "Stay in the loop with the latest about our products",
+    "posts": [
+      {
+        "id": "post-1",
+        "title": "Revolutionizing software development with cutting-edge tools",
+        "description": "Our latest engineering tools are designed to streamline workflows and boost productivity. Discover how these innovations are transforming the software development landscape.",
+        "image": "https://picsum.photos/800/450?random=1",
+        "category": "Engineering",
+        "authors": [
+          {
+            "name": "Remy Sharp",
+            "avatar": "/avatars/remy-sharp.jpg"
+          },
+          {
+            "name": "Travis Howard",
+            "avatar": "/avatars/travis-howard.jpg"
+          }
+        ],
+        "date": "2024-07-14",
+        "readTime": "5 min read",
+        "url": "/blog/revolutionizing-software-development"
+      },
+      {
+        "id": "post-2",
+        "title": "Innovative product features that drive success",
+        "description": "Explore the key features of our latest product release that are helping businesses achieve their goals. From user-friendly interfaces to robust functionality.",
+        "image": "https://picsum.photos/800/450?random=2",
+        "category": "Product",
+        "authors": [
+          {
+            "name": "Erica Johns",
+            "avatar": "/avatars/erica-johns.jpg"
+          }
+        ],
+        "date": "2024-07-12",
+        "readTime": "7 min read",
+        "url": "/blog/innovative-product-features"
+      },
+      {
+        "id": "post-3",
+        "title": "Designing for the future: trends and insights",
+        "description": "Stay ahead of the curve with the latest design trends and insights. Our design team shares their expertise on creating intuitive and visually stunning user experiences.",
+        "image": "https://picsum.photos/800/450?random=3",
+        "category": "Design",
+        "authors": [
+          {
+            "name": "Kate Morrison",
+            "avatar": "/avatars/kate-morrison.jpg"
+          }
+        ],
+        "date": "2024-07-10",
+        "readTime": "6 min read",
+        "url": "/blog/designing-for-the-future"
+      },
+      {
+        "id": "post-4",
+        "title": "Our company's journey: milestones and achievements",
+        "description": "Take a look at our company's journey and the milestones we've achieved along the way. From humble beginnings to industry leader.",
+        "image": "https://picsum.photos/800/450?random=4",
+        "category": "Company",
+        "authors": [
+          {
+            "name": "Cindy Baker",
+            "avatar": "/avatars/cindy-baker.jpg"
+          }
+        ],
+        "date": "2024-07-08",
+        "readTime": "8 min read",
+        "url": "/blog/company-journey"
+      },
+      {
+        "id": "post-5",
+        "title": "Pioneering sustainable engineering solutions",
+        "description": "Learn about our commitment to sustainability and the innovative engineering solutions we're implementing to create a greener future.",
+        "image": "https://picsum.photos/800/450?random=5",
+        "category": "Engineering",
+        "authors": [
+          {
+            "name": "Agnes Walker",
+            "avatar": "/avatars/agnes-walker.jpg"
+          },
+          {
+            "name": "Trevor Henderson",
+            "avatar": "/avatars/trevor-henderson.jpg"
+          }
+        ],
+        "date": "2024-07-05",
+        "readTime": "10 min read",
+        "url": "/blog/sustainable-engineering"
+      },
+      {
+        "id": "post-6",
+        "title": "Maximizing efficiency with our latest product updates",
+        "description": "Our recent product updates are designed to help you maximize efficiency and achieve more. Get a detailed overview of the new features and improvements.",
+        "image": "https://picsum.photos/800/450?random=6",
+        "category": "Product",
+        "authors": [
+          {
+            "name": "Travis Howard",
+            "avatar": "/avatars/travis-howard.jpg"
+          }
+        ],
+        "date": "2024-07-03",
+        "readTime": "5 min read",
+        "url": "/blog/maximizing-efficiency"
+      }
+    ],
+    "columns": {
+      "xs": 12,
+      "sm": 6,
+      "md": 4,
+      "lg": 4
+    },
+    "cardVariant": "outlined",
+    "showAuthor": true,
+    "showDate": true,
+    "showReadTime": true
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "label": "Section Heading",
+      "required": true,
+      "maxLength": 100
+    },
+    "subheading": {
+      "type": "text",
+      "label": "Section Subheading",
+      "required": false,
+      "maxLength": 200
+    },
+    "posts": {
+      "type": "collection",
+      "label": "Blog Posts",
+      "required": true,
+      "itemLabel": "Post",
+      "minItems": 1,
+      "maxItems": 12,
+      "fields": [
+        {
+          "name": "title",
+          "type": "text",
+          "label": "Post Title",
+          "required": true,
+          "maxLength": 200
+        },
+        {
+          "name": "description",
+          "type": "textarea",
+          "label": "Post Description",
+          "required": true,
+          "maxLength": 500
+        },
+        {
+          "name": "image",
+          "type": "image",
+          "label": "Featured Image",
+          "required": true
+        },
+        {
+          "name": "category",
+          "type": "text",
+          "label": "Category",
+          "required": true
+        },
+        {
+          "name": "authors",
+          "type": "collection",
+          "label": "Authors",
+          "itemLabel": "Author",
+          "fields": [
+            {
+              "name": "name",
+              "type": "text",
+              "label": "Author Name"
+            },
+            {
+              "name": "avatar",
+              "type": "image",
+              "label": "Author Avatar"
+            }
+          ]
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "label": "Publication Date"
+        },
+        {
+          "name": "readTime",
+          "type": "text",
+          "label": "Read Time"
+        },
+        {
+          "name": "url",
+          "type": "url",
+          "label": "Post URL",
+          "required": true
+        }
+      ]
+    }
+  },
+  "layout": {
+    "container": {
+      "maxWidth": "lg",
+      "spacing": 4
+    },
+    "grid": {
+      "spacing": 2,
+      "columns": 12
+    },
+    "responsive": {
+      "xs": {
+        "columns": 12,
+        "spacing": 2
+      },
+      "sm": {
+        "columns": 6,
+        "spacing": 2
+      },
+      "md": {
+        "columns": 4,
+        "spacing": 3
+      },
+      "lg": {
+        "columns": 4,
+        "spacing": 3
+      }
+    }
+  },
+  "styling": {
+    "heading": {
+      "variant": "h1",
+      "gutterBottom": true
+    },
+    "subheading": {
+      "variant": "body1",
+      "color": "text.secondary"
+    },
+    "card": {
+      "height": "100%",
+      "display": "flex",
+      "flexDirection": "column"
+    },
+    "cardMedia": {
+      "aspectRatio": "16/9",
+      "borderBottom": "1px solid",
+      "borderColor": "divider"
+    },
+    "cardContent": {
+      "flexGrow": 1,
+      "padding": 2
+    },
+    "category": {
+      "variant": "caption",
+      "component": "div",
+      "gutterBottom": true
+    },
+    "title": {
+      "variant": "h6",
+      "component": "div",
+      "gutterBottom": true
+    },
+    "description": {
+      "variant": "body2",
+      "color": "text.secondary",
+      "gutterBottom": true,
+      "overflow": "hidden",
+      "textOverflow": "ellipsis",
+      "display": "-webkit-box",
+      "WebkitLineClamp": 3,
+      "WebkitBoxOrient": "vertical"
+    },
+    "author": {
+      "display": "flex",
+      "alignItems": "center",
+      "gap": 1,
+      "padding": "16px"
+    },
+    "avatarGroup": {
+      "max": 3
+    },
+    "avatar": {
+      "width": 24,
+      "height": 24
+    },
+    "metadata": {
+      "variant": "caption",
+      "color": "text.secondary"
+    }
+  },
+  "interactions": {
+    "cardHover": {
+      "enabled": true,
+      "effect": "elevation",
+      "transition": "all 0.3s ease"
+    },
+    "cardClick": {
+      "enabled": true,
+      "action": "navigate",
+      "target": "url"
+    },
+    "imageHover": {
+      "enabled": true,
+      "effect": "scale",
+      "scale": 1.05,
+      "transition": "transform 0.3s ease"
+    }
+  },
+  "accessibility": {
+    "cardRole": "article",
+    "headingLevel": "h2",
+    "imageAlt": "required",
+    "linkAriaLabel": "Read full article: {title}"
+  },
+  "examples": [
+    {
+      "name": "Tech Blog",
+      "description": "Technology blog with engineering and product articles",
+      "props": {
+        "heading": "Tech Insights",
+        "subheading": "Explore the latest in technology and innovation",
+        "posts": [
+          {
+            "id": "tech-1",
+            "title": "The Future of AI in Software Development",
+            "description": "Artificial intelligence is revolutionizing software engineering. Explore how AI-driven tools are enhancing development processes and improving software quality.",
+            "image": "https://picsum.photos/800/450?random=10",
+            "category": "AI",
+            "authors": [
+              {
+                "name": "Dr. Sarah Chen",
+                "avatar": "/avatars/sarah-chen.jpg"
+              }
+            ],
+            "date": "2024-07-20",
+            "readTime": "12 min read",
+            "url": "/blog/future-of-ai"
+          },
+          {
+            "id": "tech-2",
+            "title": "Building Scalable Microservices",
+            "description": "Learn best practices for designing and deploying microservices architectures that scale with your business needs.",
+            "image": "https://picsum.photos/800/450?random=11",
+            "category": "Architecture",
+            "authors": [
+              {
+                "name": "Mike Johnson",
+                "avatar": "/avatars/mike-johnson.jpg"
+              }
+            ],
+            "date": "2024-07-18",
+            "readTime": "15 min read",
+            "url": "/blog/scalable-microservices"
+          },
+          {
+            "id": "tech-3",
+            "title": "Modern Frontend Development with React",
+            "description": "Dive into the latest React patterns and best practices for building performant, maintainable web applications.",
+            "image": "https://picsum.photos/800/450?random=12",
+            "category": "Frontend",
+            "authors": [
+              {
+                "name": "Emily Rodriguez",
+                "avatar": "/avatars/emily-rodriguez.jpg"
+              }
+            ],
+            "date": "2024-07-15",
+            "readTime": "10 min read",
+            "url": "/blog/modern-react"
+          }
+        ],
+        "cardVariant": "elevation",
+        "showAuthor": true,
+        "showDate": true,
+        "showReadTime": true
+      }
+    },
+    {
+      "name": "Company News",
+      "description": "Corporate blog with company updates and announcements",
+      "props": {
+        "heading": "Company News",
+        "subheading": "Latest updates from our team",
+        "posts": [
+          {
+            "id": "news-1",
+            "title": "Q3 2024 Product Roadmap",
+            "description": "Discover what's coming next in our product lineup. We're excited to share our vision for the upcoming quarter.",
+            "image": "https://picsum.photos/800/450?random=20",
+            "category": "Announcements",
+            "authors": [
+              {
+                "name": "Product Team",
+                "avatar": "/avatars/product-team.jpg"
+              }
+            ],
+            "date": "2024-07-01",
+            "readTime": "6 min read",
+            "url": "/blog/q3-roadmap"
+          },
+          {
+            "id": "news-2",
+            "title": "We're Hiring: Join Our Team",
+            "description": "Looking for talented individuals to join our growing team. See our open positions and what makes our company a great place to work.",
+            "image": "https://picsum.photos/800/450?random=21",
+            "category": "Careers",
+            "authors": [
+              {
+                "name": "HR Team",
+                "avatar": "/avatars/hr-team.jpg"
+              }
+            ],
+            "date": "2024-06-28",
+            "readTime": "4 min read",
+            "url": "/blog/hiring"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "cardVariant": "outlined",
+        "showAuthor": true,
+        "showDate": true,
+        "showReadTime": false
+      }
+    }
+  ]
+}

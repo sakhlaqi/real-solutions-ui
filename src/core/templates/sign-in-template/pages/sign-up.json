@@ -1,0 +1,65 @@
+{
+  "id": "sign-up",
+  "title": "Sign Up",
+  "description": "Create your account",
+  "layout": {
+    "type": "blank-page-layout"
+  },
+  "sections": [
+    {
+      "type": "auth-sign-up-form",
+      "props": {
+        "title": "Create an account",
+        "subtitle": "Join us today and get started.",
+        "fields": [
+          {
+            "name": "name",
+            "type": "text",
+            "label": "Full Name",
+            "placeholder": "John Doe",
+            "required": true
+          },
+          {
+            "name": "email",
+            "type": "email",
+            "label": "Email",
+            "placeholder": "name@example.com",
+            "required": true
+          },
+          {
+            "name": "password",
+            "type": "password",
+            "label": "Password",
+            "placeholder": "Create a password",
+            "required": true,
+            "minLength": 8
+          },
+          {
+            "name": "confirmPassword",
+            "type": "password",
+            "label": "Confirm Password",
+            "placeholder": "Confirm your password",
+            "required": true
+          }
+        ],
+        "terms": {
+          "text": "I agree to the",
+          "links": [
+            { "text": "Terms of Service", "href": "/terms" },
+            { "text": "Privacy Policy", "href": "/privacy" }
+          ]
+        },
+        "submitButton": "Create account",
+        "socialLogins": [
+          { "provider": "google", "label": "Continue with Google" },
+          { "provider": "github", "label": "Continue with GitHub" }
+        ],
+        "signInLink": {
+          "text": "Already have an account?",
+          "linkText": "Sign in",
+          "href": "/sign-in"
+        }
+      }
+    }
+  ]
+}

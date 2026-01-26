@@ -1,0 +1,55 @@
+{
+  "structure": {
+    "header": {
+      "logo": {
+        "text": "The Blog",
+        "href": "/"
+      },
+      "links": [
+        { "label": "Home", "href": "/" },
+        { "label": "About", "href": "/about" },
+        { "label": "Categories", "href": "/categories" },
+        { "label": "Contact", "href": "/contact" }
+      ],
+      "actions": [
+        {
+          "label": "Subscribe",
+          "href": "/subscribe",
+          "variant": "contained"
+        }
+      ]
+    },
+    "footer": {
+      "columns": [
+        {
+          "title": "Blog",
+          "links": [
+            { "label": "Latest Posts", "href": "/latest" },
+            { "label": "Popular", "href": "/popular" },
+            { "label": "Categories", "href": "/categories" },
+            { "label": "Archive", "href": "/archive" }
+          ]
+        },
+        {
+          "title": "About",
+          "links": [
+            { "label": "About Us", "href": "/about" },
+            { "label": "Authors", "href": "/authors" },
+            { "label": "Contact", "href": "/contact" },
+            { "label": "Privacy", "href": "/privacy" }
+          ]
+        },
+        {
+          "title": "Follow",
+          "links": [
+            { "label": "Twitter", "href": "https://twitter.com" },
+            { "label": "Facebook", "href": "https://facebook.com" },
+            { "label": "Instagram", "href": "https://instagram.com" },
+            { "label": "RSS Feed", "href": "/feed.xml" }
+          ]
+        }
+      ],
+      "copyright": "© 2026 The Blog. All rights reserved."
+    }
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "id": "navigation-app-bar",
+  "name": "Application Navigation Bar",
+  "category": "navigation",
+  "version": "1.0.0",
+  "description": "Top navigation bar with logo, menu items, and CTAs",
+  "tags": ["navigation", "header", "menu", "appbar"],
+  "previewImage": "/previews/navigation-app-bar.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "logo": {
+        "type": "object",
+        "properties": {
+          "src": {
+            "type": "string",
+            "description": "Logo image URL"
+          },
+          "alt": {
+            "type": "string"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "href": {
+            "type": "string",
+            "description": "Logo link (usually homepage)"
+          }
+        },
+        "required": ["src", "alt"]
+      },
+      "menuItems": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "href": {
+              "type": "string"
+            },
+            "submenu": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string" },
+                  "href": { "type": "string" },
+                  "description": { "type": "string" }
+                }
+              },
+              "description": "Optional dropdown submenu"
+            }
+          },
+          "required": ["label", "href"]
+        },
+        "minItems": 2,
+        "maxItems": 8
+      },
+      "ctaButtons": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "href": {
+              "type": "string"
+            },
+            "variant": {
+              "type": "string",
+              "enum": ["text", "outlined", "contained"]
+            },
+            "color": {
+              "type": "string",
+              "enum": ["primary", "secondary", "info"]
+            }
+          },
+          "required": ["text", "href"]
+        },
+        "maxItems": 2
+      },
+      "position": {
+        "type": "string",
+        "enum": ["fixed", "sticky", "static"],
+        "description": "Navigation positioning"
+      },
+      "transparent": {
+        "type": "boolean",
+        "description": "Transparent background on scroll top"
+      },
+      "elevation": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 24,
+        "description": "Shadow elevation"
+      }
+    },
+    "required": ["logo", "menuItems"]
+  },
+  "defaultProps": {
+    "logo": {
+      "src": "/logo.svg",
+      "alt": "Company Logo",
+      "width": 120,
+      "height": 40,
+      "href": "/"
+    },
+    "menuItems": [
+      {
+        "label": "Features",
+        "href": "#features"
+      },
+      {
+        "label": "Testimonials",
+        "href": "#testimonials"
+      },
+      {
+        "label": "Highlights",
+        "href": "#highlights"
+      },
+      {
+        "label": "Pricing",
+        "href": "#pricing"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      }
+    ],
+    "ctaButtons": [
+      {
+        "text": "Sign in",
+        "href": "/signin",
+        "variant": "text",
+        "color": "primary"
+      },
+      {
+        "text": "Sign up",
+        "href": "/signup",
+        "variant": "contained",
+        "color": "primary"
+      }
+    ],
+    "position": "fixed",
+    "transparent": true,
+    "elevation": 0
+  },
+  "slots": {
+    "logo": {
+      "type": "media",
+      "editable": true
+    },
+    "menuItems": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "label": { "type": "text", "maxLength": 30 },
+        "href": { "type": "text" },
+        "submenu": {
+          "type": "array",
+          "optional": true,
+          "items": {
+            "label": { "type": "text", "maxLength": 50 },
+            "href": { "type": "text" },
+            "description": { "type": "text", "maxLength": 100, "optional": true }
+          }
+        }
+      }
+    },
+    "ctaButtons": {
+      "type": "array",
+      "editable": true,
+      "optional": true
+    }
+  },
+  "layout": {
+    "container": "full",
+    "maxWidth": "lg",
+    "height": 64,
+    "spacing": {
+      "px": { "xs": 2, "sm": 3 }
+    }
+  },
+  "styling": {
+    "backdropFilter": "blur(10px)",
+    "backgroundColor": "rgba(255, 255, 255, 0.8)",
+    "transition": "all 0.3s ease",
+    "zIndex": 1100
+  },
+  "responsive": {
+    "mobileBreakpoint": "md",
+    "mobileMenu": "drawer",
+    "drawerPosition": "top"
+  },
+  "examples": [
+    {
+      "name": "SaaS Product Navigation",
+      "props": {
+        "logo": {
+          "src": "/brand/logo.svg",
+          "alt": "Product",
+          "width": 140,
+          "height": 45,
+          "href": "/"
+        },
+        "menuItems": [
+          {
+            "label": "Product",
+            "href": "#",
+            "submenu": [
+              {
+                "label": "Features",
+                "href": "/features",
+                "description": "Explore our powerful features"
+              },
+              {
+                "label": "Integrations",
+                "href": "/integrations",
+                "description": "Connect with 100+ tools"
+              },
+              {
+                "label": "Security",
+                "href": "/security",
+                "description": "Enterprise-grade security"
+              }
+            ]
+          },
+          {
+            "label": "Solutions",
+            "href": "#",
+            "submenu": [
+              {
+                "label": "For Startups",
+                "href": "/startups"
+              },
+              {
+                "label": "For Enterprise",
+                "href": "/enterprise"
+              },
+              {
+                "label": "For Agencies",
+                "href": "/agencies"
+              }
+            ]
+          },
+          {
+            "label": "Pricing",
+            "href": "/pricing"
+          },
+          {
+            "label": "Resources",
+            "href": "#",
+            "submenu": [
+              {
+                "label": "Documentation",
+                "href": "/docs"
+              },
+              {
+                "label": "Blog",
+                "href": "/blog"
+              },
+              {
+                "label": "Community",
+                "href": "/community"
+              }
+            ]
+          }
+        ],
+        "ctaButtons": [
+          {
+            "text": "Login",
+            "href": "/login",
+            "variant": "text",
+            "color": "primary"
+          },
+          {
+            "text": "Start Free Trial",
+            "href": "/signup",
+            "variant": "contained",
+            "color": "primary"
+          }
+        ],
+        "position": "fixed",
+        "transparent": true,
+        "elevation": 0
+      }
+    },
+    {
+      "name": "Simple Navigation",
+      "props": {
+        "logo": {
+          "src": "/logo-simple.svg",
+          "alt": "Brand",
+          "width": 100,
+          "height": 32,
+          "href": "/"
+        },
+        "menuItems": [
+          {
+            "label": "About",
+            "href": "/about"
+          },
+          {
+            "label": "Services",
+            "href": "/services"
+          },
+          {
+            "label": "Portfolio",
+            "href": "/portfolio"
+          },
+          {
+            "label": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "ctaButtons": [
+          {
+            "text": "Get Started",
+            "href": "/start",
+            "variant": "contained",
+            "color": "primary"
+          }
+        ],
+        "position": "sticky",
+        "transparent": false,
+        "elevation": 2
+      }
+    }
+  ]
+}

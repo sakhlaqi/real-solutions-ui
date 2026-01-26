@@ -1,0 +1,230 @@
+{
+  "id": "cta-split",
+  "name": "Split CTA Section",
+  "category": "cta",
+  "version": "1.0.0",
+  "description": "Two-column layout with content on left and form/image on right",
+  "tags": ["cta", "split", "two-column"],
+  "previewImage": "/previews/cta-split.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string"
+      },
+      "subheading": {
+        "type": "string"
+      },
+      "benefits": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "icon": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": ["text"]
+        },
+        "description": "List of benefits/features"
+      },
+      "rightContent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["form", "image", "stats"]
+          },
+          "formFields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "type": { "type": "string" },
+                "placeholder": { "type": "string" },
+                "required": { "type": "boolean" }
+              }
+            },
+            "description": "Form configuration if type is 'form'"
+          },
+          "submitText": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "Image URL if type is 'image'"
+          }
+        },
+        "required": ["type"]
+      }
+    },
+    "required": ["heading", "rightContent"]
+  },
+  "defaultProps": {
+    "heading": "Transform your business today",
+    "subheading": "Join thousands of companies already using our platform to accelerate growth and improve efficiency.",
+    "benefits": [
+      {
+        "icon": "CheckCircle",
+        "text": "14-day free trial, no credit card required"
+      },
+      {
+        "icon": "CheckCircle",
+        "text": "Setup in minutes, not hours"
+      },
+      {
+        "icon": "CheckCircle",
+        "text": "Cancel anytime, no questions asked"
+      }
+    ],
+    "rightContent": {
+      "type": "form",
+      "formFields": [
+        {
+          "name": "fullName",
+          "type": "text",
+          "placeholder": "Full name",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "email",
+          "placeholder": "Work email",
+          "required": true
+        },
+        {
+          "name": "company",
+          "type": "text",
+          "placeholder": "Company name",
+          "required": false
+        }
+      ],
+      "submitText": "Get Started Free"
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 300,
+      "optional": true
+    },
+    "benefits": {
+      "type": "array",
+      "editable": true,
+      "optional": true
+    },
+    "rightContent": {
+      "type": "dynamic",
+      "editable": true
+    }
+  },
+  "layout": {
+    "container": "full",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 8, "sm": 16 }
+    },
+    "columns": {
+      "left": { "xs": 12, "md": 6 },
+      "right": { "xs": 12, "md": 6 }
+    },
+    "gap": 4
+  },
+  "styling": {
+    "alignItems": "center",
+    "backgroundColor": "background.paper"
+  },
+  "examples": [
+    {
+      "name": "Demo Request",
+      "props": {
+        "heading": "See it in action",
+        "subheading": "Schedule a personalized demo with our team and discover how our platform can solve your biggest challenges.",
+        "benefits": [
+          {
+            "icon": "Groups",
+            "text": "Personalized 1-on-1 walkthrough"
+          },
+          {
+            "icon": "Timer",
+            "text": "30-minute session"
+          },
+          {
+            "icon": "Support",
+            "text": "Expert guidance and Q&A"
+          }
+        ],
+        "rightContent": {
+          "type": "form",
+          "formFields": [
+            {
+              "name": "name",
+              "type": "text",
+              "placeholder": "Your name",
+              "required": true
+            },
+            {
+              "name": "email",
+              "type": "email",
+              "placeholder": "Work email",
+              "required": true
+            },
+            {
+              "name": "phone",
+              "type": "tel",
+              "placeholder": "Phone number",
+              "required": false
+            },
+            {
+              "name": "companySize",
+              "type": "select",
+              "placeholder": "Company size",
+              "required": true,
+              "options": ["1-10", "11-50", "51-200", "201-1000", "1000+"]
+            }
+          ],
+          "submitText": "Request Demo"
+        }
+      }
+    },
+    {
+      "name": "Product Showcase",
+      "props": {
+        "heading": "Powerful features for modern teams",
+        "subheading": "Everything you need to collaborate, manage projects, and deliver results—all in one place.",
+        "benefits": [
+          {
+            "icon": "Speed",
+            "text": "10x faster than spreadsheets"
+          },
+          {
+            "icon": "Security",
+            "text": "Bank-level security & encryption"
+          },
+          {
+            "icon": "CloudDone",
+            "text": "Automatic backups & version history"
+          },
+          {
+            "icon": "Devices",
+            "text": "Works on all devices"
+          }
+        ],
+        "rightContent": {
+          "type": "image",
+          "imageUrl": "/products/dashboard-showcase.png"
+        }
+      }
+    }
+  ]
+}

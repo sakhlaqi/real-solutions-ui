@@ -1,0 +1,151 @@
+{
+  "id": "features-grid",
+  "name": "Features Grid",
+  "category": "features",
+  "version": "1.0.0",
+  "description": "Grid layout showcasing features with icons and descriptions",
+  "tags": ["grid", "icons", "highlights"],
+  "previewImage": "/previews/features-grid.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "description": "Section heading"
+      },
+      "subheading": {
+        "type": "string",
+        "description": "Section subheading"
+      },
+      "features": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "icon": {
+              "type": "string",
+              "description": "Material icon name or custom icon URL"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": ["icon", "title", "description"]
+        },
+        "minItems": 3,
+        "maxItems": 12
+      },
+      "columns": {
+        "type": "object",
+        "properties": {
+          "xs": { "type": "number", "minimum": 1, "maximum": 12 },
+          "sm": { "type": "number", "minimum": 1, "maximum": 12 },
+          "md": { "type": "number", "minimum": 1, "maximum": 12 }
+        }
+      }
+    },
+    "required": ["heading", "features"]
+  },
+  "defaultProps": {
+    "heading": "Highlights",
+    "subheading": "Discover why thousands of customers choose our product",
+    "features": [
+      {
+        "icon": "SettingsSuggest",
+        "title": "Adaptable performance",
+        "description": "Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks."
+      },
+      {
+        "icon": "Construction",
+        "title": "Built to last",
+        "description": "Experience unmatched durability that goes above and beyond with lasting investment."
+      },
+      {
+        "icon": "ThumbUpAlt",
+        "title": "Great user experience",
+        "description": "Integrate our product into your routine with an intuitive and easy-to-use interface."
+      },
+      {
+        "icon": "AutoFixHigh",
+        "title": "Innovative functionality",
+        "description": "Stay ahead with features that set new standards, addressing your evolving needs better than the rest."
+      },
+      {
+        "icon": "SupportAgent",
+        "title": "Reliable support",
+        "description": "Count on our responsive customer support, offering assistance that goes beyond the purchase."
+      },
+      {
+        "icon": "QueryStats",
+        "title": "Precision in every detail",
+        "description": "Enjoy a meticulously crafted product where small touches make a significant impact on your overall experience."
+      }
+    ],
+    "columns": {
+      "xs": 12,
+      "sm": 6,
+      "md": 4
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "optional": true
+    },
+    "features": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "icon": { "type": "icon" },
+        "title": { "type": "text", "maxLength": 50 },
+        "description": { "type": "text", "maxLength": 200 }
+      }
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 8, "sm": 16 }
+    }
+  },
+  "examples": [
+    {
+      "name": "SaaS Features (4 columns)",
+      "props": {
+        "heading": "Why Choose Our Platform",
+        "features": [
+          {
+            "icon": "Cloud",
+            "title": "Cloud-Based",
+            "description": "Access your data anywhere, anytime with our secure cloud infrastructure."
+          },
+          {
+            "icon": "Speed",
+            "title": "Lightning Fast",
+            "description": "Experience blazing-fast performance that scales with your business."
+          },
+          {
+            "icon": "Security",
+            "title": "Enterprise Security",
+            "description": "Bank-level encryption and compliance with industry standards."
+          },
+          {
+            "icon": "Sync",
+            "title": "Real-Time Sync",
+            "description": "Changes sync instantly across all your devices and team members."
+          }
+        ],
+        "columns": { "xs": 12, "sm": 6, "md": 3 }
+      }
+    }
+  ]
+}

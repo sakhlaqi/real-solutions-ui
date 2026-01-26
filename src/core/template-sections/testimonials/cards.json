@@ -1,0 +1,260 @@
+{
+  "id": "testimonials-cards",
+  "name": "Testimonial Cards",
+  "category": "testimonials",
+  "version": "1.0.0",
+  "description": "Grid of customer testimonial cards with avatars and ratings",
+  "tags": ["testimonials", "cards", "reviews"],
+  "previewImage": "/previews/testimonials-cards.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string"
+      },
+      "subheading": {
+        "type": "string"
+      },
+      "testimonials": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string",
+              "description": "Customer name"
+            },
+            "role": {
+              "type": "string",
+              "description": "Job title or role"
+            },
+            "company": {
+              "type": "string",
+              "description": "Company name"
+            },
+            "avatar": {
+              "type": "string",
+              "description": "Avatar image URL"
+            },
+            "rating": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "Star rating (1-5)"
+            },
+            "quote": {
+              "type": "string",
+              "description": "Testimonial text"
+            },
+            "logo": {
+              "type": "string",
+              "description": "Optional company logo URL"
+            }
+          },
+          "required": ["id", "name", "quote"]
+        },
+        "minItems": 3,
+        "maxItems": 12
+      },
+      "columns": {
+        "type": "object",
+        "properties": {
+          "xs": { "type": "number" },
+          "sm": { "type": "number" },
+          "md": { "type": "number" }
+        }
+      },
+      "displayRatings": {
+        "type": "boolean",
+        "description": "Whether to show star ratings"
+      }
+    },
+    "required": ["heading", "testimonials"]
+  },
+  "defaultProps": {
+    "heading": "Testimonials",
+    "subheading": "See what our customers love about our product. Discover how we excel in efficiency, durability, and satisfaction. Join us for quality, innovation, and reliable support.",
+    "testimonials": [
+      {
+        "id": "1",
+        "name": "Remy Sharp",
+        "role": "Senior Engineer",
+        "company": "Tech Corp",
+        "avatar": "/avatars/remy-sharp.jpg",
+        "rating": 5,
+        "quote": "I absolutely love how versatile this product is! Whether I'm tackling work projects or indulging in my favorite hobbies, it seamlessly adapts to my changing needs. Its intuitive design has truly enhanced my daily routine, making tasks more efficient and enjoyable."
+      },
+      {
+        "id": "2",
+        "name": "Travis Howard",
+        "role": "Lead Product Designer",
+        "company": "Design Studio",
+        "avatar": "/avatars/travis-howard.jpg",
+        "rating": 5,
+        "quote": "One of the standout features of this product is the exceptional customer support. In my experience, the team behind this product has been quick to respond and incredibly helpful. It's reassuring to know that they stand firmly behind their product."
+      },
+      {
+        "id": "3",
+        "name": "Cindy Baker",
+        "role": "CTO",
+        "company": "StartupXYZ",
+        "avatar": "/avatars/cindy-baker.jpg",
+        "rating": 5,
+        "quote": "The level of simplicity and user-friendliness in this product has significantly simplified my workflow. It's a perfect blend of innovation and practicality, allowing me to focus on what matters most without unnecessary complexity."
+      },
+      {
+        "id": "4",
+        "name": "Julia Stewart",
+        "role": "Marketing Manager",
+        "company": "Growth Co",
+        "avatar": "/avatars/julia-stewart.jpg",
+        "rating": 5,
+        "quote": "I appreciate the attention to detail in the design of this product. The small touches make a big difference, and it's evident that the creators focused on delivering a premium experience."
+      },
+      {
+        "id": "5",
+        "name": "John Smith",
+        "role": "Product Manager",
+        "company": "Innovation Inc",
+        "avatar": "/avatars/john-smith.jpg",
+        "rating": 5,
+        "quote": "I've tried other similar products, but this one stands out for its innovative features. It's clear that the makers put a lot of thought into creating a solution that truly addresses user needs."
+      },
+      {
+        "id": "6",
+        "name": "Daniel Wolf",
+        "role": "Software Engineer",
+        "company": "Dev Solutions",
+        "avatar": "/avatars/daniel-wolf.jpg",
+        "rating": 5,
+        "quote": "The quality of this product exceeded my expectations. It's durable, well-designed, and built to last. Definitely worth the investment!"
+      }
+    ],
+    "columns": {
+      "xs": 12,
+      "sm": 6,
+      "md": 4
+    },
+    "displayRatings": true
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true
+    },
+    "subheading": {
+      "type": "text",
+      "editable": true,
+      "optional": true
+    },
+    "testimonials": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "name": { "type": "text", "maxLength": 50 },
+        "role": { "type": "text", "maxLength": 50, "optional": true },
+        "company": { "type": "text", "maxLength": 50, "optional": true },
+        "avatar": { "type": "media", "optional": true },
+        "rating": { "type": "number", "min": 1, "max": 5, "optional": true },
+        "quote": { "type": "text", "maxLength": 500 },
+        "logo": { "type": "media", "optional": true }
+      }
+    },
+    "displayRatings": {
+      "type": "boolean",
+      "editable": true
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 8, "sm": 16 }
+    }
+  },
+  "styling": {
+    "cardElevation": 2,
+    "avatarSize": 56,
+    "starColor": "warning.main"
+  },
+  "examples": [
+    {
+      "name": "SaaS Reviews (3 cols)",
+      "props": {
+        "heading": "Trusted by thousands",
+        "subheading": "Don't just take our word for it—see what our customers have to say.",
+        "testimonials": [
+          {
+            "id": "t1",
+            "name": "Sarah Chen",
+            "role": "VP of Operations",
+            "company": "Acme Corp",
+            "avatar": "/testimonials/sarah.jpg",
+            "logo": "/logos/acme.svg",
+            "rating": 5,
+            "quote": "This platform transformed how our team collaborates. We've seen a 40% increase in productivity since switching."
+          },
+          {
+            "id": "t2",
+            "name": "Michael Rodriguez",
+            "role": "Founder & CEO",
+            "company": "TechStart",
+            "avatar": "/testimonials/michael.jpg",
+            "logo": "/logos/techstart.svg",
+            "rating": 5,
+            "quote": "The ROI was immediate. We recovered our investment within the first month and haven't looked back since."
+          },
+          {
+            "id": "t3",
+            "name": "Emily Watson",
+            "role": "Head of Product",
+            "company": "Innovation Labs",
+            "avatar": "/testimonials/emily.jpg",
+            "logo": "/logos/innovation-labs.svg",
+            "rating": 5,
+            "quote": "Best decision we made this year. The support team is incredibly responsive and the features keep getting better."
+          }
+        ],
+        "columns": { "xs": 12, "md": 4 },
+        "displayRatings": true
+      }
+    },
+    {
+      "name": "Compact Reviews (2 cols)",
+      "props": {
+        "heading": "What our users say",
+        "testimonials": [
+          {
+            "id": "r1",
+            "name": "Alex Thompson",
+            "role": "Designer",
+            "quote": "Intuitive interface, powerful features. Exactly what I needed!"
+          },
+          {
+            "id": "r2",
+            "name": "Jamie Lee",
+            "role": "Developer",
+            "quote": "Fast, reliable, and easy to integrate. Highly recommended."
+          },
+          {
+            "id": "r3",
+            "name": "Chris Martinez",
+            "role": "Product Manager",
+            "quote": "Game changer for our team. We can't imagine working without it."
+          },
+          {
+            "id": "r4",
+            "name": "Taylor Swift",
+            "role": "Marketer",
+            "quote": "The analytics features alone are worth the price. Fantastic product!"
+          }
+        ],
+        "columns": { "xs": 12, "sm": 6 },
+        "displayRatings": false
+      }
+    }
+  ]
+}

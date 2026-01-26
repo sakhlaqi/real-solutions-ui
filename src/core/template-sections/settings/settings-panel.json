@@ -1,0 +1,385 @@
+{
+  "id": "settings-panel",
+  "category": "settings",
+  "name": "Settings Panel",
+  "description": "Multi-tab settings interface with organized form sections for account, security, notifications, and preferences. Perfect for user settings and configuration pages.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "description": {
+        "type": "string",
+        "maxLength": 200
+      },
+      "tabs": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "required": ["id", "label", "sections"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9-]+$"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "icon": {
+              "type": "string"
+            },
+            "sections": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["title", "fields"],
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "maxLength": 100
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "fields": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": ["name", "label", "type"],
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": ["text", "email", "password", "select", "switch", "radio", "checkbox", "textarea"]
+                        },
+                        "placeholder": {
+                          "type": "string"
+                        },
+                        "helperText": {
+                          "type": "string"
+                        },
+                        "required": {
+                          "type": "boolean"
+                        },
+                        "options": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "string"
+                              },
+                              "label": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "saveButtonText": {
+        "type": "string",
+        "maxLength": 30,
+        "default": "Save Changes"
+      }
+    },
+    "required": ["tabs"]
+  },
+  "defaultProps": {
+    "heading": "Settings",
+    "description": "Manage your account settings and preferences",
+    "tabs": [
+      {
+        "id": "account",
+        "label": "Account",
+        "icon": "person",
+        "sections": [
+          {
+            "title": "Profile Information",
+            "description": "Update your personal details",
+            "fields": [
+              {
+                "name": "fullName",
+                "label": "Full Name",
+                "type": "text",
+                "placeholder": "John Doe",
+                "required": true
+              },
+              {
+                "name": "email",
+                "label": "Email Address",
+                "type": "email",
+                "placeholder": "john@example.com",
+                "required": true,
+                "helperText": "We'll never share your email"
+              },
+              {
+                "name": "bio",
+                "label": "Bio",
+                "type": "textarea",
+                "placeholder": "Tell us about yourself",
+                "helperText": "Brief description for your profile"
+              }
+            ]
+          },
+          {
+            "title": "Account Settings",
+            "fields": [
+              {
+                "name": "language",
+                "label": "Language",
+                "type": "select",
+                "options": [
+                  { "value": "en", "label": "English" },
+                  { "value": "es", "label": "Spanish" },
+                  { "value": "fr", "label": "French" }
+                ]
+              },
+              {
+                "name": "timezone",
+                "label": "Timezone",
+                "type": "select",
+                "options": [
+                  { "value": "utc", "label": "UTC" },
+                  { "value": "est", "label": "Eastern Time" },
+                  { "value": "pst", "label": "Pacific Time" }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "security",
+        "label": "Security",
+        "icon": "lock",
+        "sections": [
+          {
+            "title": "Change Password",
+            "description": "Update your password regularly for security",
+            "fields": [
+              {
+                "name": "currentPassword",
+                "label": "Current Password",
+                "type": "password",
+                "required": true
+              },
+              {
+                "name": "newPassword",
+                "label": "New Password",
+                "type": "password",
+                "required": true,
+                "helperText": "Minimum 8 characters"
+              },
+              {
+                "name": "confirmPassword",
+                "label": "Confirm Password",
+                "type": "password",
+                "required": true
+              }
+            ]
+          },
+          {
+            "title": "Two-Factor Authentication",
+            "fields": [
+              {
+                "name": "enable2FA",
+                "label": "Enable Two-Factor Authentication",
+                "type": "switch",
+                "helperText": "Add an extra layer of security"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "notifications",
+        "label": "Notifications",
+        "icon": "notifications",
+        "sections": [
+          {
+            "title": "Email Notifications",
+            "description": "Choose which emails you receive",
+            "fields": [
+              {
+                "name": "emailUpdates",
+                "label": "Product updates and news",
+                "type": "switch"
+              },
+              {
+                "name": "emailMarketing",
+                "label": "Marketing emails",
+                "type": "switch"
+              },
+              {
+                "name": "emailSecurity",
+                "label": "Security alerts",
+                "type": "switch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saveButtonText": "Save Changes"
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 200
+    },
+    "tabs": {
+      "type": "collection",
+      "itemType": "tab",
+      "minItems": 1,
+      "maxItems": 8,
+      "fields": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "sections",
+          "type": "nested-collection"
+        }
+      ]
+    }
+  },
+  "layout": {
+    "container": {
+      "maxWidth": "lg",
+      "paddingX": { "xs": 2, "sm": 3, "md": 4 },
+      "paddingY": { "xs": 4, "sm": 6, "md": 8 }
+    },
+    "tabs": {
+      "orientation": { "xs": "horizontal", "md": "vertical" },
+      "variant": "scrollable"
+    }
+  },
+  "styling": {
+    "heading": {
+      "variant": "h4",
+      "component": "h1",
+      "fontWeight": 700,
+      "gutterBottom": true
+    },
+    "description": {
+      "variant": "body1",
+      "color": "text.secondary",
+      "marginBottom": 4
+    },
+    "tabs": {
+      "borderRight": { "md": 1 },
+      "borderColor": { "md": "divider" },
+      "minWidth": { "md": 200 }
+    },
+    "tabPanel": {
+      "paddingLeft": { "md": 4 },
+      "paddingTop": { "xs": 3, "md": 0 }
+    },
+    "section": {
+      "marginBottom": 4,
+      "padding": 3,
+      "borderRadius": 2,
+      "border": "1px solid",
+      "borderColor": "divider"
+    },
+    "sectionTitle": {
+      "variant": "h6",
+      "fontWeight": 600,
+      "gutterBottom": true
+    },
+    "sectionDescription": {
+      "variant": "body2",
+      "color": "text.secondary",
+      "marginBottom": 2
+    },
+    "field": {
+      "marginBottom": 2
+    },
+    "saveButton": {
+      "marginTop": 3,
+      "minWidth": 120
+    }
+  },
+  "interactions": {
+    "tabChange": {
+      "type": "click",
+      "description": "Switch between settings tabs"
+    },
+    "formSubmit": {
+      "type": "submit",
+      "validation": true,
+      "description": "Save settings changes"
+    }
+  },
+  "accessibility": {
+    "ariaLabels": {
+      "tabs": "Settings navigation",
+      "tab": "{label} settings",
+      "panel": "{label} settings panel",
+      "saveButton": "Save {tab} settings"
+    },
+    "keyboardSupport": true,
+    "focusManagement": true
+  },
+  "examples": [
+    {
+      "name": "Simple Settings",
+      "description": "Basic settings panel with one tab",
+      "props": {
+        "heading": "Preferences",
+        "tabs": [
+          {
+            "id": "general",
+            "label": "General",
+            "sections": [
+              {
+                "title": "Display",
+                "fields": [
+                  {
+                    "name": "theme",
+                    "label": "Theme",
+                    "type": "select",
+                    "options": [
+                      { "value": "light", "label": "Light" },
+                      { "value": "dark", "label": "Dark" },
+                      { "value": "auto", "label": "Auto" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

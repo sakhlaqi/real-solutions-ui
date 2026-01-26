@@ -9,6 +9,10 @@ export { UIProvider, useUIContext, withUIProvider } from './context';
 
 // Theme exports
 export { createMUIThemeFromTokens } from './theme';
+export * from './theme';
+
+// Tenant customization exports
+export * from './tenant';
 
 // Template exports
 export {
@@ -26,6 +30,13 @@ export {
 
 // Behavior exports
 export * from './behaviors';
+export * from './behaviours';
+
+// Registry exports
+export * from './registry';
+
+// Template sections (JSON blueprints)
+export * from './template-sections';
 
 // Type exports (explicit to avoid UIProvider name conflict)
 export type {

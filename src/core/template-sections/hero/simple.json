@@ -1,0 +1,103 @@
+{
+  "id": "hero-simple",
+  "name": "Simple Hero",
+  "category": "hero",
+  "version": "1.0.0",
+  "description": "Clean hero section with heading, subheading, and CTA button",
+  "tags": ["simple", "minimal", "centered"],
+  "previewImage": "/previews/hero-simple.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "heading": {
+        "type": "string",
+        "description": "Main heading text"
+      },
+      "subheading": {
+        "type": "string",
+        "description": "Supporting text below heading"
+      },
+      "ctaText": {
+        "type": "string",
+        "description": "Call-to-action button text"
+      },
+      "ctaLink": {
+        "type": "string",
+        "description": "CTA button destination URL"
+      },
+      "alignment": {
+        "type": "string",
+        "enum": ["left", "center", "right"],
+        "description": "Text alignment"
+      },
+      "background": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["gradient", "solid", "none"]
+          },
+          "value": {
+            "type": "string",
+            "description": "Background value (color, gradient string)"
+          }
+        }
+      }
+    },
+    "required": ["heading", "subheading", "ctaText", "ctaLink"]
+  },
+  "defaultProps": {
+    "heading": "Our latest products",
+    "subheading": "Explore our cutting-edge dashboard, delivering high-quality solutions tailored to your needs.",
+    "ctaText": "Get Started",
+    "ctaLink": "#features",
+    "alignment": "center",
+    "background": {
+      "type": "gradient",
+      "value": "radial-gradient(ellipse 80% 50% at 50% -20%, hsl(210, 100%, 90%), transparent)"
+    }
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100
+    },
+    "subheading": {
+      "type": "richtext",
+      "editable": true,
+      "maxLength": 300
+    },
+    "cta": {
+      "type": "button",
+      "editable": true
+    }
+  },
+  "layout": {
+    "container": "centered",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 8, "sm": 12 }
+    }
+  },
+  "examples": [
+    {
+      "name": "SaaS Product",
+      "props": {
+        "heading": "Streamline Your Workflow",
+        "subheading": "The all-in-one platform for modern teams to collaborate and deliver exceptional results.",
+        "ctaText": "Start Free Trial",
+        "ctaLink": "/signup"
+      }
+    },
+    {
+      "name": "E-commerce",
+      "props": {
+        "heading": "Summer Collection 2026",
+        "subheading": "Discover the latest trends in fashion with our curated summer collection.",
+        "ctaText": "Shop Now",
+        "ctaLink": "/shop"
+      }
+    }
+  ]
+}

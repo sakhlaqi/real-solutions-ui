@@ -1,0 +1,300 @@
+{
+  "id": "footer-full",
+  "name": "Full Footer",
+  "category": "footer",
+  "version": "1.0.0",
+  "description": "Comprehensive footer with multiple link columns and newsletter signup",
+  "tags": ["footer", "comprehensive", "multi-column"],
+  "previewImage": "/previews/footer-full.jpg",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "logo": {
+        "type": "object",
+        "properties": {
+          "src": { "type": "string" },
+          "alt": { "type": "string" },
+          "width": { "type": "number" },
+          "height": { "type": "number" }
+        }
+      },
+      "tagline": {
+        "type": "string",
+        "description": "Brief company tagline/description"
+      },
+      "newsletter": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "buttonText": {
+            "type": "string"
+          },
+          "privacyText": {
+            "type": "string"
+          }
+        },
+        "description": "Newsletter signup form"
+      },
+      "linkColumns": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "heading": {
+              "type": "string"
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": { "type": "string" },
+                  "url": { "type": "string" }
+                },
+                "required": ["text", "url"]
+              }
+            }
+          },
+          "required": ["heading", "links"]
+        },
+        "minItems": 2,
+        "maxItems": 5
+      },
+      "socialLinks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": { "type": "string" },
+            "url": { "type": "string" },
+            "ariaLabel": { "type": "string" }
+          },
+          "required": ["platform", "url"]
+        }
+      },
+      "bottomText": {
+        "type": "string",
+        "description": "Copyright and legal text"
+      },
+      "bottomLinks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "string" },
+            "url": { "type": "string" }
+          }
+        },
+        "description": "Legal links (Privacy, Terms, etc.)"
+      }
+    },
+    "required": ["linkColumns", "bottomText"]
+  },
+  "defaultProps": {
+    "logo": {
+      "src": "/logo.svg",
+      "alt": "Company",
+      "width": 120,
+      "height": 40
+    },
+    "tagline": "Join the newsletter",
+    "newsletter": {
+      "heading": "Subscribe to newsletter",
+      "placeholder": "Your email address",
+      "buttonText": "Subscribe",
+      "privacyText": "We care about your data. Read our Privacy Policy."
+    },
+    "linkColumns": [
+      {
+        "heading": "Product",
+        "links": [
+          { "text": "Features", "url": "#features" },
+          { "text": "Testimonials", "url": "#testimonials" },
+          { "text": "Highlights", "url": "#highlights" },
+          { "text": "Pricing", "url": "#pricing" },
+          { "text": "FAQs", "url": "#faq" }
+        ]
+      },
+      {
+        "heading": "Company",
+        "links": [
+          { "text": "About us", "url": "/about" },
+          { "text": "Careers", "url": "/careers" },
+          { "text": "Press", "url": "/press" }
+        ]
+      },
+      {
+        "heading": "Legal",
+        "links": [
+          { "text": "Terms", "url": "/terms" },
+          { "text": "Privacy", "url": "/privacy" },
+          { "text": "Contact", "url": "/contact" }
+        ]
+      }
+    ],
+    "socialLinks": [
+      {
+        "platform": "facebook",
+        "url": "https://facebook.com/company",
+        "ariaLabel": "Facebook"
+      },
+      {
+        "platform": "twitter",
+        "url": "https://twitter.com/company",
+        "ariaLabel": "Twitter"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://linkedin.com/company/company",
+        "ariaLabel": "LinkedIn"
+      }
+    ],
+    "bottomText": "© 2026 YourCompany. All rights reserved.",
+    "bottomLinks": [
+      { "text": "Privacy Policy", "url": "/privacy" },
+      { "text": "Terms of Service", "url": "/terms" },
+      { "text": "Cookie Settings", "url": "/cookies" }
+    ]
+  },
+  "slots": {
+    "logo": {
+      "type": "media",
+      "editable": true,
+      "optional": true
+    },
+    "tagline": {
+      "type": "text",
+      "editable": true,
+      "maxLength": 100,
+      "optional": true
+    },
+    "newsletter": {
+      "type": "object",
+      "editable": true,
+      "optional": true
+    },
+    "linkColumns": {
+      "type": "array",
+      "editable": true,
+      "itemSchema": {
+        "heading": { "type": "text", "maxLength": 30 },
+        "links": {
+          "type": "array",
+          "items": {
+            "text": { "type": "text", "maxLength": 50 },
+            "url": { "type": "text" }
+          }
+        }
+      }
+    },
+    "socialLinks": {
+      "type": "array",
+      "editable": true,
+      "optional": true
+    },
+    "bottomText": {
+      "type": "text",
+      "editable": true
+    },
+    "bottomLinks": {
+      "type": "array",
+      "editable": true,
+      "optional": true
+    }
+  },
+  "layout": {
+    "container": "full",
+    "maxWidth": "lg",
+    "spacing": {
+      "py": { "xs": 8, "sm": 10 }
+    },
+    "grid": {
+      "main": { "xs": 12, "sm": 12, "md": 12 },
+      "columns": { "xs": 12, "sm": 4, "md": 3 }
+    },
+    "gap": { "xs": 4, "sm": 8 }
+  },
+  "styling": {
+    "borderTop": "1px solid",
+    "borderColor": "divider",
+    "backgroundColor": "background.default"
+  },
+  "examples": [
+    {
+      "name": "SaaS Product Footer",
+      "props": {
+        "logo": {
+          "src": "/brand/logo.svg",
+          "alt": "SaaS Product",
+          "width": 140,
+          "height": 45
+        },
+        "tagline": "The platform that powers modern teams",
+        "newsletter": {
+          "heading": "Weekly product updates",
+          "placeholder": "Enter your email",
+          "buttonText": "Sign up",
+          "privacyText": "Join 50,000+ professionals. Unsubscribe anytime."
+        },
+        "linkColumns": [
+          {
+            "heading": "Product",
+            "links": [
+              { "text": "Features", "url": "/features" },
+              { "text": "Integrations", "url": "/integrations" },
+              { "text": "Pricing", "url": "/pricing" },
+              { "text": "Changelog", "url": "/changelog" },
+              { "text": "Roadmap", "url": "/roadmap" }
+            ]
+          },
+          {
+            "heading": "Resources",
+            "links": [
+              { "text": "Documentation", "url": "/docs" },
+              { "text": "API Reference", "url": "/api" },
+              { "text": "Guides", "url": "/guides" },
+              { "text": "Blog", "url": "/blog" },
+              { "text": "Community", "url": "/community" }
+            ]
+          },
+          {
+            "heading": "Company",
+            "links": [
+              { "text": "About", "url": "/about" },
+              { "text": "Customers", "url": "/customers" },
+              { "text": "Careers", "url": "/careers" },
+              { "text": "Press Kit", "url": "/press" }
+            ]
+          },
+          {
+            "heading": "Support",
+            "links": [
+              { "text": "Help Center", "url": "/help" },
+              { "text": "Contact Us", "url": "/contact" },
+              { "text": "System Status", "url": "/status" },
+              { "text": "Report Bug", "url": "/bug-report" }
+            ]
+          }
+        ],
+        "socialLinks": [
+          { "platform": "twitter", "url": "https://twitter.com/company" },
+          { "platform": "linkedin", "url": "https://linkedin.com/company/company" },
+          { "platform": "github", "url": "https://github.com/company" },
+          { "platform": "youtube", "url": "https://youtube.com/@company" }
+        ],
+        "bottomText": "© 2026 Company Inc. All rights reserved.",
+        "bottomLinks": [
+          { "text": "Privacy Policy", "url": "/privacy" },
+          { "text": "Terms of Service", "url": "/terms" },
+          { "text": "Security", "url": "/security" },
+          { "text": "GDPR", "url": "/gdpr" }
+        ]
+      }
+    }
+  ]
+}

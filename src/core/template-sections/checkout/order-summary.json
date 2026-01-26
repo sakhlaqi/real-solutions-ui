@@ -1,0 +1,270 @@
+{
+  "id": "checkout-order-summary",
+  "name": "Order Summary",
+  "category": "checkout",
+  "version": "1.0.0",
+  "description": "Cart summary displaying products, quantities, prices, shipping costs, taxes, and total. Includes discount code input and itemized breakdown.",
+  "tags": ["checkout", "cart", "summary", "pricing", "total", "discount"],
+  "previewImage": "/previews/order-summary.jpg",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["heading", "items", "subtotal", "total"],
+    "properties": {
+      "heading": {"type": "string", "maxLength": 100},
+      "items": {
+        "type": "array",
+        "description": "Cart items",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["id", "name", "price", "quantity"],
+          "properties": {
+            "id": {"type": "string"},
+            "name": {"type": "string", "maxLength": 200},
+            "description": {"type": "string", "maxLength": 500},
+            "price": {"type": "number", "minimum": 0},
+            "quantity": {"type": "number", "minimum": 1},
+            "image": {"type": "string", "format": "uri"}
+          }
+        }
+      },
+      "subtotal": {"type": "number", "minimum": 0},
+      "shipping": {"type": "number", "minimum": 0},
+      "tax": {"type": "number", "minimum": 0},
+      "discount": {"type": "number", "minimum": 0},
+      "total": {"type": "number", "minimum": 0},
+      "currency": {"type": "string", "default": "USD"},
+      "currencySymbol": {"type": "string", "default": "$"},
+      "showDiscount": {"type": "boolean"},
+      "discountCode": {"type": "string"},
+      "showImages": {"type": "boolean"}
+    }
+  },
+  "defaultProps": {
+    "heading": "Order summary",
+    "items": [
+      {
+        "id": "1",
+        "name": "Professional Plan",
+        "description": "Annual subscription",
+        "price": 299.99,
+        "quantity": 1,
+        "image": "/images/product-professional.jpg"
+      },
+      {
+        "id": "2",
+        "name": "Premium Support",
+        "description": "24/7 priority support",
+        "price": 99.99,
+        "quantity": 1,
+        "image": "/images/product-support.jpg"
+      }
+    ],
+    "subtotal": 399.98,
+    "shipping": 0,
+    "tax": 32.00,
+    "discount": 0,
+    "total": 431.98,
+    "currency": "USD",
+    "currencySymbol": "$",
+    "showDiscount": true,
+    "discountCode": "",
+    "showImages": true
+  },
+  "slots": {
+    "heading": {
+      "type": "text",
+      "label": "Summary Heading",
+      "required": true
+    },
+    "items": {
+      "type": "collection",
+      "label": "Cart Items",
+      "required": true,
+      "itemLabel": "Item",
+      "fields": [
+        {"name": "id", "type": "text", "label": "Item ID", "required": true},
+        {"name": "name", "type": "text", "label": "Product Name", "required": true},
+        {"name": "description", "type": "text", "label": "Description", "required": false},
+        {"name": "price", "type": "number", "label": "Unit Price", "required": true},
+        {"name": "quantity", "type": "number", "label": "Quantity", "required": true},
+        {"name": "image", "type": "image", "label": "Product Image", "required": false}
+      ]
+    },
+    "subtotal": {
+      "type": "number",
+      "label": "Subtotal",
+      "required": true,
+      "calculated": true
+    },
+    "shipping": {
+      "type": "number",
+      "label": "Shipping Cost",
+      "required": false
+    },
+    "tax": {
+      "type": "number",
+      "label": "Tax Amount",
+      "required": false
+    },
+    "discount": {
+      "type": "number",
+      "label": "Discount Amount",
+      "required": false
+    },
+    "total": {
+      "type": "number",
+      "label": "Total Amount",
+      "required": true,
+      "calculated": true
+    },
+    "discountCodeInput": {
+      "type": "field",
+      "label": "Discount Code Field",
+      "fieldType": "text",
+      "required": false
+    }
+  },
+  "layout": {
+    "container": {"maxWidth": "sm"},
+    "spacing": {
+      "itemList": 2,
+      "summary": 2
+    }
+  },
+  "styling": {
+    "heading": {
+      "variant": "h6",
+      "gutterBottom": true,
+      "mb": 2
+    },
+    "list": {
+      "disablePadding": true
+    },
+    "listItem": {
+      "py": 1,
+      "px": 0
+    },
+    "itemImage": {
+      "width": 60,
+      "height": 60,
+      "borderRadius": 1,
+      "mr": 2,
+      "objectFit": "cover"
+    },
+    "itemName": {
+      "variant": "subtitle1",
+      "fontWeight": "medium"
+    },
+    "itemDescription": {
+      "variant": "body2",
+      "color": "text.secondary"
+    },
+    "itemPrice": {
+      "variant": "body1",
+      "fontWeight": "medium"
+    },
+    "divider": {
+      "my": 2
+    },
+    "summaryRow": {
+      "display": "flex",
+      "justifyContent": "space-between",
+      "py": 1
+    },
+    "summaryLabel": {
+      "variant": "body2"
+    },
+    "summaryValue": {
+      "variant": "body2",
+      "fontWeight": "medium"
+    },
+    "totalRow": {
+      "pt": 2,
+      "fontWeight": "bold"
+    },
+    "totalLabel": {
+      "variant": "h6"
+    },
+    "totalValue": {
+      "variant": "h6",
+      "color": "primary.main"
+    },
+    "discountInput": {
+      "size": "small",
+      "variant": "outlined"
+    }
+  },
+  "calculations": {
+    "subtotal": "sum(items[].price * items[].quantity)",
+    "total": "subtotal + shipping + tax - discount"
+  },
+  "interactions": {
+    "applyDiscount": {
+      "onClick": "validateAndApplyDiscountCode"
+    },
+    "removeItem": {
+      "onClick": "removeItemFromCart"
+    },
+    "updateQuantity": {
+      "onChange": "recalculateTotals"
+    }
+  },
+  "accessibility": {
+    "listRole": "list",
+    "itemRole": "listitem",
+    "ariaLabel": "Order summary",
+    "priceFormat": "currency"
+  },
+  "examples": [
+    {
+      "name": "Simple Summary",
+      "props": {
+        "heading": "Your order",
+        "items": [
+          {
+            "id": "1",
+            "name": "Premium Plan",
+            "price": 49.99,
+            "quantity": 1
+          }
+        ],
+        "subtotal": 49.99,
+        "shipping": 0,
+        "tax": 0,
+        "total": 49.99,
+        "showDiscount": false,
+        "showImages": false
+      }
+    },
+    {
+      "name": "With Discount",
+      "props": {
+        "heading": "Cart total",
+        "items": [
+          {
+            "id": "1",
+            "name": "Starter Plan",
+            "price": 29.99,
+            "quantity": 2,
+            "image": "/images/starter.jpg"
+          },
+          {
+            "id": "2",
+            "name": "Add-on Feature",
+            "price": 9.99,
+            "quantity": 1,
+            "image": "/images/addon.jpg"
+          }
+        ],
+        "subtotal": 69.97,
+        "shipping": 5.00,
+        "tax": 6.25,
+        "discount": 10.00,
+        "total": 71.22,
+        "discountCode": "SAVE10"
+      }
+    }
+  ]
+}
