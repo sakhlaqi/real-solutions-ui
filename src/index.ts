@@ -48,6 +48,27 @@ export type {
   ColorVariant,
 } from './core/types';
 
+// Export template & section type contracts (Phase 0A)
+export type {
+  // Template types
+  TemplateCategory,
+  TemplateTier,
+  PageDefinition,
+  PageSectionReference,
+  TemplatePreset,
+  TemplateOverride,
+  ResolvedTemplate,
+  // Section types
+  SectionCategory,
+  SectionSlot,
+  SectionLayout,
+  SectionJsonSchema,
+  SectionDefinition,
+  SectionInstance,
+  SectionOverride,
+  ResolvedSection,
+} from './core/types';
+
 // ============================================================================
 // ADAPTIVE COMPONENTS (Recommended API)
 // These provide MUI-based implementations with consistent APIs
