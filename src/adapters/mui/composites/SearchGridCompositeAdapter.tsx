@@ -279,10 +279,17 @@ export const SearchGridCompositeAdapter = <T extends Record<string, any>>({
         rowSelectionModel={selectionModel}
         onRowSelectionModelChange={handleSelectionChange}
         onRowClick={handleRowClick}
-        pagination
+        paginationMode="client"
         autoHeight
         disableColumnMenu
-        hideFooter={rowsWithIds.length === 0 && loading} // Hide footer when loading with no data to avoid state errors
+        initialState={{
+          pagination: {
+            paginationModel: {
+              page: 0,
+              pageSize: defaultPageSize,
+            },
+          },
+        }}
         slots={{
           noRowsOverlay: () => (
             <Stack height="100%" alignItems="center" justifyContent="center">

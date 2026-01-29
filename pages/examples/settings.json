@@ -1,19 +1,20 @@
 {
-  "version": "1.0.0",
-  "title": "Settings",
-  "description": "Application settings with tabbed navigation",
-  "template": {
-    "type": "TabsLayout",
-    "props": {
-      "activeTab": "profile",
-      "tabLabels": {
-        "profile": "Profile",
-        "account": "Account",
-        "notifications": "Notifications",
-        "security": "Security"
-      }
-    },
-    "slots": {
+  "meta": {
+    "version": "1.0.0",
+    "title": "Settings",
+    "description": "Application settings with tabbed navigation"
+  },
+  "template": "TabsLayout",
+  "templateProps": {
+    "activeTab": "profile",
+    "tabLabels": {
+      "profile": "Profile",
+      "account": "Account",
+      "notifications": "Notifications",
+      "security": "Security"
+    }
+  },
+  "slots": {
       "header": {
         "type": "HeaderComposite",
         "props": {
@@ -89,4 +90,3 @@
       }
     }
   }
-}

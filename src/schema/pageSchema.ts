@@ -179,6 +179,9 @@ export const PageConfigSchema = z.object({
   /** Template key from TemplateRegistry */
   template: TemplateTypeSchema,
   
+  /** Template props (optional) */
+  templateProps: PropsSchema,
+  
   /** Slot content for the template */
   slots: SlotsSchema,
   

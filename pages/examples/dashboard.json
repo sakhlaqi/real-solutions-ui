@@ -1,81 +1,232 @@
 {
-  "version": "1.0.0",
-  "title": "Dashboard",
-  "description": "Main application dashboard with widgets and data grid",
-  "template": {
-    "type": "DashboardLayout",
-    "props": {
-      "sidebarWidth": 280,
-      "sidebarVisible": true
+  "meta": {
+    "version": "1.0.0",
+    "title": "Dashboard",
+    "description": "Main application dashboard with widgets and data grid"
+  },
+  "template": "DashboardLayout",
+  "templateProps": {
+    "sidebarWidth": 280,
+    "sidebarVisible": true
+  },
+  "slots": {
+    "header": {
+      "type": "HeaderComposite",
+      "props": {
+        "title": "Dashboard",
+        "subtitle": "Welcome back! Here's what's happening today.",
+        "breadcrumbs": [
+          { "label": "Home", "href": "/" },
+          { "label": "Dashboard", "href": "/dashboard" }
+        ]
+      }
     },
-    "slots": {
-      "header": {
-        "type": "HeaderComposite",
-        "props": {
-          "title": "Dashboard",
-          "subtitle": "Welcome back! Here's what's happening today.",
-          "breadcrumbs": [
-            { "label": "Home", "href": "/" },
-            { "label": "Dashboard", "href": "/dashboard" }
-          ]
-        }
+    "sidebar": {
+      "type": "SidebarComposite",
+      "props": {
+        "items": [
+          {
+            "id": "dashboard",
+            "label": "Dashboard",
+            "icon": "📊",
+            "href": "/dashboard"
+          },
+          {
+            "id": "employees",
+            "label": "Employees",
+            "icon": "👥",
+            "badge": "12",
+            "children": [
+              { "id": "employees-list", "label": "All Employees", "href": "/employees" },
+              { "id": "employees-new", "label": "Add Employee", "href": "/employees/new" }
+            ]
+          },
+          {
+            "id": "reports",
+            "label": "Reports",
+            "icon": "📈",
+            "href": "/reports"
+          },
+          {
+            "id": "settings",
+            "label": "Settings",
+            "icon": "⚙️",
+            "href": "/settings"
+          }
+        ],
+        "activeItemId": "dashboard"
+      }
+    },
+    "main": {
+      "type": "Card",
+      "props": {
+        "title": "Team Members",
+        "subtitle": "Active employees in the organization",
+        "padding": "lg"
       },
-      "sidebar": {
-        "type": "SidebarComposite",
-        "props": {
-          "items": [
+      "children": [
+        {
+          "type": "Stack",
+          "props": {
+            "spacing": 2
+          },
+          "children": [
             {
-              "id": "dashboard",
-              "label": "Dashboard",
-              "icon": "📊",
-              "href": "/dashboard"
-            },
-            {
-              "id": "employees",
-              "label": "Employees",
-              "icon": "👥",
-              "badge": { "label": "12", "variant": "info" },
+              "type": "Card",
+              "props": {
+                "variant": "outlined",
+                "padding": "md",
+                "hover": true
+              },
               "children": [
-                { "id": "employees-list", "label": "All Employees", "href": "/employees" },
-                { "id": "employees-new", "label": "Add Employee", "href": "/employees/new" }
+                {
+                  "type": "Text",
+                  "props": {
+                    "variant": "h6",
+                    "children": "John Doe"
+                  }
+                },
+                {
+                  "type": "Text",
+                  "props": {
+                    "variant": "body2",
+                    "color": "text.secondary",
+                    "children": "john@example.com"
+                  }
+                },
+                {
+                  "type": "Stack",
+                  "props": {
+                    "direction": "row",
+                    "spacing": 2,
+                    "sx": { "mt": 1 }
+                  },
+                  "children": [
+                    {
+                      "type": "Chip",
+                      "props": {
+                        "label": "Engineering",
+                        "size": "small",
+                        "color": "primary"
+                      }
+                    },
+                    {
+                      "type": "Chip",
+                      "props": {
+                        "label": "Senior Engineer",
+                        "size": "small",
+                        "variant": "outlined"
+                      }
+                    }
+                  ]
+                }
               ]
             },
             {
-              "id": "reports",
-              "label": "Reports",
-              "icon": "📈",
-              "href": "/reports"
+              "type": "Card",
+              "props": {
+                "variant": "outlined",
+                "padding": "md",
+                "hover": true
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "props": {
+                    "variant": "h6",
+                    "children": "Jane Smith"
+                  }
+                },
+                {
+                  "type": "Text",
+                  "props": {
+                    "variant": "body2",
+                    "color": "text.secondary",
+                    "children": "jane@example.com"
+                  }
+                },
+                {
+                  "type": "Stack",
+                  "props": {
+                    "direction": "row",
+                    "spacing": 2,
+                    "sx": { "mt": 1 }
+                  },
+                  "children": [
+                    {
+                      "type": "Chip",
+                      "props": {
+                        "label": "Design",
+                        "size": "small",
+                        "color": "secondary"
+                      }
+                    },
+                    {
+                      "type": "Chip",
+                      "props": {
+                        "label": "Lead Designer",
+                        "size": "small",
+                        "variant": "outlined"
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
-              "id": "settings",
-              "label": "Settings",
-              "icon": "⚙️",
-              "href": "/settings"
+              "type": "Card",
+              "props": {
+                "variant": "outlined",
+                "padding": "md",
+                "hover": true
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "props": {
+                    "variant": "h6",
+                    "children": "Bob Johnson"
+                  }
+                },
+                {
+                  "type": "Text",
+                  "props": {
+                    "variant": "body2",
+                    "color": "text.secondary",
+                    "children": "bob@example.com"
+                  }
+                },
+                {
+                  "type": "Stack",
+                  "props": {
+                    "direction": "row",
+                    "spacing": 2,
+                    "sx": { "mt": 1 }
+                  },
+                  "children": [
+                    {
+                      "type": "Chip",
+                      "props": {
+                        "label": "Engineering",
+                        "size": "small",
+                        "color": "primary"
+                      }
+                    },
+                    {
+                      "type": "Chip",
+                      "props": {
+                        "label": "Engineer",
+                        "size": "small",
+                        "variant": "outlined"
+                      }
+                    }
+                  ]
+                }
+              ]
             }
-          ],
-          "activeItemId": "dashboard"
+          ]
         }
-      },
-      "main": {
-        "type": "SearchGridComposite",
-        "props": {
-          "dataSource": "employees",
-          "columns": [
-            { "id": "name", "label": "Name", "field": "name", "sortable": true },
-            { "id": "email", "label": "Email", "field": "email" },
-            { "id": "department", "label": "Department", "field": "department", "sortable": true },
-            { "id": "role", "label": "Role", "field": "role" }
-          ],
-          "data": [
-            { "id": 1, "name": "John Doe", "email": "john@example.com", "department": "Engineering", "role": "Senior Engineer" },
-            { "id": 2, "name": "Jane Smith", "email": "jane@example.com", "department": "Design", "role": "Lead Designer" },
-            { "id": 3, "name": "Bob Johnson", "email": "bob@example.com", "department": "Engineering", "role": "Engineer" }
-          ],
-          "searchEnabled": true,
-          "searchPlaceholder": "Search employees...",
-          "defaultPageSize": 10
-        }
-      }
+      ]
     }
   }
 }

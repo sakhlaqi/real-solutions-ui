@@ -38,6 +38,9 @@ export { createMUIThemeFromTokens } from './core/theme';
 // Export theme system (types, schemas, utils, presets)
 export * from './theme';
 
+// Export tenant configuration defaults
+export * from './core/defaults/tenantDefaults';
+
 // Export core types without wildcard to avoid conflicts
 export type {
   UIProvider as UIProviderType,
@@ -53,7 +56,6 @@ export type {
   // Template types
   TemplateCategory,
   TemplateTier,
-  PageDefinition,
   PageSectionReference,
   TemplatePreset,
   TemplateOverride,

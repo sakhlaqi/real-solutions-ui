@@ -15,9 +15,9 @@ function deepMerge<T extends Record<string, any>>(target: T, source: Partial<T>)
   for (const key in source) {
     if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
       output[key] = deepMerge(
-        output[key] || {},
+        output[key] || ({} as any),
         source[key] as any
-      );
+      ) as T[Extract<keyof T, string>];
     } else if (source[key] !== undefined) {
       output[key] = source[key] as any;
     }
@@ -70,13 +70,10 @@ export function basicConfigToOverride(config: {
   }
 
   if (config.primaryColor || config.secondaryColor) {
-    overrides.colors = {} as Partial<ColorPalette>;
-    if (config.primaryColor) {
-      (overrides.colors as any).primary = config.primaryColor;
-    }
-    if (config.secondaryColor) {
-      (overrides.colors as any).secondary = config.secondaryColor;
-    }
+    overrides.colors = {
+      ...(config.primaryColor ? { primary: config.primaryColor } : {}),
+      ...(config.secondaryColor ? { secondary: config.secondaryColor } : {}),
+    } as any;
   }
 
   if (config.fontFamily) {
@@ -125,24 +122,25 @@ export function extractThemeDiff(
 
   // Compare colors
   if (JSON.stringify(base.colors) !== JSON.stringify(modified.colors)) {
-    diff.colors = {} as Partial<ColorPalette>;
+    const colorDiff: Record<string, any> = {};
     for (const key in modified.colors) {
       if (base.colors[key as keyof typeof base.colors] !== modified.colors[key as keyof typeof modified.colors]) {
-        (diff.colors as any)[key] = (modified.colors as any)[key];
+        colorDiff[key] = (modified.colors as any)[key];
       }
     }
+    diff.colors = colorDiff as any;
   }
 
   // Compare typography
   if (JSON.stringify(base.typography) !== JSON.stringify(modified.typography)) {
-    diff.typography = {} as any;
+    const typographyDiff: Record<string, any> = {};
     for (const key in modified.typography) {
       if (JSON.stringify(base.typography[key as keyof typeof base.typography]) !== 
           JSON.stringify(modified.typography[key as keyof typeof modified.typography])) {
-        diff.typography![key as keyof typeof diff.typography] = 
-          modified.typography[key as keyof typeof modified.typography] as any;
+        typographyDiff[key] = modified.typography[key as keyof typeof modified.typography];
       }
     }
+    diff.typography = typographyDiff as any;
   }
 
   // Compare other sections similarly

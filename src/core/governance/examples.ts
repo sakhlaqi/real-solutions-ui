@@ -7,6 +7,7 @@
 import {
   parseVersion,
   bumpVersion,
+  satisfiesVersion,
   migrationRegistry,
   MigrationUtils,
   deprecationRegistry,
@@ -276,7 +277,6 @@ export function example7_VersionComparison() {
   console.log(`  1.2.3 vs 1.2.4-beta.1: ${compareVersions(v1, v3)}`);
 
   // Check version ranges
-  import { satisfiesVersion } from './versioning';
   console.log('\nVersion range checks:');
   console.log(`  1.2.3 satisfies ^1.0.0: ${satisfiesVersion(v1, '^1.0.0')}`);
   console.log(`  2.0.0 satisfies ^1.0.0: ${satisfiesVersion(v2, '^1.0.0')}`);

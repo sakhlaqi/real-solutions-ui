@@ -11,84 +11,84 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./core": {
+      "types": "./dist/core/index.d.ts",
       "import": "./dist/core/index.js",
-      "require": "./dist/core/index.cjs",
-      "types": "./dist/core/index.d.ts"
+      "require": "./dist/core/index.cjs"
     },
     "./adapters": {
+      "types": "./dist/adapters/index.d.ts",
       "import": "./dist/adapters/index.js",
-      "require": "./dist/adapters/index.cjs",
-      "types": "./dist/adapters/index.d.ts"
+      "require": "./dist/adapters/index.cjs"
     },
     "./providers/internal": {
+      "types": "./dist/providers/internal/index.d.ts",
       "import": "./dist/providers/internal/index.js",
-      "require": "./dist/providers/internal/index.cjs",
-      "types": "./dist/providers/internal/index.d.ts"
+      "require": "./dist/providers/internal/index.cjs"
     },
     "./providers/mui": {
+      "types": "./dist/providers/mui/index.d.ts",
       "import": "./dist/providers/mui/index.js",
-      "require": "./dist/providers/mui/index.cjs",
-      "types": "./dist/providers/mui/index.d.ts"
+      "require": "./dist/providers/mui/index.cjs"
     },
     "./base": {
+      "types": "./dist/base/index.d.ts",
       "import": "./dist/base/index.js",
-      "require": "./dist/base/index.cjs",
-      "types": "./dist/base/index.d.ts"
+      "require": "./dist/base/index.cjs"
     },
     "./layout": {
+      "types": "./dist/layout/index.d.ts",
       "import": "./dist/layout/index.js",
-      "require": "./dist/layout/index.cjs",
-      "types": "./dist/layout/index.d.ts"
+      "require": "./dist/layout/index.cjs"
     },
     "./navigation": {
+      "types": "./dist/navigation/index.d.ts",
       "import": "./dist/navigation/index.js",
-      "require": "./dist/navigation/index.cjs",
-      "types": "./dist/navigation/index.d.ts"
+      "require": "./dist/navigation/index.cjs"
     },
     "./forms": {
+      "types": "./dist/forms/index.d.ts",
       "import": "./dist/forms/index.js",
-      "require": "./dist/forms/index.cjs",
-      "types": "./dist/forms/index.d.ts"
+      "require": "./dist/forms/index.cjs"
     },
     "./buttons": {
+      "types": "./dist/buttons/index.d.ts",
       "import": "./dist/buttons/index.js",
-      "require": "./dist/buttons/index.cjs",
-      "types": "./dist/buttons/index.d.ts"
+      "require": "./dist/buttons/index.cjs"
     },
     "./data-display": {
+      "types": "./dist/data-display/index.d.ts",
       "import": "./dist/data-display/index.js",
-      "require": "./dist/data-display/index.cjs",
-      "types": "./dist/data-display/index.d.ts"
+      "require": "./dist/data-display/index.cjs"
     },
     "./feedback": {
+      "types": "./dist/feedback/index.d.ts",
       "import": "./dist/feedback/index.js",
-      "require": "./dist/feedback/index.cjs",
-      "types": "./dist/feedback/index.d.ts"
+      "require": "./dist/feedback/index.cjs"
     },
     "./overlay": {
+      "types": "./dist/overlay/index.d.ts",
       "import": "./dist/overlay/index.js",
-      "require": "./dist/overlay/index.cjs",
-      "types": "./dist/overlay/index.d.ts"
+      "require": "./dist/overlay/index.cjs"
     },
     "./typography": {
+      "types": "./dist/typography/index.d.ts",
       "import": "./dist/typography/index.js",
-      "require": "./dist/typography/index.cjs",
-      "types": "./dist/typography/index.d.ts"
+      "require": "./dist/typography/index.cjs"
     },
     "./utility": {
+      "types": "./dist/utility/index.d.ts",
       "import": "./dist/utility/index.js",
-      "require": "./dist/utility/index.cjs",
-      "types": "./dist/utility/index.d.ts"
+      "require": "./dist/utility/index.cjs"
     },
     "./theme": {
+      "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.js",
-      "require": "./dist/theme/index.cjs",
-      "types": "./dist/theme/index.d.ts"
+      "require": "./dist/theme/index.cjs"
     },
     "./styles": "./dist/styles/index.css",
     "./dist/styles/index.css": "./dist/styles/index.css"

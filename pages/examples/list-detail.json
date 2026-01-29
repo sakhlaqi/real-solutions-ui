@@ -1,14 +1,15 @@
 {
-  "version": "1.0.0",
-  "title": "List Detail View",
-  "description": "Master-detail layout with list and detail panels",
-  "template": {
-    "type": "TwoColumnLayout",
-    "props": {
-      "leftWidth": 0.3,
-      "gap": 16
-    },
-    "slots": {
+  "meta": {
+    "version": "1.0.0",
+    "title": "List Detail View",
+    "description": "Master-detail layout with list and detail panels"
+  },
+  "template": "TwoColumnLayout",
+  "templateProps": {
+    "leftWidth": 0.3,
+    "gap": 16
+  },
+  "slots": {
       "header": {
         "type": "HeaderComposite",
         "props": {
@@ -25,22 +26,89 @@
         }
       },
       "left": {
-        "type": "SearchGridComposite",
+        "type": "Card",
         "props": {
-          "dataSource": "employees",
-          "columns": [
-            { "id": "name", "label": "Name", "field": "name" }
-          ],
-          "data": [
-            { "id": 1, "name": "John Doe" },
-            { "id": 2, "name": "Jane Smith" },
-            { "id": 3, "name": "Bob Johnson" },
-            { "id": 4, "name": "Alice Williams" }
-          ],
-          "searchEnabled": true,
-          "searchPlaceholder": "Search employees...",
-          "selectionMode": "single"
-        }
+          "variant": "outlined",
+          "padding": "md"
+        },
+        "children": [
+          {
+            "type": "Stack",
+            "props": {
+              "spacing": 1
+            },
+            "children": [
+              {
+                "type": "Card",
+                "props": {
+                  "variant": "outlined",
+                  "padding": "sm",
+                  "interactive": true,
+                  "hover": true
+                },
+                "children": [
+                  {
+                    "type": "Text",
+                    "props": {
+                      "children": "John Doe"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Card",
+                "props": {
+                  "variant": "outlined",
+                  "padding": "sm",
+                  "interactive": true,
+                  "hover": true
+                },
+                "children": [
+                  {
+                    "type": "Text",
+                    "props": {
+                      "children": "Jane Smith"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Card",
+                "props": {
+                  "variant": "outlined",
+                  "padding": "sm",
+                  "interactive": true,
+                  "hover": true
+                },
+                "children": [
+                  {
+                    "type": "Text",
+                    "props": {
+                      "children": "Bob Johnson"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Card",
+                "props": {
+                  "variant": "outlined",
+                  "padding": "sm",
+                  "interactive": true,
+                  "hover": true
+                },
+                "children": [
+                  {
+                    "type": "Text",
+                    "props": {
+                      "children": "Alice Williams"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       "right": {
         "type": "Card",
@@ -59,4 +127,3 @@
       }
     }
   }
-}

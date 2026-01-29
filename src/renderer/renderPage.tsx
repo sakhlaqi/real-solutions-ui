@@ -304,7 +304,7 @@ function PageRendererInternal({
       return (
         <RenderContextProvider value={context}>
           <React.Suspense fallback={<div>Loading template...</div>}>
-            <TemplateAdapter slots={renderedSlots} />
+            <TemplateAdapter slots={renderedSlots} {...(config.templateProps || {})} />
           </React.Suspense>
         </RenderContextProvider>
       );

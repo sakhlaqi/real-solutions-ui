@@ -10,7 +10,7 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       include: ['src/**/*'],
-      exclude: ['**/*.stories.tsx', '**/*.test.tsx'],
+      exclude: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.test.ts', '**/__tests__/**'],
     }),
   ],
   build: {

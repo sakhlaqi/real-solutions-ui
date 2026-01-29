@@ -9,6 +9,12 @@
  * - JSON validation & linting
  */
 
+// Import internal utilities needed by GovernanceUtils
+import { parseVersion, versionToString, isStable, type VersionedTemplateMetadata } from './versioning';
+import { templateValidator } from './validation';
+import { templateGovernance } from './locking';
+import { deprecationRegistry } from './deprecation';
+
 // Versioning
 export {
   type SemanticVersion,
@@ -194,6 +200,3 @@ export const GovernanceUtils = {
     };
   },
 };
-
-// Re-export utilities
-import { parseVersion, versionToString, isStable } from './versioning';
